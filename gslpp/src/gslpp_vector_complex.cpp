@@ -108,6 +108,12 @@ namespace gslpp {
         *x = complex(a).as_gsl_type();
     }
 
+    /** Reset vector */
+    void vector<complex>::clear()
+    {
+        gsl_vector_complex_set_zero(_vector);
+    }
+
     /** Get vector size */
     size_t vector<complex>::size() const
     {

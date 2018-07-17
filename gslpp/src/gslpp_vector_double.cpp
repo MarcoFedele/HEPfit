@@ -78,6 +78,12 @@ namespace gslpp
     return *this;
   }
 
+    /** Reset vector */
+    void vector<double>::clear()
+    {
+        gsl_vector_set_zero(_vector);
+    }
+
   /** Get vector size */
   size_t vector<double>::size() const
   {

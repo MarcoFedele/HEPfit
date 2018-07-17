@@ -50,6 +50,8 @@ namespace gslpp
       double& operator()(const size_t& i);
       /** Assign */
       vector<double>& operator=(const vector<double>& v);
+      /** clear vector*/
+      void clear();
       /** Get vector size */
       size_t size() const;
       /** Get Euclidean norm */

@@ -55,6 +55,8 @@ namespace gslpp
       /** Assign element */
       void assign(const size_t& i, const complex& z);
       void assign(const size_t& i, const double& a);
+      /** Clear vector*/
+      void clear();      
       /** Get vector size */
       size_t size() const;
       /** Get Euclidean norm */
