@@ -88,6 +88,7 @@ namespace gslpp
       /** Get matrix size */
       size_t size_i() const;
       size_t size_j() const;
+      size_t size() const;
       /** Identity matrix */
       static matrix<complex> Id(size_t size);
       /** Transpose matrix */

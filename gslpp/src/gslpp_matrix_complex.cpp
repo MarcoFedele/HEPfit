@@ -190,6 +190,17 @@ namespace gslpp
   {
     return _matrix->size2;
   }
+  
+  size_t matrix<complex>::size() const
+  {
+      if(_matrix->size1 == _matrix->size2)
+        return _matrix->size2;
+      else 
+      {
+          std::cout << "\n ** Non square matrix" << std::endl;
+          exit(EXIT_FAILURE);
+      }
+  }
 
   /** Identity matrix */
   matrix<complex> matrix<complex>::Id(size_t size)

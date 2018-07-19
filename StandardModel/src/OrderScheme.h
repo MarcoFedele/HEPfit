@@ -47,8 +47,7 @@ enum orders_qcd
  */
 enum orders_qed // WARNING: don't change the ordering, it matters in HeffDF1
 {
-    NOQED = -1,
-    QED0, /* Leading order e/s */
+    QED0=0, /* Leading order e/s */
     QED1, /* */
     QED2, /**< Next-to-leading order e */
     FULLQED1, /* all terms up to QED1 included */

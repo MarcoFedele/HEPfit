@@ -19,11 +19,21 @@
  * @copyright GNU General Public License
  * @details 
  */
-class WilsonCoefficient : public WilsonTemplate<gslpp::complex> {
+class WilsonCoefficient : public WilsonTemplate<gslpp::vector<gslpp::complex> > {
 public:
-    WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order_qcd);
+    WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order_qcd, orders_qed order_qed = QED0);
     
-    WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order_qcd, orders_qed order_qed);
+    Expanded<gslpp::complex> getCoeffElement(uint i) const;
+    
+    void setCoeff(unsigned int i, gslpp::complex z, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
+    
+    void setCoeff(const gslpp::vector<gslpp::complex>& v, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
+    
+    void resetCoeff();
+
+    gslpp::vector<gslpp::complex> getCoeff(orders_qcd order_qcd_i, orders_qed order_qed_i = QED0) const;
+    
+    Expanded<gslpp::vector<gslpp::complex> > getCoeff() const;
 };
 
 #endif	/* WILSONCOEFFICIENT_H */

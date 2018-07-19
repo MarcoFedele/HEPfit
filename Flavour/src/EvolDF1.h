@@ -40,7 +40,7 @@ public:
      * @param order_qed an enum "orders_qed" for the order \f$ \alpha_e\f$ in the evolutor
      * @param model an object of StandardModel class
      */
-    EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& model_i, orders order, orders_qed order_qed);
+    EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& model_i, orders_qcd order, orders_qed order_qed);
     /**
      * @brief EvolDF1 destructor
      */
@@ -62,8 +62,7 @@ public:
      * @param scheme an enum "schemes" for the regularization scheme of the evolutor
      * @return the evolutor \f$ U (\mu , M) \f$
      */
-    gslpp::matrix<double>& DF1Evol(double mu, double M, orders ord, schemes scheme = NDR);
-    gslpp::matrix<double>& DF1Evol(double mu, double M, orders_qed ord, schemes scheme = NDR);
+    gslpp::matrix<double>& DF1Evol(double mu, double M, orders_qcd order_qcd_i, orders_qed order_qed_i = NOQED, schemes scheme = NDR);
       
     /**
      * @brief a method returning the anomalous dimension in the Chetyrkin, Misiak and Munz operator basis 
@@ -72,7 +71,7 @@ public:
      * @param n_d an uinteger for the down-type number of d.o.f.
      * @return the ADM at the order LO/NLO in the Chetyrkin, Misiak and Munz basis
      */
-    //gslpp::matrix<double> ToRescaleBasis(orders order, uint n_u, uint n_d) const;
+    //gslpp::matrix<double> ToRescaleBasis(orders_qcd order, uint n_u, uint n_d) const;
     /**
      * @brief a method returning the anomalous dimension for the evolution of the effective Wilson coefficients
      * @param mat a temporary variable of gslpp::matrix type
