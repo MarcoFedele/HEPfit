@@ -58,11 +58,10 @@ public:
      * @brief a method returning the evolutor related to the high scale \f$ M \f$ and the low scale \f$ \mu \f$
      * @param mu a double for the low scale of the evolution
      * @param M a double for the high scale of the evolution
-     * @param order an enum "orders" for the order of perturbation theory of the evolutor
      * @param scheme an enum "schemes" for the regularization scheme of the evolutor
      * @return the evolutor \f$ U (\mu , M) \f$
      */
-    gslpp::matrix<double>& DF1Evol(double mu, double M, orders_qcd order_qcd_i, orders_qed order_qed_i = NOQED, schemes scheme = NDR);
+    Expanded<gslpp::matrix<double> >& DF1Evol(double mu, double M, schemes scheme = NDR);
       
     /**
      * @brief a method returning the anomalous dimension in the Chetyrkin, Misiak and Munz operator basis 
@@ -108,6 +107,8 @@ private:
      * @param nf number of active flavours
      */    
     void CheckNf(indices nm, uint nf) const;
+    
+    void setExpandedMatrix(Expanded<gslpp::matrix<double> >& expm, unsigned int i, unsigned int  j, double x, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
     
     /**
      * @brief a void type method storing properly the magic numbers for the implementation of the evolutor

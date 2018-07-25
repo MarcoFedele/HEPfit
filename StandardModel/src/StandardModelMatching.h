@@ -210,9 +210,9 @@ public:
      */
     virtual  std::vector<WilsonCoefficient>& CMgminus2mu() ;
 
-    double x_c(const double mu, const orders order = FULLNNLO) const;
-    double x_t(const double mu, const orders order = FULLNNLO) const;
-    double mt2omh2(const double mu, const orders order = FULLNNLO) const;
+    double x_c(const double mu, const orders_qcd order_qcd = FULLNNLO) const;
+    double x_t(const double mu, const orders_qcd order_qcd = FULLNNLO) const;
+    double mt2omh2(const double mu, const orders_qcd order_qcd = FULLNNLO) const;
     
     /**
      * 
@@ -418,7 +418,7 @@ public:
     /**
      *
      * @param[in] x the square of the ratio between top mass and W mass
-     * @return 0th order loop function for the top contribution to K_L -> mu mu decays
+     * @return 0th order_qcd loop function for the top contribution to K_L -> mu mu decays
      */
     double Y0(double x)const;
     
@@ -426,7 +426,7 @@ public:
      *
      * @param[in] x the square of the ratio between top mass and W mass
      * @param[in] mu the matching scale of the Wilson coefficients
-     * @return first order in QCD loop function for the top contribution to K_L -> mu mu decays
+     * @return first order_qcd in QCD loop function for the top contribution to K_L -> mu mu decays
      */
     double Y1(double x, double mu)const;
     
@@ -600,7 +600,7 @@ public:
      *
      * @brief hep-ph/9512380v1
      * @param[in] x the square of the ratio between top mass and W mass
-     * @return 0th order loop function for the top contribution to K -> pi nu nu decays
+     * @return 0th order_qcd loop function for the top contribution to K -> pi nu nu decays
      */
     double X0t(double x)const;
     
@@ -608,7 +608,7 @@ public:
      *
      * @brief hep-ph/1009.0947v2
      * @param[in] x the square of the ratio between top mass and W mass
-     * @return first order in QCD loop function for the top contribution to K -> pi nu nu decays
+     * @return first order_qcd in QCD loop function for the top contribution to K -> pi nu nu decays
      */
     double X1t(double x)const;
     
@@ -680,7 +680,7 @@ private:
      * @param order
      * @return return the value of the wilson coefficients for \f$ B_{s} \rightarrow  l^{+} l^{-} \f$
      */
-    double setWCBsmm(int i, double x, orders order);
+    double setWCBsmm(int i, double x, orders_qcd order_qcd);
     
     /**
      * 
@@ -698,7 +698,7 @@ private:
      * @param order
      * @return return the value of the wilson coefficients for \f$ B_{d} \rightarrow  l^{+} l^{-} \f$
      */
-    double setWCBdmm(int i, double x, orders order);
+    double setWCBdmm(int i, double x, orders_qcd order_qcd);
     
     /**
      * 
@@ -716,7 +716,7 @@ private:
      * @param order
      * @return return the value of the wilson coefficients for \f$ B \rightarrow X_{s} \gamma, l^{+} l^{-} \f$
      */
-    double setWCbsg (int i, double x, orders order);
+    double setWCbsg (int i, double x, orders_qcd order_qcd);
     
     /**
      * 
@@ -725,7 +725,7 @@ private:
      * @param order
      * @return return the value of the wilson coefficients for \f$ B \rightarrow k^* l^{+} l^{-} \f$
      */
-    double setWCBMll (int i, double x, orders order);
+    double setWCBMll (int i, double x, orders_qcd order_qcd);
     
     /**
      * 
@@ -734,7 +734,7 @@ private:
      * @param order
      * @return return the value of the QCD contribution to the Wilson coefficients for non-leptonic B decays
      */
-    double setWCbnlep (int i, double x, orders order);
+    double setWCbnlep (int i, double x, orders_qcd order_qcd);
     
     /**
      * 
@@ -804,7 +804,7 @@ private:
      * @param ord NLO or NNLO
      * @return function appearing in the matching condition for \f$ C_4 \f$ 
      */
-    double C4fun(double x, orders ord);
+    double C4fun(double x, orders_qcd ord);
 
     /**
      * 
@@ -834,7 +834,7 @@ private:
      */
     double C8funLO(double x);
 
-    unsigned int setCMDF1(WilsonCoefficient& CMDF1, WilsonCoefficient& DF1block, unsigned int tot, schemes scheme, orders order, orders_qed order_qed);
+    unsigned int setCMDF1(WilsonCoefficient& CMDF1, WilsonCoefficient& DF1block, unsigned int tot, schemes scheme, orders_qcd order, orders_qed order_qed);
 
     /**
      * 

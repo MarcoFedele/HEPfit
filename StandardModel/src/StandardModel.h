@@ -517,7 +517,7 @@ public:
     };
     
     /**
-     * @brief An enumerated type representing perturbative orders of radiative
+     * @brief An enumerated type representing perturbative orders_qcd of radiative
      * corrections to %EW precision observables.
      */
     enum orders_EW {
@@ -1068,7 +1068,7 @@ public:
      * @attention This function is applicable to the scale where the three charged
      * leptons and the five quarks, not the top quark, run in the loops.
      */
-    double ale_OS(const double mu, orders order = FULLNLO) const;
+    double ale_OS(const double mu, orders_qcd order_qcd = FULLNLO) const;
 
     /**
      * @brief QCD beta function coefficients including QED corrections - eq. (36) hep-ph/0512066
@@ -1091,7 +1091,7 @@ public:
      * @details See @cite Huber:2005ig
      * @param[in] mu renormalization scale @f$\mu@f$ in GeV.
      * @param[in] order order in the @f$\alpha_s@f$ expansion as defined in OrderScheme
-     * @param[in] qed_flag include @f$\alpha_e@f$ corrections to the requested order in @f$\alpha_s@f$. The @f$\alpha_s\alpha_e@f$ term is included if NNNLO is requested. Default: false 
+     * @param[in] qed_flag include @f$\alpha_e@f$ corrections to the requested order_qcd in @f$\alpha_s@f$. The @f$\alpha_s\alpha_e@f$ term is included if NNNLO is requested. Default: false 
      * @param[in] Nf_thr true (default): @f$n_f@f$ = Nf(mu), false: @f$n_f@f$ = Nf(AlsM)  
      * @return @f$\alpha(\mu)@f$ in the @f$\overline{MS}@f$ scheme
      *
@@ -1100,7 +1100,7 @@ public:
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Woverloaded-virtual"
 #endif
-    double Als(double mu, orders order = FULLNLO, bool qed_flag = false, bool Nf_thr = true) const;
+    double Als(double mu, orders_qcd order_qcd = FULLNLO, bool qed_flag = false, bool Nf_thr = true) const;
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
@@ -1109,12 +1109,12 @@ public:
      * @brief The running electromagnetic coupling @f$\alpha_e(\mu)@f$ in the @f$\overline{MS}@f$ scheme.
      * @details See @cite Huber:2005ig
      * @param[in] mu renormalization scale @f$\mu@f$ in GeV
-     * @param[in] order order in the @f$\alpha_e@f$ expansion as defined in the order enum in OrderScheme
+     * @param[in] order_qcd order in the @f$\alpha_e@f$ expansion as defined in the order enum in OrderScheme
      * @param[in] Nf_thr flag to activate flavour thresholds. Default: true 
      * @return @f$\alpha_e(\mu)@f$ in the @f$\overline{MS}@f$ scheme
      *
      */
-    double Ale(double mu, orders order, bool Nf_thr = true) const;
+    double Ale(double mu, orders_qcd order, bool Nf_thr = true) const;
 
     /**
      * @brief Leptonic contribution to the electromagnetic coupling @f$\alpha@f$,
@@ -2592,17 +2592,17 @@ protected:
     }
     
     
-    double m_q(const QCD::quark q, const double mu, const orders order=FULLNLO) const 
+    double m_q(const QCD::quark q, const double mu, const orders_qcd order_qcd = FULLNLO) const 
     {
         switch(q) {
             case QCD::UP:
             case QCD::DOWN:
             case QCD::STRANGE:
                 return Mrun(mu, getQuarks(q).getMass_scale(), 
-                                         getQuarks(q).getMass(), order);
+                                         getQuarks(q).getMass(), order_qcd);
             case QCD::CHARM:
             case QCD::BOTTOM:
-                return Mrun(mu, getQuarks(q).getMass(), order);
+                return Mrun(mu, getQuarks(q).getMass(), order_qcd);
             case QCD::TOP:
                 return getMtpole(); // the pole mass
             default:
@@ -3127,8 +3127,8 @@ private:
     
     int iterationNo;
     
-    double AlsWithInit(double mu, double alsi, double mu_i, orders order, bool qed_flag) const;
-    double AleWithInit(double mu, double alsi, double mu_i, orders order) const;
+    double AlsWithInit(double mu, double alsi, double mu_i, orders_qcd order, bool qed_flag) const;
+    double AleWithInit(double mu, double alsi, double mu_i, orders_qcd order_qcd) const;
     static const int CacheSize = 5; ///< Defines the depth of the cache.
     mutable double als_cache[11][CacheSize]; ///< Cache for \f$\alpha_s\f$.
     mutable double ale_cache[10][CacheSize]; ///< Cache for \f$\alpha_e\f$.

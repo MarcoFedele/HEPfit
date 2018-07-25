@@ -80,9 +80,9 @@ QCD::QCD()
     unknownParameterWarning = true;
 }
 
-std::string QCD::orderToString(const orders order) const
+std::string QCD::orderToString(const orders_qcd order_qcd) const
 {
-    switch (order) {
+    switch (order_qcd) {
         case LO:
             return "LO";
         case NLO:
@@ -98,7 +98,7 @@ std::string QCD::orderToString(const orders order) const
         case FULLNNNLO:
             return "FULLNNNLO";
         default:
-            throw std::runtime_error("QCD::orderToString(): order not implemented.");
+            throw std::runtime_error("QCD::orderToString(): order_qcd not implemented.");
     }
 }
 
@@ -483,7 +483,7 @@ double QCD::Beta3(const double nf) const
 }
 
 double QCD::AlsWithInit(const double mu, const double alsi, const double mu_i,
-        const orders order) const
+        const orders_qcd order_qcd) const
 {
     double nf = Nf(mu_i);
 //    double nf = Nf(mu);
@@ -494,7 +494,7 @@ double QCD::AlsWithInit(const double mu, const double alsi, const double mu_i,
     double v = 1. - Beta0(nf) * alsi / 2. / M_PI * log(mu_i / mu);
     double logv = log(v);
 
-    switch (order) {
+    switch (order_qcd) {
         case LO:
             return (alsi / v);
         case NLO:
@@ -516,7 +516,7 @@ double QCD::AlsWithInit(const double mu, const double alsi, const double mu_i,
         case FULLNNNLO:
             return(AlsWithInit(mu,alsi,mu_i,LO)+AlsWithInit(mu,alsi,mu_i,NLO)+AlsWithInit(mu,alsi,mu_i,NNLO)+AlsWithInit(mu,alsi,mu_i,NNNLO));
         default:
-            throw std::runtime_error("QCD::AlsWithInit(): " + orderToString(order) + " is not implemented.");
+            throw std::runtime_error("QCD::AlsWithInit(): " + orderToString(order_qcd) + " is not implemented.");
     }
 }
 
@@ -527,7 +527,7 @@ double QCD::Als4(const double mu) const
 }
 
 double QCD::AlsWithLambda(const double mu, const double logLambda,
-        const orders order) const
+        const orders_qcd order_qcd) const
 {
     double nf = Nf(mu);
     double L = 2. * (log(mu) - logLambda);
@@ -536,41 +536,41 @@ double QCD::AlsWithLambda(const double mu, const double logLambda,
     double b0 = Beta0(nf);
     double b0L = b0*L;
     double alsLO = 4. * M_PI / b0L;
-    if (order == LO) return alsLO;
+    if (order_qcd == LO) return alsLO;
 
     // NLO contribution
     double b1 = Beta1(nf);
     double log_L = log(L);
     double alsNLO = 4. * M_PI / b0L * (-b1 * log_L / b0 / b0L);
-    if (order == NLO) return alsNLO;
-    if (order == FULLNLO) return (alsLO + alsNLO);
+    if (order_qcd == NLO) return alsNLO;
+    if (order_qcd == FULLNLO) return (alsLO + alsNLO);
 
     // NNLO contribution
     double b2 = Beta2(nf);
     double alsNNLO = 4. * M_PI / b0L * (1. / b0L / b0L
             * (b1 * b1 / b0 / b0 * (log_L * log_L - log_L - 1.) + b2 / b0));
-    if (order == NNLO) return alsNNLO;
-    if (order == FULLNNLO) return (alsLO + alsNLO + alsNNLO);
+    if (order_qcd == NNLO) return alsNNLO;
+    if (order_qcd == FULLNNLO) return (alsLO + alsNLO + alsNNLO);
 
     // NNNLO contribution
     double b3 = Beta3(nf);
     double alsNNNLO = 4. * M_PI / b0L * (-1. / b0L / b0L / b0L
             * (b1 * b1 * b1 / b0 / b0 / b0 * (log_L * log_L * log_L - 5./2. * log_L * log_L -2. * log_L - 0.5) + 3. * b1 * b2 * log_L / b0 / b0 - 0.5 * b3 / b0));
-    if (order == NNNLO) return alsNNNLO;
-    if (order == FULLNNNLO) return (alsLO + alsNLO + alsNNLO + alsNNNLO);
+    if (order_qcd == NNNLO) return alsNNNLO;
+    if (order_qcd == FULLNNNLO) return (alsLO + alsNLO + alsNNLO + alsNNNLO);
 
-    throw std::runtime_error(orderToString(order) + " is not implemented in QCD::AlsWithLambda().");
+    throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::AlsWithLambda().");
 }
 
-double QCD::AlsWithLambda(const double mu, const orders order) const
+double QCD::AlsWithLambda(const double mu, const orders_qcd order_qcd) const
 {
-    return AlsWithLambda(mu, logLambda(Nf(mu), order), order);
+    return AlsWithLambda(mu, logLambda(Nf(mu), order_qcd), order_qcd);
 }
 
-double QCD::NfThresholdCorrections(double mu, double M, double als, int nf, orders order) const
+double QCD::NfThresholdCorrections(double mu, double M, double als, int nf, orders_qcd order_qcd) const
 {
     double lmM = 2.*log(mu/M), res = 0.;
-    switch(order)
+    switch(order_qcd)
     {
         case FULLNNNLO:
             res += als*als*als/M_PI/M_PI/M_PI*(-564731./124416. + 82043./27648.*gslpp_special_functions::zeta(3) +
@@ -582,14 +582,14 @@ double QCD::NfThresholdCorrections(double mu, double M, double als, int nf, orde
         case LO:
             break;
         default:
-            throw std::runtime_error("QCD::ThresholdCorrections(): order not implemented.");
+            throw std::runtime_error("QCD::ThresholdCorrections(): order_qcd not implemented.");
     }
     return(res);
 }
 
-orders QCD::FullOrder(orders order) const
+orders_qcd QCD::FullOrder(orders_qcd order_qcd) const
 {
-    switch(order)
+    switch(order_qcd)
     {
         case LO:
             return(LO);
@@ -600,7 +600,7 @@ orders QCD::FullOrder(orders order) const
         case NNNLO:
             return(FULLNNNLO);
         default:
-            throw std::runtime_error("QCD::FullOrder(): " + orderToString(order) + " is not implemented.");    
+            throw std::runtime_error("QCD::FullOrder(): " + orderToString(order_qcd) + " is not implemented.");    
     }
 }
 
@@ -621,19 +621,19 @@ double QCD::MassOfNf(int nf) const
     }
 }
 
-double QCD::Als(const double mu, const orders order, bool Nf_thr) const {
+double QCD::Als(const double mu, const orders_qcd order_qcd, bool Nf_thr) const {
     int i, nfAls = (int) Nf(MAls), nfmu = Nf_thr ? (int) Nf(mu) : nfAls;
     double als, alstmp, mutmp;
-    orders fullord;
+    orders_qcd fullord;
 
     for (i = 0; i < CacheSize; ++i)
-        if ((mu == als_cache[0][i]) && ((double) order == als_cache[1][i]) &&
+        if ((mu == als_cache[0][i]) && ((double) order_qcd == als_cache[1][i]) &&
                 (AlsM == als_cache[2][i]) && (MAls == als_cache[3][i]) &&
                 (mut == als_cache[4][i]) && (mub == als_cache[5][i]) &&
                 (muc == als_cache[6][i]) && (Nf_thr == (bool) als_cache[7][i]))
             return als_cache[8][i];
 
-    switch (order)
+    switch (order_qcd)
     {
         case FULLNLO:
             return (Als(mu, LO, Nf_thr) + Als(mu, NLO, Nf_thr));
@@ -646,8 +646,8 @@ double QCD::Als(const double mu, const orders order, bool Nf_thr) const {
         case NNLO:
         case NNNLO:
             if (nfAls == nfmu)
-                als = AlsWithInit(mu, AlsM, MAls, order);
-            fullord = FullOrder(order);
+                als = AlsWithInit(mu, AlsM, MAls, order_qcd);
+            fullord = FullOrder(order_qcd);
             if (nfAls > nfmu) {
                 mutmp = BelowTh(MAls);
                 alstmp = AlsWithInit(mutmp, AlsM, MAls, fullord);
@@ -657,7 +657,7 @@ double QCD::Als(const double mu, const orders order, bool Nf_thr) const {
                     alstmp = AlsWithInit(mutmp, alstmp, AboveTh(mutmp) - MEPS, fullord);
                     alstmp *= (1. - NfThresholdCorrections(mutmp, MassOfNf(i), alstmp, i, fullord));
                 }
-                als = AlsWithInit(mu, alstmp, AboveTh(mu) - MEPS, order);
+                als = AlsWithInit(mu, alstmp, AboveTh(mu) - MEPS, order_qcd);
             }
 
             if (nfAls < nfmu) {
@@ -669,12 +669,12 @@ double QCD::Als(const double mu, const orders order, bool Nf_thr) const {
                     alstmp = AlsWithInit(mutmp, alstmp, BelowTh(mutmp) + MEPS, fullord);
                     alstmp *= (1. + NfThresholdCorrections(mutmp, MassOfNf(i + 1), alstmp, i + 1, fullord));
                 }
-                als = AlsWithInit(mu, alstmp, BelowTh(mu) + MEPS, order);
+                als = AlsWithInit(mu, alstmp, BelowTh(mu) + MEPS, order_qcd);
             }
 
             CacheShift(als_cache, 9);
             als_cache[0][0] = mu;
-            als_cache[1][0] = (double) order;
+            als_cache[1][0] = (double) order_qcd;
             als_cache[2][0] = AlsM;
             als_cache[3][0] = MAls;
             als_cache[4][0] = mut;
@@ -685,15 +685,15 @@ double QCD::Als(const double mu, const orders order, bool Nf_thr) const {
 
             return als;
         default:
-            throw std::runtime_error("QCD::Als(): " + orderToString(order) + " is not implemented.");
+            throw std::runtime_error("QCD::Als(): " + orderToString(order_qcd) + " is not implemented.");
     }
 }
 
-double QCD::AlsOLD(const double mu, const orders order) const
+double QCD::AlsOLD(const double mu, const orders_qcd order_qcd) const
 {
 //    int i;
 //    for (i = 0; i < CacheSize; ++i)
-//        if ((mu == als_cache[0][i]) && ((double) order == als_cache[1][i]) &&
+//        if ((mu == als_cache[0][i]) && ((double) order_qcd == als_cache[1][i]) &&
 //                (AlsM == als_cache[2][i]) && (MAls == als_cache[3][i]) &&
 //                (mut == als_cache[4][i]) && (mub == als_cache[5][i]) &&
 //                (muc == als_cache[6][i]))
@@ -702,52 +702,52 @@ double QCD::AlsOLD(const double mu, const orders order) const
     double nfmu = Nf(mu), nfz = Nf(MAls), mu_thre1, mu_thre2, Als_tmp, mf;
     double als;
 
-    switch (order) {
+    switch (order_qcd) {
         case LO:
         case FULLNLO:
         case NLO:
             if (nfmu == nfz)
-                als = AlsWithInit(mu, AlsM, MAls, order);
+                als = AlsWithInit(mu, AlsM, MAls, order_qcd);
             else if (nfmu > nfz) {
-                if (order == NLO)
-                    throw std::runtime_error("NLO is not implemented in QCD::Als(mu,order).");
+                if (order_qcd == NLO)
+                    throw std::runtime_error("NLO is not implemented in QCD::Als(mu,order_qcd).");
                 if (nfmu == nfz + 1.) {
                     mu_thre1 = AboveTh(MAls); // mut
-                    Als_tmp = AlsWithInit(mu_thre1 - MEPS, AlsM, MAls, order);
-                    if (order == FULLNLO) {
+                    Als_tmp = AlsWithInit(mu_thre1 - MEPS, AlsM, MAls, order_qcd);
+                    if (order_qcd == FULLNLO) {
                         mf = getQuarks(TOP).getMass(); //mf = mtpole;
                         Als_tmp = (1. + Als_tmp / M_PI * log(mu_thre1 / mf) / 3.) * Als_tmp;
                     }
-                    als = AlsWithInit(mu, Als_tmp, mu_thre1 + MEPS, order);
+                    als = AlsWithInit(mu, Als_tmp, mu_thre1 + MEPS, order_qcd);
                 } else
-                    throw std::runtime_error("Error in QCD::Als(mu,order)");
+                    throw std::runtime_error("Error in QCD::Als(mu,order_qcd)");
             } else {
-                if (order == NLO)
-                    throw std::runtime_error("NLO is not implemented in QCD::Als(mu,order).");
+                if (order_qcd == NLO)
+                    throw std::runtime_error("NLO is not implemented in QCD::Als(mu,order_qcd).");
                 if (nfmu == nfz - 1.) {
                     mu_thre1 = BelowTh(MAls); // mub
-                    Als_tmp = AlsWithInit(mu_thre1 + MEPS, AlsM, MAls, order);
-                    if (order == FULLNLO) {
+                    Als_tmp = AlsWithInit(mu_thre1 + MEPS, AlsM, MAls, order_qcd);
+                    if (order_qcd == FULLNLO) {
                         mf = getQuarks(BOTTOM).getMass();
                         Als_tmp = (1. - Als_tmp / M_PI * log(mu_thre1 / mf) / 3.) * Als_tmp;
                     }
-                    als = AlsWithInit(mu, Als_tmp, mu_thre1 - MEPS, order);
+                    als = AlsWithInit(mu, Als_tmp, mu_thre1 - MEPS, order_qcd);
                 } else if (nfmu == nfz - 2.) {
                     mu_thre1 = BelowTh(MAls); // mub
                     mu_thre2 = AboveTh(mu); // muc
-                    Als_tmp = Als(mu_thre1 + MEPS, order);
-                    if (order == FULLNLO) {
+                    Als_tmp = Als(mu_thre1 + MEPS, order_qcd);
+                    if (order_qcd == FULLNLO) {
                         mf = getQuarks(BOTTOM).getMass();
                         Als_tmp = (1. - Als_tmp / M_PI * log(mu_thre1 / mf) / 3.) * Als_tmp;
                     }
-                    Als_tmp = AlsWithInit(mu_thre2, Als_tmp, mu_thre1 - MEPS, order);
-                    if (order == FULLNLO) {
+                    Als_tmp = AlsWithInit(mu_thre2, Als_tmp, mu_thre1 - MEPS, order_qcd);
+                    if (order_qcd == FULLNLO) {
                         mf = getQuarks(CHARM).getMass();
                         Als_tmp = (1. - Als_tmp / M_PI * log(mu_thre2 / mf) / 3.) * Als_tmp;
                     }
-                    als = AlsWithInit(mu, Als_tmp, mu_thre2 - MEPS, order);
+                    als = AlsWithInit(mu, Als_tmp, mu_thre2 - MEPS, order_qcd);
                 } else
-                    throw std::runtime_error("Error in QCD::Als(mu,order)");
+                    throw std::runtime_error("Error in QCD::Als(mu,order_qcd)");
             }
             break;
         case NNLO:
@@ -755,10 +755,10 @@ double QCD::AlsOLD(const double mu, const orders order) const
         case FULLNNLO:
 //        case FULLNNNLO:
            /* alpha_s(mu) computed with Lambda_QCD for Nf=nfmu */
-            als = AlsWithLambda(mu, order);
+            als = AlsWithLambda(mu, order_qcd);
             break;
         default:
-            throw std::runtime_error(orderToString(order) + " is not implemented in QCD::Als(mu,order).");
+            throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::Als(mu,order_qcd).");
     }
 
 //    CacheShift(als_cache, 8);
@@ -780,9 +780,9 @@ double QCD::ZeroNf6NLO(double *logLambda6, double *logLambda5_in) const
             - AlsWithLambda(mut - 1.e-10, *logLambda5_in, FULLNLO));
 }
 
-double QCD::ZeroNf5(double *logLambda5, double *order) const
+double QCD::ZeroNf5(double *logLambda5, double *order_qcd) const
 {
-    return ( AlsWithLambda(MAls, *logLambda5, (orders) * order) - AlsM);
+    return ( AlsWithLambda(MAls, *logLambda5, (orders) * order_qcd) - AlsM);
 }
 
 double QCD::ZeroNf4NLO(double *logLambda4, double *logLambda5_in) const
@@ -797,15 +797,15 @@ double QCD::ZeroNf3NLO(double *logLambda3, double *logLambda4_in) const
             - AlsWithLambda(muc + 1.e-10, *logLambda4_in, FULLNLO));
 }
 
-double QCD::logLambda5(orders order) const
+double QCD::logLambda5(orders_qcd order_qcd) const
 {
-    if (order == NLO) order = FULLNLO;
-    if (order == NNLO) order = FULLNNLO;
+    if (order_qcd == NLO) order_qcd = FULLNLO;
+    if (order_qcd == NNLO) order_qcd = FULLNNLO;
 
     for (int i = 0; i < CacheSize; ++i)
         if ((AlsM == logLambda5_cache[0][i])
                 && (MAls == logLambda5_cache[1][i])
-                && ((double) order == logLambda5_cache[2][i]))
+                && ((double) order_qcd == logLambda5_cache[2][i]))
             return logLambda5_cache[3][i];
 
     CacheShift(logLambda5_cache, 4);
@@ -813,7 +813,7 @@ double QCD::logLambda5(orders order) const
     logLambda5_cache[1][0] = MAls;
     logLambda5_cache[2][0] = (double) order;
 
-    if (order == LO)
+    if (order_qcd == LO)
         logLambda5_cache[3][0] = log(MAls) - 2. * M_PI / Beta0(5.) / AlsM;
     else {
         double xmin = -4., xmax = -0.2;
@@ -884,19 +884,19 @@ double QCD::logLambdaNLO(const double nfNEW, const double nfORG,
 
 double QCD::logLambda(const double muMatching, const double mf,
         const double nfNEW, const double nfORG,
-        const double logLambdaORG, orders order) const
+        const double logLambdaORG, orders_qcd order_qcd) const
 {
     if (fabs(nfNEW - nfORG) != 1.)
         throw std::runtime_error("Error in QCD::logLambda()");
-    if (order == NLO) order = FULLNLO;
-    if (order == NNLO) order = FULLNNLO;
+    if (order_qcd == NLO) order_qcd = FULLNLO;
+    if (order_qcd == NNLO) order_qcd = FULLNNLO;
 
     /* We do not use the codes below for FULLNLO, since threshold corrections
      * can be regarded as an NNLO effect as long as setting the matching scale
-     * to be close to the mass scale of the decoupling quark. In order to use
+     * to be close to the mass scale of the decoupling quark. In order_qcd to use
      * the relation als^{nf+1} = als^{nf} exactly, we use logLambdaNLO method.
      */
-    if (order == FULLNLO)
+    if (order_qcd == FULLNLO)
         return logLambdaNLO(nfNEW, nfORG, logLambdaORG);
 
     double logMuMatching = log(muMatching);
@@ -910,7 +910,7 @@ double QCD::logLambda(const double muMatching, const double mf,
             *(Beta0(nfNEW) - Beta0(nfORG)) * L + logLambdaORG;
 
     // NLO contribution
-    if (order == FULLNLO || order == FULLNNLO) {
+    if (order_qcd == FULLNLO || order_qcd == FULLNNLO) {
         rNEW = Beta1(nfNEW) / Beta0(nfNEW);
         rORG = Beta1(nfORG) / Beta0(nfORG);
         log_mu2_mf2 = 2. * (logMuMatching - log(mf));
@@ -925,7 +925,7 @@ double QCD::logLambda(const double muMatching, const double mf,
     }
 
     // NNLO contribution
-    if (order == FULLNNLO) {
+    if (order_qcd == FULLNNLO) {
         if (nfNEW == 5. && nfORG == 6.)
             C2 = -16. * (log_mu2_mf2 * log_mu2_mf2 / 36. - 19. / 24. * log_mu2_mf2 - 7. / 24.);
         else if (nfNEW == 6. && nfORG == 5.)
@@ -945,29 +945,29 @@ double QCD::logLambda(const double muMatching, const double mf,
     return logLambdaNEW;
 }
 
-double QCD::logLambda(const double nf, orders order) const
+double QCD::logLambda(const double nf, orders_qcd order_qcd) const
 {
-    if (order == NLO) order = FULLNLO;
-    if (order == NNLO) order = FULLNNLO;
+    if (order_qcd == NLO) order_qcd = FULLNLO;
+    if (order_qcd == NNLO) order_qcd = FULLNNLO;
 
     double muMatching, mf, logLambdaORG, logLambdaNEW;
     if (nf == 5.)
-        return logLambda5(order);
+        return logLambda5(order_qcd);
     else if (nf == 6.) {
         muMatching = Thresholds(1); // mut
         /* matching condition from Nf=5 to Nf=6 is given in terms of the top pole mass. */
         mf = mtpole; // top pole mass
-        return logLambda(muMatching, mf, 6., 5., logLambda5(order), order);
+        return logLambda(muMatching, mf, 6., 5., logLambda5(order_qcd), order_qcd);
     } else if (nf == 4. || nf == 3.) {
         muMatching = Thresholds(2); // mub
         mf = getQuarks(BOTTOM).getMass(); // m_b(m_b)
-        logLambdaORG = logLambda5(order);
-        logLambdaNEW = logLambda(muMatching, mf, 4., 5., logLambdaORG, order);
+        logLambdaORG = logLambda5(order_qcd);
+        logLambdaNEW = logLambda(muMatching, mf, 4., 5., logLambdaORG, order_qcd);
         if (nf == 3.) {
             muMatching = Thresholds(3); // muc
             mf = getQuarks(CHARM).getMass(); // m_c(m_c)
             logLambdaORG = logLambdaNEW;
-            logLambdaNEW = logLambda(muMatching, mf, 3., 4., logLambdaORG, order);
+            logLambdaNEW = logLambda(muMatching, mf, 3., 4., logLambdaORG, order_qcd);
         }
         return logLambdaNEW;
     } else
@@ -1032,13 +1032,13 @@ double QCD::threCorrForMass(const double nf_f, const double nf_i) const
     }
 }
 
-double QCD::Mrun(const double mu, const double m, const orders order) const
+double QCD::Mrun(const double mu, const double m, const orders_qcd order_qcd) const
 {
-    return Mrun(mu, m, m, order);
+    return Mrun(mu, m, m, order_qcd);
 }
 
 double QCD::Mrun(const double mu_f, const double mu_i, const double m,
-        const orders order) const
+        const orders_qcd order_qcd) const
 {
     // Note: When the scale evolves across a flavour threshold, the definitions 
     //       of the outputs for "NLO" and "NNLO" become complicated. 
@@ -1046,7 +1046,7 @@ double QCD::Mrun(const double mu_f, const double mu_i, const double m,
     int i;
     for (i = 0; i < CacheSize; ++i) {
         if ((mu_f == mrun_cache[0][i]) && (mu_i == mrun_cache[1][i]) &&
-                (m == mrun_cache[2][i]) && ((double) order == mrun_cache[3][i]) &&
+                (m == mrun_cache[2][i]) && ((double) order_qcd == mrun_cache[3][i]) &&
                 (AlsM == mrun_cache[4][i]) && (MAls == mrun_cache[5][i]) &&
                 (mut == mrun_cache[6][i]) && (mub == mrun_cache[7][i]) &&
                 (muc == mrun_cache[8][i]))
@@ -1056,62 +1056,62 @@ double QCD::Mrun(const double mu_f, const double mu_i, const double m,
     double nfi = Nf(mu_i), nff = Nf(mu_f);
     double mu_threshold, mu_threshold2, mu_threshold3, mrun;
     if (nff == nfi)
-        mrun = MrunTMP(mu_f, mu_i, m, order);
+        mrun = MrunTMP(mu_f, mu_i, m, order_qcd);
     else if (nff > nfi) {
-        if (order == NLO || order == NNLO)
-            throw std::runtime_error(orderToString(order) + " is not implemented in QCD::Mrun(mu_f,mu_i,m,order)");
+        if (order_qcd == NLO || order_qcd == NNLO)
+            throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::Mrun(mu_f,mu_i,m,order_qcd)");
         mu_threshold = AboveTh(mu_i);
-        mrun = MrunTMP(mu_threshold - MEPS, mu_i, m, order);
-        if (order == FULLNNLO)
+        mrun = MrunTMP(mu_threshold - MEPS, mu_i, m, order_qcd);
+        if (order_qcd == FULLNNLO)
             mrun *= threCorrForMass(nfi + 1., nfi); // threshold corrections
         if (nff == nfi + 1.) {
-            mrun = MrunTMP(mu_f, mu_threshold + MEPS, mrun, order);
+            mrun = MrunTMP(mu_f, mu_threshold + MEPS, mrun, order_qcd);
         } else if (nff == nfi + 2.) {
             mu_threshold2 = BelowTh(mu_f);
-            mrun = MrunTMP(mu_threshold2 - MEPS, mu_threshold + MEPS, mrun, order);
-            if (order == FULLNNLO)
+            mrun = MrunTMP(mu_threshold2 - MEPS, mu_threshold + MEPS, mrun, order_qcd);
+            if (order_qcd == FULLNNLO)
                 mrun *= threCorrForMass(nff, nfi + 1.); // threshold corrections
-            mrun = MrunTMP(mu_f, mu_threshold2 + MEPS, mrun, order);
+            mrun = MrunTMP(mu_f, mu_threshold2 + MEPS, mrun, order_qcd);
         } else if (nff == nfi + 3.) {
             mu_threshold2 = AboveTh(mu_threshold);
-            mrun = MrunTMP(mu_threshold2 - MEPS, mu_threshold + MEPS, mrun, order);
-            if (order == FULLNNLO)
+            mrun = MrunTMP(mu_threshold2 - MEPS, mu_threshold + MEPS, mrun, order_qcd);
+            if (order_qcd == FULLNNLO)
                 mrun *= threCorrForMass(nfi + 2., nfi + 1.); // threshold corrections
             mu_threshold3 = BelowTh(mu_f);
-            mrun = MrunTMP(mu_threshold3 - MEPS, mu_threshold2 + MEPS, mrun, order);
-            if (order == FULLNNLO)
+            mrun = MrunTMP(mu_threshold3 - MEPS, mu_threshold2 + MEPS, mrun, order_qcd);
+            if (order_qcd == FULLNNLO)
                 mrun *= threCorrForMass(nff, nfi + 2.); // threshold corrections
-            mrun = MrunTMP(mu_f, mu_threshold3 + MEPS, mrun, order);
+            mrun = MrunTMP(mu_f, mu_threshold3 + MEPS, mrun, order_qcd);
         } else
-            throw std::runtime_error("Error in QCD::Mrun(mu_f,mu_i,m,order)");
+            throw std::runtime_error("Error in QCD::Mrun(mu_f,mu_i,m,order_qcd)");
     } else {
-        if (order == NLO || order == NNLO)
-            throw std::runtime_error(orderToString(order) + " is not implemented in QCD::Mrun(mu_f,mu_i,m,order)");
+        if (order_qcd == NLO || order_qcd == NNLO)
+            throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::Mrun(mu_f,mu_i,m,order_qcd)");
         mu_threshold = BelowTh(mu_i);
-        mrun = MrunTMP(mu_threshold + MEPS, mu_i, m, order);
-        if (order == FULLNNLO)
+        mrun = MrunTMP(mu_threshold + MEPS, mu_i, m, order_qcd);
+        if (order_qcd == FULLNNLO)
             mrun *= threCorrForMass(nfi - 1., nfi); // threshold corrections
         if (nff == nfi - 1.)
-            mrun = MrunTMP(mu_f, mu_threshold - MEPS, mrun, order);
+            mrun = MrunTMP(mu_f, mu_threshold - MEPS, mrun, order_qcd);
         else if (nff == nfi - 2.) {
             mu_threshold2 = AboveTh(mu_f);
-            mrun = MrunTMP(mu_threshold2 + MEPS, mu_threshold - MEPS, mrun, order);
-            if (order == FULLNNLO)
+            mrun = MrunTMP(mu_threshold2 + MEPS, mu_threshold - MEPS, mrun, order_qcd);
+            if (order_qcd == FULLNNLO)
                 mrun *= threCorrForMass(nff, nfi - 1.); // threshold corrections
-            mrun = MrunTMP(mu_f, mu_threshold2 - MEPS, mrun, order);
+            mrun = MrunTMP(mu_f, mu_threshold2 - MEPS, mrun, order_qcd);
         } else
-            throw std::runtime_error("Error in QCD::Mrun(mu_f,mu_i,m,order)");
+            throw std::runtime_error("Error in QCD::Mrun(mu_f,mu_i,m,order_qcd)");
     }
 
     if (mrun < 0.0) {
         std::stringstream out;
         out << "QCD::Mrun(): A quark mass becomes tachyonic in QCD::Mrun("
-                << mu_f << ", " << mu_i << ", " << m << ", " << orderToString(order) << ")"
+                << mu_f << ", " << mu_i << ", " << m << ", " << orderToString(order_qcd) << ")"
                 << std::endl
-                << "             Als(" << mu_i << ", " << orderToString(order) << ")/(4pi)="
-                << Als(mu_i, order) / (4. * M_PI) << std::endl
-                << "             Als(" << mu_f << ", " << orderToString(order) << ")/(4pi)="
-                << Als(mu_f, order) / (4. * M_PI);
+                << "             Als(" << mu_i << ", " << orderToString(order_qcd) << ")/(4pi)="
+                << Als(mu_i, order_qcd) / (4. * M_PI) << std::endl
+                << "             Als(" << mu_f << ", " << orderToString(order_qcd) << ")/(4pi)="
+                << Als(mu_f, order_qcd) / (4. * M_PI);
         throw std::runtime_error(out.str());
     }
 
@@ -1131,40 +1131,40 @@ double QCD::Mrun(const double mu_f, const double mu_i, const double m,
 }
 
 double QCD::MrunTMP(const double mu_f, const double mu_i, const double m,
-        const orders order) const
+        const orders_qcd order_qcd) const
 {
     double nf = Nf(mu_f);
     if (nf != Nf(mu_i))
         throw std::runtime_error("Error in QCD::MrunTMP().");
 
     // alpha_s/(4pi)
-    orders orderForAls;
-    if (order == LO) orderForAls = LO;
-    if (order == NLO || order == FULLNLO) orderForAls = FULLNLO;
-    if (order == NNLO || order == FULLNNLO) orderForAls = FULLNNLO;
+    orders_qcd orderForAls;
+    if (order_qcd == LO) orderForAls = LO;
+    if (order_qcd == NLO || order_qcd == FULLNLO) orderForAls = FULLNLO;
+    if (order_qcd == NNLO || order_qcd == FULLNNLO) orderForAls = FULLNNLO;
     double ai = Als(mu_i, orderForAls) / (4. * M_PI);
     double af = Als(mu_f, orderForAls) / (4. * M_PI);
 
     // LO contribution
     double b0 = Beta0(nf), g0 = Gamma0(nf);
     double mLO = m * pow(af / ai, g0 / (2. * b0));
-    if (order == LO) return mLO;
+    if (order_qcd == LO) return mLO;
 
     // NLO contribution
     double b1 = Beta1(nf), g1 = Gamma1(nf);
     double A1 = g1 / (2. * b0) - b1 * g0 / (2. * b0 * b0);
     double mNLO = mLO * A1 * (af - ai);
-    if (order == NLO) return mNLO;
-    if (order == FULLNLO) return (mLO + mNLO);
+    if (order_qcd == NLO) return mNLO;
+    if (order_qcd == FULLNLO) return (mLO + mNLO);
 
     // NNLO contribution    
     double b2 = Beta2(nf), g2 = Gamma2(nf);
     double A2 = b1 * b1 * g0 / (2. * b0 * b0 * b0) - b2 * g0 / (2. * b0 * b0) - b1 * g1 / (2. * b0 * b0) + g2 / (2. * b0);
     double mNNLO = mLO * (A1 * A1 / 2. * (af - ai)*(af - ai) + A2 / 2. * (af * af - ai * ai));
-    if (order == NNLO) return mNNLO;
-    if (order == FULLNNLO) return (mLO + mNLO + mNNLO);
+    if (order_qcd == NNLO) return mNNLO;
+    if (order_qcd == FULLNNLO) return (mLO + mNLO + mNNLO);
 
-    throw std::runtime_error(orderToString(order) + " is not implemented in QCD::MrunTMP()");
+    throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::MrunTMP()");
 }
 
 double QCD::Mrun4(const double mu_f, const double mu_i, const double m) const
@@ -1189,22 +1189,22 @@ double QCD::Mrun4(const double mu_f, const double mu_i, const double m) const
 
 ////////////////////////////////////////////////////////////////////////
 
-double QCD::Mbar2Mp(const double mbar, const orders order) const
+double QCD::Mbar2Mp(const double mbar, const orders_qcd order_qcd) const
 {
     // LO contribution
     double MpLO = mbar;
-    if (order == LO) return MpLO;
+    if (order_qcd == LO) return MpLO;
 
     // alpha_s(mbar)/pi
-    orders orderForAls;
-    if (order == NLO || order == FULLNLO) orderForAls = FULLNLO;
-    if (order == NNLO || order == FULLNNLO) orderForAls = FULLNNLO;
+    orders_qcd orderForAls;
+    if (order_qcd == NLO || order_qcd == FULLNLO) orderForAls = FULLNLO;
+    if (order_qcd == NNLO || order_qcd == FULLNNLO) orderForAls = FULLNNLO;
     double a = Als(mbar + MEPS, orderForAls) / M_PI;
 
     // NLO contribution 
     double MpNLO = mbar * 4. / 3. * a;
-    if (order == NLO) return MpNLO;
-    if (order == FULLNLO) return (MpLO + MpNLO);
+    if (order_qcd == NLO) return MpNLO;
+    if (order_qcd == FULLNLO) return (MpLO + MpNLO);
 
     // NNLO contribution
     double nl, x;
@@ -1225,30 +1225,30 @@ double QCD::Mbar2Mp(const double mbar, const orders order) const
     double Delta = M_PI * M_PI / 8. * x - 0.597 * x * x + 0.230 * x * x*x;
     double MpNNLO = mbar * (307. / 32. + 2. * zeta2 + 2. / 3. * zeta2 * log(2.0) - zeta3 / 6.
             - nl / 3. * (zeta2 + 71. / 48.) + 4. / 3. * Delta) * a*a;
-    if (order == NNLO) return MpNNLO;
-    if (order == FULLNNLO) return (MpLO + MpNLO + MpNNLO);
+    if (order_qcd == NNLO) return MpNNLO;
+    if (order_qcd == FULLNNLO) return (MpLO + MpNLO + MpNNLO);
 
-    throw std::runtime_error(orderToString(order) + " is not implemented in QCD::Mbar2Mp().");
+    throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::Mbar2Mp().");
 }
 
 double QCD::Mp2MbarTMP(double *mu, double *params) const
 {
     double mp = params[0];
-    orders order = (orders) params[1];
-    return (mp - Mbar2Mp(*mu, order));
+    orders_qcd order_qcd = (orders) params[1];
+    return (mp - Mbar2Mp(*mu, order_qcd));
 }
 
-double QCD::Mp2Mbar(const double mp, const orders order) const
+double QCD::Mp2Mbar(const double mp, const orders_qcd order_qcd) const
 {
-    if (order == NLO || order == NNLO)
-        throw std::runtime_error(orderToString(order) + " is not implemented in QCD::Mp2Mbar().");
+    if (order_qcd == NLO || order_qcd == NNLO)
+        throw std::runtime_error(orderToString(order_qcd) + " is not implemented in QCD::Mp2Mbar().");
 
     int i;
     double ms = quarks[STRANGE].getMass(), mc = quarks[CHARM].getMass();
-    double alsmp = Als(mp, order);
+    double alsmp = Als(mp, order_qcd);
     for (i = 0; i < CacheSize; ++i)
         if (alsmp == mp2mbar_cache[0][i] && ms == mp2mbar_cache[1][i] &&
-                mc == mp2mbar_cache[2][i] && (double) order == mp2mbar_cache[3][i])
+                mc == mp2mbar_cache[2][i] && (double) order_qcd == mp2mbar_cache[3][i])
             return mp2mbar_cache[4][i];
 
     CacheShift(mp2mbar_cache, 5);

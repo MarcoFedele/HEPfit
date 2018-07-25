@@ -32,7 +32,7 @@ public:
      * @param[in] order order of QCD coupling
      * @param[in] order_qed order of Electroweak coupling
      */
-    RGEvolutor(unsigned int dim, schemes scheme, orders_qcd order_qcd_i, orders_qed order_qed_i = NOQED);
+    RGEvolutor(unsigned int dim, schemes scheme, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
     
     /**
      *
@@ -49,7 +49,7 @@ public:
      * @param[in] order_i order of QCD coupling
      * @param[in] order_qed order of Electroweak coupling
      */
-    void setEvol(unsigned int i, unsigned int j, double x, orders_qcd order_i, orders_qed order_qed = NOQED);
+    void setEvol(unsigned int i, unsigned int j, double x, orders_qcd order_i, orders_qed order_qed = QED0);
     
     /**
      *
@@ -57,14 +57,14 @@ public:
      * @param[in] m
      * @param[in] order_qed_i order of Electroweak coupling
      */
-    void setEvol(const gslpp::matrix<double>& m, orders_qcd order_qcd_i, orders_qed order_qed_i = NOQED);
+    void setEvol(const gslpp::matrix<double>& m, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
     
     /**
      *
      * @brief
      * @return
      */
-    Expanded<gslpp::matrix<double> > getEvol() const;
+    Expanded<gslpp::matrix<double> >& getEvol() const;
 
     /**
      *
@@ -101,7 +101,7 @@ public:
      * @param[in] order_qed order of Electroweak coupling
      * @return The RGE evolution matrix at a fixed order of Electroweak coupling
      */
-    gslpp::matrix<double> Evol(orders_qcd order_qcd, orders_qed order_qed = NOQED);
+    gslpp::matrix<double> Evol(orders_qcd order_qcd, orders_qed order_qed = QED0);
     
 protected:
     double M;

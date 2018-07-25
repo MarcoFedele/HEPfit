@@ -45,10 +45,9 @@ public:
     }
 
     Expanded<T>(std::vector<T> & dinp) {
-        ord1 = dinp.size();
-        for (uint i = 0; i < ord1; i++)
-            data.push_back(std::vector<T>(1, dinp[i]));
-        ord2 = 1;
+        ord1 = 1;
+        ord2 = dinp.size();
+        data.push_back(dinp);
     }
 
     Expanded<T>(std::vector<std::vector<T> > & dinp) {
@@ -258,7 +257,6 @@ public:
     }
 
     Expanded<T> operator-() const {
-
         std::vector<std::vector<T> > res(ord1, std::vector<T>(ord2, Zero()));
         for (uint i1 = 0; i1 < ord1; i1++)
             for (uint i2 = 0; i2 < ord2; i2++)
@@ -459,7 +457,7 @@ public:
 
     Expanded<T> transpose() const;
 
-    T getAllOrd() {
+    T& getAllOrd() {
         T res();
         for (uint i = 0; i < ord1; i++)
             for (uint j = 0; j < ord2; j++)
@@ -467,12 +465,15 @@ public:
         return res;
     }
 
-    T getOrd(uint i, uint j = 0) const {
+    T getOrd(uint j) const {
+        return data[0][j];
+    }
+    T getOrd(uint i, uint j) const {
         return data[i][j];
     }
 
-    void setOrd(uint i, T value) {
-        data[i][0] = value;
+    void setOrd(uint j, T value) {
+        data[0][j] = value;
     }
 
     void setOrd(uint i, uint j, T value) {

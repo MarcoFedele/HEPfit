@@ -24,15 +24,9 @@ void RGEvolutor::setEvol(unsigned int i, unsigned int  j, double x, orders_qcd o
         out << order_qcd_i << " and " << order_qed_i;
         throw std::runtime_error("RGEvolutor::setEvol(): order " + out.str() +" not implemented "); 
     }
-    if (order_qed_i == NOQED) {
-        gslpp::matrix<double> tmp = wilson.getOrd(order_qcd_i);
-        tmp.assign(i, j, x);
-        wilson.setOrd(order_qcd_i, tmp);
-    } else {
-        gslpp::matrix<double> tmp = wilson.getOrd(order_qcd_i, order_qed_i);
-        tmp.assign(i, j, x);
-        wilson.setOrd(order_qcd_i, order_qed_i, tmp);
-    }
+    gslpp::matrix<double> tmp = wilson.getOrd(order_qcd_i, order_qed_i);
+    tmp.assign(i, j, x);
+    wilson.setOrd(order_qcd_i, order_qed_i, tmp);
 }
 
 void RGEvolutor::setEvol(const gslpp::matrix<double>& m, orders_qcd order_qcd_i, orders_qed order_qed_i)
@@ -40,9 +34,9 @@ void RGEvolutor::setEvol(const gslpp::matrix<double>& m, orders_qcd order_qcd_i,
     setWilson(m, order_qcd_i, order_qed_i);
 }
 
-Expanded<gslpp::matrix<double> > RGEvolutor::getEvol() const
+Expanded<gslpp::matrix<double> >& RGEvolutor::getEvol() const
 {
-    return getWilson();
+    return wilson;
 }
 
 double RGEvolutor::getM() const

@@ -87,7 +87,7 @@ public:
         return size;
     }
 
-    T getWilson(orders_qcd order_qcd_i, orders_qed order_qed_i = QED0) const {
+    T& getWilson(orders_qcd order_qcd_i, orders_qed order_qed_i = QED0) const {
         if (order_qcd_i > order_qcd || order_qed_i > order_qed) {
             std::stringstream out;
             out << order_qcd_i << " and " << order_qed_i;

@@ -140,14 +140,14 @@ void StandardModelMatching::updateSMParameters()
     mu_b = SM.getMub();
 }
 
-double StandardModelMatching::x_c(const double mu, const orders order) const 
+double StandardModelMatching::x_c(const double mu, const orders_qcd order_qcd)  const 
 {
     double mc = SM.Mrun(mu, SM.getQuarks(QCD::CHARM).getMass_scale(), 
-                        SM.getQuarks(QCD::CHARM).getMass(), order);
+                        SM.getQuarks(QCD::CHARM).getMass(), order_qcd) ;
     return mc*mc/Mw/Mw;    
 }
 
-double StandardModelMatching::x_t(const double mu, const orders order) const 
+double StandardModelMatching::x_t(const double mu, const orders_qcd order_qcd)  const 
 {
     double mt;
     
@@ -157,17 +157,17 @@ double StandardModelMatching::x_t(const double mu, const orders order) const
         mt = Mt_muw;
     else
         mt = SM.Mrun(mu, SM.getQuarks(QCD::TOP).getMass_scale(), 
-                        SM.getQuarks(QCD::TOP).getMass(), order);
+                        SM.getQuarks(QCD::TOP).getMass(), order_qcd) ;
 
     //msbar mass here?
     //mt=163.836;
     return mt*mt/Mw/Mw;   
 }
 
-double StandardModelMatching::mt2omh2(const double mu, const orders order) const 
+double StandardModelMatching::mt2omh2(const double mu, const orders_qcd order_qcd)  const 
 {
     double mt = SM.Mrun(mu, SM.getQuarks(QCD::TOP).getMass_scale(), 
-                        SM.getQuarks(QCD::TOP).getMass(), order);
+                        SM.getQuarks(QCD::TOP).getMass(), order_qcd) ;
     return (mt / SM.getMHl())*(mt / SM.getMHl());
 }
 
@@ -1438,12 +1438,12 @@ double StandardModelMatching::phi_xy(double x, double y) const
  * Wilson coefficients calcoulus, misiak base for b -> s gamma                  *  
  * ****************************************************************************/
 
-double StandardModelMatching::setWCbsg(int i, double x, orders order)
+double StandardModelMatching::setWCbsg(int i, double x, orders_qcd order_qcd) 
 {    
     sw =  sqrt( sW2 );
 
     if ( swf == sw && xcachef == x){
-        switch (order){
+        switch (order_qcd) {
         case NNLO:
             return ( CWbsgArrayNNLO[i] );
             break;        
@@ -1462,7 +1462,7 @@ double StandardModelMatching::setWCbsg(int i, double x, orders order)
     
     swf = sw; xcachef = x;
 
-    switch (order){
+    switch (order_qcd) {
         case NNLO:
             // One and two loop matching from arXiv:9910220.
             CWbsgArrayNNLO[0] = -Tt(x)+7987./72.+17./3.*M_PI*M_PI+475./6.*L+17.*L*L;
@@ -1490,7 +1490,7 @@ double StandardModelMatching::setWCbsg(int i, double x, orders order)
             throw std::runtime_error("order" + out.str() + "not implemeted"); 
             }
     
-    switch (order){
+    switch (order_qcd) {
         case NNLO:
             return ( CWbsgArrayNNLO[i] );
             break;
@@ -1563,12 +1563,12 @@ double StandardModelMatching::setWCbsg(int i, double x, orders order)
  * Wilson coefficients calcoulus, misiak base for B -> K^*ll                    *  
  * *****************************************************************************/
 
-double StandardModelMatching::setWCBMll(int i, double x, orders order)
+double StandardModelMatching::setWCBMll(int i, double x, orders_qcd order_qcd) 
 {    
     sw =  sqrt( sW2 ) ;
 
     if ( swa == sw && xcachea == x){
-        switch (order){
+        switch (order_qcd) {
         case NNLO:
         case NLO:
             return ( CWBMllArrayNLO[i] );
@@ -1585,7 +1585,7 @@ double StandardModelMatching::setWCBMll(int i, double x, orders order)
     
     swa = sw; xcachea = x;
 
-    switch (order){
+    switch (order_qcd) {
         case NNLO:
         case NLO:
             CWBMllArrayNLO[0] = 15. + 6*L;
@@ -1608,7 +1608,7 @@ double StandardModelMatching::setWCBMll(int i, double x, orders order)
             throw std::runtime_error("order" + out.str() + "not implemeted"); 
             }
     
-    switch (order){
+    switch (order_qcd) {
         case NNLO:
         case NLO:
             return ( CWBMllArrayNLO[i] );
@@ -2168,13 +2168,13 @@ double StandardModelMatching::setWCBMll(int i, double x, orders order)
 /*******************************************************************************
  * Wilson coefficients calculus, MISIAK base for Bs to mu mu  decay               *  
  * ****************************************************************************/
-double StandardModelMatching::setWCBsmm(int i, double x, orders order) 	
+double StandardModelMatching::setWCBsmm(int i, double x, orders_qcd order_qcd)  	
 {  
     
     sw =  sqrt( (M_PI * Ale ) / ( sqrt(2.) * GF * Mw * Mw) );
      
     if ( swd == sw && xcached == x){
-        switch (order){
+        switch (order_qcd) {
         case NNLO:
            return (CWBsmmArrayNNLOqcd[i]);
            break;                               
@@ -2193,7 +2193,7 @@ double StandardModelMatching::setWCBsmm(int i, double x, orders order)
   
     swd = sw;  xcached = x;
  
-    switch (order){
+    switch (order_qcd) {
     case NNLO:
         CWBsmmArrayNNLOqcd[0] = sw * sw * (-Tt(x) + 7987./72. + 17. * M_PI * M_PI/3. + 475. * L/6. + 17. * L * L);
         CWBsmmArrayNNLOqcd[1] = sw * sw * (127./18. + 4. * M_PI * M_PI /3. + 46. * L/3. + 4. * L * L);
@@ -2215,7 +2215,7 @@ double StandardModelMatching::setWCBsmm(int i, double x, orders order)
     out << order;
     throw std::runtime_error("order" + out.str() + "not implemeted"); 
     }
-    switch (order){
+    switch (order_qcd) {
     case NNLO:
         return (CWBsmmArrayNNLOqcd[i]);
        
@@ -2325,13 +2325,13 @@ double StandardModelMatching::setWCBsmmEW(int i, double x, orders_qed order_qed)
 /*******************************************************************************
  * Wilson coefficients calculus, MISIAK base for Bd to mu mu  decay               *  
  * ****************************************************************************/
-double StandardModelMatching::setWCBdmm(int i, double x, orders order) 	
+double StandardModelMatching::setWCBdmm(int i, double x, orders_qcd order_qcd)  	
 {  
     
     sw =  sqrt( (M_PI * Ale ) / ( sqrt(2.) * GF * Mw * Mw) );
      
     if ( swb == sw && xcacheb == x){
-        switch (order){
+        switch (order_qcd) {
         case NNLO:
            return (CWBdmmArrayNNLOqcd[i]);
            break;                               
@@ -2350,7 +2350,7 @@ double StandardModelMatching::setWCBdmm(int i, double x, orders order)
   
     swb = sw;  xcacheb = x;
  
-    switch (order){
+    switch (order_qcd) {
     case NNLO:
         CWBdmmArrayNNLOqcd[0] = sw * sw * (-Tt(x) + 7987./72. + 17. * M_PI * M_PI/3. + 475. * L/6. + 17. * L * L);
         CWBdmmArrayNNLOqcd[1] = sw * sw * (127./18. + 4. * M_PI * M_PI /3. + 46. * L/3. + 4. * L * L);
@@ -2372,7 +2372,7 @@ double StandardModelMatching::setWCBdmm(int i, double x, orders order)
     out << order;
     throw std::runtime_error("order" + out.str() + "not implemeted"); 
     }
-    switch (order){
+    switch (order_qcd) {
     case NNLO:
         return (CWBdmmArrayNNLOqcd[i]);
        
@@ -2463,12 +2463,12 @@ double StandardModelMatching::setWCBdmmEW(int i, double x, orders_qed order_qed)
 /*******************************************************************************
  * Wilson coefficients calculus, Buras base for nonlep. b decays               *  
  * ****************************************************************************/
-double StandardModelMatching::setWCbnlep(int i, double x, orders order) 
+double StandardModelMatching::setWCbnlep(int i, double x, orders_qcd order_qcd)  
 {    
     sw =  sqrt( (M_PI * Ale ) / ( sqrt(2) * GF * Mw * Mw) );
     
     if ( swb == sw && xcacheb == x){
-        switch (order){
+        switch (order_qcd) {
         case NNLO:
         case NLO:
             return (CWbnlepArrayNLOqcd[i]);
@@ -2485,7 +2485,7 @@ double StandardModelMatching::setWCbnlep(int i, double x, orders order)
     
     swb = sw; xcacheb = x;
     
-    switch (order){
+    switch (order_qcd) {
         case NNLO:
         case NLO:
             CWbnlepArrayNLOqcd[0] = 11./2.;
@@ -2503,7 +2503,7 @@ double StandardModelMatching::setWCbnlep(int i, double x, orders order)
             throw std::runtime_error("order" + out.str() + "not implemeted"); 
         }
     
-    switch (order){
+    switch (order_qcd) {
         case NNLO:
         case NLO:
             return (CWbnlepArrayNLOqcd[i]);
@@ -2765,7 +2765,7 @@ double StandardModelMatching::C3funNNLO(double x)
     return(G1t(x,Muw)-680./243.-20./81.*M_PI*M_PI-68./81.*L-20./27*L*L);
 }
 
-double StandardModelMatching::C4fun(double x, orders ord)
+double StandardModelMatching::C4fun(double x, orders_qcd ord)
 {
     switch (ord) {
         case NNLO:
@@ -3093,7 +3093,7 @@ WilsonCoefficient& StandardModelMatching::mc_B()
 }
 
 unsigned int StandardModelMatching::setCMDF1(WilsonCoefficient& CMDF1, WilsonCoefficient& DF1block,
-        unsigned int tot, schemes scheme, orders order, orders_qed order_qed)
+        unsigned int tot, schemes scheme, orders_qcd order, orders_qed order_qed)
 {
     unsigned int j, nops = DF1block.getSize();
     int ord;
@@ -3113,7 +3113,7 @@ std::vector<WilsonCoefficient>& StandardModelMatching::CMDF1(std::string blocks,
 {
     unsigned int tot = 0;
     schemes scheme = mcC.getScheme();
-    orders order = mcC.getOrder();
+    orders_qcd order_qcd = mcC.getOrder();
     orders_qed order_qed = mcC.getOrder_qed();
     WilsonCoefficient mcDF1(nops, scheme, order, order_qed);
 

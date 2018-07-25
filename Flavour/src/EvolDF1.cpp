@@ -26,7 +26,7 @@ std::map<std::string, uint> blocks_nops = {
         {"CPMLQB", 15}
     };
 
-EvolDF1::EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& model_i, orders ord, orders_qed ord_qed)
+EvolDF1::EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& model_i, orders_qcd ord, orders_qed ord_qed)
 : RGEvolutor(blocks_nops.at(reqblocks), scheme, ord, ord_qed), model(model_i), blocks(reqblocks),
         evec(blocks_nops.at(reqblocks), 0.), evec_i(blocks_nops.at(reqblocks), 0.), js(blocks_nops.at(reqblocks), 0.),
         h(blocks_nops.at(reqblocks), 0.), gg(blocks_nops.at(reqblocks), 0.), s_s(blocks_nops.at(reqblocks), 0.),
@@ -59,7 +59,7 @@ EvolDF1::EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& mod
     gslpp::matrix<double> M1(nops, nops, 0.), M2(nops, nops, 0.), M3(nops, nops, 0.), M4(nops, nops, 0.),
             M5(nops, nops, 0.), M6(nops, nops, 0.);
 
-    if (order_qed == NO_QED && blocks.find("L") == std::string::npos &&
+    if (order_qed == QED0 && blocks.find("L") == std::string::npos &&
             blocks.find("Q") == std::string::npos && blocks.find("B") == std::string::npos)
     {
         nfmin = 3;
@@ -116,7 +116,7 @@ EvolDF1::EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& mod
                 }
         }
         
-        if (order_qed != NO_QED)
+        if (order_qed != QED0)
         {
             b0e = model.Beta_e(00, nf);
             b3 = model.Beta_s(01, nf) / 2. / b0 / b0e;
@@ -1359,10 +1359,8 @@ gslpp::matrix<double> EvolDF1::AnomalousDimension(indices nm, uint n_u, uint n_d
     return (gammaDF1);
 }
 
-gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders ord, schemes scheme)
+Expanded<gslpp::matrix<double> >& EvolDF1::DF1Evol(double mu, double M, schemes scheme)
 {
-    if(ord > order)
-        throw std::runtime_error("EvolDF1::Df1Evol(): order not present in this Hamiltonian.");
     if(nfmin == 5 && nfmax == 5 && (model.Nf(mu) != 5. || model.Nf(M) != 5.))
         throw std::runtime_error("EvolDF1::Df1Evol(): only nf = 5 available.");
         
@@ -1381,7 +1379,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders ord, schemes
     double MAls = model.getMAls();
     if(alsM == alsM_cache && MAls == MAls_cache) {
         if (mu == this->mu && M == this->M && scheme == this->scheme)
-            return (*Evol(ord));        
+            return(getEvol());        
     }
     alsM_cache = alsM;
     MAls_cache = MAls;
@@ -1407,49 +1405,66 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders ord, schemes
     }
     DF1Ev(m_down, M, (int) nf, scheme);
 
-    return (*Evol(ord));
+    return (getEvol());
 }
 
-gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, schemes scheme)
-{
-    if(ord > order_qed)
-        throw std::runtime_error("EvolDF1::Df1Evol(): order not present in this Hamiltonian.");
-    double MAls = model.getMAls();
-    if(model.Nf(mu) != 5. || model.Nf(M) != 5. || model.Nf(MAls) != 5.)
-        throw std::runtime_error("EvolDF1::Df1Evol(): only nf = 5 available.");
-        
-    switch (scheme) {
-        case NDR:
-            break;
-        case LRI:
-        case HV:
-        default:
-            std::stringstream out;
-            out << scheme;
-            throw std::runtime_error("EvolDF1::Df1Evol(): scheme " + out.str() + " not implemented "); 
-    }
-    
-// WRONG caching! Rethink *************
-    
-    double alsM = model.getAlsM();
-    if(alsM == alsM_cache && MAls == MAls_cache) {
-        if (mu == this->mu && M == this->M && scheme == this->scheme)
-            return (*Evol(ord));        
-    }
-    alsM_cache = alsM;
-    MAls_cache = MAls;
-        
-    if (M < mu) {
+//gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, schemes scheme)
+//{
+//    if(ord > order_qed)
+//        throw std::runtime_error("EvolDF1::Df1Evol(): order not present in this Hamiltonian.");
+//    double MAls = model.getMAls();
+//    if(model.Nf(mu) != 5. || model.Nf(M) != 5. || model.Nf(MAls) != 5.)
+//        throw std::runtime_error("EvolDF1::Df1Evol(): only nf = 5 available.");
+//        
+//    switch (scheme) {
+//        case NDR:
+//            break;
+//        case LRI:
+//        case HV:
+//        default:
+//            std::stringstream out;
+//            out << scheme;
+//            throw std::runtime_error("EvolDF1::Df1Evol(): scheme " + out.str() + " not implemented "); 
+//    }
+//    
+//// WRONG caching! Rethink *************
+//    
+//    double alsM = model.getAlsM();
+//    if(alsM == alsM_cache && MAls == MAls_cache) {
+//        if (mu == this->mu && M == this->M && scheme == this->scheme)
+//            return (*Evol(ord));        
+//    }
+//    alsM_cache = alsM;
+//    MAls_cache = MAls;
+//        
+//    if (M < mu) {
+//        std::stringstream out;
+//        out << "M = " << M << " < mu = " << mu;
+//        throw std::runtime_error("EvolDF1::Df1Evol(): " + out.str() + ".");
+//    }
+//
+//    setScales(mu, M); // also assign evol to identity
+//
+//    DF1Ev(mu, M, 5, scheme); // only 5 flavour *******************
+//
+//    return (*Evol(ord));
+//}
+
+void EvolDF1::setExpandedMatrix(Expanded<gslpp::matrix<double> >& expm, unsigned int i, unsigned int  j, double x, orders_qcd order_qcd_i, orders_qed order_qed_i)
+{    
+    if (i > nops || j > nops) {
         std::stringstream out;
-        out << "M = " << M << " < mu = " << mu;
-        throw std::runtime_error("EvolDF1::Df1Evol(): " + out.str() + ".");
+        out << i << " " << j;
+        throw std::runtime_error("RGEvolutor::setEvol(): matrix indices " + out.str() + " out of range"); 
     }
-
-    setScales(mu, M); // also assign evol to identity
-
-    DF1Ev(mu, M, 5, scheme); // only 5 flavour *******************
-
-    return (*Evol(ord));
+    if (order_qcd_i > order_qcd || order_qed_i > order_qed) {
+        std::stringstream out;
+        out << order_qcd_i << " and " << order_qed_i;
+        throw std::runtime_error("RGEvolutor::setEvol(): order " + out.str() +" not implemented "); 
+    }
+    gslpp::matrix<double> tmp = expm.getOrd(order_qcd_i, order_qed_i);
+    tmp.assign(i, j, x);
+    expm.setOrd(order_qcd_i, order_qed_i, tmp);
 }
 
  void EvolDF1::DF1Ev(double mu, double M, int nf, schemes scheme) 
@@ -1475,8 +1490,8 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
 //    alsM = model.Als(M) / 4. / M_PI;
 //    double alsmu = model.Als(mu) / 4. / M_PI;
     b0 = model.Beta_s(00, nf);
-    alsM = model.Als(M, FULLNNNLO, order_qed == NO_QED ? false : true);
-    eta = alsM / model.Als(mu, FULLNNNLO, order_qed == NO_QED ? false : true);
+    alsM = model.Als(M, FULLNNNLO, order_qed == QED0 ? false : true);
+    eta = alsM / model.Als(mu, FULLNNNLO, order_qed == QED0 ? false : true);
 //    eta = alsM / model.Als(mu);
     omega = 2. * b0 * alsM / 4. / M_PI;
 
@@ -1486,8 +1501,8 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
         const uint &a = v[0];
         const uint &b = v[1];
         const uint &i = v[2];
-        res.getOrd(LO,QED0)
-        resLO(a, b) += itr->second * pow(eta, ai[nnf].at(i));
+
+        setExpandedMatrix(res, a, b, res.getOrd(LO, QED0)(a, b) + itr->second * pow(eta, ai[nnf].at(i)), LO, QED0);
     }
     
     for (itr = vM1vi[nnf].begin(); itr != vM1vi[nnf].end(); ++itr)
@@ -1498,7 +1513,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
         const uint &i = v[2];
         const uint &j = v[3];
         
-        resNLO(a, b) += omega * itr->second * f_f(nnf, i, j, -1, eta);
+        setExpandedMatrix(res, a, b, res.getOrd(NLO, QED0)(a, b) + omega * itr->second * f_f(nnf, i, j, -1, eta), NLO, QED0);
     }
 
     for (itr = vM2vi[nnf].begin(); itr != vM2vi[nnf].end(); ++itr)
@@ -1509,7 +1524,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
         const uint &i = v[2];
         const uint &j = v[3];
         
-        resNNLO(a, b) += omega * omega * itr->second * f_f(nnf, i, j, -2, eta);
+        setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED0)(a, b) + omega * omega * itr->second * f_f(nnf, i, j, -2, eta), NNLO, QED0);
     }
     
     for (itr = vM11vi[nnf].begin(); itr != vM11vi[nnf].end(); ++itr)
@@ -1521,10 +1536,10 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
         const uint &j = v[3];
         const uint &p = v[4];
         
-        resNNLO(a, b) += omega * omega * itr->second * f_g(nnf, i, p, j, -1, -1, eta);
+        setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED0)(a, b) + omega * omega * itr->second * f_g(nnf, i, p, j, -1, -1, eta), NNLO, QED0);
     }
 
-    if (order_qed != NO_QED)
+    if (order_qed != QED0)
     {
         b0e = model.Beta_e(00, nf);
         b5 = model.Beta_e(01, nf) / 2. / b0 / b0e - model.Beta_s(10, nf) / 2. / b0 / b0;
@@ -1539,9 +1554,9 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const double &term = itr->second;
 
-            res01(a, b) += lambda * term * f_f(nnf, i, j, 1, eta);
-            res02(a, b) += lambda * lambda * term * (f_f(nnf, i, j, 2, eta) - f_f(nnf, i, j, 1, eta));
-            res12(a, b) += omega * lambda * lambda * b5 * term * f_r(nnf, i, j, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(LO, QED1)(a, b) + lambda * term * f_f(nnf, i, j, 1, eta), LO, QED1);
+            setExpandedMatrix(res, a, b, res.getOrd(LO, QED2)(a, b) + lambda * lambda * term * (f_f(nnf, i, j, 2, eta) - f_f(nnf, i, j, 1, eta)), LO, QED2);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * b5 * term * f_r(nnf, i, j, 1, eta), NLO, QED2);
         }
         
         for (itr = vM4vi[nnf].begin(); itr != vM4vi[nnf].end(); ++itr)
@@ -1553,8 +1568,8 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const double &term = itr->second;
             
-            res11(a, b) += omega * lambda * term * f_f(nnf, i, j, 0, eta);
-            res12(a, b) += - omega * lambda * lambda * term * f_f(nnf, i, j, 0, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED1)(a, b) + omega * lambda * term * f_f(nnf, i, j, 0, eta), NLO, QED1);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) - omega * lambda * lambda * term * f_f(nnf, i, j, 0, eta), NLO, QED2);
         }
 
         for (itr = vM5vi[nnf].begin(); itr != vM5vi[nnf].end(); ++itr)
@@ -1565,7 +1580,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &i = v[2];
             const uint &j = v[3];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_f(nnf, i, j, -1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_f(nnf, i, j, -1, eta), NNLO, QED1);
         }
 
         for (itr = vM6vi[nnf].begin(); itr != vM6vi[nnf].end(); ++itr)
@@ -1576,7 +1591,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &i = v[2];
             const uint &j = v[3];
             
-            res12(a, b) += omega * lambda * lambda * itr->second * f_f(nnf, i, j, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * itr->second * f_f(nnf, i, j, 1, eta), NLO, QED2);
         }
 
        for (itr = vM33vi[nnf].begin(); itr != vM33vi[nnf].end(); ++itr)
@@ -1588,7 +1603,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res02(a, b) += lambda * lambda * itr->second * f_g(nnf, i, p, j, 1, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(LO, QED2)(a, b) + lambda * lambda * itr->second * f_g(nnf, i, p, j, 1, 1, eta), LO, QED2);
         }
 
        for (itr = vM13vi[nnf].begin(); itr != vM13vi[nnf].end(); ++itr)
@@ -1601,8 +1616,8 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const double &term = itr->second;
             
-            res11(a, b) += omega * lambda * term * f_g(nnf, i, p, j, -1, 1, eta);
-            res12(a, b) += omega * lambda * lambda * term * (f_g(nnf, i, p, j, -1, 2, eta) - f_g(nnf, i, p, j, -1, 1, eta));
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED1)(a, b) + omega * lambda * term * f_g(nnf, i, p, j, -1, 1, eta), NLO, QED1);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * term * (f_g(nnf, i, p, j, -1, 2, eta) - f_g(nnf, i, p, j, -1, 1, eta)), NLO, QED2);
         }
 
        for (itr = vM31vi[nnf].begin(); itr != vM31vi[nnf].end(); ++itr)
@@ -1615,8 +1630,8 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const double &term = itr->second;
             
-            res11(a, b) += omega * lambda * term * f_g(nnf, i, p, j, 1, -1, eta);
-            res12(a, b) += omega * lambda * lambda * term * (f_g(nnf, i, p, j, 2, -1, eta) - f_g(nnf, i, p, j, 1, -1, eta));  
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED1)(a, b) + omega * lambda * term * f_g(nnf, i, p, j, 1, -1, eta), NLO, QED1);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * term * (f_g(nnf, i, p, j, 2, -1, eta) - f_g(nnf, i, p, j, 1, -1, eta)), NLO, QED2);  
         }
 
         for (itr = vM34vi[nnf].begin(); itr != vM34vi[nnf].end(); ++itr)
@@ -1628,7 +1643,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res12(a, b) += omega * lambda * lambda * itr->second * f_g(nnf, i, p, j, 1, 0, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * itr->second * f_g(nnf, i, p, j, 1, 0, eta), NLO, QED2);
         }
 
         for (itr = vM43vi[nnf].begin(); itr != vM43vi[nnf].end(); ++itr)
@@ -1640,7 +1655,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res12(a, b) += omega * lambda * lambda * itr->second * f_g(nnf, i, p, j, 0, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * itr->second * f_g(nnf, i, p, j, 0, 1, eta), NLO, QED2);
         }
 
         for (itr = vM23vi[nnf].begin(); itr != vM23vi[nnf].end(); ++itr)
@@ -1652,7 +1667,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_g(nnf, i, p, j, -2, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_g(nnf, i, p, j, -2, 1, eta), NNLO, QED1);
         }
 
         for (itr = vM32vi[nnf].begin(); itr != vM32vi[nnf].end(); ++itr)
@@ -1664,7 +1679,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_g(nnf, i, p, j, 1, -2, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_g(nnf, i, p, j, 1, -2, eta), NNLO, QED1);
         }
 
         for (itr = vM14vi[nnf].begin(); itr != vM14vi[nnf].end(); ++itr)
@@ -1676,7 +1691,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_g(nnf, i, p, j, -1, 0, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_g(nnf, i, p, j, -1, 0, eta), NNLO, QED1);
         }
 
         for (itr = vM41vi[nnf].begin(); itr != vM41vi[nnf].end(); ++itr)
@@ -1688,7 +1703,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &j = v[3];
             const uint &p = v[4];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_g(nnf, i, p, j, 0, -1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_g(nnf, i, p, j, 0, -1, eta), NNLO, QED1);
         }
 
         for (itr = vM113vi[nnf].begin(); itr != vM113vi[nnf].end(); ++itr)
@@ -1701,7 +1716,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const uint &q = v[5];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_h(nnf, i, p, q, j, -1, -1, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_h(nnf, i, p, q, j, -1, -1, 1, eta), NNLO, QED1);
         }
 
         for (itr = vM131vi[nnf].begin(); itr != vM131vi[nnf].end(); ++itr)
@@ -1714,7 +1729,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const uint &q = v[5];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_h(nnf, i, p, q, j, -1, 1, -1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_h(nnf, i, p, q, j, -1, 1, -1, eta), NNLO, QED1);
         }
 
         for (itr = vM311vi[nnf].begin(); itr != vM311vi[nnf].end(); ++itr)
@@ -1727,7 +1742,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const uint &q = v[5];
             
-            res21(a, b) += omega * omega * lambda * itr->second * f_h(nnf, i, p, q, j, 1, -1, -1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NNLO, QED1)(a, b) + omega * omega * lambda * itr->second * f_h(nnf, i, p, q, j, 1, -1, -1, eta), NNLO, QED1);
         }
 
         for (itr = vM133vi[nnf].begin(); itr != vM133vi[nnf].end(); ++itr)
@@ -1740,7 +1755,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const uint &q = v[5];
             
-            res12(a, b) += omega * lambda * lambda * itr->second * f_h(nnf, i, p, q, j, -1, 1, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * itr->second * f_h(nnf, i, p, q, j, -1, 1, 1, eta), NLO, QED2);
         }
 
         for (itr = vM313vi[nnf].begin(); itr != vM313vi[nnf].end(); ++itr)
@@ -1753,7 +1768,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const uint &q = v[5];
             
-            res12(a, b) += omega * lambda * lambda * itr->second * f_h(nnf, i, p, q, j, 1, -1, 1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * itr->second * f_h(nnf, i, p, q, j, 1, -1, 1, eta), NLO, QED2);
         }
 
         for (itr = vM331vi[nnf].begin(); itr != vM331vi[nnf].end(); ++itr)
@@ -1766,7 +1781,7 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
             const uint &p = v[4];
             const uint &q = v[5];
             
-            res12(a, b) += omega * lambda * lambda * itr->second * f_h(nnf, i, p, q, j, 1, 1, -1, eta);
+            setExpandedMatrix(res, a, b, res.getOrd(NLO, QED2)(a, b) + omega * lambda * lambda * itr->second * f_h(nnf, i, p, q, j, 1, 1, -1, eta), NLO, QED2);
         }
         /*
         for (a = 0; a < nops; a++)
@@ -1810,60 +1825,23 @@ gslpp::matrix<double>& EvolDF1::DF1Evol(double mu, double M, orders_qed ord, sch
         for (uint a = 0; a < nops; a++)
             for (uint b = 0; b < nops; b++)
             {
-                if (fabs(resLO(a, b)) < EPS) resLO(a, b) = 0.;
-                if (fabs(resNLO(a, b)) < EPS) resNLO(a, b) = 0.;
-                if (fabs(resNNLO(a, b)) < EPS) resNNLO(a, b) = 0.;
-                if (fabs(res01(a, b)) < EPS) res01(a, b) = 0.;
-                if (fabs(res02(a, b)) < EPS) res02(a, b) = 0.;
-                if (fabs(res11(a, b)) < EPS) res11(a, b) = 0.;
-                if (fabs(res12(a, b)) < EPS) res12(a, b) = 0.;
-                if (fabs(res21(a, b)) < EPS) res21(a, b) = 0.;
-            }
-
-        switch (order_qed)
-        {
-            case NLO_QED22:
-                //            *elem[NLO_QED22] = (*elem[LO_QED]) * res21 + (*elem[NLO_QED11]) * res11 + (*elem[NLO_QED02]) * resNNLO +
-                //                (*elem[NLO_QED21]) * res01 + (*elem[NLO_QED12]) * resNLO + (*elem[NLO_QED22]) * resLO +
-                //                (*elem[NLO]) * res12 + (*elem[NNLO]) * res02 + (*elem[LO]) * res22;   this is a higher order term, we put it to zero since there are contribuitions in the matching
-                *elem[NLO_QED22] = 0.;
-            case NLO_QED12:
-                *elem[NLO_QED12] = (*elem[LO_QED]) * res11 + (*elem[NLO_QED11]) * res01 + (*elem[NLO_QED02]) * resNLO +
-                        (*elem[NLO_QED12]) * resLO + (*elem[LO]) * res12 + (*elem[NLO]) * res02;
-            case NLO_QED21:
-                *elem[NLO_QED21] = (*elem[LO_QED]) * resNNLO + (*elem[NLO_QED11]) * resNLO + (*elem[NLO_QED21]) * resLO
-                        + (*elem[LO]) * res21 + (*elem[NLO]) * res11 + (*elem[NNLO]) * res01;
-            case NLO_QED02:
-                *elem[NLO_QED02] = (*elem[LO_QED]) * res01 + (*elem[NLO_QED02]) * resLO + (*elem[LO]) * res02;
-            case NLO_QED11:
-                *elem[NLO_QED11] = (*elem[LO_QED]) * resNLO + (*elem[NLO_QED11]) * resLO + (*elem[LO]) * res11 + (*elem[NLO]) * res01;
-            case LO_QED:
-                *elem[LO_QED] = (*elem[LO_QED]) * resLO + (*elem[LO]) * res01;
-                break;
-            default:
-                throw std::runtime_error("Error in EvolDF1::Df1Evol(): wrong QED order");
-        }
+                if (fabs(res.getOrd(LO, QED0)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., LO, QED0);
+                if (fabs(res.getOrd(NLO, QED0)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NLO, QED0);
+                if (fabs(res.getOrd(NNLO, QED0)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NNLO, QED0);
+                if (fabs(res.getOrd(LO, QED1)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., LO, QED1);
+                if (fabs(res.getOrd(LO, QED2)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., LO, QED2);
+                if (fabs(res.getOrd(NLO, QED1)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NLO, QED1);
+                if (fabs(res.getOrd(NLO, QED2)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NLO, QED2);
+                if (fabs(res.getOrd(NNLO, QED1)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NNLO, QED1);
+            }        
     } else
         for (uint a = 0; a < nops; a++)
             for (uint b = 0; b < nops; b++)
             {
-                if (fabs(resLO(a, b)) < EPS) resLO(a, b) = 0.;
-                if (fabs(resNLO(a, b)) < EPS) resNLO(a, b) = 0.;
-                if (fabs(resNNLO(a, b)) < EPS) resNNLO(a, b) = 0.;
+                if (fabs(res.getOrd(LO, QED0)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., LO, QED0);
+                if (fabs(res.getOrd(NLO, QED0)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NLO, QED0);
+                if (fabs(res.getOrd(NNLO, QED0)(a, b)) < EPS) setExpandedMatrix(res, a, b, 0., NNLO, QED0);
             }
 
-    switch (order) // must follow QED switch
-    {
-        case NNLO:
-            *elem[NNLO] = (*elem[LO]) * resNNLO + (*elem[NLO]) * resNLO + (*elem[NNLO]) * resLO;
-        case NLO:
-            *elem[NLO] = (*elem[LO]) * resNLO + (*elem[NLO]) * resLO;
-        case LO:
-            *elem[LO] = (*elem[LO]) * resLO;
-            break;
-        case FULLNNLO:
-        case FULLNLO:
-        default:
-            throw std::runtime_error("Error in EvolDF1::Df1Evol()");
-    }
+    wilson = res * wilson;
 }

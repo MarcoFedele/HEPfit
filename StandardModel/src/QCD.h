@@ -416,15 +416,15 @@
  * The strong coupling constant @f$\alpha_s@f$ at an arbitrary scale can be
  * computed with the member functions: 
  *
- * @li AlsWithInit(const double mu, const double alsi, const double mu_i, const orders order),
- * @li AlsWithLambda(const double mu, const orders order), 
+ * @li AlsWithInit(const double mu, const double alsi, const double mu_i, const orders_qcd order_qcd),
+ * @li AlsWithLambda(const double mu, const orders_qcd order_qcd), 
  *
  * where another function
  * 
- * @li Als(const double mu, const orders order = FULLNLO)
+ * @li Als(const double mu, const orders_qcd order_qcd = FULLNLO)
  *
- * calls %AlsWithInit() for order=LO/FULLNLO(NLO),
- * and %AlsWithLambda() for order=FULLNNLO(NNLO).
+ * calls %AlsWithInit() for order_qcd=LO/FULLNLO(NLO),
+ * and %AlsWithLambda() for order_qcd=FULLNNLO(NNLO).
  *
  * The function %AlsWithInit() computes @f$\alpha_s(\mu)@f$ with a given initial
  * value @f$\alpha_s(\mu_i)@f$: 
@@ -655,11 +655,11 @@ public:
     QCD();
     
     /**
-     * @brief Converts an object of the enum type "orders" to the corresponding string.
-     * @param[in] order an object of the enum type "orders"
-     * @return the string of the given "order"
+     * @brief Converts an object of the enum type "orders_qcd" to the corresponding string.
+     * @param[in] order_qcd an object of the enum type "orders_qcd"
+     * @return the string of the given order
      */
-    std::string orderToString(const orders order) const;
+    std::string orderToString(const orders_qcd order_qcd) const;
 
     ////////////////////////////////////////////////////////////////////////
     // Parameters
@@ -986,17 +986,17 @@ public:
      * @param[in] M the running quark mass
      * @param[in] als value of als(mu) in the nf flavour theory
      * @param[in] nf number of active flavour
-     * @param[in] order order of the expansion in als 
+     * @param[in] order_qcd order of the expansion in als 
      * @return Threshold correction (without the leading term equal to 1)
      */
-    double NfThresholdCorrections(double mu, double M, double als, int nf, orders order) const;
+    double NfThresholdCorrections(double mu, double M, double als, int nf, orders_qcd order_qcd) const;
     
     /**
-     * @brief Return the FULLORDER enum corresponding to order
-     * @param[in] order of the expansion in als 
-     * @return the FULLORDER enum corresponding to order
+     * @brief Return the FULLORDER enum corresponding to order_qcd
+     * @param[in] order_qcd order of the expansion in als 
+     * @return the FULLORDER enum corresponding to order_qcd
      */
-    orders FullOrder(orders order) const;
+    orders_qcd FullOrder(orders_qcd order_qcd) const;
     
     ////////////////////////////////////////////////////////////////////////
 
@@ -1035,22 +1035,22 @@ public:
      * @param[in] mu a scale @f$\mu@f$ in GeV
      * @param[in] alsi the initial value for the coupling at the scale given below
      * @param[in] mu_i the initial scale @f$\mu_i@f$ in GeV
-     * @param[in] order LO, NLO or FULLNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO or FULLNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return the strong coupling constant @f$\alpha_s(\mu)@f$ in the
      * @f$\overline{\mathrm{MS}}@f$ scheme
      */
     double AlsWithInit(const double mu, const double alsi, const double mu_i,
-            const orders order) const;
+            const orders_qcd order_qcd) const;
 
     /**
      * @brief Computes the running strong coupling @f$\alpha_s(\mu)@f$ in the
      * @f$\overline{\mathrm{MS}}@f$ scheme with the use of @f$\Lambda_{\rm QCD}@f$.
      * @param[in] mu A scale @f$\mu@f$ in GeV
-     * @param[in] order LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return the strong coupling constant @f$\alpha_s(\mu)@f$ in the
      * @f$\overline{\mathrm{MS}}@f$ scheme
      */
-    double AlsWithLambda(const double mu, const orders order) const;
+    double AlsWithLambda(const double mu, const orders_qcd order_qcd) const;
 
     /**
      * @brief Computes the running strong coupling @f$\alpha_s(\mu)@f$ in the
@@ -1058,22 +1058,21 @@ public:
      * the coupling is computed with AlsWithInit(). On the other hand, in the
      * cases of NNLO and FULLNNLO, the coupling is computed with AlsWithLambda().
      * @param[in] mu the scale @f$\mu@f$ in GeV
-     * @param[in] order order in the @f$\alpha_s@f$ expansion as defined in OrderScheme
-     * @param[in] order_qed order in the @f$\alpha_e@f$ expansion as defined in OrderScheme. Default to NO_QED.
+     * @param[in] order_qcd order in the @f$\alpha_s@f$ expansion as defined in OrderScheme
      * @param[in] Nf_thr true (default): @f$n_f@f$ = Nf(mu), false: @f$n_f@f$ = Nf(AlsM)  
      * @return the strong coupling constant @f$\alpha_s(\mu)@f$ in the
      * @f$\overline{\mathrm{MS}}@f$ scheme
      */
-    double AlsOLD(const double mu, const orders order = FULLNLO) const;
-    virtual double Als(const double mu, const orders order = FULLNLO, bool Nf_thr = true) const;
+    double AlsOLD(const double mu, const orders_qcd order_qcd = FULLNLO) const;
+    virtual double Als(const double mu, const orders_qcd order_qcd = FULLNLO, bool Nf_thr = true) const;
 
     /**
      * @brief Computes @f$\ln\Lambda_\mathrm{QCD}@f$ with nf flavours in GeV.
      * @param[in] nf the number of active flavours \f$n_f\f$
-     * @param[in] order LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return @f$\ln\Lambda_\mathrm{QCD}@f$ with nf flavours in GeV
      */
-    double logLambda(const double nf, orders order) const;
+    double logLambda(const double nf, orders_qcd order_qcd) const;
 
     /**
      * @brief The value of \f$\alpha_s^{\mathrm{FULLNLO}}\f$ at any scale \f$\mu\f$ with the number of flavours
@@ -1123,41 +1122,41 @@ public:
      * @brief Computes a running quark mass @f$m(\mu)@f$ from @f$m(m)@f$.
      * @param[in] mu a scale @f$\mu@f$ in GeV
      * @param[in] m the @f$\overline{\mathrm{MS}}@f$ mass @f$m(m)@f$ in GeV
-     * @param[in] order LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return the running quark mass @f$m(\mu)@f$ in GeV
      */
-    double Mrun(const double mu, const double m, const orders order = FULLNLO) const;
+    double Mrun(const double mu, const double m, const orders_qcd order_qcd = FULLNLO) const;
 
     /**
      * @brief Runs a quark mass from @f$\mu_i@f$ to @f$\mu_f@f$.
      * @param[in] mu_f a scale @f$\mu_f@f$ in GeV
      * @param[in] mu_i a scale @f$\mu_i@f$ in GeV
      * @param[in] m the @f$\overline{\mathrm{MS}}@f$ mass @f$m(\mu_i)@f$ in GeV
-     * @param[in] order LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return the running quark mass @f$m(\mu_f)@f$ in GeV
      */
     double Mrun(const double mu_f, const double mu_i, const double m,
-            const orders order = FULLNLO) const;
+            const orders_qcd order_qcd = FULLNLO) const;
 
     ////////////////////////////////////////////////////////////////////////
 
     /**
      * @brief Converts the @f$\overline{\mathrm{MS}}@f$ mass @f$m(m)@f$ to the pole mass.
      * @param[in] mbar the @f$\overline{\mathrm{MS}}@f$ mass @f$m(m)@f$ in GeV
-     * @param[in] order LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return the pole mass in GeV
      *
      * @attention Can only be used for conversion of mass of the top and bottom quarks.
      */
-    double Mbar2Mp(const double mbar, const orders order = FULLNLO) const;
+    double Mbar2Mp(const double mbar, const orders_qcd order_qcd = FULLNLO) const;
 
     /**
      * @brief Converts a quark pole mass to the corresponding @f$\overline{\mathrm{MS}}@f$ mass @f$m(m)@f$.
      * @param[in] mp the pole mass of the bottom or top quark in GeV
-     * @param[in] order LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
+     * @param[in] order_qcd LO, NLO, FULLNLO, NNLO or FULLNNLO in the @f$\alpha_s@f$ expansion defined in OrderScheme
      * @return the @f$\overline{\mathrm{MS}}@f$ mass @f$m(m)@f$ in GeV
      */
-    double Mp2Mbar(const double mp, const orders order = FULLNLO) const;
+    double Mp2Mbar(const double mp, const orders_qcd order_qcd = FULLNLO) const;
 
     /**
      * @brief Converts a quark mass from the @f$\overline{\mathrm{MS}}@f$ scheme to
@@ -1244,10 +1243,10 @@ private:
      * @brief The strong coupling constant computed with using \f$\Lambda_{\rm QCD}\f$.
      * @param[in] mu the scale of the strong coupling constant
      * @param[in] logLambda \f$\log(\Lambda_{\rm QCD})\f$
-     * @param[in] order the %QCD order at which \f$\alpha_s\f$ is required
+     * @param[in] order_qcd the %QCD order at which \f$\alpha_s\f$ is required
      * @return \f$\alpha_s(\mu)\f$ for the specified order
      */
-    double AlsWithLambda(const double mu, const double logLambda, const orders order) const;
+    double AlsWithLambda(const double mu, const double logLambda, const orders_qcd order_qcd) const;
 
     /**
      * @brief A member for calculating the difference in \f$\alpha_s^{\mathrm{FULLNLO}}\f$ across the six-five
@@ -1290,10 +1289,10 @@ private:
 
     /**
      * @brief \f$\log(\Lambda_{\rm QCD})\f$ for \f$n_f = 5\f$.
-     * @param[in] order the %QCD order of the computation
+     * @param[in] order_qcd the %QCD order of the computation
      * @return \f$\log(\Lambda_{\rm QCD}^{(5)})\f$
      */
-    double logLambda5(orders order) const;
+    double logLambda5(orders_qcd order_qcd) const;
 
     /**
      * @brief \f$\log(\Lambda_{\rm QCD})\f$ used for computation of \f$\alpha_s\f$ at FULLNLO.
@@ -1311,12 +1310,12 @@ private:
      * @param[in] nfNEW the number of flavours after crossing the flavour threshold
      * @param[in] nfORG the number of flavours before crossing the flavour threshold
      * @param[in] logLambdaORG the value of \f$\log(\Lambda_{\rm QCD})\f$ with \f$n_f = nfORG\f$
-     * @param[in] order the %QCD order of the calculation
+     * @param[in] order_qcd the %QCD order of the calculation
      * @return \f$\log(\Lambda_{\rm QCD})\f$ for \f$n_f = nfNEW\f$
      */
     double logLambda(const double muMatching, const double mf,
             const double nfNEW, const double nfORG,
-            const double logLambdaORG, orders order) const;
+            const double logLambdaORG, orders_qcd order_qcd) const;
 
     /**
      * @brief The threshold correction for running of a mass when crossing a flavour threshold.
@@ -1331,10 +1330,10 @@ private:
      * @param[in] mu_f the final scale \f$\mu_f\f$ to which the mass if run
      * @param[in] mu_i the initial scale \f$\mu_i\f$ from which the mass if run
      * @param[in] m the mass at the scale \f$\mu_i\f$
-     * @param[in] order the %QCD order at which the running is being calculated
+     * @param[in] order_qcd the %QCD order at which the running is being calculated
      * @return the mass run from \f$\mu_i\f$ to \f$\mu_f\f$
      */
-    double MrunTMP(const double mu_f, const double mu_i, const double m, const orders order) const;
+    double MrunTMP(const double mu_f, const double mu_i, const double m, const orders_qcd order_qcd) const;
 
     /**
      * @brief The member used for finding the numerical solution to the pole mass from the \f$\overline{\rm MS}\f$
