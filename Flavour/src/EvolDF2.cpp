@@ -9,7 +9,7 @@
 #include "EvolDF2.h"
 #include "StandardModel.h"
 
-EvolDF2::EvolDF2(unsigned int dim_i, schemes scheme, orders order, const StandardModel& model) 
+EvolDF2::EvolDF2(unsigned int dim_i, schemes scheme, orders_qcd order, const StandardModel& model) 
 :   RGEvolutor(dim_i, scheme, order),
     model(model),
     dim(dim_i)
@@ -66,7 +66,7 @@ EvolDF2::EvolDF2(unsigned int dim_i, schemes scheme, orders order, const Standar
 EvolDF2::~EvolDF2()
 {}
 
-gslpp::matrix<double> EvolDF2::AnomalousDimension(orders order, unsigned int nf, int basis) const
+gslpp::matrix<double> EvolDF2::AnomalousDimension(orders_qcd order, unsigned int nf, int basis) const
 {
     gslpp::matrix<double> ad(dim, dim, 0.);
     double Nc = model.getNc();
@@ -145,7 +145,7 @@ gslpp::matrix<double> EvolDF2::AnomalousDimension(orders order, unsigned int nf,
     return (ad);
 }
 
-gslpp::matrix<double>& EvolDF2::Df2Evol(double mu, double M, orders order, schemes scheme)
+gslpp::matrix<double>& EvolDF2::Df2Evol(double mu, double M, orders_qcd order, schemes scheme)
 {
     switch (scheme) {
         case NDR:

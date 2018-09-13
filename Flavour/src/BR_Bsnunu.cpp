@@ -33,9 +33,9 @@ double BR_Bsnunu::computeThValue()
            /(1. - 2.*mySM.Als(mySM.getMub())/3./M_PI*((M_PI*M_PI-31./4.)*(1.-z*z)+1.5)));
 }
 
-gslpp::complex BR_Bsnunu::BRBsnunu(orders order)
+gslpp::complex BR_Bsnunu::BRBsnunu(orders_qcd order)
 {
-    if (mySM.getFlavour().getHDB1().getCoeffsnunu().getOrder() < order){
+    if (mySM.getFlavour().getHDB1().getCoeffsnunu().getOrder_QCD() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("BRBsnunu::computeThValue(): requires cofficient of "

@@ -23,7 +23,7 @@ public:
      * @param SM
      * @param modelmatching
      */
-    HeffDF1(std::string blocks, const StandardModel & SM, orders order = NLO, orders_qed order_qed = NO_QED);
+    HeffDF1(std::string blocks, const StandardModel & SM, orders_qcd order_qcd = NLO, orders_qed order_qed = QED0);
     
     /**
      * 
@@ -37,7 +37,7 @@ public:
      * @param scheme indicates the renormalization scheme
      * @return the effective hamiltonian at the scale mu B -> K^*ll decay, Misiak basis, Chetyrkin et al hep-ph/9612313
      */
-    gslpp::vector<gslpp::complex>** ComputeCoeff(double mu, schemes scheme = NDR);
+    Expanded<gslpp::vector<gslpp::complex> > ComputeCoeff(double mu, schemes scheme = NDR);
     
     /**
      * 
@@ -53,7 +53,7 @@ public:
      * @param nm order of the expansion
      * @return the coefficient of the expansion in low-energy coupling constants as defined in eq. (68) of Huber et al., hep-ph/0512066
      */
-    gslpp::vector<gslpp::complex> LowScaleCoeff(int nm);
+    gslpp::vector<gslpp::complex> LowScaleCoeff(orders_qcd order_qcd, orders_qed order_qed);
 
     EvolDF1 getEvol() const {
         return evolDF1;
@@ -75,7 +75,6 @@ private :
     schemes scheme_cache;
     std::vector<double> Vmu_cache;
     std::vector<WilsonCoefficient> WC_cache;
-
 };
 
 #endif	/* HEFFDF1_H */

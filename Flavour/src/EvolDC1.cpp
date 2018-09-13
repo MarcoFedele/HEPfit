@@ -11,7 +11,7 @@
 #include "StandardModel.h"
 
 
-EvolDC1::EvolDC1(unsigned int dim_i, schemes scheme, orders order, const StandardModel& model) 
+EvolDC1::EvolDC1(unsigned int dim_i, schemes scheme, orders_qcd order, const StandardModel& model) 
 :           RGEvolutor(dim_i, scheme, order), model(model),
             v(dim_i,0.), vi(dim_i,0.), js(dim_i,0.), h(dim_i,0.), gg(dim_i,0.),s_s(dim_i,0.),
             jssv(dim_i,0.), jss(dim_i,0.), jv(dim_i,0.), vij(dim_i,0.), e(dim_i,0.), dim(dim_i) 
@@ -80,7 +80,7 @@ EvolDC1::EvolDC1(unsigned int dim_i, schemes scheme, orders order, const Standar
 EvolDC1::~EvolDC1() 
 {}
 
-gslpp::matrix<double> EvolDC1::AnomalousDimension_M(orders order, unsigned int n_u, unsigned int n_d) const
+gslpp::matrix<double> EvolDC1::AnomalousDimension_M(orders_qcd order, unsigned int n_u, unsigned int n_d) const
 {
     
     /* Delta F = 1 anomalous dimension in Misiak basis, 
@@ -222,7 +222,7 @@ gslpp::matrix<double> EvolDC1::AnomalousDimension_M(orders order, unsigned int n
 }
 
 
-gslpp::matrix<double> EvolDC1::ToRescaledBasis(orders order, unsigned int n_u, unsigned int n_d) const
+gslpp::matrix<double> EvolDC1::ToRescaledBasis(orders_qcd order, unsigned int n_u, unsigned int n_d) const
 {
     
     /* matrix entries for the anomalous dimension in the Chetyrkin, Misiak and Munz basis,
@@ -331,7 +331,7 @@ gslpp::matrix<double> EvolDC1::ToEffectiveBasis(gslpp::matrix<double> mat) const
     
 }
 
-gslpp::matrix<double>& EvolDC1::DC1Evol(double mu, double M, orders order, schemes scheme) 
+gslpp::matrix<double>& EvolDC1::DC1Evol(double mu, double M, orders_qcd order, schemes scheme) 
 {
     switch (scheme) {
         case NDR:

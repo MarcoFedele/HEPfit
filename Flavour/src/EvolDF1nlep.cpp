@@ -8,7 +8,7 @@
 #include "EvolDF1nlep.h"
 #include "StandardModel.h"
 
-EvolDF1nlep::EvolDF1nlep(unsigned int dim_i, schemes scheme, orders order, orders_qed order_qed, const StandardModel& model)
+EvolDF1nlep::EvolDF1nlep(unsigned int dim_i, schemes scheme, orders_qcd order, orders_qed order_qed, const StandardModel& model)
 :   RGEvolutor(dim_i, scheme, order, order_qed), model(model), V(dim_i,0.), Vi(dim_i,0.),
     gs(dim_i,0.), Js(dim_i,0.), ge0(dim_i,0.), K0(dim_i,0.), ge11(dim_i,0.), K11(dim_i,0.),
     JsK0V(dim_i,0.), ViK0Js(dim_i,0.), Gamma_s0T(dim_i,0.), Gamma_s1T(dim_i,0.), 
@@ -140,7 +140,7 @@ EvolDF1nlep::EvolDF1nlep(unsigned int dim_i, schemes scheme, orders order, order
 EvolDF1nlep::~EvolDF1nlep() 
 {}
 
-gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_S(orders order, unsigned int n_u, unsigned int n_d) const
+gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_S(orders_qcd order, unsigned int n_u, unsigned int n_d) const
 {
    
     /* anomalous dimension related to Delta F = 1 operators in Buras basis, hep-ph/9512380v1 */
@@ -212,7 +212,7 @@ gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_S(orders order, unsig
         
     if (!(nf == 3 || nf == 4 || nf == 5 || nf == 6)){ 
                 throw std::runtime_error("EvolDF1nlep::AnomalousDimension_nlep_S("
-                "orders order, unsigned int n_u, unsigned int n_d) " " wrong number of flavour"); 
+                "orders_qcd order, unsigned int n_u, unsigned int n_d) " " wrong number of flavour"); 
         }
     
     /*gamma(riga, colonna) next to leading order*/
@@ -286,7 +286,7 @@ gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_S(orders order, unsig
         std::stringstream out;
         out << order;
         throw std::runtime_error("EvolDF1nlep::AnomalousDimension_nlep_S("
-                "orders order, unsigned int n_u, unsigned int n_d) " 
+                "orders_qcd order, unsigned int n_u, unsigned int n_d) " 
                 + out.str() + " not implemented"); 
         
     }
@@ -295,7 +295,7 @@ gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_S(orders order, unsig
     
   }
 
-gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_EM(orders order, unsigned int n_u, unsigned int n_d) const
+gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_EM(orders_qcd order, unsigned int n_u, unsigned int n_d) const
 {
    
     /* anomalous dimension related to Buras operators hep-ph/9512380v1 */
@@ -353,7 +353,7 @@ gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_EM(orders order, unsi
         
      if (!(nf == 3 || nf == 4 || nf == 5 || nf == 6)){ 
                throw std::runtime_error("EvolDF1nlep::AnomalousDimension_nlep_EM("
-                "orders order, unsigned int n_u, unsigned int n_d) " " wrong number of flavour"); 
+                "orders_qcd order, unsigned int n_u, unsigned int n_d) " " wrong number of flavour"); 
       }
     
     /*gamma(riga, colonna) next to leading order*/
@@ -458,7 +458,7 @@ gslpp::matrix<double> EvolDF1nlep::AnomalousDimension_nlep_EM(orders order, unsi
         std::stringstream out;
         out << order;
         throw std::runtime_error("EvolDF1nlep::AnomalousDimension_nlep_EM("
-                "orders order, unsigned int n_u, unsigned int n_d) " 
+                "orders_qcd order, unsigned int n_u, unsigned int n_d) " 
                 + out.str() + " not implemented"); 
         
     }
@@ -564,7 +564,7 @@ gslpp::matrix<double> EvolDF1nlep::Df1threshold_deltareT(double nf) const
     
 }
 
-gslpp::matrix<double>& EvolDF1nlep::Df1Evolnlep(double mu, double M, orders order, orders_qed order_qed, schemes scheme) 
+gslpp::matrix<double>& EvolDF1nlep::Df1Evolnlep(double mu, double M, orders_qcd order, orders_qed order_qed, schemes scheme) 
 {
     switch (scheme) {
         case NDR:

@@ -60,7 +60,7 @@ CBM0(3, 0.), CBM1(3, 0.), CBM2(3, 0.)
 CPenguinBox::~CPenguinBox()
 {}
 
-gslpp::vector<double> CPenguinBox::WMatchP(orders order)
+gslpp::vector<double> CPenguinBox::WMatchP(orders_qcd order)
 {
     double x = model.getMatching().x_t(model.getMuw());
 
@@ -129,7 +129,7 @@ gslpp::matrix<double> CPenguinBox::RGevolP(int nf)
     }
 }
 
-double CPenguinBox::BmatchP(orders order)
+double CPenguinBox::BmatchP(orders_qcd order)
 {
 
     double mub = model.getMub();
@@ -156,7 +156,7 @@ double CPenguinBox::BmatchP(orders order)
     }
 }
 
-gslpp::vector<double> CPenguinBox::WMatchB(orders order)
+gslpp::vector<double> CPenguinBox::WMatchB(orders_qcd order)
 {
     double l = log(model.getMuw() * model.getMuw() / model.Mw_tree() / model.Mw_tree());
 
@@ -210,7 +210,7 @@ gslpp::matrix<double> CPenguinBox::RGevolB(int nf)
     }
 }
 
-double CPenguinBox::BmatchB(orders order)
+double CPenguinBox::BmatchB(orders_qcd order)
 {
 
     double mub = model.getMub();
@@ -234,7 +234,7 @@ double CPenguinBox::BmatchB(orders order)
     }
 }
 
-double CPenguinBox::Cmatch(orders order)
+double CPenguinBox::Cmatch(orders_qcd order)
 {
 
     up5 = RGevolP(5);
@@ -492,7 +492,7 @@ double CPenguinBox::Cmatch(orders order)
     return (3. * cpm + 2. / 3. * cbme + 1. / 3. * cbmt);
 }
 
-double CPenguinBox::CT_tot(orders order, orders_qed order_qed)
+double CPenguinBox::CT_tot(orders_qcd order, orders_qed order_qed)
 {
 
     double IBT = model.getOptionalParameter("DeltaP_cu");

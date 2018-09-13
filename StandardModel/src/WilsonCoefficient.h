@@ -34,6 +34,8 @@ public:
     gslpp::vector<gslpp::complex> getCoeff(orders_qcd order_qcd_i, orders_qed order_qed_i = QED0) const;
     
     Expanded<gslpp::vector<gslpp::complex> > getCoeff() const;
+    
+    void setCoeff(const Expanded<gslpp::vector<gslpp::complex> > wc);
 };
 
 #endif	/* WILSONCOEFFICIENT_H */

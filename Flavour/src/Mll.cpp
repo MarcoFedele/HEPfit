@@ -40,7 +40,7 @@ double Mll::computeThValue()
     return (EXIT_FAILURE);
 }
 
-void Mll::computeObs(orders order, orders_qed order_qed)
+void Mll::computeObs(orders_qcd order, orders_qed order_qed)
 {   
     double mu = SM.getMub();  
     
@@ -64,21 +64,21 @@ void Mll::computeObs(orders order, orders_qed order_qed)
     Smumu = (absP * absP * sin(2. * argP - phiNP) -  absS * absS * sin(2. * argS - phiNP)) / (absP * absP + absS * absS);
 }
 
-double Mll::computeAmumu(orders order)
+double Mll::computeAmumu(orders_qcd order)
 {
     computeObs(FULLNLO, FULLNLO_QED);
     return(Amumu);
 }
 
-double Mll::computeSmumu(orders order)
+double Mll::computeSmumu(orders_qcd order)
 {
     computeObs(FULLNLO, FULLNLO_QED);
     return(Smumu);
 }
 
-void Mll::computeAmpSq(orders order, orders_qed order_qed, double mu)
+void Mll::computeAmpSq(orders_qcd order, orders_qed order_qed, double mu)
 {  
-    if (SM.getFlavour().getHDB1().getCoeffsmumu().getOrder() < order % 3){
+    if (SM.getFlavour().getHDB1().getCoeffsmumu().getOrder_QCD() < order % 3){
         std::stringstream out;
         out << order;
         throw std::runtime_error("Bsmumu::computeAmpSq(): required cofficient of "

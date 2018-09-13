@@ -40,7 +40,7 @@ protected:
      * \f$ BR(K_{L} \rightarrow \pi^{0} \nu \bar{\nu}) \f$, for example
      * see hep-ph/0603079 section 2.3
      */
-    gslpp::complex BRKp0nunu(orders order, orders_qed order_qed);
+    gslpp::complex BRKp0nunu(orders_qcd order, orders_qed order_qed);
     
 private:
     

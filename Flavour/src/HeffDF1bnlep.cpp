@@ -39,7 +39,7 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep00(double mu, sch
     coeffbnlep00.setMu(mu);
     
     orders_qed ordDF1ew = coeffbnlep00.getOrder_qed();
-    orders ordDF1 =  coeffbnlep00.getOrder();
+    orders_qcd ordDF1 =  coeffbnlep00.getOrder_QCD();
     
     for (unsigned int i = 0; i < mcb.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
@@ -147,7 +147,7 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep10(double mu, sch
     coeffbnlep10.setMu(mu);
     
     orders_qed ordDF1ew = coeffbnlep10.getOrder_qed();
-    orders ordDF1 =  coeffbnlep10.getOrder();
+    orders_qcd ordDF1 =  coeffbnlep10.getOrder_QCD();
     
     for (unsigned int i = 0; i < mcb.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
@@ -222,7 +222,7 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep01(double mu, sch
     coeffbnlep01A.setMu(mu);
     coeffbnlep01B.setMu(mu);
     
-    orders ordDF1 = coeffbnlep01A.getOrder();
+    orders_qcd ordDF1 = coeffbnlep01A.getOrder_QCD();
     
     //evolution of the current*current terms
     for (unsigned int i = 0; i < mcbCC1.size(); i++)
@@ -274,7 +274,7 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep11(double mu, sch
     coeffbnlep11A.setMu(mu);
     coeffbnlep11B.setMu(mu);
     
-    orders ordDF1 = coeffbnlep11A.getOrder();
+    orders_qcd ordDF1 = coeffbnlep11A.getOrder_QCD();
     
     for (unsigned int i = 0; i < mcbCC1.size(); i++)
         for (int j = LO; j <= ordDF1; j++)

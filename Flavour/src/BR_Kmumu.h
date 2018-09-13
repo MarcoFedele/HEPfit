@@ -39,7 +39,7 @@ protected:
      * @return the short distance contribution to the 
      * |\f$ BR(K_L \rightarrow \mu \bar{\mu}) \f$|, 
      */
-    gslpp::complex BRKmumu(orders order);
+    gslpp::complex BRKmumu(orders_qcd order);
     
 private:
     

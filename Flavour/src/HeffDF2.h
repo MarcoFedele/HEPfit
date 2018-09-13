@@ -45,7 +45,7 @@ public:
      * @param c_in is the Wilson Coefficient to be converted to scheme schout
      * @param order
      */ 
-    void ChangeScheme(schemes schout, WilsonCoefficient& c_in, orders order);
+    void ChangeScheme(schemes schout, WilsonCoefficient& c_in, orders_qcd order);
     
     /**
      * 
@@ -94,7 +94,7 @@ public:
      * @param nf is the number of active flavours
      * @return the anomalous dimension for DeltaF=2 processes
      */
-    gslpp::matrix<double> AnomalousDimension(orders order, unsigned int nf = 0) const;
+    gslpp::matrix<double> AnomalousDimension(orders_qcd order, unsigned int nf = 0) const;
 
     WilsonCoefficient getCoeffBd() const {
         return coeffbd;

@@ -15,9 +15,9 @@ AmpDD2::AmpDD2(const StandardModel& SM_i)
     mySM.initializeBParameter("BD");
 }
 
-gslpp::complex AmpDD2::AmpDD(orders order) 
+gslpp::complex AmpDD2::AmpDD(orders_qcd order) 
 {
-    if (mySM.getFlavour().getHDF2().getCoeffDD().getOrder() < order)
+    if (mySM.getFlavour().getHDF2().getCoeffDD().getOrder_QCD() < order)
         throw std::runtime_error("DmD::computeThValue(): requires cofficient of order not computed"); 
 
     gslpp::vector<gslpp::complex> ** allcoeff =  mySM.getFlavour().ComputeCoeffdd(

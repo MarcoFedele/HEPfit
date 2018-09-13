@@ -133,6 +133,13 @@ namespace gslpp
       matrix<complex> operator*(const complex& z) const;
       /** Division operator (complex) */
       matrix<complex> operator/(const complex& z) const;
+      /** Comparison == (matrix) */
+      bool operator==(const matrix<double>& a) const;
+      bool operator!=(const matrix<double>& a) const
+      {
+          return(!(*this == a));
+      }
+
       /** friend functions */
       friend std::ostream& operator<<(std::ostream& output, const matrix<double>& m);
       /** @{

@@ -95,8 +95,10 @@ public:
                     " not present in the object");
         }
         return wilson.getOrd(order_qcd_i, order_qed_i);
+
     };
 
+protected:
     Expanded<T> getWilson() const {
         return wilson;
     }
@@ -114,7 +116,6 @@ public:
         wilson.setOrd(order_qcd_i, order_qed_i, v);
     };
 
-protected:
     Expanded<T> wilson;
     unsigned int size;
     double mu;

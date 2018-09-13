@@ -93,7 +93,7 @@ class F_2;
  * Considering the matrix element of @f$\mathcal{H}_\mathrm{eff}^{\Delta B = 1}@f$
  * between the initial state @f$M@f$ and the final state @f$P l^+ l^-@f$, only the contribution of 
  * @f$\mathcal{H}_\mathrm{eff}^\mathrm{sl+\gamma}@f$ clearly factorizes into the 
- * product of hadronic form factors and leptonic tensors at all orders in strong interactions. 
+ * product of hadronic form factors and leptonic tensors at all orders_qcd in strong interactions. 
  * Following @cite Jager:2012uw, we implemented the amplitude in the helicity basis; 
  * hence we made use of the helicity form factors @f$ \tilde{V}_0(q^2), 
  * \tilde{T}_0(q^2)@f$ and @f$\tilde{S}(q^2) @f$, which are related to the

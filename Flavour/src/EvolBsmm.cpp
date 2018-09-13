@@ -9,7 +9,7 @@
 #include "StandardModel.h"
 #include <gsl/gsl_sf.h>
 
-EvolBsmm::EvolBsmm(unsigned int dim_i, schemes scheme, orders order, orders_qed order_qed, const StandardModel & model)
+EvolBsmm::EvolBsmm(unsigned int dim_i, schemes scheme, orders_qcd order, orders_qed order_qed, const StandardModel & model)
 :   RGEvolutor(dim_i, scheme, order, order_qed), model(model), V(dim_i,0.), Vi(dim_i,0.),
     AA(dim_i,0.), BB(dim_i,0.), CC(dim_i,0.), DD(dim_i,0.), EE(dim_i,0.), FF(dim_i,0.),
     RR(dim_i,0.), e(dim_i,0.), vavi(0,0.), vbvi(0,0.), vcvi(0,0.), vdvi(0,0.),
@@ -675,7 +675,7 @@ gslpp::matrix<double> EvolBsmm::BuiltB(char letter, unsigned int n_u, unsigned i
 
 
 
-gslpp::matrix< double > & EvolBsmm::Df1Evol(double mu, double M, orders order, orders_qed order_qed, schemes scheme) 
+gslpp::matrix< double > & EvolBsmm::Df1Evol(double mu, double M, orders_qcd order, orders_qed order_qed, schemes scheme) 
 
 {
     switch (scheme) {             /*  complete this method */

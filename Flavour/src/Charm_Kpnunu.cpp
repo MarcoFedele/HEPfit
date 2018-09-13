@@ -35,7 +35,7 @@ U4b(2, 0.), U5b(2, 0.), J5b1(2, 0.), J4b1(2, 0.), J5b2(2, 0.), J4b2(2, 0.), dc_b
 Charm_Kpnunu::~Charm_Kpnunu()
 {}
 
-gslpp::vector<double> Charm_Kpnunu::Cp(orders order)
+gslpp::vector<double> Charm_Kpnunu::Cp(orders_qcd order)
 {
 
     double x = model.getMatching().x_t(model.getMuw());
@@ -76,7 +76,7 @@ gslpp::vector<double> Charm_Kpnunu::Cp(orders order)
     }
 }
 
-gslpp::matrix<double> Charm_Kpnunu::RGevolP(int nf, orders order)
+gslpp::matrix<double> Charm_Kpnunu::RGevolP(int nf, orders_qcd order)
 {
 
     gslpp::matrix<double> evo(3, 3, 0.);
@@ -164,7 +164,7 @@ gslpp::matrix<double> Charm_Kpnunu::RGevolP(int nf, orders order)
     }
 }
 
-gslpp::vector<double> Charm_Kpnunu::ThresholdCp(orders order)
+gslpp::vector<double> Charm_Kpnunu::ThresholdCp(orders_qcd order)
 {
 
     double mub = model.getMub();
@@ -202,7 +202,7 @@ gslpp::vector<double> Charm_Kpnunu::ThresholdCp(orders order)
     }
 }
 
-gslpp::vector<double> Charm_Kpnunu::C_p(orders order)
+gslpp::vector<double> Charm_Kpnunu::C_p(orders_qcd order)
 {
 
     cpmuW0 = Cp(LO);
@@ -250,7 +250,7 @@ gslpp::vector<double> Charm_Kpnunu::C_p(orders order)
 
 }
 
-double Charm_Kpnunu::C_P(orders order)
+double Charm_Kpnunu::C_P(orders_qcd order)
 {
 
     double L = log(model.getMuc() * model.getMuc() / mc / mc);
@@ -290,7 +290,7 @@ double Charm_Kpnunu::C_P(orders order)
     }
 }
 
-gslpp::vector<double> Charm_Kpnunu::Cb(orders order)
+gslpp::vector<double> Charm_Kpnunu::Cb(orders_qcd order)
 {
 
     double L = log(model.getMuw() * model.getMuw() / model.Mw_tree() / model.Mw_tree());
@@ -321,7 +321,7 @@ gslpp::vector<double> Charm_Kpnunu::Cb(orders order)
     }
 }
 
-gslpp::matrix<double> Charm_Kpnunu::RGevolB(int nf, orders order)
+gslpp::matrix<double> Charm_Kpnunu::RGevolB(int nf, orders_qcd order)
 {
 
     gslpp::matrix<double> evo(2, 2, 0.);
@@ -403,7 +403,7 @@ gslpp::matrix<double> Charm_Kpnunu::RGevolB(int nf, orders order)
     }
 }
 
-gslpp::vector<double> Charm_Kpnunu::ThresholdCb(orders order)
+gslpp::vector<double> Charm_Kpnunu::ThresholdCb(orders_qcd order)
 {
 
     double mub = model.getMub();
@@ -436,7 +436,7 @@ gslpp::vector<double> Charm_Kpnunu::ThresholdCb(orders order)
     }
 }
 
-gslpp::vector<double> Charm_Kpnunu::C_b(orders order)
+gslpp::vector<double> Charm_Kpnunu::C_b(orders_qcd order)
 {
 
     cbmuW0 = Cb(LO);
@@ -484,7 +484,7 @@ gslpp::vector<double> Charm_Kpnunu::C_b(orders order)
 
 }
 
-double Charm_Kpnunu::C_Be(orders order)
+double Charm_Kpnunu::C_Be(orders_qcd order)
 {
 
     double L = log(model.getMuc() * model.getMuc() / mc / mc);
@@ -518,7 +518,7 @@ double Charm_Kpnunu::C_Be(orders order)
     }
 }
 
-double Charm_Kpnunu::C_Bt(orders order)
+double Charm_Kpnunu::C_Bt(orders_qcd order)
 {
 
     double L = log(model.getMuc() * model.getMuc() / mc / mc);
@@ -567,7 +567,7 @@ double Charm_Kpnunu::C_Bt(orders order)
     }
 }
 
-double Charm_Kpnunu::P_C(orders order)
+double Charm_Kpnunu::P_C(orders_qcd order)
 {
     double Xe = C_P(order) + C_Be(order);
     double Xt = C_P(order) + C_Bt(order);
@@ -577,7 +577,7 @@ double Charm_Kpnunu::P_C(orders order)
     return (pc);
 }
 
-double Charm_Kpnunu::C_TOT(orders order, orders_qed order_qed)
+double Charm_Kpnunu::C_TOT(orders_qcd order, orders_qed order_qed)
 {
 
     double xt = model.getMatching().x_t(model.getMut());

@@ -28,7 +28,7 @@ gslpp::vector<gslpp::complex>** HeffDF1bsg::ComputeCoeffBsg(double mu, schemes s
     
     coeffbsg.setMu(mu); 
     
-    orders ordDF1 = coeffbsg.getOrder();
+    orders_qcd ordDF1 = coeffbsg.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++){

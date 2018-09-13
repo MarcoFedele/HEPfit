@@ -38,7 +38,7 @@ protected:
      * @return the short distance contribution to the 
      * |\f$ BR(B_s \rightarrow \nu \bar{\nu}) \f$|
      */
-    gslpp::complex BRBdnunu(orders order);
+    gslpp::complex BRBdnunu(orders_qcd order);
     
 private:
     

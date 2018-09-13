@@ -15,9 +15,9 @@ AmpDK2::AmpDK2(const StandardModel& SM_i)
     mySM.initializeBParameter("BK");
 }
 
-gslpp::complex AmpDK2::AmpDK(orders order) 
+gslpp::complex AmpDK2::AmpDK(orders_qcd order) 
 {
-    if (mySM.getFlavour().getHDF2().getCoeffK().getOrder() < order % 3)
+    if (mySM.getFlavour().getHDF2().getCoeffK().getOrder_QCD() < order % 3) // AARGHHH *** FIX ME ***
         throw std::runtime_error("AmpDK::computeThValue(): requires cofficient of order not computed"); 
 
     gslpp::vector<gslpp::complex> ** allcoeff = mySM.getFlavour().ComputeCoeffK(
@@ -59,9 +59,9 @@ gslpp::complex AmpDK2::AmpDK(orders order)
     }
 }
 
-gslpp::complex AmpDK2::AmpMK(orders order) 
+gslpp::complex AmpDK2::AmpMK(orders_qcd order) 
 {
-    if (mySM.getFlavour().getHDF2().getCoeffmK().getOrder() < order % 3)
+    if (mySM.getFlavour().getHDF2().getCoeffmK().getOrder_QCD() < order % 3) // AARGHHH *** FIX ME ***
         throw std::runtime_error("AmpDK::computeThValue(): requires cofficient of order not computed");
 
     gslpp::vector<gslpp::complex> ** allcoeff = mySM.getFlavour().ComputeCoeffmK(

@@ -251,21 +251,21 @@ private:
     * @param[in] sh \f$q^2/m_b^2\f$ of the decay
     * @return \f${\tilde C}_7^\mathrm{eff}\f$
     */
-    gslpp::complex C7eff(double sh, orders order);
+    gslpp::complex C7eff(double sh, orders_qcd order);
 
     /**
     * @brief The effective coefficient \f${\tilde C}_9^\mathrm{eff}\f$ from @cite Asatrian:2001zw.
     * @param[in] sh \f$q^2/m_b^2\f$ of the decay
     * @return \f${\tilde C}_9^\mathrm{eff}\f$
     */
-    gslpp::complex C9eff(double sh, orders order);
+    gslpp::complex C9eff(double sh, orders_qcd order);
 
     /**
     * @brief The effective coefficient \f${\tilde C}_{10}^\mathrm{eff}\f$ from @cite Asatrian:2001zw.
     * @param[in] sh \f$q^2/m_b^2\f$ of the decay
     * @return \f${\tilde C}_{10}^\mathrm{eff}\f$
     */
-    gslpp::complex C10eff(double sh, orders order);
+    gslpp::complex C10eff(double sh, orders_qcd order);
 
     /**
     * @brief The bremsstrahlung correction \f$omega_7(\hat s)\f$ from @cite Asatrian:2001zw.
@@ -294,7 +294,7 @@ private:
     * @param[in] order LO or NLO
     * @return ATUW(sh, order)
     */
-    gslpp::complex ATUW(double sh, orders order);
+    gslpp::complex ATUW(double sh, orders_qcd order);
     
     /**
     * @brief Auxiliary function \f$h(z,sh)\f$ from @cite Asatrian:2001zw.
@@ -423,37 +423,37 @@ private:
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] order LO or NLO
     */
-    double S77_T(double sh, orders order);
-    double S79_T(double sh, orders order);
-    double S99_T(double sh, orders order);
-    double S1010_T(double sh, orders order);
+    double S77_T(double sh, orders_qcd order);
+    double S79_T(double sh, orders_qcd order);
+    double S99_T(double sh, orders_qcd order);
+    double S1010_T(double sh, orders_qcd order);
     
     /**
     * @brief Auxiliary functions \f$S_{NM}^L\f$ from @cite Huber:2015sra
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] order LO or NLO
     */
-    double S77_L(double sh, orders order);
-    double S79_L(double sh, orders order);
-    double S99_L(double sh, orders order);
-    double S1010_L(double sh, orders order);
+    double S77_L(double sh, orders_qcd order);
+    double S79_L(double sh, orders_qcd order);
+    double S99_L(double sh, orders_qcd order);
+    double S1010_L(double sh, orders_qcd order);
     
     /**
     * @brief Auxiliary functions \f$S_{NM}^A\f$ from @cite Huber:2015sra
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] order LO or NLO
     */
-    double S710_A(double sh, orders order);
-    double S910_A(double sh, orders order);
+    double S710_A(double sh, orders_qcd order);
+    double S910_A(double sh, orders_qcd order);
     
     /**
     * @brief \f$\mathcal{O}(\Lambda_{QCD}^2/m_c^2)\f$ contributions \f$c_{ij}^I\f$ as defined in @cite Huber:2015sra
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] i,j indices in eq. (4.10) in @cite Huber:2015sra
     */
-    gslpp::complex cij_T(unsigned int i, unsigned int j, double sh, orders order);
-    gslpp::complex cij_L(unsigned int i, unsigned int j, double sh, orders order);
-    gslpp::complex cij_A(unsigned int i, unsigned int j, double sh, orders order);
+    gslpp::complex cij_T(unsigned int i, unsigned int j, double sh, orders_qcd order);
+    gslpp::complex cij_L(unsigned int i, unsigned int j, double sh, orders_qcd order);
+    gslpp::complex cij_A(unsigned int i, unsigned int j, double sh, orders_qcd order);
     
     /**
     * @brief Log-enhanced electromagnetic corrections \f$e_{ij}^I\f$ as defined in @cite Huber:2015sra
@@ -548,14 +548,14 @@ private:
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] order LO or NLO
     */
-    gslpp::vector<gslpp::complex> Mi7(double sh, orders order);
+    gslpp::vector<gslpp::complex> Mi7(double sh, orders_qcd order);
     
     /**
     * @brief Vector of auxiliary functions \f$M_i^9(sh)\f$ from Table 6 of @cite Huber:2005ig
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] order LO or NLO
     */
-    gslpp::vector<gslpp::complex> Mi9(double sh, orders order);
+    gslpp::vector<gslpp::complex> Mi9(double sh, orders_qcd order);
     
     /**
     * @brief Vector of auxiliary functions \f$M_i^10(sh)\f$ from Table 6 of @cite Huber:2005ig
@@ -575,7 +575,7 @@ private:
     * @param[in] sh normalized dilepton invariant mass \f$q^2/m_b^2\f$
     * @param[in] order LO or NLO
     */
-    gslpp::matrix<gslpp::complex> matH_L(double sh, orders order);
+    gslpp::matrix<gslpp::complex> matH_L(double sh, orders_qcd order);
     
     /**
     * @brief Angular observable \f$H_T\f$ as defined in @cite Huber:2015sra
@@ -593,7 +593,7 @@ private:
     * @brief Normalization function for \f$B\to X_s\ell\ell\f$ from eq. (4.8) of 1503.04849
     * @param[in] ord/ord_qed order to be returned
     */
-    double Phi_u(orders ord);
+    double Phi_u(orders_qcd ord);
     double Phi_u(orders_qed ord_qed);
 };
 #endif	/* BXqLL_H */

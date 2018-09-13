@@ -24,11 +24,11 @@ class AmpDB2 {
 public:
     AmpDB2(const StandardModel& SM_i);
     
-    gslpp::complex getAmpBd(orders order){
+    gslpp::complex getAmpBd(orders_qcd order){
         return AmpBd(order);
     }
     
-    gslpp::complex getAmpBs(orders order){
+    gslpp::complex getAmpBs(orders_qcd order){
         return AmpBs(order);
     }
 
@@ -41,8 +41,8 @@ public:
     }
     
 protected:
-    gslpp::complex AmpBd(orders order);
-    gslpp::complex AmpBs(orders order);
+    gslpp::complex AmpBd(orders_qcd order);
+    gslpp::complex AmpBs(orders_qcd order);
     gslpp::complex PBd();
     gslpp::complex PBs();
 

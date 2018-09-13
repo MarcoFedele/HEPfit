@@ -34,7 +34,7 @@ class EvolDF1nlep : public RGEvolutor {
      * @param order_qed an enum "orders_qed" for the order of QED perturbation theory of the evolutor 
      * @param model an object of StandardModel class 
      */
-    EvolDF1nlep(unsigned int dim,  schemes scheme,orders order, orders_qed order_qed, const StandardModel& model);
+    EvolDF1nlep(unsigned int dim,  schemes scheme,orders_qcd order, orders_qed order_qed, const StandardModel& model);
     /**
      * @brief EvolDF1nlep destructor 
      */
@@ -46,7 +46,7 @@ class EvolDF1nlep : public RGEvolutor {
      * @param n_d an unsigned integer for the down-type number of d.o.f.
      * @return the ADM related to QCD corrections at the order LO/NLO in the standard basis 
      */
-    gslpp::matrix<double> AnomalousDimension_nlep_S(orders order, unsigned int n_u, unsigned int n_d) const;
+    gslpp::matrix<double> AnomalousDimension_nlep_S(orders_qcd order, unsigned int n_u, unsigned int n_d) const;
     /**
      * @brief a method returning the anomalous dimension matrix given in the standard basis
      * @param order an enum "orders" for the order of QED perturbation theory of the ADM
@@ -54,7 +54,7 @@ class EvolDF1nlep : public RGEvolutor {
      * @param n_d an unsigned integer for the down-type number of d.o.f.
      * @return the ADM related to QED corrections at the order LO/NLO in the standard basis 
      */
-    gslpp::matrix<double> AnomalousDimension_nlep_EM(orders order, unsigned int n_u, unsigned int n_d) const;
+    gslpp::matrix<double> AnomalousDimension_nlep_EM(orders_qcd order, unsigned int n_u, unsigned int n_d) const;
     /**
      * @brief a method returning the evolutor related to the high scale \f$ M \f$ and the low scale \f$ \mu \f$
      * @param mu a double for the low scale of the evolution
@@ -64,7 +64,7 @@ class EvolDF1nlep : public RGEvolutor {
      * @param scheme an enum "schemes" for the regularization scheme of the evolutor
      * @return the evolutor \f$ U (\mu , M) \f$
      */
-    gslpp::matrix<double>& Df1Evolnlep(double mu, double M, orders order, orders_qed order_qed, schemes scheme = NDR);
+    gslpp::matrix<double>& Df1Evolnlep(double mu, double M, orders_qcd order, orders_qed order_qed, schemes scheme = NDR);
     /**
      * @brief a method returning the matrix threshold for the QCD penguins at the NLO
      * @param nf a double for the active number of flavors

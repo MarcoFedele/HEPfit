@@ -27,8 +27,8 @@ public:
      * @return theoretical value of |\f$ BR(B_s \rightarrow \mu \bar{\mu}) \f$|
      */
     double computeThValue();
-    double computeAmumu(orders order);
-    double computeSmumu(orders order);
+    double computeAmumu(orders_qcd order);
+    double computeSmumu(orders_qcd order);
     
     
 protected:
@@ -40,8 +40,8 @@ protected:
      * @return the short distance contribution to the 
      * |\f$ BR(B_s \rightarrow \mu \bar{\mu}) \f$|
      */
-    void computeAmpSq(orders order, orders_qed order_qed, double mu);
-    void computeObs(orders order, orders_qed order_qed);
+    void computeAmpSq(orders_qcd order, orders_qed order_qed, double mu);
+    void computeObs(orders_qcd order, orders_qed order_qed);
     
 private:
     

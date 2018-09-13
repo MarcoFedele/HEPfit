@@ -28,14 +28,14 @@ protected:
      * @param order
      * @return the amplitude for K_L decay in 2 pion with 0 isospin change
      */
-    gslpp::complex AmpDS1pp0(orders order);
+    gslpp::complex AmpDS1pp0(orders_qcd order);
     
     /**
      * 
      * @param order
      * @return the amplitude for K_L decay in 2 pion with double isospin change
      */
-    gslpp::complex AmpDS1pp2(orders order);
+    gslpp::complex AmpDS1pp2(orders_qcd order);
     
 private:
     

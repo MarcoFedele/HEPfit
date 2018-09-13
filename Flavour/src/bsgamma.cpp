@@ -2230,7 +2230,7 @@ double Bsgamma::Vub_NNLO(double E0)
             + 2. * r12 * Vub_NLO_3body_A(E0) + (r12 + r78) * Vub_NLO_3body_B(E0));
 }
 
-double Bsgamma::P(double E0, double mu_b, double mu_c, orders order)
+double Bsgamma::P(double E0, double mu_b, double mu_c, orders_qcd order)
 {
 
     switch(order) {

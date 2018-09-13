@@ -30,7 +30,7 @@ class EvolDC1Buras : public RGEvolutor {
      * @param order an enum "orders" for the order of perturbation theory of the evolutor
      * @param model an object of StandardModel class 
      */    
-    EvolDC1Buras(unsigned int dim_i,  schemes scheme, orders order, const StandardModel& model);
+    EvolDC1Buras(unsigned int dim_i,  schemes scheme, orders_qcd order, const StandardModel& model);
     /**
      * @brief EvolDC1Buras destructor
      */
@@ -43,7 +43,7 @@ class EvolDC1Buras : public RGEvolutor {
      * @param scheme an enum "schemes" for the regularization scheme of the evolutor
      * @return the evolutor \f$ U (\mu , M) \f$
      */
-    gslpp::matrix<double>& DC1EvolBuras(double mu, double M, orders order,  schemes scheme = NDR);
+    gslpp::matrix<double>& DC1EvolBuras(double mu, double M, orders_qcd order,  schemes scheme = NDR);
     /**
      * @brief a method returning the anomalous dimension matrix given in the standard basis
      * @param order an enum "orders" for the order of perturbation theory of the ADM
@@ -51,7 +51,7 @@ class EvolDC1Buras : public RGEvolutor {
      * @param n_d an unsigned integer for the down-type number of d.o.f.
      * @return the ADM at the order LO/NLO in the standard basis
      */
-    gslpp::matrix<double> AnomalousDimension_DC1_Buras(orders order, unsigned int n_u,
+    gslpp::matrix<double> AnomalousDimension_DC1_Buras(orders_qcd order, unsigned int n_u,
         unsigned int n_d) const;
     /**
      * @brief a method returning the matrix threshold for the QCD penguins at the NLO
@@ -86,7 +86,7 @@ class EvolDC1Buras : public RGEvolutor {
      * @param M a double for the intermidiate scale of the threshold
      * @param order an enum "orders" for the order of perturbation theory of the threshold (LO is trivial)
      */
-    void DC1PenguinThresholds(double M, orders order);
+    void DC1PenguinThresholds(double M, orders_qcd order);
     gslpp::matrix<gslpp::complex> v, vi, js, h, gg, s_s, jssv, jss, jv, vij;
     gslpp::vector<gslpp::complex> e;
     unsigned int dim;

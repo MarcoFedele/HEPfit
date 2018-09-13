@@ -1632,7 +1632,7 @@ public:
     * @param[in] order perturbation theory order
     * @return \f$P\f$
     */
-    double P(double E0, double mu_b, double mu_c, orders order);
+    double P(double E0, double mu_b, double mu_c, orders_qcd order);
     
     
     /**

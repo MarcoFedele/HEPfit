@@ -11,7 +11,7 @@
 #include <stdexcept>
 
 
-EvolDC1Buras::EvolDC1Buras(unsigned int dim_i, schemes scheme, orders order, const StandardModel& model) 
+EvolDC1Buras::EvolDC1Buras(unsigned int dim_i, schemes scheme, orders_qcd order, const StandardModel& model) 
 :           RGEvolutor(dim_i, scheme, order), model(model),
             v(dim_i,0.), vi(dim_i,0.), js(dim_i,0.), h(dim_i,0.), gg(dim_i,0.), s_s(dim_i,0.),
             jssv(dim_i,0.), jss(dim_i,0.), jv(dim_i,0.), vij(dim_i,0.), e(dim_i,0.), dim(dim_i)  
@@ -78,7 +78,7 @@ EvolDC1Buras::EvolDC1Buras(unsigned int dim_i, schemes scheme, orders order, con
 EvolDC1Buras::~EvolDC1Buras() 
 {}
 
-gslpp::matrix<double> EvolDC1Buras::AnomalousDimension_DC1_Buras(orders order, unsigned int n_u, unsigned int n_d) const
+gslpp::matrix<double> EvolDC1Buras::AnomalousDimension_DC1_Buras(orders_qcd order, unsigned int n_u, unsigned int n_d) const
 {
    
     /* anomalous dimension related to Delta F = 1 operators in Buras basis, hep-ph/9512380v1 */
@@ -185,7 +185,7 @@ gslpp::matrix<double> EvolDC1Buras::AnomalousDimension_DC1_Buras(orders order, u
     
   }
 
-gslpp::matrix<double>& EvolDC1Buras::DC1EvolBuras(double mu, double M, orders order, schemes scheme) 
+gslpp::matrix<double>& EvolDC1Buras::DC1EvolBuras(double mu, double M, orders_qcd order, schemes scheme) 
 {
     switch (scheme) {
         case NDR:
@@ -294,7 +294,7 @@ return(deltarsT);
 
 }
 
-void EvolDC1Buras::DC1PenguinThresholds(double M, orders order) 
+void EvolDC1Buras::DC1PenguinThresholds(double M, orders_qcd order) 
 {
 
     double alsM = model.Als(M) / 4. / M_PI;

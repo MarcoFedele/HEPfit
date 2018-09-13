@@ -37,8 +37,8 @@ public:
     AmpDK2(const StandardModel& SM_i);
 
 protected:
-    gslpp::complex AmpDK(orders order);
-    gslpp::complex AmpMK(orders order);
+    gslpp::complex AmpDK(orders_qcd order);
+    gslpp::complex AmpMK(orders_qcd order);
     
 private:
     

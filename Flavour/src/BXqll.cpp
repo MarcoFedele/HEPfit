@@ -318,7 +318,7 @@ gslpp::complex BXqll::h_z(double zed, double sh)
     return(h_z);
 }
 
-gslpp::complex BXqll::ATUW(double sh, orders order)
+gslpp::complex BXqll::ATUW(double sh, orders_qcd order)
 {
         if(order == FULLNLO || order <= NLO)
         return(C_9[order]+T_9[order]*h_z(z,sh)+U_9[order]*h_z(1.,sh)+W_9[order]*h_z(0.,sh));
@@ -326,7 +326,7 @@ gslpp::complex BXqll::ATUW(double sh, orders order)
         throw std::runtime_error("BXqll::ATUW: order not implemented");
 }
 
-gslpp::complex BXqll::C7eff(double sh, orders order)
+gslpp::complex BXqll::C7eff(double sh, orders_qcd order)
 {
     gslpp::complex C7eff;
     
@@ -345,7 +345,7 @@ gslpp::complex BXqll::C7eff(double sh, orders order)
     return (C7eff);
 }
 
-gslpp::complex BXqll::C9eff(double sh, orders order)
+gslpp::complex BXqll::C9eff(double sh, orders_qcd order)
 {
     gslpp::complex C9eff;
     
@@ -364,7 +364,7 @@ gslpp::complex BXqll::C9eff(double sh, orders order)
     return (C9eff);
 }
 
-gslpp::complex BXqll::C10eff(double sh, orders order)
+gslpp::complex BXqll::C10eff(double sh, orders_qcd order)
 {
     gslpp::complex C10eff;
     
@@ -857,7 +857,7 @@ std::vector< std::vector<BXqll::Expanded> > BXqll::matH_T(double sh)
     return Hij_T;
 }
 
-gslpp::matrix<gslpp::complex> BXqll::matH_L(double sh, orders order)
+gslpp::matrix<gslpp::complex> BXqll::matH_L(double sh, orders_qcd order)
 {
     gslpp::matrix<gslpp::complex> Hij_L(10,10,0.);
     
@@ -922,7 +922,7 @@ gslpp::matrix<gslpp::complex> BXqll::matH_L(double sh, orders order)
     return Hij_L;
 }
 
-gslpp::vector<gslpp::complex> BXqll::Mi7(double sh, orders order)
+gslpp::vector<gslpp::complex> BXqll::Mi7(double sh, orders_qcd order)
 {
     gslpp::vector<gslpp::complex> M7(10,0.);
 
@@ -943,7 +943,7 @@ gslpp::vector<gslpp::complex> BXqll::Mi7(double sh, orders order)
     return M7;
 }
 
-gslpp::vector<gslpp::complex> BXqll::Mi9(double sh, orders order)
+gslpp::vector<gslpp::complex> BXqll::Mi9(double sh, orders_qcd order)
 {
     gslpp::vector<gslpp::complex> M9(10,0.);
     
@@ -979,7 +979,7 @@ gslpp::vector<double> BXqll::Mi10(double sh)
     return M10;
 }
 
-double BXqll::S77_T(double sh, orders order)
+double BXqll::S77_T(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = 8.*umsh*umsh/sh;
@@ -998,7 +998,7 @@ double BXqll::S77_T(double sh, orders order)
     }
 }
 
-double BXqll::S79_T(double sh, orders order)
+double BXqll::S79_T(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = 8.*umsh*umsh;
@@ -1017,7 +1017,7 @@ double BXqll::S79_T(double sh, orders order)
     }
 }
 
-double BXqll::S99_T(double sh, orders order)
+double BXqll::S99_T(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = 2.*sh*umsh*umsh;
@@ -1036,12 +1036,12 @@ double BXqll::S99_T(double sh, orders order)
     }
 }
 
-double BXqll::S1010_T(double sh, orders order)
+double BXqll::S1010_T(double sh, orders_qcd order)
 {
     return S99_T(sh,order);
 }
 
-double BXqll::S77_L(double sh, orders order)
+double BXqll::S77_L(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = 4.*umsh*umsh;
@@ -1060,7 +1060,7 @@ double BXqll::S77_L(double sh, orders order)
     }
 }
 
-double BXqll::S79_L(double sh, orders order)
+double BXqll::S79_L(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = 4.*umsh*umsh;
@@ -1079,7 +1079,7 @@ double BXqll::S79_L(double sh, orders order)
     }
 }
 
-double BXqll::S99_L(double sh, orders order)
+double BXqll::S99_L(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = umsh*umsh;
@@ -1098,12 +1098,12 @@ double BXqll::S99_L(double sh, orders order)
     }
 }
 
-double BXqll::S1010_L(double sh, orders order)
+double BXqll::S1010_L(double sh, orders_qcd order)
 {
     return S99_L(sh,order);
 }
 
-double BXqll::S710_A(double sh, orders order)
+double BXqll::S710_A(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = -8.*umsh*umsh;
@@ -1122,7 +1122,7 @@ double BXqll::S710_A(double sh, orders order)
     }
 }
 
-double BXqll::S910_A(double sh, orders order)
+double BXqll::S910_A(double sh, orders_qcd order)
 {
     double umsh = 1. - sh;
     double sigma = -4.*umsh*umsh;
@@ -1141,7 +1141,7 @@ double BXqll::S910_A(double sh, orders order)
     }
 }
 
-gslpp::complex BXqll::cij_T(unsigned int i, unsigned int j, double sh, orders order)
+gslpp::complex BXqll::cij_T(unsigned int i, unsigned int j, double sh, orders_qcd order)
 {
     unsigned int ij = 10*(i + 1) + (j + 1);
     double umsh = (1. - sh), uptsh = 1. + 3.*sh;
@@ -1174,7 +1174,7 @@ gslpp::complex BXqll::cij_T(unsigned int i, unsigned int j, double sh, orders or
     }
 }
 
-gslpp::complex BXqll::cij_L(unsigned int i, unsigned int j, double sh, orders order)
+gslpp::complex BXqll::cij_L(unsigned int i, unsigned int j, double sh, orders_qcd order)
 {
     unsigned int ij = 10*(i + 1) + (j + 1);
     double umsh = (1. - sh), tmsh = 3. - sh;
@@ -1207,7 +1207,7 @@ gslpp::complex BXqll::cij_L(unsigned int i, unsigned int j, double sh, orders or
     }
 }
 
-gslpp::complex BXqll::cij_A(unsigned int i, unsigned int j, double sh, orders order)
+gslpp::complex BXqll::cij_A(unsigned int i, unsigned int j, double sh, orders_qcd order)
 {
     unsigned int ij = 100*(i + 1) + (j + 1);
     double umsh = (1. - sh), uptsh = 1. + 3.*sh;
@@ -1623,7 +1623,7 @@ gslpp::complex BXqll::F_BIR(double r)
         throw std::runtime_error("BXqll::F_BIR(): 1/mc^2 corrections diverge at q^2 = 4*mc^2");
 }
 
-double BXqll::Phi_u(orders ord)
+double BXqll::Phi_u(orders_qcd ord)
 {
     switch(ord)
     {

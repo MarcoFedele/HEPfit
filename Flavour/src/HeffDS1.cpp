@@ -29,7 +29,7 @@ gslpp::vector<gslpp::complex>** HeffDS1::ComputeCoeffDS1PP(double mu, schemes sc
     coeffds1.setMu(mu); //inizializes to zero the coefficients
     coeffds1cc.setMu(mu);
     
-    orders ordDF1 =  coeffds1.getOrder();
+    orders_qcd ordDF1 =  coeffds1.getOrder_QCD();
     
     switch(scheme) {
     
@@ -137,7 +137,7 @@ gslpp::vector<gslpp::complex>** HeffDS1::ComputeCoeffDS1pnunu()
     
     const std::vector<WilsonCoefficient>& mcb = model.getMatching().CMkpnn();
     
-    orders ordDF1 = coeffds1pnunu.getOrder();
+    orders_qcd ordDF1 = coeffds1pnunu.getOrder_QCD();
     orders_qed ordDF1_ew = coeffds1pnunu.getOrder_qed();
     
     for (unsigned int i = 0; i < mcb.size(); i++){
@@ -159,7 +159,7 @@ gslpp::vector<gslpp::complex>** HeffDS1::ComputeCoeffDS1mumu()
     
     const std::vector<WilsonCoefficient>& mcb = model.getMatching().CMkmm();
     
-    orders ordDF1 = coeffds1mumu.getOrder();
+    orders_qcd ordDF1 = coeffds1mumu.getOrder_QCD();
     
     for (unsigned int i = 0; i < mcb.size(); i++){
         for (int j = LO; j <= ordDF1; j++){

@@ -25,9 +25,9 @@ double BR_Kppnunu::computeThValue()
            * SM.getOptionalParameter("Br_Kp_P0enu") * BRKppnunu(NLO, NLO_QED11).real());
 }
 
-gslpp::complex BR_Kppnunu::BRKppnunu(orders order, orders_qed order_qed)
+gslpp::complex BR_Kppnunu::BRKppnunu(orders_qcd order, orders_qed order_qed)
 {
-    if (mySM.getFlavour().getHDS1().getCoeffDS1pnunu().getOrder() < order){
+    if (mySM.getFlavour().getHDS1().getCoeffDS1pnunu().getOrder_QCD() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("BRKppnunu::computeThValue(): requires cofficient of "

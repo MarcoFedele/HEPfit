@@ -46,7 +46,7 @@ gslpp::vector<gslpp::complex>** HeffDC1::ComputeCoeffDC1_pi(double mu, schemes s
     
     const std::vector<WilsonCoefficient>& mc = model.getMatching().CMd1();
     coeffdc1.setMu(mu); 
-    orders ordDF1 = coeffdc1.getOrder();
+    orders_qcd ordDF1 = coeffdc1.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         if(i != 1){
         for (int j = LO; j <= ordDF1; j++){
@@ -70,7 +70,7 @@ gslpp::vector<gslpp::complex>** HeffDC1::ComputeCoeffDC1_K(double mu, schemes sc
     const std::vector<WilsonCoefficient>& mc = model.getMatching().CMd1();
     coeffdc1.setMu(mu); 
     
-    orders ordDF1 = coeffdc1.getOrder();
+    orders_qcd ordDF1 = coeffdc1.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         std::cout << " SIZE i " << i << std::endl << std::endl;
         for (int j = LO; j <= ordDF1; j++){
@@ -100,7 +100,7 @@ gslpp::vector<gslpp::complex>** HeffDC1::ComputeCoeffDC1g(double mu, schemes sch
     gslpp::vector<gslpp::complex> vecdc1g(10,0.);
     coeffdc1g.setMu(mu); 
     
-    orders ordDF1 = coeffdc1g.getOrder();
+    orders_qcd ordDF1 = coeffdc1g.getOrder_QCD();
     for (int i = 0; i < mcg.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++)  {

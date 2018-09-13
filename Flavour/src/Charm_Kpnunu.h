@@ -43,7 +43,7 @@ public:
      * @return Wilson coefficients related to the Z-penguin contribution, given
      * at the renormalization scale \f$ \mu_{W} \f$
      */
-    gslpp::vector<double> Cp(orders order);
+    gslpp::vector<double> Cp(orders_qcd order);
 
     /**
      * 
@@ -51,7 +51,7 @@ public:
      * @param nf, number of flavours
      * @return LO, NLO and NNLO RG evolution matrix for the Z-penguin contribution
      */
-    gslpp::matrix<double> RGevolP(int nf, orders order);
+    gslpp::matrix<double> RGevolP(int nf, orders_qcd order);
 
     /**
      * 
@@ -60,7 +60,7 @@ public:
      * @return non trivial threshold matching at NNLO level for the Wilson coefficients 
      * related to the Z-penguin contribution
      */
-    gslpp::vector<double> ThresholdCp(orders order);
+    gslpp::vector<double> ThresholdCp(orders_qcd order);
 
     /**
      * 
@@ -68,14 +68,14 @@ public:
      * @return Wilson coefficients related to the Z-penguin contribution evolved
      * down to the renormalization scale \f$ mu_{c} \f$ 
      */
-    gslpp::vector<double> C_p(orders order);
+    gslpp::vector<double> C_p(orders_qcd order);
 
     /**
      * 
      * @param order, QCD perturbation theory order 
      * @return coefficient recasting the total Z-penguin contribution to BR of the process
      */
-    double C_P(orders order);
+    double C_P(orders_qcd order);
 
     /**
      * 
@@ -83,7 +83,7 @@ public:
      * @return Wilson coefficients related to the EW box contribution, given
      * at the renormalization scale \f$ \mu_{W} \f$
      */
-    gslpp::vector<double> Cb(orders order);
+    gslpp::vector<double> Cb(orders_qcd order);
 
     /**
      * 
@@ -91,14 +91,14 @@ public:
      * @param nf, number of flavours
      * @return LO, NLO and NNLO RG evolution matrix for the EW box contribution
      */
-    gslpp::matrix<double> RGevolB(int nf, orders order);
+    gslpp::matrix<double> RGevolB(int nf, orders_qcd order);
     /**
      * 
      * @param order, QCD perturbation theory order
      * @return non trivial threshold matching at NNLO level for the Wilson coefficients 
      * related to the EW box contribution
      */
-    gslpp::vector<double> ThresholdCb(orders order);
+    gslpp::vector<double> ThresholdCb(orders_qcd order);
 
     /**
      * 
@@ -106,7 +106,7 @@ public:
      * @return Wilson coefficients related to the EW box contribution evolved
      * down to the renormalization scale \f$ \mu_{c} \f$ 
      */
-    gslpp::vector<double> C_b(orders order);
+    gslpp::vector<double> C_b(orders_qcd order);
 
     /**
      * 
@@ -114,7 +114,7 @@ public:
      * @return coefficient recasting the EW box contribution related to the light leptons
      *  to the BR of the process
      */
-    double C_Be(orders order);
+    double C_Be(orders_qcd order);
 
     /**
      * 
@@ -122,7 +122,7 @@ public:
      * @return coefficient recasting the EW box contribution related to the tau lepton
      *  to the BR of the process
      */
-    double C_Bt(orders order);
+    double C_Bt(orders_qcd order);
 
     /**
      * 
@@ -130,7 +130,7 @@ public:
      * @return the phenomenological function P_C which contains the appropriate C_P, C_Be and C_Bt 
      *  linear combination appearing explicitly in the final BR formula of the process 
      */
-    double P_C(orders order);
+    double P_C(orders_qcd order);
 
     /**
      * 
@@ -139,7 +139,7 @@ public:
      * loop function X_t for this process (in respect with the one present also in 
      * \f$  K^{0} \rightarrow \pi^{0}  \nu \bar{\nu} \f$)
      */
-    double C_TOT(orders order, orders_qed order_qed);
+    double C_TOT(orders_qcd order, orders_qed order_qed);
 
 private:
     const StandardModel& model;

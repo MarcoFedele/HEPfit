@@ -33,7 +33,7 @@ protected:
  * @param an enum "orders" for the order of perturbation theory of the evolutor 
  * @return the complex \f$ | \Delta C = 2 | \f$ amplitude 
  */
-    gslpp::complex AmpDD(orders order);
+    gslpp::complex AmpDD(orders_qcd order);
     
 private:
     

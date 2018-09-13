@@ -41,14 +41,14 @@ protected:
      * |\f$ BR(K^{+} \rightarrow \pi^{+} \nu \bar{\nu}) \f$|, for example
      * see hep-ph/0603079 section 2.3
      */
-    gslpp::complex BRKppnunu(orders order, orders_qed order_qed);
+    gslpp::complex BRKppnunu(orders_qcd order, orders_qed order_qed);
     
     /**
      * 
      * @param order
      * @return \f$ P_{C} \f$ defined for exmple in hep-ph/0603079 
      */
-    gslpp::complex P_C(orders order);
+    gslpp::complex P_C(orders_qcd order);
     
 private:
     

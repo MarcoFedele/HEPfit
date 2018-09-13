@@ -22,7 +22,7 @@ public:
      * @param order
      * @param model 
      */
-    EvolDF2(unsigned int dim_i, schemes scheme, orders order, const StandardModel& model);
+    EvolDF2(unsigned int dim_i, schemes scheme, orders_qcd order, const StandardModel& model);
     
     /**
      * 
@@ -38,7 +38,7 @@ public:
      * @param basis basis identifier (0: ciuchini, 1: buras)
      * @return Anomalous dimension for DeltaF=2 processes
      */
-    gslpp::matrix<double> AnomalousDimension(orders order, unsigned int nf, int basis = 0) const;
+    gslpp::matrix<double> AnomalousDimension(orders_qcd order, unsigned int nf, int basis = 0) const;
 
     /**
      * 
@@ -48,7 +48,7 @@ public:
      * @param scheme
      * @return the Wilson coefficients evolved from the scale M to the scale mu
      */
-    gslpp::matrix<double>& Df2Evol(double mu, double M, orders order, 
+    gslpp::matrix<double>& Df2Evol(double mu, double M, orders_qcd order, 
             schemes scheme = NDR);
     
     /**

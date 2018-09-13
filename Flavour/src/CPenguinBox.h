@@ -61,7 +61,7 @@ public:
      * @param order, perturbation theory order
      * @return matching Wilson coefficients at the top scale for the Z-penguin contribution
      */
-    gslpp::vector<double> WMatchP(orders order);
+    gslpp::vector<double> WMatchP(orders_qcd order);
 
     /**
      * 
@@ -69,14 +69,14 @@ public:
      * @param order, perturbation theory order
      * @return matching Wilson coefficients at the W scale for the Box contribution
      */
-    gslpp::vector<double> WMatchB(orders order);
+    gslpp::vector<double> WMatchB(orders_qcd order);
 
     /**
      * 
      * @param order
      * @return return the scale-indipendent Wilson coefficient below the Chram scale
      */
-    double Cmatch(orders order);
+    double Cmatch(orders_qcd order);
 
     /**
      * 
@@ -85,7 +85,7 @@ public:
      * @return chram contribuition times the model.getlam_c().real plus the 
      * isospin-breacking contribution.
      */
-    double CT_tot(orders order, orders_qed order_qed);
+    double CT_tot(orders_qcd order, orders_qed order_qed);
 
 protected:
 
@@ -118,14 +118,14 @@ private:
      * @param order
      * @return matching at SM::getMub() threshold for the Z-penguin contribution
      */
-    double BmatchP(orders order);
+    double BmatchP(orders_qcd order);
 
     /**
      * 
      * @param order
      * @return matching at SM::getMub() threshold for the Box contribution
      */
-    double BmatchB(orders order);
+    double BmatchB(orders_qcd order);
 };
 
 #endif /* CPENGUINBOX_H */

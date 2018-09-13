@@ -62,3 +62,7 @@ gslpp::vector<gslpp::complex> WilsonCoefficient::getCoeff(orders_qcd order_qcd_i
 Expanded<gslpp::vector<gslpp::complex> > WilsonCoefficient::getCoeff() const {
     return getWilson();
 }
+
+void WilsonCoefficient::setCoeff(const Expanded<gslpp::vector<gslpp::complex> > wc) {
+    wilson = wc;
+}

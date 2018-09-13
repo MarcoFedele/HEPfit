@@ -14,7 +14,7 @@ double BR_Bdnunu::computeThValue()
 }
 
 
-gslpp::complex BR_Bdnunu::BRBdnunu(orders order)
+gslpp::complex BR_Bdnunu::BRBdnunu(orders_qcd order)
 {
     return gslpp::complex(0.0, 0.0);
 }

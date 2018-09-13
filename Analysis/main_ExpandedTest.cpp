@@ -263,5 +263,19 @@ int main(void) {
     std::cout << "zero6 = " << mc1 * emd - (emd.transpose() * mc1.transpose()).transpose() << std::endl;
     std::cout << "zero6 = " << mc1 * emc - (emc.transpose() * mc1.transpose()).transpose() << std::endl;
 
+    std::cout << "true = " << (esd == esd) << std::endl;
+    std::cout << "true = " << (esc == esc) << std::endl;
+    std::cout << "true = " << (evd == evd) << std::endl;
+    std::cout << "true = " << (evc == evc) << std::endl;
+    std::cout << "true = " << (emd == emd) << std::endl;
+    std::cout << "true = " << (emc == emc) << std::endl;
+
+    std::cout << "false = " << (esd == esd * esd) << std::endl;
+    std::cout << "false = " << (esc == esc * esc) << std::endl;
+    std::cout << "false = " << (evd == 5 * evd) << std::endl;
+    std::cout << "false = " << (evc == 7 * evc) << std::endl;
+    std::cout << "false = " << (emd == emd * emd) << std::endl;
+    std::cout << "false = " << (emc == emc * emc) << std::endl;
+
     return (0);
 }

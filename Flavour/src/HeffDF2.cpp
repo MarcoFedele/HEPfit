@@ -44,7 +44,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffBd(double mu, schemes schem
     
     coeffbd.setScheme(mc[0].getScheme());
     
-    orders ordDF2 = coeffbd.getOrder();
+    orders_qcd ordDF2 = coeffbd.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
         for (int j = LO; j <= ordDF2; j++){
@@ -70,7 +70,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffBs(double mu, schemes schem
     
     coeffbs.setScheme(mc[0].getScheme());
 
-    orders ordDF2 = coeffbs.getOrder();
+    orders_qcd ordDF2 = coeffbs.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
         for (int j = LO; j <= ordDF2; j++){
@@ -96,7 +96,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffdd(double mu, schemes schem
 
     coeffDd.setScheme(mc[0].getScheme());
 
-    orders ordDF2 = coeffDd.getOrder();
+    orders_qcd ordDF2 = coeffDd.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
        ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
        for (int j = LO; j <= ordDF2; j++){
@@ -125,7 +125,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffK(double mu, schemes scheme
     coeffk.setCoeff(zero,LO);
     coeffk.setCoeff(zero,NLO);
 
-    orders ordDF2 = coeffk.getOrder();
+    orders_qcd ordDF2 = coeffk.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         if (i == 0){
             coeffk.setCoeff(0, evolDF2->etatt(mu) * model.getMatching().S0tt()
@@ -171,7 +171,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffmK(double mu, schemes schem
     
     coeffmk.setMu(mu);
 
-    orders ordDF2 = coeffmk.getOrder();
+    orders_qcd ordDF2 = coeffmk.getOrder_QCD();
     for (unsigned int i = 0; i < mc.size(); i++){
         if (i == 0){
             coeffmk.setCoeff(zero, NLO);
@@ -193,7 +193,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffmK(double mu, schemes schem
     return coeffmk.getCoeff();
 }
 
-void HeffDF2::ChangeScheme(schemes schout, WilsonCoefficient& c_in, orders order) 
+void HeffDF2::ChangeScheme(schemes schout, WilsonCoefficient& c_in, orders_qcd order) 
 {
     schemes schin = c_in.getScheme();
     if (schout == schin || order == LO) return;

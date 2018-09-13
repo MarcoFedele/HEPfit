@@ -264,7 +264,23 @@ public:
         return Expanded<T>(res);
     }
 
+    bool operator==(const Expanded<T>& z) const {
+        uint up1 = std::min(ord1, z.getN1());
+        uint up2 = std::min(ord2, z.getN2());
 
+        if(up1 != getN1() || up2 != getN2())
+            throw std::runtime_error("Expanded::operator==: cannot compare objects expanded to diffent orders.");
+
+        for (uint i1 = 0; i1 < up1; i1++)
+            for (uint i2 = 0; i2 < up2; i2++)
+                if(z.getOrd(i1, i2) != getOrd(i1, i2)) return(false);
+
+        return true;
+    }
+
+    bool operator!=(const Expanded<T>& z) const {
+        return !(z == *this);
+    }
 
     /***************** End Expanded-Expanded *****************/
 
