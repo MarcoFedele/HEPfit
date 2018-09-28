@@ -164,7 +164,7 @@ std::vector<WilsonCoefficient>& THDMMatching::CMbsg()
  * Wilson coefficients calculus, Misiak base for b -> s gamma                  *  
  * ****************************************************************************/
 
-double THDMMatching::setWCbsg(int i, double tan, double mt, double mhp, double mu, orders order)
+double THDMMatching::setWCbsg(int i, double tan, double mt, double mhp, double mu, orders_qcd order)
 {  
     if ( tanbsg == tan && mtbsg == mt  && mhpbsg == mhp && mubsg == mu){
         switch (order){

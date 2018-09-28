@@ -46,14 +46,14 @@ gslpp::vector<gslpp::complex>** HeffDC1::ComputeCoeffDC1_pi(double mu, schemes s
     
     const std::vector<WilsonCoefficient>& mc = model.getMatching().CMd1();
     coeffdc1.setMu(mu); 
-    orders_qcd ordDF1 = coeffdc1.getOrder_QCD();
+    orders_qcd ordDF1 = coeffdc1.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         if(i != 1){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++){
-                coeffdc1.setCoeff(*coeffdc1.getCoeff(orders(j)) +
-                    ug->DC1Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                    (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                coeffdc1.setCoeff(*coeffdc1.getCoeff(orders_qcd(j)) +
+                    ug->DC1Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                    (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
                 }
             }
         }
@@ -70,19 +70,19 @@ gslpp::vector<gslpp::complex>** HeffDC1::ComputeCoeffDC1_K(double mu, schemes sc
     const std::vector<WilsonCoefficient>& mc = model.getMatching().CMd1();
     coeffdc1.setMu(mu); 
     
-    orders_qcd ordDF1 = coeffdc1.getOrder_QCD();
+    orders_qcd ordDF1 = coeffdc1.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         std::cout << " SIZE i " << i << std::endl << std::endl;
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++){
-                coeffdc1.setCoeff(*coeffdc1.getCoeff(orders(j)) + 
-                    ug->DC1Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                    (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                coeffdc1.setCoeff(*coeffdc1.getCoeff(orders_qcd(j)) + 
+                    ug->DC1Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                    (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
                 }
             }
         if(i == 0){
             for (int j = LO; j <= ordDF1; j++){
-            coeffdc1.setCoeff(COEFF_K * (*coeffdc1.getCoeff(orders(j))), orders(j));
+            coeffdc1.setCoeff(COEFF_K * (*coeffdc1.getCoeff(orders_qcd(j))), orders_qcd(j));
             }
         }
     }
@@ -100,16 +100,16 @@ gslpp::vector<gslpp::complex>** HeffDC1::ComputeCoeffDC1g(double mu, schemes sch
     gslpp::vector<gslpp::complex> vecdc1g(10,0.);
     coeffdc1g.setMu(mu); 
     
-    orders_qcd ordDF1 = coeffdc1g.getOrder_QCD();
+    orders_qcd ordDF1 = coeffdc1g.getOrder();
     for (int i = 0; i < mcg.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++)  {
-                coeffdc1g.setCoeff(*coeffdc1g.getCoeff(orders(j)) +
-                    ug->DC1Evol(mu, mcg[i].getMu(), orders(k), mcg[i].getScheme()) *
-                    (*(mcg[i].getCoeff(orders(j - k)))), orders(j));
+                coeffdc1g.setCoeff(*coeffdc1g.getCoeff(orders_qcd(j)) +
+                    ug->DC1Evol(mu, mcg[i].getMu(), orders_qcd(k), mcg[i].getScheme()) *
+                    (*(mcg[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
             }
             //STAMPA PROVE
-      vecdc1g = *coeffdc1g.getCoeff(orders(j));
+      vecdc1g = *coeffdc1g.getCoeff(orders_qcd(j));
 
         std::cout<< std::endl <<" CHROMOMAGNETIC  "<< j <<" CHROMOMAGNETIC "<<std::endl; 
         std::cout<<" ++++++++++ "<< "C_8g_eff" <<" --> "<< vecdc1g(7) <<" ++++++++++++ "<<std::endl; 

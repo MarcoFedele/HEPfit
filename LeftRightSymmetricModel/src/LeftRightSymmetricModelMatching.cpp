@@ -40,7 +40,7 @@ void LeftRightSymmetricModelMatching::updateLeftRightSymmetricModelParameters()
     alpha = myLeftRightSymmetricModel.getalpha_LRSM();
 }
 
-gslpp::complex LeftRightSymmetricModelMatching::setWCbsgWR(int i, orders order)
+gslpp::complex LeftRightSymmetricModelMatching::setWCbsgWR(int i, orders_qcd order)
 {
 //    if ( tanbsg == tan && mtbsg == mt  && mhpbsg == mhp && mubsg == mu){
 //        switch (order){
@@ -102,7 +102,7 @@ gslpp::complex LeftRightSymmetricModelMatching::setWCbsgWR(int i, orders order)
     }
 }
 
-gslpp::complex LeftRightSymmetricModelMatching::setWCbsgHp(int i, orders order)
+gslpp::complex LeftRightSymmetricModelMatching::setWCbsgHp(int i, orders_qcd order)
 {
 //    if ( tanbsg == tan && mtbsg == mt  && mhpbsg == mhp && mubsg == mu){
 //        switch (order){

@@ -782,7 +782,7 @@ double QCD::ZeroNf6NLO(double *logLambda6, double *logLambda5_in) const
 
 double QCD::ZeroNf5(double *logLambda5, double *order_qcd) const
 {
-    return ( AlsWithLambda(MAls, *logLambda5, (orders) * order_qcd) - AlsM);
+    return ( AlsWithLambda(MAls, *logLambda5, (orders_qcd) * order_qcd) - AlsM);
 }
 
 double QCD::ZeroNf4NLO(double *logLambda4, double *logLambda5_in) const
@@ -811,7 +811,7 @@ double QCD::logLambda5(orders_qcd order_qcd) const
     CacheShift(logLambda5_cache, 4);
     logLambda5_cache[0][0] = AlsM;
     logLambda5_cache[1][0] = MAls;
-    logLambda5_cache[2][0] = (double) order;
+    logLambda5_cache[2][0] = (double) order_qcd;
 
     if (order_qcd == LO)
         logLambda5_cache[3][0] = log(MAls) - 2. * M_PI / Beta0(5.) / AlsM;
@@ -820,7 +820,7 @@ double QCD::logLambda5(orders_qcd order_qcd) const
         TF1 f = TF1("f", this, &QCD::ZeroNf5, xmin, xmax, 1, "QCD", "zeroNf5");
 
         ROOT::Math::WrappedTF1 wf1(f);
-        double ledouble = (double) order;
+        double ledouble = (double) order_qcd;
         wf1.SetParameters(&ledouble);
 
         ROOT::Math::BrentRootFinder brf;
@@ -1119,7 +1119,7 @@ double QCD::Mrun(const double mu_f, const double mu_i, const double m,
     mrun_cache[0][0] = mu_f;
     mrun_cache[1][0] = mu_i;
     mrun_cache[2][0] = m;
-    mrun_cache[3][0] = (double) order;
+    mrun_cache[3][0] = (double) order_qcd;
     mrun_cache[4][0] = AlsM;
     mrun_cache[5][0] = MAls;
     mrun_cache[6][0] = mut;
@@ -1234,7 +1234,7 @@ double QCD::Mbar2Mp(const double mbar, const orders_qcd order_qcd) const
 double QCD::Mp2MbarTMP(double *mu, double *params) const
 {
     double mp = params[0];
-    orders_qcd order_qcd = (orders) params[1];
+    orders_qcd order_qcd = (orders_qcd) params[1];
     return (mp - Mbar2Mp(*mu, order_qcd));
 }
 
@@ -1255,14 +1255,14 @@ double QCD::Mp2Mbar(const double mp, const orders_qcd order_qcd) const
     mp2mbar_cache[0][0] = alsmp;
     mp2mbar_cache[1][0] = ms;
     mp2mbar_cache[2][0] = mc;
-    mp2mbar_cache[3][0] = (double) order;
+    mp2mbar_cache[3][0] = (double) order_qcd;
 
     TF1 f("f", this, &QCD::Mp2MbarTMP, mp / 2., 2. * mp, 2, "QCD", "mp2mbara");
 
     ROOT::Math::WrappedTF1 wf1(f);
     double params[2];
     params[0] = mp;
-    params[1] = (double) order;
+    params[1] = (double) order_qcd;
     wf1.SetParameters(params);
 
     ROOT::Math::BrentRootFinder brf;

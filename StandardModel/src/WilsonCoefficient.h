@@ -21,21 +21,40 @@
  */
 class WilsonCoefficient : public WilsonTemplate<gslpp::vector<gslpp::complex> > {
 public:
-    WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order_qcd, orders_qed order_qed = QED0);
-    
-    Expanded<gslpp::complex> getCoeffElement(uint i) const;
-    
-    void setCoeff(unsigned int i, gslpp::complex z, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
-    
-    void setCoeff(const gslpp::vector<gslpp::complex>& v, orders_qcd order_qcd_i, orders_qed order_qed_i = QED0);
-    
-    void resetCoeff();
 
-    gslpp::vector<gslpp::complex> getCoeff(orders_qcd order_qcd_i, orders_qed order_qed_i = QED0) const;
+    WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order);
     
-    Expanded<gslpp::vector<gslpp::complex> > getCoeff() const;
+    WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order, orders_qed order_qed);
+
+    gslpp::vector<gslpp::complex>** getCoeff() const
+    {
+        return (gslpp::vector<gslpp::complex>**) elem;
+    }
     
-    void setCoeff(const Expanded<gslpp::vector<gslpp::complex> > wc);
+    void setCoeff(const gslpp::vector<gslpp::complex>& z, orders_qcd order_i)
+    { 
+        setElem(z, order_i); 
+    }
+    
+    void setCoeff(const gslpp::vector<gslpp::complex>& z, orders_qed order_qed_i) 
+    { 
+        setElem(z, order_qed_i); 
+    }
+
+    void setCoeff(unsigned int i, gslpp::complex z, orders_qcd order_i);
+    
+    void setCoeff(unsigned int i, gslpp::complex z, orders_qed order_qed_i);
+
+    gslpp::vector<gslpp::complex>* getCoeff(orders_qcd ord) const 
+    { 
+        return Elem(ord); 
+    }
+    
+    gslpp::vector<gslpp::complex>* getCoeff(orders_qed ord_qed) const 
+    { 
+        return Elem(ord_qed); 
+    }
+    
 };
 
 #endif	/* WILSONCOEFFICIENT_H */

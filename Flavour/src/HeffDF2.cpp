@@ -44,14 +44,14 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffBd(double mu, schemes schem
     
     coeffbd.setScheme(mc[0].getScheme());
     
-    orders_qcd ordDF2 = coeffbd.getOrder_QCD();
+    orders_qcd ordDF2 = coeffbd.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
         for (int j = LO; j <= ordDF2; j++){
             for (int k = LO; k <= j; k++){                
-                coeffbd.setCoeff(*coeffbd.getCoeff(orders(j)) +
-                    evolDF2->Df2Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                    (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                coeffbd.setCoeff(*coeffbd.getCoeff(orders_qcd(j)) +
+                    evolDF2->Df2Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                    (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
             }
         }
     }
@@ -70,14 +70,14 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffBs(double mu, schemes schem
     
     coeffbs.setScheme(mc[0].getScheme());
 
-    orders_qcd ordDF2 = coeffbs.getOrder_QCD();
+    orders_qcd ordDF2 = coeffbs.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
         for (int j = LO; j <= ordDF2; j++){
             for (int k = LO; k <= j; k++){
-                coeffbs.setCoeff(*coeffbs.getCoeff(orders(j)) +
-                    evolDF2->Df2Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                    (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                coeffbs.setCoeff(*coeffbs.getCoeff(orders_qcd(j)) +
+                    evolDF2->Df2Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                    (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
             }
         }
     }
@@ -96,14 +96,14 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffdd(double mu, schemes schem
 
     coeffDd.setScheme(mc[0].getScheme());
 
-    orders_qcd ordDF2 = coeffDd.getOrder_QCD();
+    orders_qcd ordDF2 = coeffDd.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
        ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
        for (int j = LO; j <= ordDF2; j++){
             for (int k = LO; k <= j; k++){
-                coeffDd.setCoeff(*coeffDd.getCoeff(orders(j)) +
-                    evolDF2->Df2Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                    (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                coeffDd.setCoeff(*coeffDd.getCoeff(orders_qcd(j)) +
+                    evolDF2->Df2Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                    (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
             }
         }
     }
@@ -125,7 +125,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffK(double mu, schemes scheme
     coeffk.setCoeff(zero,LO);
     coeffk.setCoeff(zero,NLO);
 
-    orders_qcd ordDF2 = coeffk.getOrder_QCD();
+    orders_qcd ordDF2 = coeffk.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         if (i == 0){
             coeffk.setCoeff(0, evolDF2->etatt(mu) * model.getMatching().S0tt()
@@ -149,9 +149,9 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffK(double mu, schemes scheme
             ChangeScheme(mc[0].getScheme(),mc[i],ordDF2);
             for (int j = LO; j <= ordDF2; j++){
                 for (int k = LO; k <= j; k++){
-                    coeffk.setCoeff(*coeffk.getCoeff(orders(j)) +
-                        evolDF2->Df2Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                        (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                    coeffk.setCoeff(*coeffk.getCoeff(orders_qcd(j)) +
+                        evolDF2->Df2Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                        (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
                 }
             }
         }
@@ -171,7 +171,7 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffmK(double mu, schemes schem
     
     coeffmk.setMu(mu);
 
-    orders_qcd ordDF2 = coeffmk.getOrder_QCD();
+    orders_qcd ordDF2 = coeffmk.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         if (i == 0){
             coeffmk.setCoeff(zero, NLO);
@@ -180,9 +180,9 @@ gslpp::vector<gslpp::complex>** HeffDF2::ComputeCoeffmK(double mu, schemes schem
         else {
             for (int j = LO; j <= ordDF2; j++){
                 for (int k = LO; k <= j; k++){
-                    coeffmk.setCoeff(*coeffmk.getCoeff(orders(j)) +
-                        evolDF2->Df2Evol(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                        (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                    coeffmk.setCoeff(*coeffmk.getCoeff(orders_qcd(j)) +
+                        evolDF2->Df2Evol(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                        (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
                 }
             }
         }

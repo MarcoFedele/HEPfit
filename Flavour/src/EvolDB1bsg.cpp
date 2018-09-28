@@ -467,7 +467,7 @@ gslpp::matrix<double>& EvolDB1bsg::Df1Evolbsg(double mu, double M, orders_qcd or
         }
     }
     
-    switch(order) {
+    switch(order_qcd) {
         case NNLO:
             *elem[NNLO] = (*elem[LO]) * resNNLO + (*elem[NLO]) * resNLO + (*elem[NNLO]) * resLO;
         case NLO:

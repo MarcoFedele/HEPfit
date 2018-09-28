@@ -19,7 +19,7 @@ public:
      * @param SM_i a reference to Standard Model
      * @param order the order of the computation (LO, NLO, FULLNLO, NNLO or FULLNNLO)
      */
-    alpha_s(const StandardModel& SM_i, orders order);
+    alpha_s(const StandardModel& SM_i, orders_qcd order);
     
     /**
      * default destructor
@@ -34,7 +34,7 @@ public:
     double computeThValue();
 private:
     
-    orders order;
+    orders_qcd order;
 
 };
 

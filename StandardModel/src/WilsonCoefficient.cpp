@@ -9,60 +9,44 @@
 #include <sstream>
 #include <stdexcept>
 
-WilsonCoefficient::WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order_qcd_i, orders_qed order_qed_i)
-: WilsonTemplate<gslpp::vector<gslpp::complex> >(dim, scheme, order_qcd_i, order_qed_i) {
-};
+WilsonCoefficient::WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order)
+: WilsonTemplate<gslpp::vector<gslpp::complex> >(dim, scheme, order)
+{};
 
-Expanded<gslpp::complex> WilsonCoefficient::getCoeffElement(uint i) const {
-    Expanded<gslpp::complex> ret;
+WilsonCoefficient::WilsonCoefficient(unsigned int dim, schemes scheme, orders_qcd order, orders_qed order_qed)
+: WilsonTemplate<gslpp::vector<gslpp::complex> >(dim, scheme, order, order_qed)
+{};
 
-    if (i >= size) {
+void WilsonCoefficient::setCoeff(unsigned int i, gslpp::complex z, orders_qcd order_i) 
+{    
+    if ((unsigned int) i > size) {
         std::stringstream out;
         out << i;
-        throw std::runtime_error("WilsonTemplate::getCoeff(): requested element " + out.str() +
-                " not present in the object");
+        throw std::runtime_error("WilsonCoefficient::setCoeff(): coefficient index "
+        + out.str() + " out of range");
     }
-    std::vector<std::vector<gslpp::complex> > obj(wilson.getN1());
-    for (uint j = 0; j < wilson.getN1(); j++)
-        for (uint k = 0; k < wilson.getN2(); k++)
-            obj[j].push_back(wilson.getOrd(j, k)(i));
-    return (Expanded<gslpp::complex>(obj));
-};
-
-void WilsonCoefficient::setCoeff(unsigned int i, gslpp::complex z, orders_qcd order_qcd_i, orders_qed order_qed_i) {
-    if (i >= size) {
+    if (order_i > order_qcd) {
         std::stringstream out;
-        out << i;
-        throw std::runtime_error("WilsonTemplate::setCoeff(): coefficient index "
-                + out.str() + " out of range");
-    }
-    if (order_qcd_i > order_qcd || order_qed_i > order_qed) {
-        std::stringstream out;
-        out << order_qcd_i << " and " << order_qed_i;
-        throw std::runtime_error("WilsonTemplate::setCoeff(): order " + out.str() +
+        out << order_i;
+        throw std::runtime_error("WilsonCoefficient::setCoeff(): order " + out.str() +
                 " not implemented ");
     }
-    gslpp::vector<gslpp::complex> tmp = wilson.getOrd(order_qcd_i, order_qed_i);
-    tmp.assign(i, z);
-    wilson.setOrd(order_qcd_i, order_qed_i, tmp);
+    elem[order_i]->assign(i, z);
 }
 
-void WilsonCoefficient::setCoeff(const gslpp::vector<gslpp::complex>& v, orders_qcd order_qcd_i, orders_qed order_qed_i) {
-    setWilson(v, order_qcd_i, order_qed_i);
-}
-
-void WilsonCoefficient::resetCoeff() {
-    resetWilson();
-}
-
-gslpp::vector<gslpp::complex> WilsonCoefficient::getCoeff(orders_qcd order_qcd_i, orders_qed order_qed_i) const {
-    return getWilson(order_qcd_i, order_qed_i);
-}
-
-Expanded<gslpp::vector<gslpp::complex> > WilsonCoefficient::getCoeff() const {
-    return getWilson();
-}
-
-void WilsonCoefficient::setCoeff(const Expanded<gslpp::vector<gslpp::complex> > wc) {
-    wilson = wc;
+void WilsonCoefficient::setCoeff(unsigned int i, gslpp::complex z, orders_qed order_qed_i) 
+{    
+    if ((unsigned int) i > size) {
+        std::stringstream out;
+        out << i;
+        throw std::runtime_error("WilsonCoefficientEW::setCoeff(): coefficient index "
+        + out.str() + " out of range");
+    }
+    if (order_qed_i > order_qed) {
+        std::stringstream out;
+        out << order_qed_i;
+        throw std::runtime_error("WilsonCoefficientEW::setCoeff(): order_qed " + out.str() +
+                " not implemented ");
+    }
+    elem[order_qed_i]->assign(i, z);
 }

@@ -39,28 +39,28 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep00(double mu, sch
     coeffbnlep00.setMu(mu);
     
     orders_qed ordDF1ew = coeffbnlep00.getOrder_qed();
-    orders_qcd ordDF1 =  coeffbnlep00.getOrder_QCD();
+    orders_qcd ordDF1 =  coeffbnlep00.getOrder();
     
     for (unsigned int i = 0; i < mcb.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++) {        
                 
                 //Evolves the LO terms and the ones proportional to alpha_s 
-                coeffbnlep00qcd.setCoeff(*coeffbnlep00qcd.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders(k), NO_QED, mcb[i].getScheme())*
-                    (*(mcb[i].getCoeff(orders(j - k)))), orders(j));
+                coeffbnlep00qcd.setCoeff(*coeffbnlep00qcd.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders_qcd(k), NO_QED, mcb[i].getScheme())*
+                    (*(mcb[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
                 
                 
                 //Evolves terms proportional to alpha_e and alpha_e/aplha_s
                 coeffbnlep00qcd.setCoeff(*coeffbnlep00qcd.getCoeff(orders_qed(j+4)) +
                     u->Df1Evolnlep(mu, mcb[i].getMu(), NNLO, orders_qed(k+4), mcb[i].getScheme()) *
-                    (*(mcb[i].getCoeff(orders(j - k)))), orders_qed(j+4));
+                    (*(mcb[i].getCoeff(orders_qcd(j - k)))), orders_qed(j+4));
    
             }
         }
         
                 coeffbnlep00qcd.setCoeff(*coeffbnlep00qcd.getCoeff(orders_qed(NLO_QED11)) +
-                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders(LO), NO_QED,  mcb[i].getScheme()) *
+                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders_qcd(LO), NO_QED,  mcb[i].getScheme()) *
                     (*(mcb[i].getCoeff(orders_qed(NLO_QED11)))), orders_qed(NLO_QED11));       
         
     }     
@@ -69,9 +69,9 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep00(double mu, sch
     for (unsigned int i = 0; i < mcbCC.size(); i++)
         for (int j = LO; j <= ordDF1; j++)
             for (int k = LO; k <= j; k++)
-                coeffbnlep00CC.setCoeff(*coeffbnlep00CC.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcbCC[i].getMu(), orders(k), NO_QED, mcbCC[i].getScheme()) *
-                    (*(mcbCC[i].getCoeff(orders(j - k)))), orders(j)); 
+                coeffbnlep00CC.setCoeff(*coeffbnlep00CC.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcbCC[i].getMu(), orders_qcd(k), NO_QED, mcbCC[i].getScheme()) *
+                    (*(mcbCC[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j)); 
         
     coeffbnlep00qcd.setScheme(scheme);
     coeffbnlep00CC.setScheme(scheme);
@@ -87,7 +87,7 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep00(double mu, sch
         appoggio3[i] = 0.;
     }
     for (int j=LO; j <= ordDF1; j++) {
-        bnlep2 = *coeffbnlep00qcd.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep00qcd.getCoeff(orders_qcd(j));
         std::cout<< std::endl <<"$$$$$$$$$$$$ "<< j <<" $$$$$$$$$$$"<<std::endl;
                 
         for (int i = 0; i < 10; i++){
@@ -96,13 +96,13 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep00(double mu, sch
          if( j == NLO){ appoggio1[i] = bnlep(i); }   
             std::cout<<"++++++++++ "<< i <<" -> "<< bnlep(i) <<" ++++++++++++"<<std::endl;
         }
-        bnlep2 = *coeffbnlep00CC.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep00CC.getCoeff(orders_qcd(j));
         for (int i = 10; i < 12; i++){
             bnlep.assign(i, bnlep2(i-10));
             std::cout<<"++++++++++ "<< i <<" -> "<< bnlep(i) <<" ++++++++++++"<<std::endl;
             
         }        
-    coeffbnlep00.setCoeff(bnlep, orders(j));
+    coeffbnlep00.setCoeff(bnlep, orders_qcd(j));
     }
     for (int k=LO_QED; k <= ordDF1ew; k++) {
         bnlep2 = *coeffbnlep00qcd.getCoeff(orders_qed(k));
@@ -147,36 +147,36 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep10(double mu, sch
     coeffbnlep10.setMu(mu);
     
     orders_qed ordDF1ew = coeffbnlep10.getOrder_qed();
-    orders_qcd ordDF1 =  coeffbnlep10.getOrder_QCD();
+    orders_qcd ordDF1 =  coeffbnlep10.getOrder();
     
     for (unsigned int i = 0; i < mcb.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++)   {
                 
                 //Evolves the LO terms and the ones proportional to alpha_s 
-                coeffbnlep10qcd.setCoeff(*coeffbnlep10qcd.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders(k), NO_QED,  mcb[i].getScheme()) *
-                    (*(mcb[i].getCoeff(orders(j - k)))), orders(j));
+                coeffbnlep10qcd.setCoeff(*coeffbnlep10qcd.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders_qcd(k), NO_QED,  mcb[i].getScheme()) *
+                    (*(mcb[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
                 
                 //Evolves terms proportional to alpha_e and alpha_e/aplha_s
                 coeffbnlep10qcd.setCoeff(*coeffbnlep10qcd.getCoeff(orders_qed(j+4)) +
                     u->Df1Evolnlep(mu, mcb[i].getMu(), NNLO, orders_qed(k+4), mcb[i].getScheme()) *
-                    (*(mcb[i].getCoeff(orders(j - k)))), orders_qed(j+4));
+                    (*(mcb[i].getCoeff(orders_qcd(j - k)))), orders_qed(j+4));
             }
         }
             
         coeffbnlep10qcd.setCoeff(*coeffbnlep10qcd.getCoeff(orders_qed(NLO_QED11)) +
-                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders(LO), NO_QED, mcb[i].getScheme()) *
-                    (*(mcb[i].getCoeff(orders(LO_QED)))), orders_qed(NLO_QED11));
+                    u->Df1Evolnlep(mu, mcb[i].getMu(), orders_qcd(LO), NO_QED, mcb[i].getScheme()) *
+                    (*(mcb[i].getCoeff(orders_qcd(LO_QED)))), orders_qed(NLO_QED11));
     }        
     
     //Evolves the current*current part of the hamiltonian (the one non-proportional to lambda_t) 
     for (unsigned int i = 0; i < mcbCC.size(); i++)
         for (int j = LO; j <= ordDF1; j++)
             for (int k = LO; k <= j; k++)
-                coeffbnlep10CC.setCoeff(*coeffbnlep10CC.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcbCC[i].getMu(), orders(k), NO_QED, mcbCC[i].getScheme()) *
-                    (*(mcbCC[i].getCoeff(orders(j - k)))), orders(j)); 
+                coeffbnlep10CC.setCoeff(*coeffbnlep10CC.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcbCC[i].getMu(), orders_qcd(k), NO_QED, mcbCC[i].getScheme()) *
+                    (*(mcbCC[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j)); 
         
     coeffbnlep10qcd.setScheme(scheme);
     coeffbnlep10CC.setScheme(scheme);
@@ -186,15 +186,15 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep10(double mu, sch
     //the last two are the remainder current*current operators 
     
     for (int j=LO; j <= ordDF1; j++) {
-        bnlep2 = *coeffbnlep10qcd.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep10qcd.getCoeff(orders_qcd(j));
         for (int i = 0; i < 10; i++){
             bnlep.assign(i, bnlep2(i));
         }
-        bnlep2 = *coeffbnlep10CC.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep10CC.getCoeff(orders_qcd(j));
         for (int i = 10; i < 12; i++){
             bnlep.assign(i, bnlep2(i-10));
         }        
-    coeffbnlep10.setCoeff(bnlep, orders(j));
+    coeffbnlep10.setCoeff(bnlep, orders_qcd(j));
     }
     for (int k=LO_QED; k <= ordDF1ew; k++) {
         bnlep2 = *coeffbnlep10qcd.getCoeff(orders_qed(k));
@@ -222,22 +222,22 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep01(double mu, sch
     coeffbnlep01A.setMu(mu);
     coeffbnlep01B.setMu(mu);
     
-    orders_qcd ordDF1 = coeffbnlep01A.getOrder_QCD();
+    orders_qcd ordDF1 = coeffbnlep01A.getOrder();
     
     //evolution of the current*current terms
     for (unsigned int i = 0; i < mcbCC1.size(); i++)
         for (int j = LO; j <= ordDF1; j++)
             for (int k = LO; k <= j; k++)
-                coeffbnlep01A.setCoeff(*coeffbnlep01A.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcbCC1[i].getMu(), orders(k), NO_QED, mcbCC1[i].getScheme()) *
-                    (*(mcbCC1[i].getCoeff(orders(j - k)))), orders(j)); 
+                coeffbnlep01A.setCoeff(*coeffbnlep01A.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcbCC1[i].getMu(), orders_qcd(k), NO_QED, mcbCC1[i].getScheme()) *
+                    (*(mcbCC1[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j)); 
         
     for (unsigned int i = 0; i < mcbCC2.size(); i++)
         for (int j = LO; j <= ordDF1; j++)
             for (int k = LO; k <= j; k++)
-                coeffbnlep01B.setCoeff(*coeffbnlep01B.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcbCC2[i].getMu(), orders(k), NO_QED, mcbCC2[i].getScheme()) *
-                    (*(mcbCC2[i].getCoeff(orders(j - k)))), orders(j)); 
+                coeffbnlep01B.setCoeff(*coeffbnlep01B.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcbCC2[i].getMu(), orders_qcd(k), NO_QED, mcbCC2[i].getScheme()) *
+                    (*(mcbCC2[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j)); 
         
     coeffbnlep01A.setScheme(scheme);
     coeffbnlep01B.setScheme(scheme);
@@ -245,15 +245,15 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep01(double mu, sch
     
     //Puts all together in a wilson coefficient object of 4 components
     for (int j=LO; j <= ordDF1; j++) {
-        bnlep2 = *coeffbnlep01A.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep01A.getCoeff(orders_qcd(j));
         for (int i = 0; i < 2; i++){
             bnlep.assign(i, bnlep2(i));
         }
-        bnlep2 = *coeffbnlep01A.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep01A.getCoeff(orders_qcd(j));
         for (int i = 2; i < 4; i++){
             bnlep.assign(i, bnlep2(i-2));
         }        
-    coeffbnlep01.setCoeff(bnlep, orders(j));
+    coeffbnlep01.setCoeff(bnlep, orders_qcd(j));
     }    
     return coeffbnlep01.getCoeff();   
     
@@ -274,36 +274,36 @@ gslpp::vector<gslpp::complex>** HeffDF1bnlep::ComputeCoeffBnlep11(double mu, sch
     coeffbnlep11A.setMu(mu);
     coeffbnlep11B.setMu(mu);
     
-    orders_qcd ordDF1 = coeffbnlep11A.getOrder_QCD();
+    orders_qcd ordDF1 = coeffbnlep11A.getOrder();
     
     for (unsigned int i = 0; i < mcbCC1.size(); i++)
         for (int j = LO; j <= ordDF1; j++)
             for (int k = LO; k <= j; k++)
-                coeffbnlep11A.setCoeff(*coeffbnlep11A.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcbCC1[i].getMu(), orders(k), NO_QED, mcbCC1[i].getScheme()) *
-                    (*(mcbCC1[i].getCoeff(orders(j - k)))), orders(j)); 
+                coeffbnlep11A.setCoeff(*coeffbnlep11A.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcbCC1[i].getMu(), orders_qcd(k), NO_QED, mcbCC1[i].getScheme()) *
+                    (*(mcbCC1[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j)); 
         
     for (unsigned int i = 0; i < mcbCC2.size(); i++)
         for (int j = LO; j <= ordDF1; j++)
             for (int k = LO; k <= j; k++)
-                coeffbnlep11B.setCoeff(*coeffbnlep11B.getCoeff(orders(j)) +
-                    u->Df1Evolnlep(mu, mcbCC2[i].getMu(), orders(k), NO_QED, mcbCC2[i].getScheme()) *
-                    (*(mcbCC2[i].getCoeff(orders(j - k)))), orders(j)); 
+                coeffbnlep11B.setCoeff(*coeffbnlep11B.getCoeff(orders_qcd(j)) +
+                    u->Df1Evolnlep(mu, mcbCC2[i].getMu(), orders_qcd(k), NO_QED, mcbCC2[i].getScheme()) *
+                    (*(mcbCC2[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j)); 
         
     coeffbnlep11A.setScheme(scheme);
     coeffbnlep11B.setScheme(scheme);
     coeffbnlep11.setScheme(scheme);
     
    for (int j=LO; j <= ordDF1; j++) {
-        bnlep2 = *coeffbnlep11A.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep11A.getCoeff(orders_qcd(j));
         for (int i = 0; i < 2; i++){
             bnlep.assign(i, bnlep2(i));
         }
-        bnlep2 = *coeffbnlep11A.getCoeff(orders(j));
+        bnlep2 = *coeffbnlep11A.getCoeff(orders_qcd(j));
         for (int i = 2; i < 4; i++){
             bnlep.assign(i, bnlep2(i-2));
         }        
-    coeffbnlep11.setCoeff(bnlep, orders(j));
+    coeffbnlep11.setCoeff(bnlep, orders_qcd(j));
     }    
     return coeffbnlep11.getCoeff();   
     

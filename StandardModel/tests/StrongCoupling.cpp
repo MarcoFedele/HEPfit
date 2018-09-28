@@ -94,22 +94,22 @@ int main(int argc, char** argv) {
         cout << setw(30) << "Lambda(6):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << exp(mySM->logLambda(6., (orders)order));
+                cout << setw(18) << exp(mySM->logLambda(6., (orders_qcd)order));
         cout << endl;
         cout << setw(30) << "Lambda(5):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << exp(mySM->logLambda(5., (orders)order));
+                cout << setw(18) << exp(mySM->logLambda(5., (orders_qcd)order));
         cout << endl;
         cout << setw(30) << "Lambda(4):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << exp(mySM->logLambda(4., (orders)order));
+                cout << setw(18) << exp(mySM->logLambda(4., (orders_qcd)order));
         cout << endl;
         cout << setw(30) << "Lambda(3):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << exp(mySM->logLambda(3., (orders)order));
+                cout << setw(18) << exp(mySM->logLambda(3., (orders_qcd)order));
         cout << endl << endl;
 
         ////////////////////////////////////////////////////////////////////////
@@ -123,61 +123,61 @@ int main(int argc, char** argv) {
         cout << setw(30) << "alpha_s(M_t):";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMtpole();
-            cout << setw(18) << mySM->AlsWithLambda(mu, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(mut) for Nf=6:";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMut();
-            cout << setw(18) << mySM->AlsWithLambda(mu+EPS, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu+EPS, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(mut) for Nf=5:";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMut();
-            cout << setw(18) << mySM->AlsWithLambda(mu-EPS, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu-EPS, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(M_Z):";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMz();
-            cout << setw(18) << mySM->AlsWithLambda(mu, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(m_b(m_b)):";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getQuarks(mySM->BOTTOM).getMass();
-            cout << setw(18) << mySM->AlsWithLambda(mu, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(mub) for Nf=5:";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMub();
-            cout << setw(18) << mySM->AlsWithLambda(mu+EPS, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu+EPS, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(mub) for Nf=4:";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMub();
-            cout << setw(18) << mySM->AlsWithLambda(mu-EPS, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu-EPS, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(m_c(m_c)):";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getQuarks(mySM->CHARM).getMass();
-            cout << setw(18) << mySM->AlsWithLambda(mu, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(muc) for Nf=4:";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMuc();
-            cout << setw(18) << mySM->AlsWithLambda(mu+EPS, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu+EPS, (orders_qcd)order);
         }
         cout << endl;
         cout << setw(30) << "alpha_s(muc) for Nf=3:";
         for (int order=LO; order<=FULLNNLO; order++) {
             double mu = mySM->getMuc();
-            cout << setw(18) << mySM->AlsWithLambda(mu-EPS, (orders)order);
+            cout << setw(18) << mySM->AlsWithLambda(mu-EPS, (orders_qcd)order);
         }
         cout << endl << endl;
 
@@ -190,37 +190,37 @@ int main(int argc, char** argv) {
         cout << setw(30) << "alpha_s(M_t):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getMtpole(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getMtpole(), (orders_qcd)order);
         cout << endl;
         cout << setw(30) << "alpha_s(mut):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getMut(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getMut(), (orders_qcd)order);
         cout << endl;
         cout << setw(30) << "alpha_s(M_Z):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getMz(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getMz(), (orders_qcd)order);
         cout << endl;
         cout << setw(30) << "alpha_s(m_b(m_b)):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getQuarks(mySM->BOTTOM).getMass(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getQuarks(mySM->BOTTOM).getMass(), (orders_qcd)order);
         cout << endl;
         cout << setw(30) << "alpha_s(mub):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getMub(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getMub(), (orders_qcd)order);
         cout << endl;
         cout << setw(30) << "alpha_s(m_c(m_c)):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getQuarks(mySM->CHARM).getMass(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getQuarks(mySM->CHARM).getMass(), (orders_qcd)order);
         cout << endl;
         cout << setw(30) << "alpha_s(muc):";
         for (int order=LO; order<=FULLNNLO; order++)
             if (order!=NLO && order!=NNLO)
-                cout << setw(18) << mySM->Als(mySM->getMuc(), (orders)order);
+                cout << setw(18) << mySM->Als(mySM->getMuc(), (orders_qcd)order);
         cout << endl << endl;
 
         ////////////////////////////////////////////////////////////////////////

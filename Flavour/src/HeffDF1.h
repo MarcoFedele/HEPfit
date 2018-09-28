@@ -10,7 +10,7 @@
 
 #include "StandardModel.h"
 #include "StandardModelMatching.h"
-#include "WilsonCoefficient.h"
+#include "WilsonCoefficientNew.h"
 #include "EvolDF1.h"
 #include <map>
 
@@ -29,7 +29,7 @@ public:
      * 
      * @brief destructor
      */
-    virtual ~HeffDF1();
+    virtual ~HeffDF1() {};
     
     /**
      * 
@@ -66,7 +66,7 @@ public:
 private :
     const StandardModel& model;
     
-    WilsonCoefficient coeff;
+    WilsonCoefficientNew coeff;
     EvolDF1 evolDF1;
     
     std::string blocks;
@@ -74,7 +74,7 @@ private :
     double mu_cache;
     schemes scheme_cache;
     std::vector<double> Vmu_cache;
-    std::vector<WilsonCoefficient> WC_cache;
+    std::vector<WilsonCoefficientNew> WC_cache;
 };
 
 #endif	/* HEFFDF1_H */

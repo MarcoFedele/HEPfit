@@ -28,13 +28,13 @@ gslpp::vector<gslpp::complex>** HeffDF1bsg::ComputeCoeffBsg(double mu, schemes s
     
     coeffbsg.setMu(mu); 
     
-    orders_qcd ordDF1 = coeffbsg.getOrder_QCD();
+    orders_qcd ordDF1 = coeffbsg.getOrder();
     for (unsigned int i = 0; i < mc.size(); i++){
         for (int j = LO; j <= ordDF1; j++){
             for (int k = LO; k <= j; k++){
-                coeffbsg.setCoeff(*coeffbsg.getCoeff(orders(j)) +
-                    evolDB1bsg->Df1Evolbsg(mu, mc[i].getMu(), orders(k), mc[i].getScheme()) *
-                    (*(mc[i].getCoeff(orders(j - k)))), orders(j));
+                coeffbsg.setCoeff(*coeffbsg.getCoeff(orders_qcd(j)) +
+                    evolDB1bsg->Df1Evolbsg(mu, mc[i].getMu(), orders_qcd(k), mc[i].getScheme()) *
+                    (*(mc[i].getCoeff(orders_qcd(j - k)))), orders_qcd(j));
             }
         }
     }

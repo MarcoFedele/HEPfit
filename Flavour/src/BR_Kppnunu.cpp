@@ -22,12 +22,12 @@ double BR_Kppnunu::computeThValue()
                    SM.Mw_tree() * SM.Mw_tree()) ));
     
     return( SM.getOptionalParameter("IB_Kp") * 3.*SM.getAle()*SM.getAle()/(2.*M_PI*M_PI*pow(sin(theta),4.))
-           * SM.getOptionalParameter("Br_Kp_P0enu") * BRKppnunu(NLO, NLO_QED11).real());
+           * SM.getOptionalParameter("Br_Kp_P0enu") * BRKppnunu(NLO, QED1).real());
 }
 
 gslpp::complex BR_Kppnunu::BRKppnunu(orders_qcd order, orders_qed order_qed)
 {
-    if (mySM.getFlavour().getHDS1().getCoeffDS1pnunu().getOrder_QCD() < order){
+    if (mySM.getFlavour().getHDS1().getCoeffDS1pnunu().getOrder() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("BRKppnunu::computeThValue(): requires cofficient of "
@@ -37,19 +37,19 @@ gslpp::complex BR_Kppnunu::BRKppnunu(orders_qcd order, orders_qed order_qed)
     gslpp::vector<gslpp::complex> ** allcoeff = mySM.getFlavour().ComputeCoeffDS1pnunu();
     
     switch(order_qed) {
-        case NLO_QED11:
-            return((*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[NLO_QED11])) *
-                   (*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[NLO_QED11])) +
-                   CKpnunu.C_TOT(NNLO,NLO_QED11)*CKpnunu.C_TOT(NNLO,NLO_QED11));
-        case LO_QED:
+        case QED1:
+            return((*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[QED1])) *
+                   (*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[QED1])) +
+                   CKpnunu.C_TOT(NNLO,QED1)*CKpnunu.C_TOT(NNLO, QED1));
+        case QED0:
             switch(order) {
                 case NLO:
                     return((*(allcoeff[LO]) + *(allcoeff[NLO])) *
                            (*(allcoeff[LO]) + *(allcoeff[NLO])) +
-                           CKpnunu.C_TOT(NLO,LO_QED)*CKpnunu.C_TOT(NLO,LO_QED));
+                           CKpnunu.C_TOT(NLO, QED0)*CKpnunu.C_TOT(NLO, QED0));
                 case LO:
                     return((*(allcoeff[LO])) * (*(allcoeff[LO]) ) +
-                           CKpnunu.C_TOT(LO,LO_QED)*CKpnunu.C_TOT(LO,LO_QED));
+                           CKpnunu.C_TOT(LO, QED0)*CKpnunu.C_TOT(LO, QED0));
                 default:
                     std::stringstream out;
                     out << order;

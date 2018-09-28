@@ -405,7 +405,7 @@ gslpp::matrix<double>& EvolDC1::DC1Evol(double mu, double M, orders_qcd order, s
         }
     }
     
-    switch(order) {
+    switch(order_qcd) {
         case NNLO:
             *elem[NNLO] = 0.;
         case NLO:

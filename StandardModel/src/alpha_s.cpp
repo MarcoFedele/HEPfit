@@ -8,7 +8,7 @@
 #include "alpha_s.h"
 #include "StandardModel.h"
 
-alpha_s::alpha_s(const StandardModel& SM_i, orders order)
+alpha_s::alpha_s(const StandardModel& SM_i, orders_qcd order)
 : ThObservable(SM_i)
 {
     if (order >= LO and order <= FULLNNNLO) this->order = order;

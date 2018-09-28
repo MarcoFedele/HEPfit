@@ -522,7 +522,7 @@ bool StandardModel::checkSMparamsForEWPO()
 
 ////////////////////////////////////////////////////////////////////////
 
-double StandardModel::ale_OS(const double mu, orders order) const
+double StandardModel::ale_OS(const double mu, orders_qcd order) const
 {
     if (mu < 50.0)
         throw std::runtime_error("out of range in StandardModel::ale_OS()");
@@ -591,11 +591,11 @@ double StandardModel::Beta_e(int nm, unsigned int nf) const
     }
 }
 
-double StandardModel::Als(double mu, orders order, bool qed_flag, bool Nf_thr) const
+double StandardModel::Als(double mu, orders_qcd order, bool qed_flag, bool Nf_thr) const
 {
     int i, nfAls = (int) Nf(Mz), nfmu = Nf_thr ? (int) Nf(mu) : nfAls;
     double als, alstmp, mutmp;
-    orders fullord;
+    orders_qcd fullord;
 
     for (i = 0; i < CacheSize; ++i)
         if ((mu == als_cache[0][i]) && ((double) order == als_cache[1][i]) &&
@@ -663,7 +663,7 @@ double StandardModel::Als(double mu, orders order, bool qed_flag, bool Nf_thr) c
     }
 }
 
-double StandardModel::AlsWithInit(double mu, double alsi, double mu_i, orders order, bool qed_flag) const
+double StandardModel::AlsWithInit(double mu, double alsi, double mu_i, orders_qcd order, bool qed_flag) const
 {
     double nf = Nf(mu), alei = Ale(mu_i, FULLNLO); // CHANGE ME!
     double b00s = Beta_s(00, nf), b00e = Beta_e(00, nf);
@@ -700,11 +700,11 @@ double StandardModel::AlsWithInit(double mu, double alsi, double mu_i, orders or
     return (als);
 }
 
-double StandardModel::Ale(const double mu, orders order, bool Nf_thr) const
+double StandardModel::Ale(const double mu, orders_qcd order, bool Nf_thr) const
 {
     int i, nfAle = (int) Nf(Mz), nfmu = Nf_thr ? (int) Nf(mu) : nfAle;
     double ale, aletmp, mutmp, aleMz = alphaMz();
-    orders fullord;
+    orders_qcd fullord;
 
     for (i = 0; i < CacheSize; ++i)
         if ((mu == ale_cache[0][i]) && ((double) order == ale_cache[1][i]) &&
@@ -773,7 +773,7 @@ double StandardModel::Ale(const double mu, orders order, bool Nf_thr) const
     }
 }
 
-double StandardModel::AleWithInit(double mu, double alei, double mu_i, orders order) const
+double StandardModel::AleWithInit(double mu, double alei, double mu_i, orders_qcd order) const
 {
     if (fabs(mu - mu_i) < MEPS) return(alei);
 

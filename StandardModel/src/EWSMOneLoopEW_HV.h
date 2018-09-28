@@ -48,7 +48,7 @@ public:
      * @param[in] order (=LO, NLO, NNLO, FULLNLO, FULLNNLO)
      * @return the MSbar mass of u, d, s, c, b or the pole mass of t
      */
-    double mq(const QCD::quark q, const double mu, const orders order = FULLNLO) const
+    double mq(const QCD::quark q, const double mu, const orders_qcd order = FULLNLO) const
     {
         switch (q) {
             case QCD::UP:

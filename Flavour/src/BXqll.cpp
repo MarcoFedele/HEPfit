@@ -1643,7 +1643,7 @@ double BXqll::Phi_u(orders_qed ord_qed)
 {
     switch(ord_qed)
     {
-        case LO_QED:
+        case QED0:
             return(kappa * (12. / 23. * (1. - alsmu / mySM.Als(mySM.getMuw(), FULLNNNLO, true))));
         default:
             throw std::runtime_error("BXqll::Phi_u(): order not implemented.");

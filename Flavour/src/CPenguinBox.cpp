@@ -502,12 +502,12 @@ double CPenguinBox::CT_tot(orders_qcd order, orders_qed order_qed)
     switch (order) {
         case(NNLO):
             switch (order_qed) {
-                case(NLO_QED11):
+                case(QED1):
                     return (model.getCKM().computelamc().real() / model.getCKM().getLambda()*(Cmatch(NNLO) + IBT) +
                             model.getCKM().computelamt().real() / model.getCKM().getLambda()*(model.Als(model.getMuw()) / 4. / M_PI *
                             model.getMatching().X1t(xt) + model.getMatching().X1t(xt) + model.getAle() / 4. / M_PI *
                             model.getMatching().Xewt(xt, a, model.getMuc())));
-                case(LO_QED):
+                case(QED0):
                     return (model.getCKM().computelamc().real() / model.getCKM().getLambda()*(Cmatch(NNLO) + IBT) +
                             model.getCKM().computelamt().real() / model.getCKM().getLambda()*(model.Als(model.getMuw()) / 4. / M_PI *
                             model.getMatching().X1t(xt) + model.getMatching().X1t(xt)));
@@ -518,12 +518,12 @@ double CPenguinBox::CT_tot(orders_qcd order, orders_qed order_qed)
             }
         case(NLO):
             switch (order_qed) {
-                case(NLO_QED11):
+                case(QED1):
                     return (model.getCKM().computelamc().real() / model.getCKM().getLambda()*(Cmatch(NLO) + IBT) +
                             model.getCKM().computelamt().real() / model.getCKM().getLambda()*(model.Als(model.getMuw()) / 4. / M_PI *
                             model.getMatching().X1t(xt) + model.getMatching().X1t(xt) + model.getAle() / 4. / M_PI *
                             model.getMatching().Xewt(xt, a, model.getMuc())));
-                case(LO_QED):
+                case(QED0):
                     return (model.getCKM().computelamc().real() / model.getCKM().getLambda()*(Cmatch(NLO) + IBT) +
                             model.getCKM().computelamt().real() / model.getCKM().getLambda()*(model.Als(model.getMuw()) / 4. / M_PI *
                             model.getMatching().X1t(xt) + model.getMatching().X1t(xt)));
@@ -534,12 +534,12 @@ double CPenguinBox::CT_tot(orders_qcd order, orders_qed order_qed)
             }
         case(LO):
             switch (order_qed) {
-                case(NLO_QED11):
+                case(QED1):
                     return (model.getCKM().computelamc().real() / model.getCKM().getLambda()*(Cmatch(LO) + IBT) +
                             model.getCKM().computelamt().real() / model.getCKM().getLambda()*(model.Als(model.getMuw()) / 4. / M_PI *
                             model.getMatching().X1t(xt) + model.getAle() / 4. / M_PI *
                             model.getMatching().Xewt(xt, a, model.getMuc())));
-                case(LO_QED):
+                case(QED0):
                     return (model.getCKM().computelamc().real() / model.getCKM().getLambda()*(Cmatch(NLO) + IBT) +
                             model.getCKM().computelamt().real() / model.getCKM().getLambda()*(model.Als(model.getMuw()) / 4. / M_PI *
                             model.getMatching().X1t(xt)));

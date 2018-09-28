@@ -592,18 +592,18 @@ double Charm_Kpnunu::C_TOT(orders_qcd order, orders_qed order_qed)
     double IBT = model.getOptionalParameter("DeltaP_cu");
     double X = 0.;
 
-    if ((order == NNLO) && (order_qed == NLO_QED11)) {
+    if ((order == NNLO) && (order_qed == QED1)) {
         X = lambdat.real() / lambda5 * (model.getMatching().X0t(xt) + model.Als(model.getMut(), FULLNLO)
                 / 4. / M_PI * model.getMatching().X1t(xt) + Ale / 4. / M_PI * model.getMatching().Xewt(xt, a, Muw));
         return (X + (lambdac.real() / lambda)*(P_C(NNLO) + IBT));
     }
 
-    if ((order == NLO) && (order_qed == LO_QED)) {
+    if ((order == NLO) && (order_qed == QED0)) {
         X = lambdat.real() / lambda5 * (model.getMatching().X0t(xt) / lambda5 + model.Als(model.getMut(), FULLNLO) / 4. / M_PI * model.getMatching().X1t(xt));
         return (X + (lambdac.real() / lambda)*(P_C(NLO) + IBT));
     }
 
-    if ((order == LO) && (order_qed == LO_QED)) {
+    if ((order == LO) && (order_qed == QED0)) {
         X = lambdat.real() * model.getMatching().X0t(xt) / lambda5;
         return (X + (lambdac.real() / lambda)*(P_C(LO) + IBT));
     }

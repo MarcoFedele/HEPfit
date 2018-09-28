@@ -689,10 +689,10 @@ gslpp::matrix< double > & EvolBsmm::Df1Evol(double mu, double M, orders_qcd orde
             throw std::runtime_error("EvolDF1nlep::Df1Evol(): scheme " + out.str()  + " not implemented ");
     }
 
-    if (mu == this->mu && M == this->M && scheme == this->scheme && order_qed == NO_QED)
+    if (mu == this->mu && M == this->M && scheme == this->scheme && order_qed == QED0)
         return (*Evol(order));
 
-    if (mu == this->mu && M == this->M && scheme == this->scheme &&  order_qed != NO_QED)
+    if (mu == this->mu && M == this->M && scheme == this->scheme &&  order_qed != QED0)
         return (*Evol(order_qed));
 
 
@@ -725,7 +725,7 @@ gslpp::matrix< double > & EvolBsmm::Df1Evol(double mu, double M, orders_qcd orde
         Df1Evol(m_down, M, nf, scheme);
     }
 
-    if(order_qed != NO_QED) return (*Evol(order_qed));
+    if(order_qed != QED0) return (*Evol(order_qed));
     else return (*Evol(order)); 
     
 }	
@@ -922,38 +922,35 @@ void EvolBsmm::Df1Evol(double mu, double M, double nf, schemes scheme)
     switch(order_qed) {    
 
 
-        case NLO_QED22:
+        case QED2:
 
-            *elem[NLO_QED22] = (*elem[NLO_QED22]) * resLO + (*elem[NLO_QED11]) * Ue + (*elem[LO]) * Ue2 + 
-                    (*elem[NLO_QED21]) * Ueos + (*elem[NNLO]) * Ue2os2 + (*elem[NLO]) * Ue2os;
+            *elem[QED2] = (*elem[QED2]) * resLO + (*elem[QED1]) * Ue + (*elem[LO]) * Ue2 + 
+                    (*elem[QED1]) * Ueos + (*elem[NNLO]) * Ue2os2 + (*elem[NLO]) * Ue2os;
 
-        case NLO_QED12:
+        // SBAGLIATO!!!!!!!***************
 
-            *elem[NLO_QED12] =(*elem[NLO_QED11]) * Ueos + (*elem[NLO]) * Ue2os2 + (*elem[LO]) * Ue2os;
+            *elem[QED2] =(*elem[QED1]) * Ueos + (*elem[NLO]) * Ue2os2 + (*elem[LO]) * Ue2os;
 
-        case NLO_QED21:    
+        case QED1:    
 
-            *elem[NLO_QED21] = (*elem[NLO_QED21]) * resLO + (*elem[NLO_QED11]) * Us +
+            *elem[QED1] = (*elem[QED1]) * resLO + (*elem[QED1]) * Us +
                         (*elem[NLO]) * Ue + (*elem[LO]) * Ues + (*elem[NNLO]) * Ueos;
 
-        case NLO_QED02:   
 
-            *elem[NLO_QED02] = (*elem[LO]) * Ue2os2;
+            *elem[QED2] = (*elem[LO]) * Ue2os2;
 
-        case NLO_QED11:
-
-            *elem[NLO_QED11] = (*elem[NLO_QED11]) * resLO + (*elem[LO]) * Ue + (*elem[NLO]) * Ueos;
+            *elem[QED1] = (*elem[QED1]) * resLO + (*elem[LO]) * Ue + (*elem[NLO]) * Ueos;
 
 
-        case LO_QED:
+        case QED0:
 
-            *elem[LO_QED] = (*elem[LO]) * Ueos;
+            *elem[QED0] = (*elem[LO]) * Ueos;
             break;
             default:
             throw std::runtime_error("Error in EvolBsmm::Df1Evol");
     }   
 
-    switch(order) {
+    switch(order_qcd) {
         case NNLO:
 
             *elem[NNLO] =  (*elem[LO]) * Us2 + (*elem[NNLO]) * resLO + (*elem[NLO]) * Us;

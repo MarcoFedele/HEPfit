@@ -578,10 +578,10 @@ gslpp::matrix<double>& EvolDF1nlep::Df1Evolnlep(double mu, double M, orders_qcd 
                     + " not implemented ");
     }
 /* IMPORTANT!!: Please check cache for variation in AlsMZ and Ale. Ayan Paul*/
-    if (mu == this->mu && M == this->M && scheme == this->scheme && order_qed == NO_QED)
+    if (mu == this->mu && M == this->M && scheme == this->scheme && order_qed == QED0)
        return (*Evol(order));
     
-    if (mu == this->mu && M == this->M && scheme == this->scheme &&  order_qed == NLO_QED11)
+    if (mu == this->mu && M == this->M && scheme == this->scheme &&  order_qed == QED1)
        return (*Evol(order_qed));
         
     if (M < mu) {
@@ -606,7 +606,7 @@ gslpp::matrix<double>& EvolDF1nlep::Df1Evolnlep(double mu, double M, orders_qcd 
     
     Df1Evolnlep(m_down, M, nf, scheme);
     
-    if(order_qed != NO_QED){
+    if(order_qed != QED0){
     
     return (*Evol(order_qed));
     }
@@ -655,17 +655,17 @@ void EvolDF1nlep::Df1Evolnlep(double mu, double M, double nf, schemes scheme)
      }
  
     switch(order_qed) {
-        case NLO_QED11:
-            *elem[NLO_QED11] = (*elem[NLO]) * resLO_ew +
-                            (*elem[NLO_QED11]) * resLO + (*elem[LO]) *resNLO_QED;
-        case LO_QED:
-            *elem[LO_QED] =  (*elem[LO]) * resLO_ew;
+        case QED1:
+            *elem[QED1] = (*elem[NLO]) * resLO_ew +
+                            (*elem[QED1]) * resLO + (*elem[LO]) *resNLO_QED;
+        case QED0:
+            *elem[QED0] =  (*elem[LO]) * resLO_ew;
             break;
         default:
             throw std::runtime_error("Error in EvolDF1nlep::Df1Evolnlep()");
     }   
    
-    switch(order) {
+    switch(order_qcd) {
         case NNLO:
             *elem[NNLO] = 0.;
         case NLO:
@@ -689,14 +689,14 @@ void EvolDF1nlep::Df1threshold_nlep(double M, double nf){
     dreT = ale * Df1threshold_deltareT(nf);
     
      switch(order_qed){
-         case NLO_QED11:
-             *elem[NLO_QED11] += (*elem[LO])*dreT + (*elem[LO_QED]) * drsT ; 
+         case QED1:
+             *elem[QED1] += (*elem[LO])*dreT + (*elem[QED0]) * drsT ; 
              break;
          default:
              throw std::runtime_error("Error in EvolDF1nlep::Df1threshold_nlep()");
      }
     
-    switch(order){
+    switch(order_qcd){
         case NNLO:
             *elem[NNLO] = 0.;
         case NLO:

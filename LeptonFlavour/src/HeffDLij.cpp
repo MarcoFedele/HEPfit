@@ -21,12 +21,12 @@ gslpp::vector<gslpp::complex>** HeffDLij::ComputeCoeffDLij(int li_lj) {
         case 1:
         {
             std::vector<WilsonCoefficient>& mcb1 = model.getMatching().CMDLij(1);
-            orders ordDLij_1 = coeffDLij_1.getOrder();
+            orders_qcd ordDLij_1 = coeffDLij_1.getOrder();
             coeffDLij_1.resetCoefficient();
             for (unsigned int i = 0; i < mcb1.size(); i++){
                 for (int j = LO; j <= ordDLij_1; j++){
-                    coeffDLij_1.setCoeff(*coeffDLij_1.getCoeff(orders(j))
-                                            + *mcb1[i].getCoeff(orders(j)), orders(j));
+                    coeffDLij_1.setCoeff(*coeffDLij_1.getCoeff(orders_qcd(j))
+                                            + *mcb1[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLij_1.getCoeff();
@@ -34,12 +34,12 @@ gslpp::vector<gslpp::complex>** HeffDLij::ComputeCoeffDLij(int li_lj) {
         case 2:
         {
             std::vector<WilsonCoefficient>& mcb2 = model.getMatching().CMDLij(2);
-            orders ordDLij_2 = coeffDLij_2.getOrder();
+            orders_qcd ordDLij_2 = coeffDLij_2.getOrder();
             coeffDLij_2.resetCoefficient();
             for (unsigned int i = 0; i < mcb2.size(); i++){
                 for (int j = LO; j <= ordDLij_2; j++){
-                    coeffDLij_2.setCoeff(*coeffDLij_2.getCoeff(orders(j))
-                                            + *mcb2[i].getCoeff(orders(j)), orders(j));
+                    coeffDLij_2.setCoeff(*coeffDLij_2.getCoeff(orders_qcd(j))
+                                            + *mcb2[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLij_2.getCoeff();
@@ -47,12 +47,12 @@ gslpp::vector<gslpp::complex>** HeffDLij::ComputeCoeffDLij(int li_lj) {
         case 3:
         {
             std::vector<WilsonCoefficient>& mcb3 = model.getMatching().CMDLij(3);
-            orders ordDLij_3 = coeffDLij_3.getOrder();
+            orders_qcd ordDLij_3 = coeffDLij_3.getOrder();
             coeffDLij_3.resetCoefficient();
             for (unsigned int i = 0; i < mcb3.size(); i++){
                 for (int j = LO; j <= ordDLij_3; j++){
-                    coeffDLij_3.setCoeff(*coeffDLij_3.getCoeff(orders(j))
-                                            + *mcb3[i].getCoeff(orders(j)), orders(j));
+                    coeffDLij_3.setCoeff(*coeffDLij_3.getCoeff(orders_qcd(j))
+                                            + *mcb3[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLij_3.getCoeff();

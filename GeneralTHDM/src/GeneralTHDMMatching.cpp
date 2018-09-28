@@ -3117,7 +3117,7 @@ std::vector<WilsonCoefficient>& GeneralTHDMMatching::CMbsg()
  * Wilson coefficients calculus, Misiak base for b -> s gamma                  *  
  * ****************************************************************************/
 
-gslpp::complex GeneralTHDMMatching::setWCbsg(int i, gslpp::complex sigmau, gslpp::complex sigmad, double mt, double mhp, double mu, orders order)
+gslpp::complex GeneralTHDMMatching::setWCbsg(int i, gslpp::complex sigmau, gslpp::complex sigmad, double mt, double mhp, double mu, orders_qcd order)
 {
     if ( su.abs() == sigmau.abs() && su.arg() == sigmau.arg() &&
          sd.abs() == sigmad.abs() && sd.arg() == sigmad.arg() &&

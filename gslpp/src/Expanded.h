@@ -484,7 +484,8 @@ public:
     T getOrd(uint j) const {
         return data[0][j];
     }
-    T getOrd(uint i, uint j) const {
+    
+    const T& getOrd(uint i, uint j) const {
         return data[i][j];
     }
 

@@ -394,7 +394,7 @@ namespace gslpp {
         size_t i;
         output << "(";
         for (i = 0; i < v.size() - 1; i++)
-            output << v(i) << ",";
+            output << v(i) << ", ";
         output << v(i) << ")";
         return output;
     }

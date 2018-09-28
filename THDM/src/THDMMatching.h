@@ -61,7 +61,7 @@ public:
      * @param order
      * @return return the value of the wilson coefficients for \f$ B \rightarrow X_{s} \gamma, l^{+} l^{-} \f$
      */
-    double setWCbsg (int i, double tan, double mt, double mhp, double mu, orders order);
+    double setWCbsg (int i, double tan, double mt, double mhp, double mu, orders_qcd order);
 
     /** Calculates the muon g-2 at LO**/
     /**

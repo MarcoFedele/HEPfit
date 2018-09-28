@@ -22,12 +22,12 @@ gslpp::vector<gslpp::complex>** HeffDLi3j::ComputeCoeffDLi3j(int li_lj) {
         case 1:
         {
             std::vector<WilsonCoefficient>& mcb4 = model.getMatching().CMDLi3j(1);
-            orders ordDLi3j_1 = coeffDLi3j_1.getOrder();
+            orders_qcd ordDLi3j_1 = coeffDLi3j_1.getOrder();
             coeffDLi3j_1.resetCoefficient();
             for (unsigned int i = 0; i < mcb4.size(); i++){
                 for (int j = LO; j <= ordDLi3j_1; j++){
-                    coeffDLi3j_1.setCoeff(*coeffDLi3j_1.getCoeff(orders(j))
-                                            + *mcb4[i].getCoeff(orders(j)), orders(j));
+                    coeffDLi3j_1.setCoeff(*coeffDLi3j_1.getCoeff(orders_qcd(j))
+                                            + *mcb4[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLi3j_1.getCoeff();
@@ -35,12 +35,12 @@ gslpp::vector<gslpp::complex>** HeffDLi3j::ComputeCoeffDLi3j(int li_lj) {
         case 2:
         {
             std::vector<WilsonCoefficient>& mcb5 = model.getMatching().CMDLi3j(2);
-            orders ordDLi3j_2 = coeffDLi3j_2.getOrder();
+            orders_qcd ordDLi3j_2 = coeffDLi3j_2.getOrder();
             coeffDLi3j_2.resetCoefficient();
             for (unsigned int i = 0; i < mcb5.size(); i++){
                 for (int j = LO; j <= ordDLi3j_2; j++){
-                    coeffDLi3j_2.setCoeff(*coeffDLi3j_2.getCoeff(orders(j))
-                                            + *mcb5[i].getCoeff(orders(j)), orders(j));
+                    coeffDLi3j_2.setCoeff(*coeffDLi3j_2.getCoeff(orders_qcd(j))
+                                            + *mcb5[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLi3j_2.getCoeff();
@@ -48,12 +48,12 @@ gslpp::vector<gslpp::complex>** HeffDLi3j::ComputeCoeffDLi3j(int li_lj) {
         case 3:
         {
             std::vector<WilsonCoefficient>& mcb6 = model.getMatching().CMDLi3j(3);
-            orders ordDLi3j_3 = coeffDLi3j_3.getOrder();
+            orders_qcd ordDLi3j_3 = coeffDLi3j_3.getOrder();
             coeffDLi3j_3.resetCoefficient();
             for (unsigned int i = 0; i < mcb6.size(); i++){
                 for (int j = LO; j <= ordDLi3j_3; j++){
-                    coeffDLi3j_3.setCoeff(*coeffDLi3j_3.getCoeff(orders(j))
-                                            + *mcb6[i].getCoeff(orders(j)), orders(j));
+                    coeffDLi3j_3.setCoeff(*coeffDLi3j_3.getCoeff(orders_qcd(j))
+                                            + *mcb6[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLi3j_3.getCoeff();
@@ -61,12 +61,12 @@ gslpp::vector<gslpp::complex>** HeffDLi3j::ComputeCoeffDLi3j(int li_lj) {
         case 4:
         {
             std::vector<WilsonCoefficient>& mcb7 = model.getMatching().CMDLi3j(4);
-            orders ordDLi3j_4 = coeffDLi3j_4.getOrder();
+            orders_qcd ordDLi3j_4 = coeffDLi3j_4.getOrder();
             coeffDLi3j_4.resetCoefficient();
             for (unsigned int i = 0; i < mcb7.size(); i++){
                 for (int j = LO; j <= ordDLi3j_4; j++){
-                    coeffDLi3j_4.setCoeff(*coeffDLi3j_4.getCoeff(orders(j))
-                                            + *mcb7[i].getCoeff(orders(j)), orders(j));
+                    coeffDLi3j_4.setCoeff(*coeffDLi3j_4.getCoeff(orders_qcd(j))
+                                            + *mcb7[i].getCoeff(orders_qcd(j)), orders_qcd(j));
                 }
             }
         return coeffDLi3j_4.getCoeff();

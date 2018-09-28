@@ -211,7 +211,7 @@ void EvolDF2::Df2Evol(double mu, double M, double nf, schemes scheme)
                 resLO(i, j) += b[i][j][k] * etap;
             }
     }
-    switch (order) {
+    switch (order_qcd) {
         case NNLO:
             *elem[NNLO] = 0.; // Marco can implement it if he wishes to!
         case NLO:

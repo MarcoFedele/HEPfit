@@ -18,12 +18,12 @@ Heffgminus2::~Heffgminus2() {
 gslpp::vector<gslpp::complex>** Heffgminus2::ComputeCoeffgm2mu() {
 
    std::vector<WilsonCoefficient>& mcb9 = model.getMatching().CMgminus2mu();
-    orders ordgminus2mu = coeffgminus2mu.getOrder();
+    orders_qcd ordgminus2mu = coeffgminus2mu.getOrder();
     coeffgminus2mu.resetCoefficient();
     for (unsigned int i = 0; i < mcb9.size(); i++){
         for (int j = LO; j <= ordgminus2mu; j++){
-            coeffgminus2mu.setCoeff(*coeffgminus2mu.getCoeff(orders(j))
-                                    + *mcb9[i].getCoeff(orders(j)), orders(j));
+            coeffgminus2mu.setCoeff(*coeffgminus2mu.getCoeff(orders_qcd(j))
+                                    + *mcb9[i].getCoeff(orders_qcd(j)), orders_qcd(j));
         }
     }
 

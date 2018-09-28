@@ -30,7 +30,7 @@ double BR_Kp0nunu::computeThValue()
 
 gslpp::complex BR_Kp0nunu::BRKp0nunu(orders_qcd order, orders_qed order_qed)
 {
-    if (mySM.getFlavour().getHDS1().getCoeffDS1pnunu().getOrder_QCD() < order){
+    if (mySM.getFlavour().getHDS1().getCoeffDS1pnunu().getOrder() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("BRKp0nunu::computeThValue(): requires cofficient of "
@@ -40,10 +40,10 @@ gslpp::complex BR_Kp0nunu::BRKp0nunu(orders_qcd order, orders_qed order_qed)
     gslpp::vector<gslpp::complex> ** allcoeff = mySM.getFlavour().ComputeCoeffDS1pnunu();
     
     switch(order_qed) {
-        case QED11:
-            return((*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[NLO_QED11])) *
-                   (*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[NLO_QED11])));
-        case LO_QED:
+        case QED1:
+            return((*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[QED1])) *
+                   (*(allcoeff[LO]) + *(allcoeff[NLO]) + *(allcoeff[QED1])));
+        case QED0:
             switch(order) {
                 case NLO:
                     return((*(allcoeff[LO]) + *(allcoeff[NLO])) * 

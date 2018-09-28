@@ -30,7 +30,7 @@ double BR_Kmumu::computeThValue()
 
 gslpp::complex BR_Kmumu::BRKmumu(orders_qcd order)
 {
-    if (mySM.getFlavour().getHDS1().getCoeffDS1mumu().getOrder_QCD() < order){
+    if (mySM.getFlavour().getHDS1().getCoeffDS1mumu().getOrder() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("BRKmumu::computeThValue(): requires cofficient of "

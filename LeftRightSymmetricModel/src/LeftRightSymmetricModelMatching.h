@@ -33,8 +33,8 @@ public:
     
     void updateLeftRightSymmetricModelParameters();
 
-    gslpp::complex setWCbsgWR(int i, orders order);
-    gslpp::complex setWCbsgHp(int i, orders order);
+    gslpp::complex setWCbsgWR(int i, orders_qcd order);
+    gslpp::complex setWCbsgHp(int i, orders_qcd order);
 
     void setCMbsgWR();
     

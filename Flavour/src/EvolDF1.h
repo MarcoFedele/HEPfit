@@ -9,7 +9,7 @@
 #define EVOLDF1_H
 
 #include <string>
-#include "RGEvolutor.h"
+#include "RGEvolutorNew.h"
 #include "StandardModel.h"
 #include "gslpp_special_functions.h"
 #include <map>
@@ -20,7 +20,7 @@
 typedef unsigned int uint;
 typedef unsigned int indices;
 
-class EvolDF1 : public RGEvolutor {
+class EvolDF1 : public RGEvolutorNew {
     /**
      * @class EvolDC1Buras
      * @brief \f$ |\Delta F = 1 | \f$ Evolutor Class
@@ -58,10 +58,11 @@ public:
      * @brief a method returning the evolutor related to the high scale \f$ M \f$ and the low scale \f$ \mu \f$
      * @param mu a double for the low scale of the evolution
      * @param M a double for the high scale of the evolution
+     * @param order an enum "orders" for the order of perturbation theory of the evolutor
      * @param scheme an enum "schemes" for the regularization scheme of the evolutor
      * @return the evolutor \f$ U (\mu , M) \f$
      */
-    Expanded<gslpp::matrix<double> >& DF1Evol(double mu, double M, schemes scheme = NDR);
+    const Expanded<gslpp::matrix<double> >& DF1Evol(double mu, double M, schemes scheme = NDR);
       
     /**
      * @brief a method returning the anomalous dimension in the Chetyrkin, Misiak and Munz operator basis 
@@ -70,7 +71,7 @@ public:
      * @param n_d an uinteger for the down-type number of d.o.f.
      * @return the ADM at the order LO/NLO in the Chetyrkin, Misiak and Munz basis
      */
-    //gslpp::matrix<double> ToRescaleBasis(orders_qcd order, uint n_u, uint n_d) const;
+    //gslpp::matrix<double> ToRescaleBasis(orders order, uint n_u, uint n_d) const;
     /**
      * @brief a method returning the anomalous dimension for the evolution of the effective Wilson coefficients
      * @param mat a temporary variable of gslpp::matrix type

@@ -19,6 +19,8 @@ Mll::Mll(const StandardModel& SM_i, int obsFlag, QCD::meson meson_i, QCD::lepton
     SM.initializeMeson(meson);
 };
 
+#define FULLNLO_QED QED2 // QUICK AND WRONG FIX TO ALLOW COMPILATION
+
 double Mll::computeThValue()
 {
     computeObs(FULLNLO, FULLNLO_QED);
@@ -78,7 +80,7 @@ double Mll::computeSmumu(orders_qcd order)
 
 void Mll::computeAmpSq(orders_qcd order, orders_qed order_qed, double mu)
 {  
-    if (SM.getFlavour().getHDB1().getCoeffsmumu().getOrder_QCD() < order % 3){
+    if (SM.getFlavour().getHDB1().getCoeffsmumu().getOrder() < order % 3){
         std::stringstream out;
         out << order;
         throw std::runtime_error("Bsmumu::computeAmpSq(): required cofficient of "

@@ -47,6 +47,7 @@
 ModelFactory::ModelFactory()
 {
     modelFactory["StandardModel"] = boost::factory<StandardModel*>();
+/*
     modelFactory["NPSTU"] = boost::factory<NPSTU*>();
     modelFactory["NPSTUZbbbarLR"] = boost::factory<NPSTUZbbbarLR*>();
     modelFactory["NPEpsilons"] = boost::factory<NPEpsilons*>();
@@ -85,13 +86,14 @@ ModelFactory::ModelFactory()
     modelFactory["GeneralSUSY"] = boost::factory<GeneralSUSY*>();
     modelFactory["GeorgiMachacek"] = boost::factory<GeorgiMachacek*>();
     modelFactory["LeftRightSymmetricModel"] = boost::factory<LeftRightSymmetricModel*>();
-/** BEGIN: REMOVE FROM THE PACKAGE **/
+// BEGIN: REMOVE FROM THE PACKAGE
     modelFactory["MFV"] = boost::factory<MFV*>();
     modelFactory["pMSSM"] = boost::factory<pMSSM*>();
     modelFactory["NPSTUVWXY"] = boost::factory<NPSTUVWXY*>();
     modelFactory["GeneralTHDM"] = boost::factory<GeneralTHDM*>();
     modelFactory["THDMW"] = boost::factory<THDMW*>();
-/** END: REMOVE FROM THE PACKAGE **/
+// END: REMOVE FROM THE PACKAGE
+*/
 }
 
 void ModelFactory::addModelToFactory(const std::string name, boost::function<StandardModel*() > funct)

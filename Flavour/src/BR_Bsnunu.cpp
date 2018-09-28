@@ -35,7 +35,7 @@ double BR_Bsnunu::computeThValue()
 
 gslpp::complex BR_Bsnunu::BRBsnunu(orders_qcd order)
 {
-    if (mySM.getFlavour().getHDB1().getCoeffsnunu().getOrder_QCD() < order){
+    if (mySM.getFlavour().getHDB1().getCoeffsnunu().getOrder() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("BRBsnunu::computeThValue(): requires cofficient of "

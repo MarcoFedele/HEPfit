@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
         for (int order=LO; order<=FULLNNLO; order++) { 
             if (order!=NLO && order!=NNLO) { 
                 double mb = mySM->getQuarks(mySM->BOTTOM).getMass();
-                cout << setw(18) << mySM->Mrun(mySM->getMz(), mb, (orders)order);
+                cout << setw(18) << mySM->Mrun(mySM->getMz(), mb, (orders_qcd)order);
             }
         }
         cout << endl;
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
         for (int order=LO; order<=FULLNNLO; order++) { 
             if (order!=NLO && order!=NNLO) { 
                 double mc = mySM->getQuarks(mySM->CHARM).getMass();
-                cout << setw(18) << mySM->Mrun(mySM->getMz(), mc, (orders)order);
+                cout << setw(18) << mySM->Mrun(mySM->getMz(), mc, (orders_qcd)order);
             }
         }
         cout << endl << endl;
@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
         for (int order=LO; order<=FULLNNLO; order++) { 
             if (order!=NLO && order!=NNLO) { 
                 double mb = mySM->getQuarks(mySM->BOTTOM).getMass();
-                cout << setw(18) << mySM->Mrun(mb, mb, (orders)order);
+                cout << setw(18) << mySM->Mrun(mb, mb, (orders_qcd)order);
             }
         }
         cout << endl;
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
             if (order!=NLO && order!=NNLO) { 
                 double mc = mySM->getQuarks(mySM->CHARM).getMass();
                 double mb = mySM->getQuarks(mySM->BOTTOM).getMass();
-                cout << setw(18) << mySM->Mrun(mb, mc, (orders)order);
+                cout << setw(18) << mySM->Mrun(mb, mc, (orders_qcd)order);
             }
         }
         cout << endl << endl;;
@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
         for (int order=LO; order<=FULLNNLO; order++) { 
             if (order!=NLO && order!=NNLO) { 
                 double mb = mySM->getQuarks(mySM->BOTTOM).getMass();
-                cout << setw(18) << mySM->Mrun(2.0, mb, (orders)order);
+                cout << setw(18) << mySM->Mrun(2.0, mb, (orders_qcd)order);
             }
         }
         cout << endl;
@@ -111,7 +111,7 @@ int main(int argc, char** argv) {
         for (int order=LO; order<=FULLNNLO; order++) { 
             if (order!=NLO && order!=NNLO) { 
                 double mc = mySM->getQuarks(mySM->CHARM).getMass();
-                cout << setw(18) << mySM->Mrun(2.0, mc, (orders)order);
+                cout << setw(18) << mySM->Mrun(2.0, mc, (orders_qcd)order);
             }
         }
         cout << endl << endl;
@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
             if (order!=NLO && order!=NNLO) { 
                 double mb = mySM->getQuarks(mySM->BOTTOM).getMass();
                 double mc = mySM->getQuarks(mySM->CHARM).getMass();
-                cout << setw(18) << mySM->Mrun(mc, mb, (orders)order);
+                cout << setw(18) << mySM->Mrun(mc, mb, (orders_qcd)order);
             }
         }
         cout << endl;
@@ -129,7 +129,7 @@ int main(int argc, char** argv) {
         for (int order=LO; order<=FULLNNLO; order++) { 
             if (order!=NLO && order!=NNLO) { 
                 double mc = mySM->getQuarks(mySM->CHARM).getMass();
-                cout << setw(18) << mySM->Mrun(mc, mc, (orders)order);
+                cout << setw(18) << mySM->Mrun(mc, mc, (orders_qcd)order);
             }
         }
         cout << endl << endl;;

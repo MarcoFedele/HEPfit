@@ -258,7 +258,7 @@ void EvolDC1Buras::DC1EvolBuras(double mu, double M, double nf, schemes scheme)
             }
         }
     }
-    switch(order) {
+    switch(order_qcd) {
         case NNLO:
             *elem[NNLO] = 0.;
         case NLO:

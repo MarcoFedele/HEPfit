@@ -895,7 +895,7 @@ public:
      * @brief A get method to retrieve the %CKM matrix. 
      * @return the %CKM matrix
      */
-    gslpp::matrix<gslpp::complex> getVCKM() const // why don't we return a const reference?
+    const gslpp::matrix<gslpp::complex>& getVCKM() const // why don't we return a const reference?
     {
         return myCKM.getCKM();
     }

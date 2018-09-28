@@ -240,7 +240,7 @@ public:
      * @f$m_{u,d,s}(2\,\mathrm{GeV})@f$, @f$m_c(m_c)@f$, @f$m_b(m_b)@f$ or
      * @f$m_t^{\mathrm{pole}}@f$ is returned.
      */
-    double mf(const Particle f, const double mu = 0.0, const orders order = FULLNNLO) const;
+    double mf(const Particle f, const double mu = 0.0, const orders_qcd order = FULLNNLO) const;
 
     /**
      * @brief The mass squared of an SM fermion.
@@ -254,7 +254,7 @@ public:
      * @f$(m_{u,d,s}(2\,\mathrm{GeV}))^2@f$, @f$(m_c(m_c))^2@f$, @f$(m_b(m_b))^2@f$ or
      * @f$(m_t^{\mathrm{pole}})^2@f$ is returned.
      */
-    double mf2(const Particle f, const double mu = 0.0, const orders order = FULLNNLO) const
+    double mf2(const Particle f, const double mu = 0.0, const orders_qcd order = FULLNNLO) const
     {
         double mf1 = mf(f, mu, order);
         return ( mf1 * mf1);
@@ -363,7 +363,7 @@ public:
      * @param[in] order order in %QCD (see #orders)
      * @return @f$\alpha_s(\mu)@f$ at the given order
      */
-    double Als(const double mu, const orders order) const
+    double Als(const double mu, const orders_qcd order) const
     {
         return ( SM.Als(mu, order));
     }

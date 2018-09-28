@@ -46,7 +46,7 @@ EWSMcache::EWSMcache(const StandardModel& SM_i)
 
 ////////////////////////////////////////////////////////////////////////
 
-double EWSMcache::mf(const Particle f, const double mu, const orders order) const
+double EWSMcache::mf(const Particle f, const double mu, const orders_qcd order) const
 {
     if (f.is("TOP"))
         return SM.getMtpole(); // the pole mass

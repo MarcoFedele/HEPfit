@@ -19,7 +19,7 @@ AmpDS1::AmpDS1(const StandardModel& SM_i)
 
 gslpp::complex AmpDS1::AmpDS1pp0(orders_qcd order) 
 {
-    if (mySM.getFlavour().getHDS1().getCoeffDS1PP().getOrder_QCD() < order){
+    if (mySM.getFlavour().getHDS1().getCoeffDS1PP().getOrder() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("AmpDK1::computeThValue(): requires cofficient of order" 
@@ -74,7 +74,7 @@ gslpp::complex AmpDS1::AmpDS1pp0(orders_qcd order)
 
 gslpp::complex AmpDS1::AmpDS1pp2(orders_qcd order) 
 {
-    if (mySM.getFlavour().getHDS1().getCoeffDS1PP().getOrder_QCD() < order){
+    if (mySM.getFlavour().getHDS1().getCoeffDS1PP().getOrder() < order){
         std::stringstream out;
         out << order;
         throw std::runtime_error("AmpDK1::computeThValue(): requires cofficient of "

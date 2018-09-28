@@ -26,7 +26,7 @@ enum schemes
 /**
  * @enum orders
  * @ingroup StandardModel
- * @brief An enum type for orders in %QCD.
+ * @brief An enum type for orders_qcd in %QCD.
  */
 enum orders_qcd
 {
@@ -43,7 +43,7 @@ enum orders_qcd
 /**
  * @enum orders_qed
  * @ingroup StandardModel
- * @brief An enum type for orders in electroweak.
+ * @brief An enum type for orders_qcd in electroweak.
  */
 enum orders_qed // WARNING: don't change the ordering, it matters in HeffDF1
 {
@@ -53,5 +53,15 @@ enum orders_qed // WARNING: don't change the ordering, it matters in HeffDF1
     FULLQED1, /* all terms up to QED1 included */
     FULLQED2 /* all terms up to QED2 included */
 };
+
+// ******* FIX TO ALLOW FOR COMPILATION -- WWRROONNGG -- TO BE REMOVED ABSOLUTELY !!!!!!!!!
+#define NO_QED QED0
+#define LO_QED QED0
+#define NLO_QED01 QED1
+#define NLO_QED11 QED1
+#define NLO_QED21 QED1
+#define NLO_QED02 QED2
+#define NLO_QED12 QED2
+#define NLO_QED22 QED2
 
 #endif	/* ORDERSCHEME_H */

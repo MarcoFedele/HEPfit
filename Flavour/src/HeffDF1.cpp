@@ -97,7 +97,7 @@ gslpp::vector<gslpp::complex> HeffDF1::LowScaleCoeff(orders_qcd order_qcd, order
 
 Expanded<gslpp::vector<gslpp::complex> > HeffDF1::ComputeCoeff(double mu, schemes scheme)
 {
-    const std::vector<WilsonCoefficient>& mc = model.getMatching().CMDF1(blocks, nops);
+    const std::vector<WilsonCoefficientNew>& mc = model.getMatching().CMDF1(blocks, nops);
     uint i;
 
     if (mu == mu_cache && scheme == scheme_cache)

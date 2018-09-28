@@ -46,7 +46,7 @@ public:
      * @brief A member for returning the CKM matrix.
      * @return the CKM matrix
      */
-    gslpp::matrix<gslpp::complex> getCKM() const 
+    const gslpp::matrix<gslpp::complex>& getCKM() const 
     {
         return V;
     }

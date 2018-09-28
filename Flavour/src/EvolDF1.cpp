@@ -27,7 +27,7 @@ std::map<std::string, uint> blocks_nops = {
     };
 
 EvolDF1::EvolDF1(std::string reqblocks, schemes scheme, const StandardModel& model_i, orders_qcd ord, orders_qed ord_qed)
-: RGEvolutor(blocks_nops.at(reqblocks), scheme, ord, ord_qed), model(model_i), blocks(reqblocks),
+: RGEvolutorNew(blocks_nops.at(reqblocks), scheme, ord, ord_qed), model(model_i), blocks(reqblocks),
         evec(blocks_nops.at(reqblocks), 0.), evec_i(blocks_nops.at(reqblocks), 0.), js(blocks_nops.at(reqblocks), 0.),
         h(blocks_nops.at(reqblocks), 0.), gg(blocks_nops.at(reqblocks), 0.), s_s(blocks_nops.at(reqblocks), 0.),
         jssv(blocks_nops.at(reqblocks), 0.), jss(blocks_nops.at(reqblocks), 0.), jv(blocks_nops.at(reqblocks), 0.),
@@ -1249,8 +1249,7 @@ gslpp::matrix<double> EvolDF1::AnomalousDimension(indices nm, uint n_u, uint n_d
     
     if(blocks.compare("C") == 0)
         gammaDF1.assign(0, 0, GammaCC(nm, n_u, n_d));
-        
-    if(blocks.compare("CP") == 0)
+    else if(blocks.compare("CP") == 0)
     {
         gammaDF1.assign(0, 0, GammaCC(nm, n_u, n_d));
         gammaDF1.assign(0, 2, GammaCP(nm, n_u, n_d));
@@ -1359,7 +1358,7 @@ gslpp::matrix<double> EvolDF1::AnomalousDimension(indices nm, uint n_u, uint n_d
     return (gammaDF1);
 }
 
-Expanded<gslpp::matrix<double> >& EvolDF1::DF1Evol(double mu, double M, schemes scheme)
+const Expanded<gslpp::matrix<double> >& EvolDF1::DF1Evol(double mu, double M, schemes scheme)
 {
     if(nfmin == 5 && nfmax == 5 && (model.Nf(mu) != 5. || model.Nf(M) != 5.))
         throw std::runtime_error("EvolDF1::Df1Evol(): only nf = 5 available.");
