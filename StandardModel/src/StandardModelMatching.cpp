@@ -3017,6 +3017,7 @@ std::vector<WilsonCoefficientNew>& StandardModelMatching::CMDF1(std::string bloc
     schemes scheme = mcC.getScheme();
     orders_qcd order_qcd = mcC.getOrder_QCD();
     orders_qed order_qed = mcC.getOrder_QED();
+    vmcDF1.clear();
     WilsonCoefficientNew mcDF1(nops, scheme, order_qcd, order_qed);
 
     typedef WilsonCoefficientNew & (StandardModelMatching::*BlockM)();

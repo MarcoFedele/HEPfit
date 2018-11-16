@@ -328,6 +328,7 @@ private:
     double f_h(uint nf, uint i, uint p, uint q, uint j, int k, int l, int m, double eta);
     
     std::map< uint, double > ai[NF];
+    //double ai[NF][20];
     std::map< std::vector<uint>, double > vM0vi[NF], vM1vi[NF], vM2vi[NF], vM3vi[NF], vM4vi[NF], vM5vi[NF],
          vM6vi[NF], vM11vi[NF], vM33vi[NF], vM31vi[NF], vM13vi[NF], vM34vi[NF], vM43vi[NF], vM23vi[NF], vM32vi[NF],
          vM14vi[NF], vM41vi[NF], vM113vi[NF], vM131vi[NF], vM311vi[NF], vM133vi[NF], vM313vi[NF], vM331vi[NF];

@@ -46,15 +46,19 @@ int main(void) {
     
     double myMW = mySM.Mw();
 
-    HeffDF1 Heff("CPMLQB", mySM, NNLO, QED2);
+    HeffDF1 Heff("CPMLQB", mySM, NNLO);
 
     std::cout << "%SUITE_STARTING% Evolutor" << std::endl;
     std::cout << "%SUITE_STARTED% *****" << std::endl;
-    Expanded<gslpp::vector<gslpp::complex> > allcoeff;
+    Expanded<gslpp::vector<gslpp::complex> > allcoeff(Heff.ComputeCoeff(mub));
+    Expanded<gslpp::vector<gslpp::complex> > total(allcoeff);
 
-    allcoeff = Heff.ComputeCoeff(mub);
+    for(double mu=8;mu<9;mu+=0.005) {
+      allcoeff = Heff.ComputeCoeff(mu);
+      total = total +allcoeff;
+    }
+    std::cout << total << std::endl;
       
-    std::cout << allcoeff << std::endl;
 
 //    std::cout << std::endl << "00:" << std::endl;
 //    std::cout << Heff.LowScaleCoeff(00) <<  std::endl;

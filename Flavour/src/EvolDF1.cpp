@@ -205,12 +205,13 @@ double EvolDF1::f_f(uint nnf, uint i, uint j, int k, double eta)
             f_f_c[3][il] == k && f_f_d[0][il] == eta)
             return f_f_d[1][il];
    
-    double den = ai[nnf].at(j) + k - ai[nnf].at(i), ret;
+    double aii=ai[nnf].at(i), aij=ai[nnf].at(j);
+    double den = aij + k - aii, ret;
     
     if(fabs(den) < EPS) 
-        ret=pow(eta, ai[nnf].at(i))*log(eta);
+        ret=pow(eta, aii)*log(eta);
     else
-        ret=(pow(eta, ai[nnf].at(j) + k ) - pow(eta, ai[nnf].at(i))) / den;
+        ret=(pow(eta, aij + k ) - pow(eta, aii)) / den;
     
     model.CacheShift(f_f_c, 4);
     model.CacheShift(f_f_d, 2);
@@ -1461,9 +1462,10 @@ void EvolDF1::setExpandedMatrix(Expanded<gslpp::matrix<double> >& expm, unsigned
         out << order_qcd_i << " and " << order_qed_i;
         throw std::runtime_error("RGEvolutor::setEvol(): order " + out.str() +" not implemented "); 
     }
-    gslpp::matrix<double> tmp = expm.getOrd(order_qcd_i, order_qed_i);
-    tmp.assign(i, j, x);
-    expm.setOrd(order_qcd_i, order_qed_i, tmp);
+//    gslpp::matrix<double> tmp = expm.getOrd(order_qcd_i, order_qed_i);
+//    tmp.assign(i, j, x);
+//    expm.setOrd(order_qcd_i, order_qed_i, tmp);
+    expm.setSingleElem(order_qcd_i, order_qed_i, i, j, x);
 }
 
  void EvolDF1::DF1Ev(double mu, double M, int nf, schemes scheme) 

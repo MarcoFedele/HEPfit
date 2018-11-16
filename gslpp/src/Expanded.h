@@ -496,6 +496,16 @@ public:
     void setOrd(uint i, uint j, T value) {
         data[i][j] = value;
     }
+    
+    template <class Q> typename std::enable_if<isMat(T, Q), void>::type 
+    setSingleElem(uint i,uint j,uint h, uint k, Q x ) {
+        data[i][j].assign(h,k,x);
+    }
+
+    template <class Q> typename std::enable_if<isVec(T, Q), void>::type 
+    setSingleElem(uint i,uint j,uint h, Q x ) {
+        data[i][j].assign(h,x);
+    }
 
     const uint getN1() const {
         return ord1;
