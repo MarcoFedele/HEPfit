@@ -487,5 +487,333 @@ public:
     const FroggattNielsen *myFroggattNielsen;
 };
 
+
+class Ru11 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru11(const StandardModel& SM_i);
+     
+   ~Ru11();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Ru12 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru12(const StandardModel& SM_i);
+     
+   ~Ru12();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Ru13 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru13(const StandardModel& SM_i);
+     
+   ~Ru13();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+
+class Ru21 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru21(const StandardModel& SM_i);
+     
+   ~Ru21();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Ru22 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru22(const StandardModel& SM_i);
+     
+   ~Ru22();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Ru23 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru23(const StandardModel& SM_i);
+     
+   ~Ru23();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+
+class Ru31 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru31(const StandardModel& SM_i);
+     
+   ~Ru31();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Ru32 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru32(const StandardModel& SM_i);
+     
+   ~Ru32();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Ru33 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Ru33(const StandardModel& SM_i);
+     
+   ~Ru33();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd11 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd11(const StandardModel& SM_i);
+     
+   ~Rd11();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd12 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd12(const StandardModel& SM_i);
+     
+   ~Rd12();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd13 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd13(const StandardModel& SM_i);
+     
+   ~Rd13();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+
+class Rd21 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd21(const StandardModel& SM_i);
+     
+   ~Rd21();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd22 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd22(const StandardModel& SM_i);
+     
+   ~Rd22();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd23 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd23(const StandardModel& SM_i);
+     
+   ~Rd23();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+
+class Rd31 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd31(const StandardModel& SM_i);
+     
+   ~Rd31();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd32 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd32(const StandardModel& SM_i);
+     
+   ~Rd32();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
+
+class Rd33 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Rd33(const StandardModel& SM_i);
+     
+   ~Rd33();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
 #endif /* FROGGATTNIELSEN_H */
 

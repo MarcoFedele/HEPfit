@@ -44,6 +44,24 @@ ThObsFactory::ThObsFactory()
     obsThFactory["GaNTHDM"] = boost::factory<GaNTHDM*>();
     
     obsThFactory["test"] = boost::factory<test*>();
+    obsThFactory["Ru11"] = boost::factory<Ru11*>();
+    obsThFactory["Ru12"] = boost::factory<Ru12*>();
+    obsThFactory["Ru13"] = boost::factory<Ru13*>();
+    obsThFactory["Ru21"] = boost::factory<Ru21*>();
+    obsThFactory["Ru22"] = boost::factory<Ru22*>();
+    obsThFactory["Ru23"] = boost::factory<Ru23*>();
+    obsThFactory["Ru31"] = boost::factory<Ru31*>();
+    obsThFactory["Ru32"] = boost::factory<Ru32*>();
+    obsThFactory["Ru33"] = boost::factory<Ru33*>();
+    obsThFactory["Rd11"] = boost::factory<Rd11*>();
+    obsThFactory["Rd12"] = boost::factory<Rd12*>();
+    obsThFactory["Rd13"] = boost::factory<Rd13*>();
+    obsThFactory["Rd21"] = boost::factory<Rd21*>();
+    obsThFactory["Rd22"] = boost::factory<Rd22*>();
+    obsThFactory["Rd23"] = boost::factory<Rd23*>();
+    obsThFactory["Rd31"] = boost::factory<Rd31*>();
+    obsThFactory["Rd32"] = boost::factory<Rd32*>();
+    obsThFactory["Rd33"] = boost::factory<Rd33*>();
 
     //
     //-----  StandardModel observables  -----

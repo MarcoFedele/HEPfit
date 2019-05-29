@@ -456,3 +456,309 @@ double test::computeThValue()
     return myFroggattNielsen->geteps();
 
 }
+
+Ru11::Ru11(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru11::~Ru11()
+{
+};
+
+double Ru11::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(0,0).abs()/Fu(0,0);
+}
+
+Ru12::Ru12(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru12::~Ru12()
+{
+};
+
+double Ru12::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(0,1).abs()/Fu(0,1);
+}
+
+Ru13::Ru13(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru13::~Ru13()
+{
+};
+
+double Ru13::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(0,2).abs()/Fu(0,2);
+}
+
+Ru21::Ru21(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru21::~Ru21()
+{
+};
+
+double Ru21::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(1,0).abs()/Fu(1,0);
+}
+
+Ru22::Ru22(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru22::~Ru22()
+{
+};
+
+double Ru22::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(1,1).abs()/Fu(1,1);
+}
+
+Ru23::Ru23(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru23::~Ru23()
+{
+};
+
+double Ru23::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(1,2).abs()/Fu(1,2);
+}
+
+Ru31::Ru31(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru31::~Ru31()
+{
+};
+
+double Ru31::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(2,0).abs()/Fu(2,0);
+}
+
+Ru32::Ru32(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru32::~Ru32()
+{
+};
+
+double Ru32::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(2,1).abs()/Fu(2,1);
+}
+
+Ru33::Ru33(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Ru33::~Ru33()
+{
+};
+
+double Ru33::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yu = myFroggattNielsen->y_u();
+    gslpp::matrix<double> Fu = myFroggattNielsen->F_u();
+    
+    return yu(2,2).abs()/Fu(2,2);
+}
+
+Rd11::Rd11(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd11::~Rd11()
+{
+};
+
+double Rd11::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(0,0).abs()/Fd(0,0);
+}
+
+Rd12::Rd12(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd12::~Rd12()
+{
+};
+
+double Rd12::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(0,1).abs()/Fd(0,1);
+}
+
+Rd13::Rd13(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd13::~Rd13()
+{
+};
+
+double Rd13::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(0,2).abs()/Fd(0,2);
+}
+
+Rd21::Rd21(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd21::~Rd21()
+{
+};
+
+double Rd21::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(1,0).abs()/Fd(1,0);
+}
+
+Rd22::Rd22(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd22::~Rd22()
+{
+};
+
+double Rd22::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(1,1).abs()/Fd(1,1);
+}
+
+Rd23::Rd23(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd23::~Rd23()
+{
+};
+
+double Rd23::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(1,2).abs()/Fd(1,2);
+}
+
+Rd31::Rd31(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd31::~Rd31()
+{
+};
+
+double Rd31::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(2,0).abs()/Fd(2,0);
+}
+
+Rd32::Rd32(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd32::~Rd32()
+{
+};
+
+double Rd32::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(2,1).abs()/Fd(2,1);
+}
+
+Rd33::Rd33(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+Rd33::~Rd33()
+{
+};
+
+double Rd33::computeThValue()
+{
+    gslpp::matrix<gslpp::complex> yd = myFroggattNielsen->y_d();
+    gslpp::matrix<double> Fd = myFroggattNielsen->F_d();
+    
+    return yd(2,2).abs()/Fd(2,2);
+}
