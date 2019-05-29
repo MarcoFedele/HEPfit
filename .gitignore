@@ -39,7 +39,7 @@ Analysis/*.root
 Analysis/*.txt
 Analysis/*~
 Analysis/*.eps
-Analysis/Observables*
+#Analysis/Observables*
 Analysis/*.sh
 Analysis/*.zip
 
