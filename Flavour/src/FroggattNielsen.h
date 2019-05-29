@@ -396,37 +396,37 @@ public:
      *
      * @return \f$ |CKM| $\f
      */
-    gslpp::matrix<double> absCKM() const;
+    gslpp::matrix<gslpp::complex> CKM() const;
     
     /**
      *
      * @return \f$ \lambda_u $\f
      */
-    gslpp::matrix<double> lambda_u() const;
+    gslpp::matrix<gslpp::complex> lambda_u() const;
     
     /**
      *
      * @return \f$ \lambda_d $\f
      */
-    gslpp::matrix<double> lambda_d() const;
+    gslpp::matrix<gslpp::complex> lambda_d() const;
     
     /**
      *
      * @return \f$ V $\f
      */
-    gslpp::matrix<double> create_V(double th1, double th2, double th3, double phi1, double phi2, double phi3, double phi4, double phi5) const;
+    gslpp::matrix<gslpp::complex> create_V(double th1, double th2, double th3, double phi1, double phi2, double phi3, double phi4, double phi5) const;
     
     /**
      *
      * @return \f$ y_u $\f
      */
-    gslpp::matrix<double> y_u() const;
+    gslpp::matrix<gslpp::complex> y_u() const;
     
     /**
      *
      * @return \f$ y_d $\f
      */
-    gslpp::matrix<double> y_d() const;
+    gslpp::matrix<gslpp::complex> y_d() const;
     
     /**
      *
