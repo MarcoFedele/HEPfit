@@ -14,6 +14,7 @@
 #include "MtMSbar.h"
 #include "Axions.h"
 #include "AxionsTHDM.h"
+#include "FroggattNielsen.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
@@ -41,6 +42,8 @@ ThObsFactory::ThObsFactory()
     obsThFactory["TRGBTHDM"] = boost::factory<TRGBTHDM*>();
     obsThFactory["HBRTHDM"] = boost::factory<HBRTHDM*>();
     obsThFactory["GaNTHDM"] = boost::factory<GaNTHDM*>();
+    
+    obsThFactory["test"] = boost::factory<test*>();
 
     //
     //-----  StandardModel observables  -----
