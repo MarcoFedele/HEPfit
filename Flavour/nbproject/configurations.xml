@@ -6,6 +6,8 @@
                    projectFiles="true">
       <itemPath>src/AmpDB2.h</itemPath>
       <itemPath>src/AmpDK2.h</itemPath>
+      <itemPath>src/Axions.h</itemPath>
+      <itemPath>src/AxionsTHDM.h</itemPath>
       <itemPath>src/BdmumuOBsmumu.h</itemPath>
       <itemPath>src/Betas_JPsiPhi.h</itemPath>
       <itemPath>src/Btaunu.h</itemPath>
@@ -55,6 +57,8 @@
                    projectFiles="true">
       <itemPath>src/AmpDB2.cpp</itemPath>
       <itemPath>src/AmpDK2.cpp</itemPath>
+      <itemPath>src/Axions.cpp</itemPath>
+      <itemPath>src/AxionsTHDM.cpp</itemPath>
       <itemPath>src/BdmumuOBsmumu.cpp</itemPath>
       <itemPath>src/Betas_JPsiPhi.cpp</itemPath>
       <itemPath>src/Btaunu.cpp</itemPath>
@@ -149,6 +153,14 @@
       <item path="src/AmpDK2.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/AmpDK2.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Axions.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Axions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/AxionsTHDM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/AxionsTHDM.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/BdmumuOBsmumu.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -337,6 +349,14 @@
       <item path="src/AmpDK2.cpp" ex="false" tool="1" flavor2="8">
       </item>
       <item path="src/AmpDK2.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Axions.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Axions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/AxionsTHDM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/AxionsTHDM.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/BdmumuOBsmumu.cpp" ex="false" tool="1" flavor2="8">
       </item>

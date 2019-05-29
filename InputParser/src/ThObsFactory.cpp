@@ -12,11 +12,36 @@
 #include "FlavourObservables.h"
 #include "alpha_s.h"
 #include "MtMSbar.h"
+#include "Axions.h"
+#include "AxionsTHDM.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 ThObsFactory::ThObsFactory()
 {
+    //
+    //-----  My observables  -----
+     obsThFactory["mac2"] = boost::factory<mac2*>();
+    obsThFactory["G117B15A"] = boost::factory<G117B15A*>();
+    obsThFactory["R548"] = boost::factory<R548*>();
+    obsThFactory["PG1351489"] = boost::factory<PG1351489*>();
+    obsThFactory["L192"] = boost::factory<L192*>();
+    obsThFactory["TRGB"] = boost::factory<TRGB*>();
+    obsThFactory["HBR"] = boost::factory<HBR*>();
+    
+    obsThFactory["gagTHDM"] = boost::factory<gagTHDM*>();
+    obsThFactory["gaeTHDM"] = boost::factory<gaeTHDM*>();
+    obsThFactory["logtbTHDM"] = boost::factory<logtbTHDM*>();
+    obsThFactory["logmaTHDM"] = boost::factory<logmaTHDM*>();
+    obsThFactory["mac2THDM"] = boost::factory<mac2THDM*>();
+    obsThFactory["G117B15ATHDM"] = boost::factory<G117B15ATHDM*>();
+    obsThFactory["R548THDM"] = boost::factory<R548THDM*>();
+    obsThFactory["PG1351489THDM"] = boost::factory<PG1351489THDM*>();
+    obsThFactory["L192THDM"] = boost::factory<L192THDM*>();
+    obsThFactory["TRGBTHDM"] = boost::factory<TRGBTHDM*>();
+    obsThFactory["HBRTHDM"] = boost::factory<HBRTHDM*>();
+    obsThFactory["GaNTHDM"] = boost::factory<GaNTHDM*>();
+
     //
     //-----  StandardModel observables  -----
     obsThFactory["MtMSbar"] = boost::factory<MtMSbar*>();
