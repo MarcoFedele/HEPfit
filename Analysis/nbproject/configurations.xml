@@ -59,9 +59,11 @@
     </logicalFolder>
     <itemPath>Axions.conf</itemPath>
     <itemPath>Flavour.conf</itemPath>
+    <itemPath>FroggattNielsen.conf</itemPath>
     <itemPath>Model.conf</itemPath>
     <itemPath>MonteCarlo.conf</itemPath>
     <itemPath>Observables_Axions.conf</itemPath>
+    <itemPath>Observables_FN.conf</itemPath>
     <itemPath>StandardModel.conf</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -244,11 +246,15 @@
       </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Model.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="StandardModel.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -492,11 +498,15 @@
       </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Model.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="StandardModel.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -733,11 +743,15 @@
       </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Model.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="StandardModel.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -976,11 +990,15 @@
       </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Model.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="StandardModel.conf" ex="false" tool="3" flavor2="0">
       </item>
