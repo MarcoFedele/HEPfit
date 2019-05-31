@@ -353,6 +353,40 @@ public:
     const AxionsTHDM *myAxions;
 };
 
+class loggagTHDM : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   loggagTHDM(const StandardModel& SM_i);
+     
+   ~loggagTHDM();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const AxionsTHDM *myAxions;
+};
+
+class loggaeTHDM : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   loggaeTHDM(const StandardModel& SM_i);
+     
+   ~loggaeTHDM();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const AxionsTHDM *myAxions;
+};
+
 class mac2THDM : public ThObservable {
 public:
     /**

@@ -435,6 +435,38 @@ double logmaTHDM::computeThValue()
 } 
 
 
+loggagTHDM::loggagTHDM(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+loggagTHDM::~loggagTHDM()
+{
+};
+
+double loggagTHDM::computeThValue()
+{
+    return log10(myAxions->gag());
+
+} 
+
+
+loggaeTHDM::loggaeTHDM(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+loggaeTHDM::~loggaeTHDM()
+{
+};
+
+double loggaeTHDM::computeThValue()
+{
+    return log10(myAxions->gae());
+
+} 
+
+
 mac2THDM::mac2THDM(const StandardModel& SM_i)
 : ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
 {

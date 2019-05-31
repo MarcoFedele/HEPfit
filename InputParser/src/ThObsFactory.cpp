@@ -34,6 +34,8 @@ ThObsFactory::ThObsFactory()
     obsThFactory["gaeTHDM"] = boost::factory<gaeTHDM*>();
     obsThFactory["logtbTHDM"] = boost::factory<logtbTHDM*>();
     obsThFactory["logmaTHDM"] = boost::factory<logmaTHDM*>();
+    obsThFactory["loggagTHDM"] = boost::factory<loggagTHDM*>();
+    obsThFactory["loggaeTHDM"] = boost::factory<loggaeTHDM*>();
     obsThFactory["mac2THDM"] = boost::factory<mac2THDM*>();
     obsThFactory["G117B15ATHDM"] = boost::factory<G117B15ATHDM*>();
     obsThFactory["R548THDM"] = boost::factory<R548THDM*>();
