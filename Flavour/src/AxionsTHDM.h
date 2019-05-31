@@ -72,8 +72,8 @@ public:
      *
      * @return \f$ DFSZ type $\f
      */
-    double getDFSZ() const {
-        return DFSZ;
+    double getmodel() const {
+        return model;
     }
     
     /**
@@ -263,7 +263,7 @@ private:
     
     double ma, tanb, sinb, cosb;
     
-    double DFSZ;
+    double model;
     
     double a_G117B15A, b_G117B15A, c_G117B15A, d_G117B15A;
     double a_R548, b_R548, c_R548, d_R548;

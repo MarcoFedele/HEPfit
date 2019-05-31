@@ -7,7 +7,7 @@
 
 #include "AxionsTHDM.h"
 
-const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "DFSZ",
+const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model",
                                 "a_G117B15A", "b_G117B15A", "c_G117B15A", "d_G117B15A", 
                                 "a_R548", "b_R548", "c_R548", "d_R548", 
                                 "a_PG1351489", "b_PG1351489", "c_PG1351489", "d_PG1351489", 
@@ -18,7 +18,7 @@ const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "DF
 AxionsTHDM::AxionsTHDM() : StandardModel() {   
     ModelParamMap.insert(std::make_pair("logtanb", std::cref(tanb)));
     ModelParamMap.insert(std::make_pair("logma", std::cref(ma)));
-    ModelParamMap.insert(std::make_pair("DFSZ", std::cref(DFSZ)));
+    ModelParamMap.insert(std::make_pair("model", std::cref(model)));
     
     ModelParamMap.insert(std::make_pair("a_G117B15A", std::cref(a_G117B15A)));
     ModelParamMap.insert(std::make_pair("b_G117B15A", std::cref(b_G117B15A)));
@@ -107,8 +107,8 @@ void AxionsTHDM::setParameter(const std::string name, const double& value){
     else if(name.compare("logma") == 0) {
         ma = pow(10., value);
     }
-    else if(name.compare("DFSZ") == 0)
-        DFSZ = value;
+    else if(name.compare("model") == 0)
+        model = value;
     else if(name.compare("a_G117B15A") == 0)
         a_G117B15A = value;
     else if(name.compare("b_G117B15A") == 0)
@@ -178,12 +178,22 @@ double AxionsTHDM::gag() const
 {
     double Cag;
     
-    if (DFSZ == 1.)
+    if (model == 0.)
+        Cag = - 1.92;
+    else if (model == 1.)
         Cag = 8./3. - 1.92;
-    else if (DFSZ == 2.)
+    else if (model == 2.)
         Cag = -2./3. + 1.92;
+    else if (model == 3.)
+        Cag = -2./3. + 1.92;
+    else if (model == 4.)
+        Cag = 8./3. - 1.92;
+    else if (model == 5.)
+        Cag = 4./3. + 1.92;
+    else if (model == 6.)
+        Cag = 14./3. - 1.92;
     else
-        throw std::runtime_error("error in AzionsTHDM::gag, DFSZ can be either 1. or 2. !"); 
+        throw std::runtime_error("error in AzionsTHDM::gag, model can only be an integer between 0. and 6. !"); 
     
     return getAle()/2./M_PI * ma/(5.7e9) * Cag;
 }
@@ -192,28 +202,168 @@ double AxionsTHDM::gae() const
 {
     double Cae;
     
-    if (DFSZ == 1.)
-        Cae = sinb*sinb;
-    else if (DFSZ == 2.)
+    if (model == 0.)
+        Cae = 0.;
+    else if (model == 1.)
+        Cae = sinb*sinb/3.;
+    else if (model == 2.)
+        Cae = cosb*cosb/3.;
+    else if (model == 3.)
         Cae = cosb*cosb;
+    else if (model == 4.)
+        Cae = sinb*sinb;
+    else if (model == 5.)
+        Cae = cosb*cosb;
+    else if (model == 6.)
+        Cae = sinb*sinb;
     else
-        throw std::runtime_error("error in AzionsTHDM::gae, DFSZ can be either 1. or 2. !"); 
+        throw std::runtime_error("error in AzionsTHDM::gae, model can only be an integer between 0. and 6. !"); 
     
-    return 0.28e-13 * ma * Cae;
+    return 0.84e-13 * ma * Cae;
 }
 
 double AxionsTHDM::gap() const 
 {
-    double Cap = - 0.435*sinb*sinb - 0.182;
+    double Cad, Cas, Cab;
+    double Cau, Cac, Cat;
+    
+    if (model == 0.) {
+        Cad = 0.;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = 0.;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else if (model == 1.){
+        Cad = sinb*sinb/3.;
+        Cas = sinb*sinb/3.;
+        Cab = sinb*sinb/3.;
+        Cau = cosb*cosb/3.;
+        Cac = cosb*cosb/3.;
+        Cat = cosb*cosb/3.;
+    }
+    else if (model == 2.){
+        Cad = sinb*sinb/3.;
+        Cas = sinb*sinb/3.;
+        Cab = sinb*sinb/3.;
+        Cau = cosb*cosb/3.;
+        Cac = cosb*cosb/3.;
+        Cat = cosb*cosb/3.;
+    }
+    else if (model == 3.){
+        Cad = sinb*sinb;
+        Cas = sinb*sinb;
+        Cab = -cosb*cosb;
+        Cau = cosb*cosb;
+        Cac = cosb*cosb;
+        Cat = -sinb*sinb;
+    }
+    else if (model == 4.){
+        Cad = sinb*sinb;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = cosb*cosb;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else if (model == 5.){
+        Cad = sinb*sinb;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = cosb*cosb;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else if (model == 6.){
+        Cad = sinb*sinb;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = cosb*cosb;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else
+        throw std::runtime_error("error in AzionsTHDM::gap, model can only be an integer between 0. and 6. !"); 
+    
+    double Cap = -0.47 
+            + 0.88*Cau - 0.39*Cad - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
+    
+    //Cap = - 0.435*sinb*sinb - 0.182;
     
     return 1.56e-10 * ma * Cap;
 }
 
 double AxionsTHDM::gan() const 
 {
-    double Cap = 0.414*sinb*sinb - 0.160;
+    double Cad, Cas, Cab;
+    double Cau, Cac, Cat;
     
-    return 1.57e-10 * ma * Cap;
+    if (model == 0.) {
+        Cad = 0.;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = 0.;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else if (model == 1.){
+        Cad = sinb*sinb/3.;
+        Cas = sinb*sinb/3.;
+        Cab = sinb*sinb/3.;
+        Cau = cosb*cosb/3.;
+        Cac = cosb*cosb/3.;
+        Cat = cosb*cosb/3.;
+    }
+    else if (model == 2.){
+        Cad = sinb*sinb/3.;
+        Cas = sinb*sinb/3.;
+        Cab = sinb*sinb/3.;
+        Cau = cosb*cosb/3.;
+        Cac = cosb*cosb/3.;
+        Cat = cosb*cosb/3.;
+    }
+    else if (model == 3.){
+        Cad = sinb*sinb;
+        Cas = sinb*sinb;
+        Cab = -cosb*cosb;
+        Cau = cosb*cosb;
+        Cac = cosb*cosb;
+        Cat = -sinb*sinb;
+    }
+    else if (model == 4.){
+        Cad = sinb*sinb;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = cosb*cosb;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else if (model == 5.){
+        Cad = sinb*sinb;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = cosb*cosb;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else if (model == 6.){
+        Cad = sinb*sinb;
+        Cas = 0.;
+        Cab = 0.;
+        Cau = cosb*cosb;
+        Cac = 0.;
+        Cat = 0.;
+    }
+    else
+        throw std::runtime_error("error in AzionsTHDM::gan, model can only be an integer between 0. and 6. !"); 
+    
+    double Can = -0.47 
+            + 0.88*Cad - 0.39*Cau - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
+    
+    //Can = 0.414*sinb*sinb - 0.160;
+    
+    return 1.57e-10 * ma * Can;
 }
 
 
