@@ -7,7 +7,7 @@
 
 #include "AxionsTHDM.h"
 
-const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L",
+const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L", "C_pn_err",
                                 "a_G117B15A", "b_G117B15A", "c_G117B15A", "d_G117B15A",
                                 "a_R548", "b_R548", "c_R548", "d_R548",
                                 "a_PG1351489", "b_PG1351489", "c_PG1351489", "d_PG1351489",
@@ -20,6 +20,7 @@ AxionsTHDM::AxionsTHDM() : StandardModel() {
     ModelParamMap.insert(std::make_pair("logma", std::cref(ma)));
     ModelParamMap.insert(std::make_pair("model", std::cref(model)));
     ModelParamMap.insert(std::make_pair("eps_L", std::cref(eps_L)));
+    ModelParamMap.insert(std::make_pair("C_pn_err", std::cref(C_pn_err)));
 
     ModelParamMap.insert(std::make_pair("a_G117B15A", std::cref(a_G117B15A)));
     ModelParamMap.insert(std::make_pair("b_G117B15A", std::cref(b_G117B15A)));
@@ -112,6 +113,8 @@ void AxionsTHDM::setParameter(const std::string name, const double& value){
         model = value;
     else if(name.compare("eps_L") == 0)
         eps_L = value;
+    else if(name.compare("C_pn_err") == 0)
+        C_pn_err = value;
     else if(name.compare("a_G117B15A") == 0)
         a_G117B15A = value;
     else if(name.compare("b_G117B15A") == 0)
@@ -288,9 +291,9 @@ double AxionsTHDM::gap() const
     }
     else
         throw std::runtime_error("error in AzionsTHDM::gap, model can only be an integer between 0. and 6. !");
-
-    double Cap = -0.47
-            + 0.88*Cau - 0.39*Cad - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
+    
+    double Cap = (-0.47+C_pn_err)
+            + (0.88+C_pn_err)*Cau + (-0.39+C_pn_err)*Cad - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
 
     //Cap = - 0.435*sinb*sinb - 0.182;
 
@@ -361,8 +364,8 @@ double AxionsTHDM::gan() const
     else
         throw std::runtime_error("error in AzionsTHDM::gan, model can only be an integer between 0. and 6. !");
 
-    double Can = -0.02
-            + 0.88*Cad - 0.39*Cau - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
+    double Can = (-0.02+C_pn_err)
+            + (0.88+C_pn_err)*Cad + (-0.39+C_pn_err)*Cau - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
 
     //Can = 0.414*sinb*sinb - 0.160;
 

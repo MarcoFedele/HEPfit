@@ -19,7 +19,7 @@
 class AxionsTHDM: public StandardModel {
 public:
 
-    static const int NAxionsvars = 23;
+    static const int NAxionsvars = 24;
 
     static const std::string Axionsvars[NAxionsvars];
 
@@ -74,6 +74,14 @@ public:
      */
     double getmodel() const {
         return model;
+    }
+
+    /**
+     *
+     * @return \f$ parameter in C_p and C_n $\f
+     */
+    double getC_pn_err() const {
+        return C_pn_err;
     }
 
     /**
@@ -263,7 +271,7 @@ private:
 
     double ma, tanb, sinb, cosb;
 
-    double model, eps_L;
+    double model, eps_L, C_pn_err;
 
     double a_G117B15A, b_G117B15A, c_G117B15A, d_G117B15A;
     double a_R548, b_R548, c_R548, d_R548;
