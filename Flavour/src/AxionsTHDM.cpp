@@ -361,7 +361,7 @@ double AxionsTHDM::gan() const
     else
         throw std::runtime_error("error in AzionsTHDM::gan, model can only be an integer between 0. and 6. !");
 
-    double Can = -0.47
+    double Can = -0.02
             + 0.88*Cad - 0.39*Cau - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
 
     //Can = 0.414*sinb*sinb - 0.160;
