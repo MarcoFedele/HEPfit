@@ -29,6 +29,8 @@
 #include "WilsonCoefficientObservables.h"
 #include "MVlnuObservables.h"
 #include "MPlnuObservables.h"
+#include "myMPlnuObservables.h"
+#include "myMVlnuObservables.h"
 
 #endif	/* FLAVOUROBSERVABLES_H */
 

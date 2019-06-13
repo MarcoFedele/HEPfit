@@ -15,12 +15,17 @@
 #include "MVgamma.h"
 #include "MVlnu.h"
 #include "MPlnu.h"
+#include "myMPlnu.h"
+#include "myMVlnu.h"
 
 Flavour::Flavour(const StandardModel& SM_i)
 : mySM(SM_i)
 {
     dispersion = false;
     CLNflag = false;
+    BGLflag = false;
+    MSflag = false;
+    ChiralBasisflag = false;
     btocNPpmflag = false;
 };
 
@@ -187,6 +192,39 @@ MPll& Flavour::getMPll(QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_
 //    }
 //    return *MPllMap.at(key);
     return getM<MPll>(MPllMap, meson_i, vector_i, lep_i);
+}
+
+myMPlnu& Flavour::getmyMPlnu(QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i) const
+{
+//    std::reference_wrapper<std::shared_ptr<MPlnu> > x(MPlnu_BdbarDtaunu);
+//    if (meson_i == StandardModel::B_D && vector_i == StandardModel::D_P && lep_i == StandardModel::TAU) x = std::ref(MPlnu_BdbarDtaunu);
+//    else if (meson_i == StandardModel::B_D && vector_i == StandardModel::D_P && lep_i == StandardModel::MU) x = std::ref(MPlnu_BdbarDmunu);
+//    else if (meson_i == StandardModel::B_D && vector_i == StandardModel::D_P && lep_i == StandardModel::ELECTRON) x = std::ref(MPlnu_BdbarDelnu);
+//    else throw std::runtime_error("Flavour: Decay channel not implemented.");
+//    return *getPtr<MPlnu>(x.get(), meson_i, vector_i, lep_i);
+//    std::vector<int> key({meson_i, vector_i, lep_i});
+//    if(MPlnuMap.find(key)==MPlnuMap.end()) {
+//        MPlnuMap.insert(std::make_pair(key,std::shared_ptr<MPlnu>(new MPlnu(mySM,meson_i, vector_i, lep_i))));
+//    }
+//    return *MPlnuMap.at(key);
+    return getM<myMPlnu>(myMPlnuMap, meson_i, vector_i, lep_i);
+}
+
+myMVlnu& Flavour::getmyMVlnu(QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i) const
+{
+//    std::reference_wrapper<std::shared_ptr<MVlnu> > x(MVlnu_BdbarDstartaunu);
+//    if (meson_i == StandardModel::B_D && vector_i == StandardModel::D_star_P && lep_i == StandardModel::TAU) x = std::ref(MVlnu_BdbarDstartaunu);
+//    else if (meson_i == StandardModel::B_D && vector_i == StandardModel::D_star_P && lep_i == StandardModel::MU) x = std::ref(MVlnu_BdbarDstarmunu);
+//    else if (meson_i == StandardModel::B_D && vector_i == StandardModel::D_star_P && lep_i == StandardModel::ELECTRON) x = std::ref(MVlnu_BdbarDstarelnu);
+//    else throw std::runtime_error("Flavour: Decay channel not implemented.");
+//    return *getPtr<MVlnu>(x.get(), meson_i, vector_i, lep_i);
+//    std::vector<int> key({meson_i, vector_i, lep_i});
+//    if(MVlnuMap.find(key)==MVlnuMap.end()) {
+//        MVlnuMap.insert(std::make_pair(key,std::shared_ptr<MVlnu>(new MVlnu(mySM,meson_i, vector_i, lep_i))));
+//    }
+//    return *MVlnuMap.at(key);
+    return getM<myMVlnu>(myMVlnuMap, meson_i, vector_i, lep_i);
+
 }
 
 template <typename T, typename... Args>

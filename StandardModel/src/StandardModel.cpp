@@ -406,9 +406,18 @@ bool StandardModel::setFlag(const std::string name, const bool value)
     } else if (name.compare("UseDispersionRelation") == 0) {
         SMFlavour.setFlagUseDispersionRelation(value);
         res = true;
+    } else if (name.compare("BGLflag") == 0) {
+        SMFlavour.setFlagBGL(value);
+        res = true;
     } else if (name.compare("CLNflag") == 0) {
         SMFlavour.setFlagCLN(value);
         res = true;
+    } else if (name.compare("MSflag") == 0) {
+        SMFlavour.setFlagMS(value);
+        res = true;
+    } else if (name.compare("ChiralBasisflag") == 0) {
+	      SMFlavour.setFlagChiralBasis(value);
+	      res = true;
     } else if (name.compare("btocNPpmflag") == 0) {
         SMFlavour.setFlagbtocNPpm(value);
         res = true;

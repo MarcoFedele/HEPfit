@@ -16,6 +16,8 @@ class MPll;
 class MVgamma;
 class MVlnu;
 class MPlnu;
+class myMPlnu;
+class myMVlnu;
 #include "QCD.h"
 #include <boost/tuple/tuple.hpp>
 #include <memory>
@@ -199,6 +201,26 @@ public:
     MPlnu& getMPlnu(QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i) const;
 
     /**
+     * @brief Returns the initial and final state dependent object for \f$ B \to P \ell \nu \f$.
+     * @param[in] meson_i specifies the meson in the initial state
+     * @param[in] pseudoscalar_i specifies the vector in the final state
+     * @param[in] lepton_i specifies the lepton in the final state
+     * @return returns a pointer to the initial and final state dependent object for the process \f$ B \to V \ell \nu \f$
+     *
+     */
+    myMPlnu& getmyMPlnu(QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i) const;
+
+    /**
+     * @brief Returns the initial and final state dependent object for \f$ B \to V \ell \nu \f$.
+     * @param[in] meson_i specifies the meson in the initial state
+     * @param[in] vector_i specifies the vector in the final state
+     * @param[in] lepton_i specifies the lepton in the final state
+     * @return returns a pointer to the initial and final state dependent object for the process \f$ B \to V \ell^+ \ell^- \f$
+     *
+     */
+    myMVlnu& getmyMVlnu(QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i) const;
+
+    /**
      * @brief sets the update flag for the initial and final state dependent object for \f$ B \to V \ell^+ \ell^- \f$.
      * @param[in] meson_i specifies the meson in the initial state
      * @param[in] vector_i specifies the vector in the final state
@@ -232,6 +254,21 @@ public:
         return (this->CLNflag = CLNflag);
     }
 
+    bool setFlagBGL(bool BGLflag)
+    {
+        return (this->BGLflag = BGLflag);
+    }
+
+    bool setFlagMS(bool MSflag)
+    {
+        return (this->MSflag = MSflag);
+    }
+
+    bool setFlagChiralBasis(bool ChiralBasisflag)
+    {
+        return (this->ChiralBasisflag = ChiralBasisflag);
+    }
+
     bool setFlagbtocNPpm(bool btocNPpmflag)
     {
         return (this->btocNPpmflag = btocNPpmflag);
@@ -250,6 +287,21 @@ public:
     bool getFlagCLN() const
     {
         return CLNflag;
+    }
+
+    bool getFlagBGL() const
+    {
+        return BGLflag;
+    }
+
+    bool getFlagMS() const
+    {
+        return MSflag;
+    }
+
+    bool getFlagChiralBasis() const
+    {
+        return ChiralBasisflag;
     }
 
     bool getbtocNPpmflag() const
@@ -273,10 +325,15 @@ private:
     mutable std::map<std::vector<int>, std::shared_ptr<MVgamma> > MVgammaMap;
     mutable std::map<std::vector<int>, std::shared_ptr<MPll> > MPllMap;
     mutable std::map<std::vector<int>, std::shared_ptr<MPlnu> > MPlnuMap;
+    mutable std::map<std::vector<int>, std::shared_ptr<myMPlnu> > myMPlnuMap;
+    mutable std::map<std::vector<int>, std::shared_ptr<myMVlnu> > myMVlnuMap;
     mutable std::map<std::vector<int>, bool> flagUpdateMap;
     
     mutable bool dispersion;
     mutable bool CLNflag;
+    mutable bool BGLflag;
+    mutable bool MSflag;
+    mutable bool ChiralBasisflag;
     mutable bool btocNPpmflag;
     mutable bool FixedWCbtosflag;
 };

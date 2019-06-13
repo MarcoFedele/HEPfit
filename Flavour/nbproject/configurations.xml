@@ -48,6 +48,10 @@
       <itemPath>src/bsgamma.h</itemPath>
       <itemPath>src/gamma.h</itemPath>
       <itemPath>src/hpl.h</itemPath>
+      <itemPath>src/myMPlnu.h</itemPath>
+      <itemPath>src/myMPlnuObservables.h</itemPath>
+      <itemPath>src/myMVlnu.h</itemPath>
+      <itemPath>src/myMVlnuObservables.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -97,6 +101,10 @@
       <itemPath>src/alpha_2a.cpp</itemPath>
       <itemPath>src/bsgamma.cpp</itemPath>
       <itemPath>src/gamma.cpp</itemPath>
+      <itemPath>src/myMPlnu.cpp</itemPath>
+      <itemPath>src/myMPlnuObservables.cpp</itemPath>
+      <itemPath>src/myMVlnu.cpp</itemPath>
+      <itemPath>src/myMVlnuObservables.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -326,6 +334,22 @@
       </item>
       <item path="src/hpl.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/myMPlnu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/myMPlnu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMPlnuObservables.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/myMPlnuObservables.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMVlnu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/myMVlnu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMVlnuObservables.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/myMVlnuObservables.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="3">
       <toolsSet>
@@ -525,6 +549,22 @@
       <item path="src/gamma.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/hpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMPlnu.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="src/myMPlnu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMPlnuObservables.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="src/myMPlnuObservables.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMVlnu.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="src/myMVlnu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/myMVlnuObservables.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="src/myMVlnuObservables.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

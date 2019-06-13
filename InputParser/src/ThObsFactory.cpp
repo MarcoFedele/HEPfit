@@ -475,6 +475,94 @@ ThObsFactory::ThObsFactory()
     obsThFactory["af0_0"] = boost::bind(boost::factory<af0_0*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::ELECTRON);
     obsThFactory["FF0_MPlnu"] = boost::bind(boost::factory<FF0_MPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::ELECTRON);
     obsThFactory["FFplus_MPlnu"] = boost::bind(boost::factory<FFplus_MPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::ELECTRON);
+    
+    
+    //----- B to D l nu  -----
+    obsThFactory["Gamma_BDtau"] = boost::bind(boost::factory<Gamma_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::TAU);
+    obsThFactory["Gamma_BDmu"] = boost::bind(boost::factory<Gamma_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::MU);
+    obsThFactory["Gamma_BDe"] = boost::bind(boost::factory<Gamma_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::ELECTRON);
+    
+    obsThFactory["A_FB_BDtau"] = boost::bind(boost::factory<A_FB_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::TAU);
+    obsThFactory["A_FB_BDmu"] = boost::bind(boost::factory<A_FB_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::MU);
+    obsThFactory["A_FB_BDe"] = boost::bind(boost::factory<A_FB_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::ELECTRON);
+    
+    obsThFactory["A_lam_BDtau"] = boost::bind(boost::factory<A_lam_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::TAU);
+    obsThFactory["A_lam_BDmu"] = boost::bind(boost::factory<A_lam_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::MU);
+    obsThFactory["A_lam_BDe"] = boost::bind(boost::factory<A_lam_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::ELECTRON);
+    
+    obsThFactory["R_D"] = boost::bind(boost::factory<R_D*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_FB_MPlnu"] = boost::bind(boost::factory<R_A_FB_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_lam_MPlnu"] = boost::bind(boost::factory<R_A_lam_myMPlnu*>(), _1, StandardModel::B_D, StandardModel::D_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    
+    
+    //----- B to D* l nu  -----
+    obsThFactory["Gamma_BDstartau"] = boost::bind(boost::factory<Gamma_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["Gamma_BDstarmu"] = boost::bind(boost::factory<Gamma_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["Gamma_BDstare"] = boost::bind(boost::factory<Gamma_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    obsThFactory["A_lam_BDstartau"] = boost::bind(boost::factory<A_lam_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_lam_BDstarmu"] = boost::bind(boost::factory<A_lam_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_lam_BDstare"] = boost::bind(boost::factory<A_lam_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    obsThFactory["R_LT_BDstartau"] = boost::bind(boost::factory<R_LT_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["R_LT_BDstarmu"] = boost::bind(boost::factory<R_LT_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["R_LT_BDstare"] = boost::bind(boost::factory<R_LT_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    obsThFactory["R_AB_BDstartau"] = boost::bind(boost::factory<R_AB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["R_AB_BDstarmu"] = boost::bind(boost::factory<R_AB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["R_AB_BDstare"] = boost::bind(boost::factory<R_AB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    obsThFactory["A_FB_BDstartau"] = boost::bind(boost::factory<A_FB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_FB_BDstarmu"] = boost::bind(boost::factory<A_FB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_FB_BDstare"] = boost::bind(boost::factory<A_FB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    obsThFactory["A_3_BDstartau"] = boost::bind(boost::factory<A_3_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_3_BDstarmu"] = boost::bind(boost::factory<A_3_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_3_BDstare"] = boost::bind(boost::factory<A_3_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    
+    obsThFactory["A_4_BDstartau"] = boost::bind(boost::factory<A_4_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_4_BDstarmu"] = boost::bind(boost::factory<A_4_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_4_BDstare"] = boost::bind(boost::factory<A_4_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    
+    obsThFactory["A_5_BDstartau"] = boost::bind(boost::factory<A_5_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_5_BDstarmu"] = boost::bind(boost::factory<A_5_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_5_BDstare"] = boost::bind(boost::factory<A_5_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    
+    obsThFactory["A_6_BDstartau"] = boost::bind(boost::factory<A_6_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_6_BDstarmu"] = boost::bind(boost::factory<A_6_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_6_BDstare"] = boost::bind(boost::factory<A_6_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    
+    obsThFactory["A_7_BDstartau"] = boost::bind(boost::factory<A_7_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_7_BDstarmu"] = boost::bind(boost::factory<A_7_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_7_BDstare"] = boost::bind(boost::factory<A_7_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    
+    obsThFactory["A_8_BDstartau"] = boost::bind(boost::factory<A_8_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_8_BDstarmu"] = boost::bind(boost::factory<A_8_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_8_BDstare"] = boost::bind(boost::factory<A_8_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    
+    obsThFactory["A_9_BDstartau"] = boost::bind(boost::factory<A_9_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU);
+    obsThFactory["A_9_BDstarmu"] = boost::bind(boost::factory<A_9_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::MU);
+    obsThFactory["A_9_BDstare"] = boost::bind(boost::factory<A_9_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::ELECTRON);
+    
+    obsThFactory["R_Dst"] = boost::bind(boost::factory<R_Dst*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_lam_myMVlnu"] = boost::bind(boost::factory<R_A_lam_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_R_LT_myMVlnu"] = boost::bind(boost::factory<R_R_LT_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_R_AB_myMVlnu"] = boost::bind(boost::factory<R_R_AB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_FB_myMVlnu"] = boost::bind(boost::factory<R_A_FB_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_3_myMVlnu"] = boost::bind(boost::factory<R_A_3_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_4_myMVlnu"] = boost::bind(boost::factory<R_A_4_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_5_myMVlnu"] = boost::bind(boost::factory<R_A_5_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["R_A_6_myMVlnu"] = boost::bind(boost::factory<R_A_6_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["D_A_7_myMVlnu"] = boost::bind(boost::factory<D_A_7_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["D_A_8_myMVlnu"] = boost::bind(boost::factory<D_A_8_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    obsThFactory["D_A_9_myMVlnu"] = boost::bind(boost::factory<D_A_9_myMVlnu*>(), _1, StandardModel::B_D, StandardModel::D_star_P, StandardModel::TAU, StandardModel::MU, StandardModel::ELECTRON);
+    
 
     //----- B to tau nu  -----
     obsThFactory["btaunu"] = boost::bind(boost::factory<Btaunu*>(), _1, StandardModel::B_P);
