@@ -425,7 +425,7 @@ double R_A_FB_myMVlnu::computeThValue()
 **/
 R_A_3_myMVlnu::R_A_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
-: ThObservable(SM_i) 
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_1) 
 {
     lep1 = lep_1;
     lep2 = lep_2;
@@ -438,9 +438,9 @@ R_A_3_myMVlnu::R_A_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD:
 
 double R_A_3_myMVlnu::computeThValue() 
 {
-    double A3tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(4);
-    double A3mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(4);
-    double A3e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(4);
+    double A3tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(4) / computeGamma(lep1);
+    double A3mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(4) / computeGamma(lep2);
+    double A3e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(4) / computeGamma(lep3);
     
     double res = 2. * A3tau / (A3mu + A3e);
     
@@ -453,7 +453,7 @@ double R_A_3_myMVlnu::computeThValue()
 **/
 R_A_4_myMVlnu::R_A_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
-: ThObservable(SM_i) 
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_1)
 {
     lep1 = lep_1;
     lep2 = lep_2;
@@ -466,9 +466,9 @@ R_A_4_myMVlnu::R_A_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD:
 
 double R_A_4_myMVlnu::computeThValue() 
 {
-    double A4tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(5);
-    double A4mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(5);
-    double A4e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(5);
+    double A4tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(5) / computeGamma(lep1);
+    double A4mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(5) / computeGamma(lep2);
+    double A4e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(5) / computeGamma(lep3);
     
     double res = 2. * A4tau / (A4mu + A4e);
     
@@ -481,7 +481,7 @@ double R_A_4_myMVlnu::computeThValue()
 **/
 R_A_5_myMVlnu::R_A_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
-: ThObservable(SM_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_1)
 {
     lep1 = lep_1;
     lep2 = lep_2;
@@ -494,9 +494,9 @@ R_A_5_myMVlnu::R_A_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD:
 
 double R_A_5_myMVlnu::computeThValue() 
 {
-    double A5tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(6);
-    double A5mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(6);
-    double A5e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(6);
+    double A5tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(6) / computeGamma(lep1);
+    double A5mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(6) / computeGamma(lep2);
+    double A5e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(6) / computeGamma(lep3);
     
     double res = 2. * A5tau / (A5mu + A5e);
     
@@ -509,7 +509,7 @@ double R_A_5_myMVlnu::computeThValue()
 **/
 R_A_6_myMVlnu::R_A_6_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
-: ThObservable(SM_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_1)
 {
     lep1 = lep_1;
     lep2 = lep_2;
@@ -522,9 +522,9 @@ R_A_6_myMVlnu::R_A_6_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD:
 
 double R_A_6_myMVlnu::computeThValue() 
 {
-    double A6tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(8);
-    double A6mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(8);
-    double A6e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(8);
+    double A6tau = SM.getFlavour().getmyMVlnu(meson, vectorM, lep1).integrateI(8) / computeGamma(lep1);
+    double A6mu = SM.getFlavour().getmyMVlnu(meson, vectorM, lep2).integrateI(8) / computeGamma(lep2);
+    double A6e = SM.getFlavour().getmyMVlnu(meson, vectorM, lep3).integrateI(8) / computeGamma(lep3);
     
     double res = 2. * A6tau / (A6mu + A6e);
     

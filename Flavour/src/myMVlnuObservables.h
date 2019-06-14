@@ -739,7 +739,7 @@ private:
  * @f]
  */
 
-class R_A_3_myMVlnu : public ThObservable{
+class R_A_3_myMVlnu : public Gamma_myMVlnu{
 public:
     
     /**
@@ -782,7 +782,7 @@ private:
  * @f]
  */
 
-class R_A_4_myMVlnu : public ThObservable{
+class R_A_4_myMVlnu : public Gamma_myMVlnu{
 public:
     
     /**
@@ -825,7 +825,7 @@ private:
  * @f]
  */
 
-class R_A_5_myMVlnu : public ThObservable{
+class R_A_5_myMVlnu : public Gamma_myMVlnu{
 public:
     
     /**
@@ -868,7 +868,7 @@ private:
  * @f]
  */
 
-class R_A_6_myMVlnu : public ThObservable{
+class R_A_6_myMVlnu : public Gamma_myMVlnu{
 public:
     
     /**
