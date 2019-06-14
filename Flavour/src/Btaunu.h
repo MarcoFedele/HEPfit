@@ -33,6 +33,11 @@ protected:
 private:
     
     QCD::meson meson;
+    bool ChiralBasisflag;
+
+    gslpp::complex gV;  /**< NP vector WC */
+    gslpp::complex gA;  /**< NP axial WC */
+    gslpp::complex gP;  /**< NP pseudoscalar WC */
     
 };
 
