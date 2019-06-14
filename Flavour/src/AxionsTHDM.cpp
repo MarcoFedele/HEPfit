@@ -275,27 +275,28 @@ double AxionsTHDM::gap() const
     }
     else if (model == 4.){
         Cad = sinb*sinb;
-        Cas = 0.;
-        Cab = 0.;
+        Cas = sinb*sinb;
+        Cab = -cosb*cosb;
         Cau = cosb*cosb;
-        Cac = 0.;
+        Cac = cosb*cosb;
+        Cat = -sinb*sinb;
         Cat = 0.;
     }
     else if (model == 5.){
         Cad = sinb*sinb;
-        Cas = 0.;
-        Cab = 0.;
+        Cas = sinb*sinb;
+        Cab = -cosb*cosb;
         Cau = cosb*cosb;
-        Cac = 0.;
-        Cat = 0.;
+        Cac = cosb*cosb;
+        Cat = -sinb*sinb;
     }
     else if (model == 6.){
         Cad = sinb*sinb;
-        Cas = 0.;
-        Cab = 0.;
+        Cas = sinb*sinb;
+        Cab = -cosb*cosb;
         Cau = cosb*cosb;
-        Cac = 0.;
-        Cat = 0.;
+        Cac = cosb*cosb;
+        Cat = -sinb*sinb;
     }
     else
         throw std::runtime_error("error in AzionsTHDM::gap, model can only be an integer between 0. and 6. !");
