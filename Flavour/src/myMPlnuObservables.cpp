@@ -124,9 +124,9 @@ R_A_lam_myMPlnu::R_A_lam_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, 
 
 double R_A_lam_myMPlnu::computeThValue()
 {
-    double Alamtau = 1. - 2./computeGamma(lep1) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(3)
-    double Alammu = 1. - 2./computeGamma(lep2) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(3)
-    double Alame = 1. - 2./computeGamma(lep3) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(3)
+    double Alamtau = 1. - 2./computeGamma(lep1) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(3);
+    double Alammu = 1. - 2./computeGamma(lep2) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(3);
+    double Alame = 1. - 2./computeGamma(lep3) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(3);
 
     double res = 2. * Alamtau / (Alammu + Alame);
 
