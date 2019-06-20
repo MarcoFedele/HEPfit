@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 HEPfit Collaboration
  *
  *
@@ -13,20 +13,20 @@
 /**
 * Gamma
 **/
-Gamma_myMPlnu::Gamma_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i) 
-: ThObservable(SM_i) 
-{  
+Gamma_myMPlnu::Gamma_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i)
+: ThObservable(SM_i)
+{
     lep = lep_i;
     meson = meson_i;
     pseudoscalar = pseudoscalar_i;
-    
+
     setParametersForObservable(SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep).initializemyMPlnuParameters());
 }
 
 double Gamma_myMPlnu::computeGamma(QCD::lepton lep)
 {
     QCD::lepton lep_i = lep;
-    
+
     return 2. * ( SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep_i).integrateI(0)
                 + 1./3. * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep_i).integrateI(2) );
 }
@@ -40,17 +40,17 @@ double Gamma_myMPlnu::computeThValue()
 /**
 * A_FB
 **/
-A_FB_myMPlnu::A_FB_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i) 
-: Gamma_myMPlnu(SM_i, meson_i, pseudoscalar_i, lep_i) 
+A_FB_myMPlnu::A_FB_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i)
+: Gamma_myMPlnu(SM_i, meson_i, pseudoscalar_i, lep_i)
 {
     lep = lep_i;
     meson = meson_i;
     pseudoscalar = pseudoscalar_i;
-    
+
     setParametersForObservable(SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep).initializemyMPlnuParameters());
 }
 
-double A_FB_myMPlnu::computeThValue() 
+double A_FB_myMPlnu::computeThValue()
 {
     return 1. / computeGamma(lep) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep).integrateI(1);
 }
@@ -59,13 +59,13 @@ double A_FB_myMPlnu::computeThValue()
 /**
 * A_lam
 **/
-A_lam_myMPlnu::A_lam_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i) 
-: Gamma_myMPlnu(SM_i, meson_i, pseudoscalar_i, lep_i) 
+A_lam_myMPlnu::A_lam_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i)
+: Gamma_myMPlnu(SM_i, meson_i, pseudoscalar_i, lep_i)
 {
     lep = lep_i;
     meson = meson_i;
     pseudoscalar = pseudoscalar_i;
-    
+
     setParametersForObservable(SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep).initializemyMPlnuParameters());
 }
 
@@ -87,20 +87,20 @@ double A_lam_myMPlnu::computeThValue()
 /**
 * R_D
 **/
-R_D::R_D(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, 
-            QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
-: Gamma_myMPlnu(SM_i, meson_i, pseudoscalar_i, lep_1) 
+R_D::R_D(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i,
+            QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3)
+: Gamma_myMPlnu(SM_i, meson_i, pseudoscalar_i, lep_1)
 {
     lep1 = lep_1;
     lep2 = lep_2;
     lep3 = lep_3;
     meson = meson_i;
     pseudoscalar = pseudoscalar_i;
-    
+
     setParametersForObservable(SM.getFlavour().getmyMPlnu(meson, pseudoscalar, QCD::lepton::TAU).initializemyMPlnuParameters());
 }
 
-double R_D::computeThValue() 
+double R_D::computeThValue()
 {
     return computeGamma(lep1) / (1./2. * (computeGamma(lep2) + computeGamma(lep3)) );
 }
@@ -109,8 +109,8 @@ double R_D::computeThValue()
 /**
 * R_A_lam
 **/
-R_A_lam_myMPlnu::R_A_lam_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, 
-            QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
+R_A_lam_myMPlnu::R_A_lam_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i,
+            QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3)
 : ThObservable(SM_i)
 {
     lep1 = lep_1;
@@ -118,21 +118,18 @@ R_A_lam_myMPlnu::R_A_lam_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, 
     lep3 = lep_3;
     meson = meson_i;
     pseudoscalar = pseudoscalar_i;
-    
+
     setParametersForObservable(SM.getFlavour().getmyMPlnu(meson, pseudoscalar, QCD::lepton::TAU).initializemyMPlnuParameters());
 }
 
-double R_A_lam_myMPlnu::computeThValue() 
+double R_A_lam_myMPlnu::computeThValue()
 {
-    double Alamtau = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(4)
-                    - SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(3);
-    double Alammu = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(4)
-                   - SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(3);
-    double Alame = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(4)
-                  - SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(3);
-    
+    double Alamtau = 1. - 2./computeGamma(lep1) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(3)
+    double Alammu = 1. - 2./computeGamma(lep2) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(3)
+    double Alame = 1. - 2./computeGamma(lep3) * SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(3)
+
     double res = 2. * Alamtau / (Alammu + Alame);
-    
+
     return res;
 }
 
@@ -140,8 +137,8 @@ double R_A_lam_myMPlnu::computeThValue()
 /**
 * R_A_FB
 **/
-R_A_FB_myMPlnu::R_A_FB_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, 
-            QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3) 
+R_A_FB_myMPlnu::R_A_FB_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i,
+            QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3)
 : ThObservable(SM_i)
 {
     lep1 = lep_1;
@@ -149,24 +146,21 @@ R_A_FB_myMPlnu::R_A_FB_myMPlnu(const StandardModel& SM_i, QCD::meson meson_i, QC
     lep3 = lep_3;
     meson = meson_i;
     pseudoscalar = pseudoscalar_i;
-    
+
     setParametersForObservable(SM.getFlavour().getmyMPlnu(meson, pseudoscalar, QCD::lepton::TAU).initializemyMPlnuParameters());
 }
 
-double R_A_FB_myMPlnu::computeThValue() 
+double R_A_FB_myMPlnu::computeThValue()
 {
     double Mlep12 = SM.getLeptons(lep1).getMass() * SM.getLeptons(lep1).getMass();
     double Mlep22 = SM.getLeptons(lep2).getMass() * SM.getLeptons(lep2).getMass();
     double Mlep32 = SM.getLeptons(lep3).getMass() * SM.getLeptons(lep3).getMass();
-    
-    double AFBtau = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(1);
-    double AFBmu = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(1);
-    double AFBe = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(1);
-    
+
+    double AFBtau = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep1).integrateI(1) / computeGamma(lep1);
+    double AFBmu = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep2).integrateI(1) / computeGamma(lep2);
+    double AFBe = SM.getFlavour().getmyMPlnu(meson, pseudoscalar, lep3).integrateI(1) / computeGamma(lep3);
+
     double res = 2. * AFBtau/Mlep12 / (AFBmu/Mlep22 + AFBe/Mlep32);
-    
+
     return res;
 }
-
-
-
