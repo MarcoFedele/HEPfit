@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2012 HEPfit Collaboration
  *
  *
@@ -21,9 +21,9 @@
 #include "EWSMThreeLoopEW.h"
 #include "EWSMApproximateFormulae.h"
 #include "gslpp_function_adapter.h"
-  
+
 std::string StandardModel::SMvars[NSMvars] = {
-    "lambda", "A", "rhob", "etab", "Mz", "AlsMz", "GF", "ale", "dAle5Mz", "mHl", 
+    "lambda", "A", "rhob", "etab", "Mz", "AlsMz", "GF", "ale", "dAle5Mz", "mHl",
     "delMw", "delSin2th_l", "delSin2th_q", "delSin2th_b", "delGammaZ", "delsigma0H", "delR0l", "delR0c", "delR0b",
     "mneutrino_1", "mneutrino_2", "mneutrino_3", "melectron", "mmu", "mtau", "muw"
 };
@@ -56,10 +56,10 @@ Ye(3, 3, 0.), SMM(*this), SMFlavour(*this)
     flagLEP2[ISR] = true;
     flagLEP2[QEDFSR] = true;
     flagLEP2[QCDFSR] = true;
-    
+
     bSigmaForAFB = false;
     bSigmaForR = false;
-    
+
     // Caches for EWPO
     FlagCacheInStandardModel = true; // use caches in the current class
     useDeltaAlphaLepton_cache = false;
@@ -120,7 +120,7 @@ Ye(3, 3, 0.), SMM(*this), SMFlavour(*this)
     ModelParamMap.insert(std::make_pair("rhob", std::cref(rhob)));
     ModelParamMap.insert(std::make_pair("etab", std::cref(etab)));
     ModelParamMap.insert(std::make_pair("muw", std::cref(muw)));
-    
+
     iterationNo = 0;
     realorder = LO;
 }
@@ -418,6 +418,12 @@ bool StandardModel::setFlag(const std::string name, const bool value)
     } else if (name.compare("ChiralBasisflag") == 0) {
 	      SMFlavour.setFlagChiralBasis(value);
 	      res = true;
+    } else if (name.compare("gSL814gTflag") == 0) {
+	      SMFlavour.setFlaggSL814gT(value);
+	      res = true;
+    } else if (name.compare("gSLm814gTflag") == 0) {
+	      SMFlavour.setFlaggSLm814gT(value);
+	      res = true;
     } else if (name.compare("btocNPpmflag") == 0) {
         SMFlavour.setFlagbtocNPpm(value);
         res = true;
@@ -614,7 +620,7 @@ double StandardModel::AlsByOrder(double mu, orders order, bool qed_flag, bool Nf
     int i, nfAls = (int) Nf(Mz), nfmu = Nf_thr ? (int) Nf(mu) : nfAls;
     double als, alstmp, mutmp;
     orders fullord;
-    
+
     for (i = 0; i < CacheSize; ++i)
         if ((mu == als_cache[0][i]) && ((double) order == als_cache[1][i]) &&
                 (AlsMz == als_cache[2][i]) && (Mz == als_cache[3][i]) &&
@@ -650,7 +656,7 @@ double StandardModel::AlsByOrder(double mu, orders order, bool qed_flag, bool Nf
                 alstmp *= (1. + NfThresholdCorrections(mutmp, MassOfNf(nfAls + 1), alstmp, nfAls + 1, fullord)); // WARNING: QED threshold corrections not implemented yet
                 for (i = nfAls + 1; i < nfmu; i++) {
                     mutmp = AboveTh(mutmp) - MEPS;
-                    alstmp = AlsWithInit(mutmp, alstmp, BelowTh(mutmp) + MEPS, realorder, qed_flag); 
+                    alstmp = AlsWithInit(mutmp, alstmp, BelowTh(mutmp) + MEPS, realorder, qed_flag);
                     alstmp *= (1. + NfThresholdCorrections(mutmp, MassOfNf(i + 1), alstmp, i + 1, fullord)); // WARNING: QED threshold corrections not implemented yet
                 }
                 als = AlsWithInit(mu, alstmp, BelowTh(mu) + MEPS, order, qed_flag);
@@ -658,7 +664,7 @@ double StandardModel::AlsByOrder(double mu, orders order, bool qed_flag, bool Nf
 
             CacheShift(als_cache, 11);
             als_cache[0][0] = mu;
-            als_cache[1][0] = (double) order;       
+            als_cache[1][0] = (double) order;
             als_cache[2][0] = AlsMz;
             als_cache[3][0] = Mz;
             als_cache[4][0] = mut;
@@ -767,7 +773,7 @@ double StandardModel::Ale(const double mu, orders order, bool Nf_thr) const
 //                alstmp *= (1. + NfThresholdCorrections(mutmp, MassOfNf(nfAls + 1), alstmp, nfAls + 1, fullord)); // WARNING: QED threshold corrections not implemented yet
                 for (i = nfAle + 1; i < nfmu; i++) {
                     mutmp = AboveTh(mutmp) - MEPS;
-                    aletmp = AleWithInit(mutmp, aletmp, BelowTh(mutmp) + MEPS, fullord); 
+                    aletmp = AleWithInit(mutmp, aletmp, BelowTh(mutmp) + MEPS, fullord);
 //                    alstmp *= (1. + NfThresholdCorrections(mutmp, MassOfNf(i + 1), alstmp, i + 1, fullord)); // WARNING: QED threshold corrections not implemented yet
                 }
                 ale = AleWithInit(mu, aletmp, BelowTh(mu) + MEPS, order);
@@ -775,7 +781,7 @@ double StandardModel::Ale(const double mu, orders order, bool Nf_thr) const
 
             CacheShift(ale_cache, 10);
             ale_cache[0][0] = mu;
-            ale_cache[1][0] = (double) order;    
+            ale_cache[1][0] = (double) order;
             ale_cache[2][0] = AlsMz;
             ale_cache[3][0] = Mz;
             ale_cache[4][0] = mut;
@@ -893,9 +899,9 @@ double StandardModel::Alstilde5(const double mu) const
     unsigned int nf = 5;
 
     double B00S = Beta0(nf), B10S = Beta1(nf), B20S = Beta2(nf), B30S = gsl_sf_zeta_int(3) * 352864./81. - 598391./1458,
-            B01S = -22./9., B11S = -308./27., B02S = 4945./243.; 
+            B01S = -22./9., B11S = -308./27., B02S = 4945./243.;
 
-    double B00E = 80./9., B01E = 176./9., B10E = 464./27.; 
+    double B00E = 80./9., B01E = 176./9., B10E = 464./27.;
 
     double B10soB00s = B10S / B00S;
     double B01soB00e = B01S/B00E;
@@ -913,15 +919,15 @@ double StandardModel::Alstilde5(const double mu) const
 
     double result = 0;
 
-    result = asovs - pow(asovs, 2) * (logvs * B10soB00s - logve * B01soB00e) 
+    result = asovs - pow(asovs, 2) * (logvs * B10soB00s - logve * B01soB00e)
             +  pow(asovs, 3) * ((1. - vs) * B20S / B00S + B10soB00s * B10soB00s * (logvs * logvs - logvs
-            + vs - 1.) + B01soB00e * B01soB00e * logve * logve + (-2. * logvs * logve 
-            + ps * ve * logve) * B01S * B10S/(B00E * B00S)) 
-            +  pow(asovs, 4) * (0.5 * B30S *(1. - vs * vs)/ B00S + ((2. * vs - 3.) * logvs + vs * vs 
-            - vs) * B20S * B10soB00s /(B00S) + B10soB00s * B10soB00s * B10soB00s * (- pow(logvs,3) 
+            + vs - 1.) + B01soB00e * B01soB00e * logve * logve + (-2. * logvs * logve
+            + ps * ve * logve) * B01S * B10S/(B00E * B00S))
+            +  pow(asovs, 4) * (0.5 * B30S *(1. - vs * vs)/ B00S + ((2. * vs - 3.) * logvs + vs * vs
+            - vs) * B20S * B10soB00s /(B00S) + B10soB00s * B10soB00s * B10soB00s * (- pow(logvs,3)
             + 5. * pow(logvs,2) / 2. + 2. * (1. - vs) * logvs - (vs - 1.) * (vs - 1.)* 0.5))
-            + pow(asovs, 2) * (aeove) * ((ve - 1.) * B02S / B00E 
-            + ps * ve * logeos * B11S /B00S +(logve - ve + 1.) * B01soB00e * B10E/(B00E) 
+            + pow(asovs, 2) * (aeove) * ((ve - 1.) * B02S / B00E
+            + ps * ve * logeos * B11S /B00S +(logve - ve + 1.) * B01soB00e * B10E/(B00E)
             + logvs * ps * B01S * B10soB00s/(B00S) +(logsoe * ve * ps - logvs) * B01soB00e * B01E/( B00S));
     return (result);
 }
@@ -1358,17 +1364,17 @@ double StandardModel::R_inv() const
 double StandardModel::N_nu() const
 {
     double Nnu = 0.0;
-    double Gl = 0.0;    
+    double Gl = 0.0;
     double Rl = 0.0;
-    
+
     // Don't assume lepton universality: average over lepton flavours
     Gl = GammaZ(leptons[ELECTRON]) + GammaZ(leptons[MU]) + GammaZ(leptons[TAU]);
     Rl = (1.0/3.0) * ( R0_f(leptons[ELECTRON]) + R0_f(leptons[MU]) + R0_f(leptons[TAU]) );
-    
+
     Nnu = sqrt( 12.0 * M_PI * Rl / Mz / Mz / sigma0_had() ) - Rl -3.0;
-    
+
     Nnu = (Gl/Gamma_inv()) * Nnu;
-    
+
     return Nnu;
 
 }

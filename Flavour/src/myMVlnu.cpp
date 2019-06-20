@@ -28,6 +28,8 @@ N_cache(3, 0.)
     BGLflag = false;
     MSflag = false;
     ChiralBasisflag = false;
+    gSL814gTflag = false;
+    gSLm814gTflag = false;
 
     I1c_updated = 0;
     I1s_updated = 0;
@@ -56,6 +58,8 @@ std::vector<std::string> myMVlnu::initializemyMVlnuParameters()
     BGLflag = mySM.getFlavour().getFlagBGL();
     MSflag = mySM.getFlavour().getFlagMS();
     ChiralBasisflag = mySM.getFlavour().getFlagChiralBasis();
+    gSL814gTflag = mySM.getFlavour().getFlaggSL814gT();
+    gSLm814gTflag = mySM.getFlavour().getFlaggSLm814gT();
 
     if (MSflag + CLNflag + BGLflag != true) throw std::runtime_error("myMVlnu: only one between MSflag, CLNflag and BGLflag can be true");
 
@@ -392,7 +396,10 @@ void myMVlnu::updateParameters()
             gP = mySM.getOptionalParameter("regSR") + gslpp::complex::i()*mySM.getOptionalParameter("imgSR")
                 - mySM.getOptionalParameter("regSL") - gslpp::complex::i()*mySM.getOptionalParameter("imgSL");
             gT = 2.*(mySM.getOptionalParameter("regT") + gslpp::complex::i()*mySM.getOptionalParameter("imgT"));
-            //gT = 2.*(mySM.getOptionalParameter("regSL") + gslpp::complex::i()*mySM.getOptionalParameter("imgSL"))/8.14;
+            if (gSL814gTflag)
+              gT = 2.*(mySM.getOptionalParameter("regSL") + gslpp::complex::i()*mySM.getOptionalParameter("imgSL"))/8.14;
+            if (gSLm814gTflag)
+              gT = -2.*(mySM.getOptionalParameter("regSL") + gslpp::complex::i()*mySM.getOptionalParameter("imgSL"))/8.14;
         }
         else {
             gV = mySM.getOptionalParameter("regV") + gslpp::complex::i()*mySM.getOptionalParameter("imgV");

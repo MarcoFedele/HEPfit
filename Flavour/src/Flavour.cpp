@@ -26,6 +26,8 @@ Flavour::Flavour(const StandardModel& SM_i)
     BGLflag = false;
     MSflag = false;
     ChiralBasisflag = false;
+    gSL814gTflag = false;
+    gSLm814gTflag = false;
     btocNPpmflag = false;
 };
 

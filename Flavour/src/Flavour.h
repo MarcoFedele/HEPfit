@@ -269,6 +269,16 @@ public:
         return (this->ChiralBasisflag = ChiralBasisflag);
     }
 
+    bool setFlaggSL814gT(bool gSL814gTflag)
+    {
+        return (this->gSL814gTflag = gSL814gTflag);
+    }
+
+    bool setFlaggSLm814gT(bool gSLm814gTflag)
+    {
+        return (this->gSLm814gTflag = gSLm814gTflag);
+    }
+
     bool setFlagbtocNPpm(bool btocNPpmflag)
     {
         return (this->btocNPpmflag = btocNPpmflag);
@@ -304,6 +314,16 @@ public:
         return ChiralBasisflag;
     }
 
+    bool getFlaggSL814gT() const
+    {
+        return gSL814gTflag;
+    }
+
+    bool getFlaggSLm814gT() const
+    {
+        return gSLm814gTflag;
+    }
+
     bool getbtocNPpmflag() const
     {
         return btocNPpmflag;
@@ -328,12 +348,14 @@ private:
     mutable std::map<std::vector<int>, std::shared_ptr<myMPlnu> > myMPlnuMap;
     mutable std::map<std::vector<int>, std::shared_ptr<myMVlnu> > myMVlnuMap;
     mutable std::map<std::vector<int>, bool> flagUpdateMap;
-    
+
     mutable bool dispersion;
     mutable bool CLNflag;
     mutable bool BGLflag;
     mutable bool MSflag;
     mutable bool ChiralBasisflag;
+    mutable bool gSL814gTflag;
+    mutable bool gSLm814gTflag;
     mutable bool btocNPpmflag;
     mutable bool FixedWCbtosflag;
 };

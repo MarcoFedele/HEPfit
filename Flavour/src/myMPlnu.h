@@ -49,6 +49,8 @@ private:
     std::vector<std::string> mplnuParameters;/**< The string of mandatory myMPlnu parameters */
     bool MSflag;
     bool ChiralBasisflag;
+    bool gSL814gTflag;
+    bool gSLm814gTflag;
 
     double GF;            /**<Fermi constant */
     double Mlep;          /**<Charged lepton mass */
