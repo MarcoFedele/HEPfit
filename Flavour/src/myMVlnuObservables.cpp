@@ -306,7 +306,7 @@ double R_Dst::computeThValue()
 **/
 R_A_lam_myMVlnu::R_A_lam_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3)
-: ThObservable(SM_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_1)
 {
     lep1 = lep_1;
     lep2 = lep_2;
@@ -397,7 +397,7 @@ double R_R_AB_myMVlnu::computeThValue()
 **/
 R_A_FB_myMVlnu::R_A_FB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3)
-: ThObservable(SM_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_1)
 {
     lep1 = lep_1;
     lep2 = lep_2;

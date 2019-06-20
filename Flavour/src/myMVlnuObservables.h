@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 HEPfit Collaboration
  *
  *
@@ -14,11 +14,11 @@
 /**
  * @class Gamma_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<\Gamma>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<\Gamma>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<\Gamma>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<\Gamma>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <\Gamma>=\,.
@@ -26,7 +26,7 @@
  */
 class Gamma_myMVlnu : public ThObservable{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -35,20 +35,20 @@ public:
      * @param[in] lep_i final charged lepton of the decay
      */
     Gamma_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
      * @brief A method to compute the binned observable @f$<\Gamma>@f$ in @f$M \to V l^-\nu@f$.
      * @param[in] lep final charged lepton of the decay
      * @return @f$<\Gamma'>_{[qmin,qmax]}@f$
      */
     double computeGamma(QCD::lepton lep);
-    
+
     /**
     * @brief The binned observable @f$<\Gamma>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<\Gamma'>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -60,11 +60,11 @@ private:
 /**
  * @class A_lam_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_{\lambda}>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_{\lambda}>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_{\lambda}>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_{\lambda}>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_{\lambda}>=\,.
@@ -73,7 +73,7 @@ private:
 
 class A_lam_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -82,13 +82,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_lam_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -98,13 +98,13 @@ private:
 
 
 /**
- * @class 
+ * @class
  * @ingroup Flavour
- * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$< >@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$< >@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * < >=\,.
@@ -113,7 +113,7 @@ private:
 
 class R_LT_myMVlnu : public ThObservable{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -122,13 +122,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     R_LT_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -138,13 +138,13 @@ private:
 
 
 /**
- * @class 
+ * @class
  * @ingroup Flavour
- * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$< >@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$< >@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * < >=\,.
@@ -153,7 +153,7 @@ private:
 
 class R_AB_myMVlnu : public ThObservable{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -162,13 +162,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     R_AB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -180,11 +180,11 @@ private:
 /**
  * @class A_FB_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_{FB}>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_{FB}>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_{FB}>=\,.
@@ -193,7 +193,7 @@ private:
 
 class A_FB_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -202,13 +202,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_FB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -220,11 +220,11 @@ private:
 /**
  * @class A_3_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_3>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_3>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_3>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_3>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_3>=\,.
@@ -233,7 +233,7 @@ private:
 
 class A_3_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -242,15 +242,15 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     double computeA3(QCD::lepton lep);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -262,11 +262,11 @@ private:
 /**
  * @class A_4_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_4>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_4>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_4>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_4>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_4>=\,.
@@ -275,7 +275,7 @@ private:
 
 class A_4_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -284,13 +284,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -302,11 +302,11 @@ private:
 /**
  * @class A_5_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_5>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_5>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_5>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_5>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_5>=\,.
@@ -315,7 +315,7 @@ private:
 
 class A_5_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -324,13 +324,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -342,11 +342,11 @@ private:
 /**
  * @class A_6_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_6>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_6>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_6>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_6>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_6>=\,.
@@ -355,7 +355,7 @@ private:
 
 class A_6_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -364,13 +364,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_6_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -382,11 +382,11 @@ private:
 /**
  * @class A_7_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_7>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_7>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_7>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_7>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_7>=\,.
@@ -395,7 +395,7 @@ private:
 
 class A_7_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -404,13 +404,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_7_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -422,11 +422,11 @@ private:
 /**
  * @class A_8_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_8>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_8>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_8>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_8>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_8>=\,.
@@ -435,7 +435,7 @@ private:
 
 class A_8_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -444,13 +444,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_8_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -462,11 +462,11 @@ private:
 /**
  * @class A_9_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_9>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_9>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_9>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_9>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_9>=\,.
@@ -475,7 +475,7 @@ private:
 
 class A_9_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -484,13 +484,13 @@ public:
      * @param[in] lep_i final leptons of the decay
      */
     A_9_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep; /**< Final leptons type. */
     QCD::meson meson; /**< Initial meson type. */
@@ -511,11 +511,11 @@ private:
 /**
  * @class R_D*
  * @ingroup Flavour
- * @brief A class for the observable @f$(D*)@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the observable @f$(D*)@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the observable @f$R(D*)@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the observable @f$R(D*)@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * R(D*)=\,.
@@ -524,7 +524,7 @@ private:
 
 class R_Dst : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -534,15 +534,15 @@ public:
      * @param[in] lep_2 final leptons of the decay
      * @param[in] lep_3 final leptons of the decay
      */
-    R_Dst(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_Dst(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -556,20 +556,20 @@ private:
 /**
  * @class A_lam_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_{\lambda}>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_{\lambda}>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_{\lambda}>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_{\lambda}>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_{\lambda}>=\,.
  * @f]
  */
 
-class R_A_lam_myMVlnu : public ThObservable{
+class R_A_lam_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -577,15 +577,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_A_lam_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_A_lam_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -597,13 +597,13 @@ private:
 
 
 /**
- * @class 
+ * @class
  * @ingroup Flavour
- * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$< >@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$< >@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * < >=\,.
@@ -612,7 +612,7 @@ private:
 
 class R_R_LT_myMVlnu : public R_LT_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -620,15 +620,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_R_LT_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_R_LT_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -640,13 +640,13 @@ private:
 
 
 /**
- * @class 
+ * @class
  * @ingroup Flavour
- * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$< >@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$< >@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$< >@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * < >=\,.
@@ -655,7 +655,7 @@ private:
 
 class R_R_AB_myMVlnu : public R_AB_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -663,15 +663,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_R_AB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_R_AB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -685,20 +685,20 @@ private:
 /**
  * @class A_FB_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_{FB}>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_{FB}>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_{FB}>=\,.
  * @f]
  */
 
-class R_A_FB_myMVlnu : public ThObservable{
+class R_A_FB_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -706,15 +706,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_A_FB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_A_FB_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -728,11 +728,11 @@ private:
 /**
  * @class A_3_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_3>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_3>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_3>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_3>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_3>=\,.
@@ -741,7 +741,7 @@ private:
 
 class R_A_3_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -749,15 +749,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_A_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_A_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -771,11 +771,11 @@ private:
 /**
  * @class A_4_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_4>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_4>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_4>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_4>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_4>=\,.
@@ -784,7 +784,7 @@ private:
 
 class R_A_4_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -792,15 +792,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_A_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_A_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -814,11 +814,11 @@ private:
 /**
  * @class A_5_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_5>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_5>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_5>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_5>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_5>=\,.
@@ -827,7 +827,7 @@ private:
 
 class R_A_5_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -835,15 +835,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_A_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_A_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -857,11 +857,11 @@ private:
 /**
  * @class A_6_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_6>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_6>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_6>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_6>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_6>=\,.
@@ -870,7 +870,7 @@ private:
 
 class R_A_6_myMVlnu : public Gamma_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -878,15 +878,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    R_A_6_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    R_A_6_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -900,11 +900,11 @@ private:
 /**
  * @class A_7_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_7>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_7>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_7>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_7>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_7>=\,.
@@ -913,7 +913,7 @@ private:
 
 class D_A_7_myMVlnu : public A_7_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -921,15 +921,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    D_A_7_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    D_A_7_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -943,11 +943,11 @@ private:
 /**
  * @class A_8_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_8>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_8>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_8>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_8>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_8>=\,.
@@ -956,7 +956,7 @@ private:
 
 class D_A_8_myMVlnu : public A_8_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -964,15 +964,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    D_A_8_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    D_A_8_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned ovector_i final vector meson of the decaybservable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -986,11 +986,11 @@ private:
 /**
  * @class A_9_myMVlnu
  * @ingroup Flavour
- * @brief A class for the binned observable @f$<A_9>@f$ in @f$M \to V l^-\nu@f$. 
+ * @brief A class for the binned observable @f$<A_9>@f$ in @f$M \to V l^-\nu@f$.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
- * @details This class is used to compute the integrated observable @f$<A_9>@f$ in 
- * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients 
+ * @details This class is used to compute the integrated observable @f$<A_9>@f$ in
+ * @f$M \to V l^-\nu@f$ in terms of the integrated helicity coefficients
  * @f$<\I_i>@f$, computed in the myMVlnu class:
  * @f[
  * <A_9>=\,.
@@ -999,7 +999,7 @@ private:
 
 class D_A_9_myMVlnu : public A_9_myMVlnu{
 public:
-    
+
     /**
      * @brief Constructor.
      * @param[in] SM_i a reference to an object of type StandardModel
@@ -1007,15 +1007,15 @@ public:
      * @param[in] vector_i final vector meson of the decay
      * @param[in] lep_i final leptons of the decay
      */
-    D_A_9_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, 
+    D_A_9_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i,
             QCD::lepton lep_1, QCD::lepton lep_2, QCD::lepton lep_3);
-    
+
     /**
     * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
     * @return @f$<A_{FB}>@f$
     */
     double computeThValue ();
-   
+
 private:
     QCD::lepton lep1; /**< Final leptons type. */
     QCD::lepton lep2; /**< Final leptons type. */
@@ -1027,4 +1027,3 @@ private:
 
 
 #endif /* MYMVLNUOBSERVABLES_H */
-
