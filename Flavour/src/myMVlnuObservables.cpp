@@ -147,7 +147,7 @@ A_3_myMVlnu::A_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::mes
 
 double A_3_myMVlnu::computeA3(QCD::lepton lep)
 {
-    return 1. / computeGamma(lep) * SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(4);
+    return 1. / computeGamma(lep) / 2. / M_PI * SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(4);
 }
 
 double A_3_myMVlnu::computeThValue()
@@ -266,7 +266,235 @@ A_9_myMVlnu::A_9_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::mes
 
 double A_9_myMVlnu::computeThValue()
 {
-    return 1. / computeGamma(lep) * SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(11);
+    return 1. / computeGamma(lep) / 2. / M_PI * SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(11);
+}
+
+
+/**
+* I_1c
+**/
+I_1c_myMVlnu::I_1c_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_1c_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(0) / computeGamma(lep);
+}
+
+
+/**
+* I_1s
+**/
+I_1s_myMVlnu::I_1s_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_1s_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(1) / computeGamma(lep);
+}
+
+
+/**
+* I_2c
+**/
+I_2c_myMVlnu::I_2c_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_2c_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(2) / computeGamma(lep);
+}
+
+
+/**
+* I_2s
+**/
+I_2s_myMVlnu::I_2s_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_2s_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(3) / computeGamma(lep);
+}
+
+
+/**
+* I_3
+**/
+I_3_myMVlnu::I_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_3_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(4) / computeGamma(lep);
+}
+
+
+/**
+* I_4
+**/
+I_4_myMVlnu::I_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_4_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(5) / computeGamma(lep);
+}
+
+
+/**
+* I_5
+**/
+I_5_myMVlnu::I_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_5_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(6) / computeGamma(lep);
+}
+
+
+/**
+* I_6c
+**/
+I_6c_myMVlnu::I_6c_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_6c_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(7) / computeGamma(lep);
+}
+
+
+/**
+* I_6s
+**/
+I_6s_myMVlnu::I_6s_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_6s_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(8) / computeGamma(lep);
+}
+
+
+/**
+* I_7
+**/
+I_7_myMVlnu::I_7_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_7_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(9) / computeGamma(lep);
+}
+
+
+/**
+* I_8
+**/
+I_8_myMVlnu::I_8_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_8_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(10) / computeGamma(lep);
+}
+
+
+/**
+* I_9
+**/
+I_9_myMVlnu::I_9_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i)
+: Gamma_myMVlnu(SM_i, meson_i, vector_i, lep_i)
+{
+    lep = lep_i;
+    meson = meson_i;
+    vectorM = vector_i;
+
+    setParametersForObservable(SM.getFlavour().getmyMVlnu(meson, vectorM, lep).initializemyMVlnuParameters());
+}
+
+double I_9_myMVlnu::computeThValue()
+{
+    return SM.getFlavour().getmyMVlnu(meson, vectorM, lep).integrateI(11) / computeGamma(lep);
 }
 
 

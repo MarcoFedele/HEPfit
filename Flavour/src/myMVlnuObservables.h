@@ -499,6 +499,318 @@ private:
 };
 
 
+class I_1c_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_1c_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_1s_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_1s_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_2c_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_2c_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_2s_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_2s_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_3_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_3_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_4_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_4_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_5_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_5_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_6c_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_6c_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_6s_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_6s_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_7_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_7_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_8_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_8_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
+class I_9_myMVlnu : public Gamma_myMVlnu{
+public:
+
+    /**
+     * @brief Constructor.
+     * @param[in] SM_i a reference to an object of type StandardModel
+     * @param[in] meson_i initial meson of the decay
+     * @param[in] vector_i final vector meson of the decay
+     * @param[in] lep_i final leptons of the decay
+     */
+    I_9_myMVlnu(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson vector_i, QCD::lepton lep_i);
+
+    /**
+    * @brief The binned observable @f$<A_{FB}>@f$ in @f$M \to V l^-\nu@f$.
+    * @return @f$<A_{FB}>@f$
+    */
+    double computeThValue ();
+
+private:
+    QCD::lepton lep; /**< Final leptons type. */
+    QCD::meson meson; /**< Initial meson type. */
+    QCD::meson vectorM; /**< Final vector meson type. */
+
+};
+
+
 
 /*********************
  *                   *
