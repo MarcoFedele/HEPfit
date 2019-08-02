@@ -19,7 +19,7 @@
 class FroggattNielsen: public StandardModel {
 public:
 
-    static const int NFroggattNielsenvars = 39;
+    static const int NFroggattNielsenvars = 33;
 
     static const std::string FroggattNielsenvars[NFroggattNielsenvars];
     
@@ -246,22 +246,6 @@ public:
     
     /**
      *
-     * @return \f$ phi_{L4} $\f
-     */
-    double getphiL4() const {
-        return phiL4;
-    }
-    
-    /**
-     *
-     * @return \f$ phi_{L5} $\f
-     */
-    double getphiL5() const {
-        return phiL5;
-    }
-    
-    /**
-     *
      * @return \f$ th_{Ru1} $\f
      */
     double getthRu1() const {
@@ -306,22 +290,6 @@ public:
      */
     double getphiRu3() const {
         return phiRu3;
-    }
-    
-    /**
-     *
-     * @return \f$ phi_{Ru4} $\f
-     */
-    double getphiRu4() const {
-        return phiRu4;
-    }
-    
-    /**
-     *
-     * @return \f$ phi_{Ru5} $\f
-     */
-    double getphiRu5() const {
-        return phiRu5;
     }
     
     /**
@@ -372,22 +340,6 @@ public:
         return phiRd3;
     }
     
-    /**
-     *
-     * @return \f$ phi_{Rd4} $\f
-     */
-    double getphiRd4() const {
-        return phiRd4;
-    }
-    
-    /**
-     *
-     * @return \f$ phi_{Rd5} $\f
-     */
-    double getphiRd5() const {
-        return phiRd5;
-    }
-    
     
     ///////////////////
     
@@ -414,7 +366,7 @@ public:
      *
      * @return \f$ V $\f
      */
-    gslpp::matrix<gslpp::complex> create_V(double th1, double th2, double th3, double phi1, double phi2, double phi3, double phi4, double phi5) const;
+    gslpp::matrix<gslpp::complex> create_V(double th1, double th2, double th3, double phi1, double phi2, double phi3) const;
     
     /**
      *
@@ -456,9 +408,9 @@ private:
     double QRu1, QRu2, QRu3;
     double QRd1, QRd2, QRd3;
     
-    double thL1, thL2, thL3, phiL1, phiL2, phiL3, phiL4, phiL5;
-    double thRu1, thRu2, thRu3, phiRu1, phiRu2, phiRu3, phiRu4, phiRu5;
-    double thRd1, thRd2, thRd3, phiRd1, phiRd2, phiRd3, phiRd4, phiRd5;
+    double thL1, thL2, thL3, phiL1, phiL2, phiL3;
+    double thRu1, thRu2, thRu3, phiRu1, phiRu2, phiRu3;
+    double thRd1, thRd2, thRd3, phiRd1, phiRd2, phiRd3;
       
 };
 

@@ -13,9 +13,9 @@ const std::string FroggattNielsen::FroggattNielsenvars[NFroggattNielsenvars] = {
     "QL1", "QL2", "QL3",
     "QRu1", "QRu2", "QRu3",
     "QRd1", "QRd2", "QRd3",
-    "thL1", "thL2", "thL3", "phiL1", "phiL2", "phiL3", "phiL4", "phiL5",
-    "thRu1", "thRu2", "thRu3", "phiRu1", "phiRu2", "phiRu3", "phiRu4", "phiRu5",
-    "thRd1", "thRd2", "thRd3", "phiRd1", "phiRd2", "phiRd3", "phiRd4", "phiRd5"};
+    "thL1", "thL2", "thL3", "phiL1", "phiL2", "phiL3",
+    "thRu1", "thRu2", "thRu3", "phiRu1", "phiRu2", "phiRu3",
+    "thRd1", "thRd2", "thRd3", "phiRd1", "phiRd2", "phiRd3"};
 
 FroggattNielsen::FroggattNielsen() : StandardModel() {   
     ModelParamMap.insert(std::make_pair("eps", std::cref(eps)));
@@ -39,24 +39,18 @@ FroggattNielsen::FroggattNielsen() : StandardModel() {
     ModelParamMap.insert(std::make_pair("phiL1", std::cref(phiL1)));
     ModelParamMap.insert(std::make_pair("phiL2", std::cref(phiL2)));
     ModelParamMap.insert(std::make_pair("phiL3", std::cref(phiL3)));
-    ModelParamMap.insert(std::make_pair("phiL4", std::cref(phiL4)));
-    ModelParamMap.insert(std::make_pair("phiL5", std::cref(phiL5)));
     ModelParamMap.insert(std::make_pair("thRu1", std::cref(thRu1)));
     ModelParamMap.insert(std::make_pair("thRu2", std::cref(thRu2)));
     ModelParamMap.insert(std::make_pair("thRu3", std::cref(thRu3)));
     ModelParamMap.insert(std::make_pair("phiRu1", std::cref(phiRu1)));
     ModelParamMap.insert(std::make_pair("phiRu2", std::cref(phiRu2)));
     ModelParamMap.insert(std::make_pair("phiRu3", std::cref(phiRu3)));
-    ModelParamMap.insert(std::make_pair("phiRu4", std::cref(phiRu4)));
-    ModelParamMap.insert(std::make_pair("phiRu5", std::cref(phiRu5)));
     ModelParamMap.insert(std::make_pair("thRd1", std::cref(thRd1)));
     ModelParamMap.insert(std::make_pair("thRd2", std::cref(thRd2)));
     ModelParamMap.insert(std::make_pair("thRd3", std::cref(thRd3)));
     ModelParamMap.insert(std::make_pair("phiRd1", std::cref(phiRd1)));
     ModelParamMap.insert(std::make_pair("phiRd2", std::cref(phiRd2)));
     ModelParamMap.insert(std::make_pair("phiRd3", std::cref(phiRd3)));
-    ModelParamMap.insert(std::make_pair("phiRd4", std::cref(phiRd4)));
-    ModelParamMap.insert(std::make_pair("phiRd5", std::cref(phiRd5)));
 
 }
 
@@ -175,12 +169,6 @@ void FroggattNielsen::setParameter(const std::string name, const double& value){
     else if(name.compare("phiL3") == 0) {
         phiL3 = value;
     }
-    else if(name.compare("phiL4") == 0) {
-        phiL4 = value;
-    }
-    else if(name.compare("phiL5") == 0) {
-        phiL5 = value;
-    }
     else if(name.compare("thRu1") == 0) {
         thRu1 = value;
     }
@@ -199,12 +187,6 @@ void FroggattNielsen::setParameter(const std::string name, const double& value){
     else if(name.compare("phiRu3") == 0) {
         phiRu3 = value;
     }
-    else if(name.compare("phiRu4") == 0) {
-        phiRu4 = value;
-    }
-    else if(name.compare("phiRu5") == 0) {
-        phiRu5 = value;
-    }
     else if(name.compare("thRd1") == 0) {
         thRd1 = value;
     }
@@ -222,12 +204,6 @@ void FroggattNielsen::setParameter(const std::string name, const double& value){
     }
     else if(name.compare("phiRd3") == 0) {
         phiRd3 = value;
-    }
-    else if(name.compare("phiRd4") == 0) {
-        phiRd4 = value;
-    }
-    else if(name.compare("phiRd5") == 0) {
-        phiRd5 = value;
     }
     else
         StandardModel::setParameter(name,value);
@@ -263,12 +239,12 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::CKM() const
     V.assign(0, 1, s12CKM*c13CKM);
     V.assign(0, 2, gslpp::complex(s13CKM, -deltaCKM, true));
 
-    V.assign(1, 0, (-s12CKM * c23CKM - gslpp::complex(c12CKM * s23CKM*s13CKM, deltaCKM, true)));
-    V.assign(1, 1, (c12CKM * c23CKM - gslpp::complex(s12CKM * s23CKM*s13CKM, deltaCKM, true)));
+    V.assign(1, 0, (-s12CKM*c23CKM - gslpp::complex(c12CKM*s23CKM*s13CKM, deltaCKM, true)));
+    V.assign(1, 1, (c12CKM*c23CKM - gslpp::complex(s12CKM*s23CKM*s13CKM, deltaCKM, true)));
     V.assign(1, 2, s23CKM*c13CKM);
 
-    V.assign(2, 0, (s12CKM * s23CKM - gslpp::complex(c12CKM * c23CKM*s13CKM, deltaCKM, true)));
-    V.assign(2, 1, (-c12CKM * s23CKM - gslpp::complex(s12CKM * c23CKM*s13CKM, deltaCKM, true)));
+    V.assign(2, 0, (s12CKM*s23CKM - gslpp::complex(c12CKM*c23CKM*s13CKM, deltaCKM, true)));
+    V.assign(2, 1, (-c12CKM*s23CKM - gslpp::complex(s12CKM*c23CKM*s13CKM, deltaCKM, true)));
     V.assign(2, 2, c23CKM*c13CKM);  
     
     return V;
@@ -302,7 +278,7 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::lambda_d() const
     return lambdad;
 }
 
-gslpp::matrix<gslpp::complex> FroggattNielsen::create_V(double th1, double th2, double th3, double phi1, double phi2, double phi3, double phi4, double phi5) const
+gslpp::matrix<gslpp::complex> FroggattNielsen::create_V(double th1, double th2, double th3, double phi1, double phi2, double phi3) const
 {   
     double c1 = cos(th1);
     double s1 = sin(th1);
@@ -313,17 +289,17 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::create_V(double th1, double th2, 
     
     gslpp::matrix<gslpp::complex> V(3,3,0);
     
-    V.assign(0, 0, gslpp::complex(c1*c2, phi1, true));
-    V.assign(0, 1, gslpp::complex(s1, phi3, true));
-    V.assign(0, 2, gslpp::complex(c1*s2, phi4, true));
+    V.assign(0, 0, c1*c2);
+    V.assign(0, 1, c2*s1);
+    V.assign(0, 2, gslpp::complex(s1, -phi1, true));
     
-    V.assign(1, 0, (gslpp::complex(s2*s3, -phi4-phi5, true)-gslpp::complex(c2*c3*s1, phi1+phi2-phi3, true)));
-    V.assign(1, 1, gslpp::complex(c1*c3, phi2, true).abs());
-    V.assign(1, 2, (gslpp::complex(-c2*s3, -phi1-phi5, true)-gslpp::complex(c3*s1*s2, phi2-phi3+phi4, true)));
+    V.assign(1, 0, (-gslpp::complex(c3*s2, phi2, true)-gslpp::complex(c2*s1*s3, phi1+phi2, true)));
+    V.assign(1, 1, (gslpp::complex(c2*c3, phi2, true)-gslpp::complex(s1*s2*s3, phi1+phi2, true)));
+    V.assign(1, 2, gslpp::complex(c1*s3, phi2, true).abs());
     
-    V.assign(2, 0, (-gslpp::complex(c3*s2, -phi2-phi4, true)-gslpp::complex(c2*s1*s3, phi1-phi3+phi5, true)));
-    V.assign(2, 1, gslpp::complex(c1*s3, phi5, true).abs());
-    V.assign(2, 2, (gslpp::complex(c2*c3, -phi1-phi2, true)-gslpp::complex(s1*s2*s3, -phi3+phi4+phi5, true)));
+    V.assign(2, 0, (gslpp::complex(s2*s3, phi3, true)-gslpp::complex(c2*c3*s1, phi1+phi3, true)));
+    V.assign(2, 1, (-gslpp::complex(c2*s3, phi3, true)-gslpp::complex(c3*s1*s2, phi1+phi3, true)));
+    V.assign(2, 2, gslpp::complex(c1*c3, phi3, true).abs());
     
     return V;
 }
@@ -333,8 +309,8 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::y_u() const
     gslpp::matrix<gslpp::complex> VL(3,3,0);
     gslpp::matrix<gslpp::complex> VRu(3,3,0);
     
-    VL = create_V(thL1, thL2, thL3, phiL1, phiL2, phiL3, phiL4, phiL5);
-    VRu = create_V(thRu1, thRu2, thRu3, phiRu1, phiRu2, phiRu3, phiRu4, phiRu5);
+    VL = create_V(thL1, thL2, thL3, phiL1, phiL2, phiL3);
+    VRu = create_V(thRu1, thRu2, thRu3, phiRu1, phiRu2, phiRu3);
     
     gslpp::matrix<gslpp::complex> yu(3,3,0);
     
@@ -348,8 +324,8 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::y_d() const
     gslpp::matrix<gslpp::complex> VL(3,3,0);
     gslpp::matrix<gslpp::complex> VRd(3,3,0);
     
-    VL = create_V(thL1, thL2, thL3, phiL1, phiL2, phiL3, phiL4, phiL5);
-    VRd = create_V(thRd1, thRd2, thRd3, phiRd1, phiRd2, phiRd3, phiRd4, phiRd5);
+    VL = create_V(thL1, thL2, thL3, phiL1, phiL2, phiL3);
+    VRd = create_V(thRd1, thRd2, thRd3, phiRd1, phiRd2, phiRd3);
     
     gslpp::matrix<gslpp::complex> yd(3,3,0);
     
