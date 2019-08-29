@@ -392,6 +392,12 @@ public:
      */
     gslpp::matrix<double> F_d() const;
     
+    /**
+     *
+     * @return \f$ \delta $\f
+     */
+    double delta() const;
+    
 protected: 
     
     virtual void setParameter(const std::string, const double&);

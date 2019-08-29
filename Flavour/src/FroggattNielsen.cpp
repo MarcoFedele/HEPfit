@@ -388,6 +388,125 @@ gslpp::matrix<double> FroggattNielsen::F_d() const
     return Fd;
 }
 
+double FroggattNielsen::delta() const
+{
+    gslpp::matrix<gslpp::complex> delta_yu(3,3,0), m_u(3,3,0), m_u_2(3,3,0), m_u_2_diag(3,3,0);
+    gslpp::matrix<gslpp::complex> delta_yd(3,3,0), m_d(3,3,0), m_d_2(3,3,0), m_d_2_diag(3,3,0);
+    double delta_mu, delta_mc, delta_mt, delta_md, delta_ms, delta_mb, c_over_delta_c;
+    double delta = 0.;
+    double delta_c = 0.001;
+    
+    /* real up */
+    for (int i=0; i<3; i++)
+    {
+        for (int j=0; j<3; j++)
+        {
+            c_over_delta_c = ( y_u(i,j)/F_u(i,j) ).real() / delta_c;
+
+            delta_yu = y_u();
+            delta_yu(i,j) += delta_c * delta_yu(i,j).real();
+            m_u = delta_yu * v() / sqrt(2.);
+            m_u_2 = m_u * m_u.hconjugate();
+
+            m_u_2_diag = m_u_2;     /////////////     FIX THIS
+
+            delta_mu = c_over_delta_c * (sqrt(m_u_2_diag(0,0)) - getQuarks(QCD::UP).getMass()).abs() / getQuarks(QCD::UP).getMass();
+            delta_mc = c_over_delta_c * (sqrt(m_u_2_diag(1,1)) - getQuarks(QCD::CHARM).getMass()).abs() / getQuarks(QCD::CHARM).getMass();
+            delta_mt = c_over_delta_c * (sqrt(m_u_2_diag(2,2)) - mtopEW).abs() / mtopEW;
+
+            if (delta_mu > delta)
+                delta = delta_mu;
+            if (delta_mc > delta)
+                delta = delta_mc;
+            if (delta_mt > delta)
+                delta = delta_mt;
+        }
+    }
+    
+    /* imag up */
+    for (int i=0; i<3; i++)
+    {
+        for (int j=0; j<3; j++)
+        {
+            c_over_delta_c = ( y_u(i,j)/F_u(i,j) ).imag() / delta_c;
+
+            delta_yu = y_u();
+            delta_yu(i,j) += delta_c * gslpp::complex.i() * delta_yu(i,j).imag();
+            m_u = delta_yu * v() / sqrt(2.);
+            m_u_2 = m_u * m_u.hconjugate();
+
+            m_u_2_diag = m_u_2;     /////////////     FIX THIS
+
+            delta_mu = c_over_delta_c * (sqrt(m_u_2_diag(0,0)) - getQuarks(QCD::UP).getMass()).abs() / getQuarks(QCD::UP).getMass();
+            delta_mc = c_over_delta_c * (sqrt(m_u_2_diag(1,1)) - getQuarks(QCD::CHARM).getMass()).abs() / getQuarks(QCD::CHARM).getMass();
+            delta_mt = c_over_delta_c * (sqrt(m_u_2_diag(2,2)) - mtopEW).abs() / mtopEW;
+
+            if (delta_mu > delta)
+                delta = delta_mu;
+            if (delta_mc > delta)
+                delta = delta_mc;
+            if (delta_mt > delta)
+                delta = delta_mt;
+        }
+    }
+    
+    /* real down */
+    for (int i=0; i<3; i++)
+    {
+        for (int j=0; j<3; j++)
+        {
+            c_over_delta_c = ( y_d(i,j)/F_d(i,j) ).real() / delta_c;
+
+            delta_yd = y_d();
+            delta_yd(i,j) += delta_c * delta_yd(i,j).real();
+            m_d = delta_yd * v() / sqrt(2.);
+            m_d_2 = m_d * m_d.hconjugate();
+
+            m_d_2_diag = m_d_2;     /////////////     FIX THIS
+
+            delta_md = c_over_delta_c * (sqrt(m_d_2_diag(0,0)) - getQuarks(QCD::DOWN).getMass()).abs() / getQuarks(QCD::DOWN).getMass();
+            delta_ms = c_over_delta_c * (sqrt(m_d_2_diag(1,1)) - getQuarks(QCD::STRANGE).getMass()).abs() / getQuarks(QCD::STRANGE).getMass();
+            delta_mb = c_over_delta_c * (sqrt(m_d_2_diag(2,2)) - getQuarks(QCD::BOTTOM).getMass()).abs() / getQuarks(QCD::BOTTOM).getMass();
+
+            if (delta_md > delta)
+                delta = delta_md;
+            if (delta_ms > delta)
+                delta = delta_ms;
+            if (delta_mb > delta)
+                delta = delta_mb;
+        }
+    }
+    
+    /* imag down */
+    for (int i=0; i<3; i++)
+    {
+        for (int j=0; j<3; j++)
+        {
+            c_over_delta_c = ( y_d(i,j)/F_d(i,j) ).imag() / delta_c;
+
+            delta_yd = y_d();
+            delta_yd(i,j) += delta_c * gslpp::complex.i() * delta_yd(i,j).imag();
+            m_d = delta_yd * v() / sqrt(2.);
+            m_d_2 = m_d * m_d.hconjugate();
+
+            m_d_2_diag = m_d_2;     /////////////     FIX THIS
+
+            delta_md = c_over_delta_c * (sqrt(m_d_2_diag(0,0)) - getQuarks(QCD::DOWN).getMass()).abs() / getQuarks(QCD::DOWN).getMass();
+            delta_ms = c_over_delta_c * (sqrt(m_d_2_diag(1,1)) - getQuarks(QCD::STRANGE).getMass()).abs() / getQuarks(QCD::STRANGE).getMass();
+            delta_mb = c_over_delta_c * (sqrt(m_d_2_diag(2,2)) - getQuarks(QCD::BOTTOM).getMass()).abs() / getQuarks(QCD::BOTTOM).getMass();
+
+            if (delta_md > delta)
+                delta = delta_md;
+            if (delta_ms > delta)
+                delta = delta_ms;
+            if (delta_mb > delta)
+                delta = delta_mb;
+        }
+    }
+    
+    return delta;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////
 // Observables
