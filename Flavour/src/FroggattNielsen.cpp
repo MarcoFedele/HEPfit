@@ -401,7 +401,7 @@ double FroggattNielsen::delta() const
     {
         for (int j=0; j<3; j++)
         {
-            c_over_delta_c = ( y_u(i,j)/F_u(i,j) ).real() / delta_c;
+            c_over_delta_c = ( y_u()(i,j)/F_u()(i,j) ).real() / delta_c;
 
             delta_yu = y_u();
             delta_yu(i,j) += delta_c * delta_yu(i,j).real();
@@ -428,10 +428,10 @@ double FroggattNielsen::delta() const
     {
         for (int j=0; j<3; j++)
         {
-            c_over_delta_c = ( y_u(i,j)/F_u(i,j) ).imag() / delta_c;
+            c_over_delta_c = ( y_u()(i,j)/F_u()(i,j) ).imag() / delta_c;
 
             delta_yu = y_u();
-            delta_yu(i,j) += delta_c * gslpp::complex.i() * delta_yu(i,j).imag();
+            delta_yu(i,j) += delta_c * gslpp::complex::i() * delta_yu(i,j).imag();
             m_u = delta_yu * v() / sqrt(2.);
             m_u_2 = m_u * m_u.hconjugate();
 
@@ -455,7 +455,7 @@ double FroggattNielsen::delta() const
     {
         for (int j=0; j<3; j++)
         {
-            c_over_delta_c = ( y_d(i,j)/F_d(i,j) ).real() / delta_c;
+            c_over_delta_c = ( y_d()(i,j)/F_d()(i,j) ).real() / delta_c;
 
             delta_yd = y_d();
             delta_yd(i,j) += delta_c * delta_yd(i,j).real();
@@ -482,10 +482,10 @@ double FroggattNielsen::delta() const
     {
         for (int j=0; j<3; j++)
         {
-            c_over_delta_c = ( y_d(i,j)/F_d(i,j) ).imag() / delta_c;
+            c_over_delta_c = ( y_d()(i,j)/F_d()(i,j) ).imag() / delta_c;
 
             delta_yd = y_d();
-            delta_yd(i,j) += delta_c * gslpp::complex.i() * delta_yd(i,j).imag();
+            delta_yd(i,j) += delta_c * gslpp::complex::i() * delta_yd(i,j).imag();
             m_d = delta_yd * v() / sqrt(2.);
             m_d_2 = m_d * m_d.hconjugate();
 
