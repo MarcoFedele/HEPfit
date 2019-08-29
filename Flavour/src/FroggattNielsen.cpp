@@ -404,7 +404,7 @@ double FroggattNielsen::delta() const
             c_over_delta_c = ( y_u()(i,j)/F_u()(i,j) ).real() / delta_c;
 
             delta_yu = y_u();
-            double temp = delta_yu(i,j);//.real();
+            gslpp::complex temp = delta_yu(i,j);//.real();
             delta_yu(i,j) += delta_c * temp;
             m_u = delta_yu * v() / sqrt(2.);
             m_u_2 = m_u * m_u.hconjugate();
