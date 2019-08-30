@@ -485,7 +485,7 @@ double FroggattNielsen::delta() const
             c_over_delta_c = ( y_d()(i,j)/F_d()(i,j) ).imag() / delta_c;
 
             delta_yd = y_d();
-            delta_yd(i,j) += delta_c * gslpp::complex::i() * delta_yd(i,j).imag();
+            delta_yd(i,j) += 1.;//delta_c * gslpp::complex::i() * delta_yd(i,j).imag();
             m_d = delta_yd * v() / sqrt(2.);
             m_d_2 = m_d * m_d.hconjugate();
 
