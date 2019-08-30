@@ -390,8 +390,9 @@ gslpp::matrix<double> FroggattNielsen::F_d() const
 
 double FroggattNielsen::delta() const
 {
-    gslpp::matrix<gslpp::complex> delta_yu(3,3,0), m_u(3,3,0), m_u_2(3,3,0), V_u(3,3,0); //m_u_2_diag(3,3,0);
-    gslpp::matrix<gslpp::complex> delta_yd(3,3,0), m_d(3,3,0), m_d_2(3,3,0), V_d(3,3,0); // m_d_2_diag(3,3,0);
+    gslpp::matrix<gslpp::complex> delta_yu(3,3,0), m_u(3,3,0), m_u_2(3,3,0), V_u(3,3,0);
+    gslpp::matrix<gslpp::complex> delta_yd(3,3,0), m_d(3,3,0), m_d_2(3,3,0), V_d(3,3,0);
+    gslpp::matrix<gslpp::complex> ckm(3,3,0);
     vector<double> m_u_2_diag(3,0), m_d_2_diag(3,0);
     double delta_mu, delta_mc, delta_mt, delta_md, delta_ms, delta_mb, c_over_delta_c;
     double delta = 0.;
@@ -408,8 +409,13 @@ double FroggattNielsen::delta() const
             delta_yu.assign(i,j, delta_yu(i,j) + delta_c * delta_yu(i,j).real() );
             m_u = delta_yu * v() / sqrt(2.);
             m_u_2 = m_u * m_u.hconjugate();
-            
             m_u_2.eigensystem(V_u, m_u_2_diag);
+
+            m_d = y_d() * v() / sqrt(2.);
+            m_d_2 = m_d * m_d.hconjugate();
+            m_d_2.eigensystem(V_d, m_d_2_diag);
+            
+            ckm = V_u.hconjugate()*V_d;
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
             delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass())) / getQuarks(QCD::CHARM).getMass();
@@ -435,8 +441,13 @@ double FroggattNielsen::delta() const
             delta_yu.assign(i,j, delta_yu(i,j) + delta_c * gslpp::complex::i() * delta_yu(i,j).imag() );
             m_u = delta_yu * v() / sqrt(2.);
             m_u_2 = m_u * m_u.hconjugate();
-
             m_u_2.eigensystem(V_u, m_u_2_diag);
+
+            m_d = y_d() * v() / sqrt(2.);
+            m_d_2 = m_d * m_d.hconjugate();
+            m_d_2.eigensystem(V_d, m_d_2_diag);
+            
+            ckm = V_u.hconjugate()*V_d;
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
             delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass())) / getQuarks(QCD::CHARM).getMass();
@@ -462,8 +473,13 @@ double FroggattNielsen::delta() const
             delta_yd.assign(i,j, delta_yd(i,j) + delta_c * delta_yd(i,j).real() );
             m_d = delta_yd * v() / sqrt(2.);
             m_d_2 = m_d * m_d.hconjugate();
-
             m_d_2.eigensystem(V_d, m_d_2_diag);
+
+            m_u = y_u() * v() / sqrt(2.);
+            m_u_2 = m_u * m_u.hconjugate();
+            m_u_2.eigensystem(V_u, m_u_2_diag);
+            
+            ckm = V_u.hconjugate()*V_d;
 
             delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - getQuarks(QCD::DOWN).getMass())) / getQuarks(QCD::DOWN).getMass();
             delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - getQuarks(QCD::STRANGE).getMass())) / getQuarks(QCD::STRANGE).getMass();
@@ -489,8 +505,13 @@ double FroggattNielsen::delta() const
             delta_yd.assign(i,j, delta_yd(i,j) + delta_c * gslpp::complex::i() * delta_yd(i,j).imag() );
             m_d = delta_yd * v() / sqrt(2.);
             m_d_2 = m_d * m_d.hconjugate();
-
             m_d_2.eigensystem(V_d, m_d_2_diag);
+
+            m_u = y_u() * v() / sqrt(2.);
+            m_u_2 = m_u * m_u.hconjugate();
+            m_u_2.eigensystem(V_u, m_u_2_diag);
+            
+            ckm = V_u.hconjugate()*V_d;
 
             delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - getQuarks(QCD::DOWN).getMass())) / getQuarks(QCD::DOWN).getMass();
             delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - getQuarks(QCD::STRANGE).getMass())) / getQuarks(QCD::STRANGE).getMass();
