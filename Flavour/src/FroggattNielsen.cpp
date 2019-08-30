@@ -392,7 +392,7 @@ double FroggattNielsen::delta() const
 {
     gslpp::matrix<gslpp::complex> delta_yu(3,3,0), m_u(3,3,0), m_u_2(3,3,0), V_u(3,3,0); //m_u_2_diag(3,3,0);
     gslpp::matrix<gslpp::complex> delta_yd(3,3,0), m_d(3,3,0), m_d_2(3,3,0), V_d(3,3,0); // m_d_2_diag(3,3,0);
-    vector<gslpp::complex> m_u_2_diag(3,0), m_d_2_diag(3,0);
+    vector<double> m_u_2_diag(3,0), m_d_2_diag(3,0);
     double delta_mu, delta_mc, delta_mt, delta_md, delta_ms, delta_mb, c_over_delta_c;
     double delta = 0.;
     double delta_c = 0.001;
@@ -411,7 +411,7 @@ double FroggattNielsen::delta() const
             
             m_u_2.eigensystem(V_u, m_u_2_diag);
 
-            delta_mu = c_over_delta_c * (sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass()).abs() / getQuarks(QCD::UP).getMass();
+            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
             delta_mc = c_over_delta_c * (sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass()).abs() / getQuarks(QCD::CHARM).getMass();
             delta_mt = c_over_delta_c * (sqrt(m_u_2_diag(2)) - mtopEW).abs() / mtopEW;
 
