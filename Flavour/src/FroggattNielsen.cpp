@@ -418,11 +418,11 @@ double FroggattNielsen::delta() const
             
             ckm = V_u.hconjugate()*V_d;
             
-            s_13 = abs(ckm(0,2));
+            s_13 = ckm(0,2).abs();
             c_13 = sqrt(1. - s_13*s_13);
-            c_12 = abs(ckm(0,0)/c_13);
+            c_12 = ckm(0,0).abs() / c_13;
             s_12 = sqrt(1. - c_12*c_12);
-            s_23 = abs(ckm(1,2))/c_13;
+            s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
@@ -475,11 +475,11 @@ double FroggattNielsen::delta() const
             
             ckm = V_u.hconjugate()*V_d;
             
-            s_13 = abs(ckm(0,2));
+            s_13 = ckm(0,2).abs();
             c_13 = sqrt(1. - s_13*s_13);
-            c_12 = abs(ckm(0,0)/c_13);
+            c_12 = ckm(0,0).abs() / c_13;
             s_12 = sqrt(1. - c_12*c_12);
-            s_23 = abs(ckm(1,2))/c_13;
+            s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
@@ -532,11 +532,11 @@ double FroggattNielsen::delta() const
             
             ckm = V_u.hconjugate()*V_d;
             
-            s_13 = abs(ckm(0,2));
+            s_13 = ckm(0,2).abs();
             c_13 = sqrt(1. - s_13*s_13);
-            c_12 = abs(ckm(0,0)/c_13);
+            c_12 = ckm(0,0).abs() / c_13;
             s_12 = sqrt(1. - c_12*c_12);
-            s_23 = abs(ckm(1,2))/c_13;
+            s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
@@ -589,11 +589,11 @@ double FroggattNielsen::delta() const
             
             ckm = V_u.hconjugate()*V_d;
             
-            s_13 = abs(ckm(0,2));
+            s_13 = ckm(0,2).abs();
             c_13 = sqrt(1. - s_13*s_13);
-            c_12 = abs(ckm(0,0)/c_13);
+            c_12 = ckm(0,0).abs() / c_13;
             s_12 = sqrt(1. - c_12*c_12);
-            s_23 = abs(ckm(1,2))/c_13;
+            s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
