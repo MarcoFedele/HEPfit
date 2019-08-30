@@ -8,7 +8,7 @@
 #include "FroggattNielsen.h"
 
 const std::string FroggattNielsen::FroggattNielsenvars[NFroggattNielsenvars] = {
-    "eps", "mtopEW",
+    "eps", "mup", "mcharm", "mtop", "mdown", "mstrange", "mbottom",
     "s12CKM", "s13CKM", "s23CKM", "deltaCKM",
     "QL1", "QL2", "QL3",
     "QRu1", "QRu2", "QRu3",
@@ -19,7 +19,12 @@ const std::string FroggattNielsen::FroggattNielsenvars[NFroggattNielsenvars] = {
 
 FroggattNielsen::FroggattNielsen() : StandardModel() {   
     ModelParamMap.insert(std::make_pair("eps", std::cref(eps)));
-    ModelParamMap.insert(std::make_pair("mtopEW", std::cref(mtopEW)));
+    ModelParamMap.insert(std::make_pair("mup", std::cref(mup)));
+    ModelParamMap.insert(std::make_pair("mcharm", std::cref(mcharm)));
+    ModelParamMap.insert(std::make_pair("mtop", std::cref(mtop)));
+    ModelParamMap.insert(std::make_pair("mdown", std::cref(mdown)));
+    ModelParamMap.insert(std::make_pair("mstrange", std::cref(mstrange)));
+    ModelParamMap.insert(std::make_pair("mbottom", std::cref(mbottom)));
     ModelParamMap.insert(std::make_pair("s12CKM", std::cref(s12CKM)));
     ModelParamMap.insert(std::make_pair("s13CKM", std::cref(s13CKM)));
     ModelParamMap.insert(std::make_pair("s23CKM", std::cref(s23CKM)));
@@ -106,8 +111,23 @@ void FroggattNielsen::setParameter(const std::string name, const double& value){
     if(name.compare("eps") == 0) {
         eps = value;
     }
-    else if(name.compare("mtopEW") == 0) {
-        mtopEW = value;
+    else if(name.compare("mup") == 0) {
+        mup = value;
+    }
+    else if(name.compare("mcharm") == 0) {
+        mcharm = value;
+    }
+    else if(name.compare("mtop") == 0) {
+        mtop = value;
+    }
+    else if(name.compare("mdown") == 0) {
+        mdown = value;
+    }
+    else if(name.compare("mstrange") == 0) {
+        mstrange = value;
+    }
+    else if(name.compare("mbottom") == 0) {
+        mbottom = value;
     }
     else if(name.compare("s12CKM") == 0) {
         s12CKM = value;
@@ -254,11 +274,11 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::lambda_u() const
 {   
     gslpp::matrix<gslpp::complex> lambdau(3,3,0);
     
-    lambdau.assign(0, 0, getQuarks(QCD::UP).getMass()*sqrt(2.)/v());
+    lambdau.assign(0, 0, getmup()*sqrt(2.)/v());
 
-    lambdau.assign(1, 1, getQuarks(QCD::CHARM).getMass()*sqrt(2.)/v());
+    lambdau.assign(1, 1, getmcharm()*sqrt(2.)/v());
 
-    lambdau.assign(2, 2, getmtopEW()*sqrt(2.)/v());
+    lambdau.assign(2, 2, getmtop()*sqrt(2.)/v());
     
     return lambdau;
 }
@@ -267,11 +287,11 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::lambda_d() const
 {   
     gslpp::matrix<gslpp::complex> lambdad(3,3,0);
     
-    lambdad.assign(0, 0, getQuarks(QCD::DOWN).getMass()*sqrt(2.)/v());
+    lambdad.assign(0, 0, getmdown()*sqrt(2.)/v());
 
-    lambdad.assign(1, 1, getQuarks(QCD::STRANGE).getMass()*sqrt(2.)/v());
+    lambdad.assign(1, 1, getmstrange()*sqrt(2.)/v());
 
-    lambdad.assign(2, 2, getQuarks(QCD::BOTTOM).getMass()*sqrt(2.)/v());
+    lambdad.assign(2, 2, getmbottom()*sqrt(2.)/v());
     
     lambdad = CKM()*lambdad;
     
@@ -425,12 +445,12 @@ double FroggattNielsen::delta() const
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
-            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
-            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass())) / getQuarks(QCD::CHARM).getMass();
-            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtopEW)) / mtopEW;
-            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - getQuarks(QCD::DOWN).getMass())) / getQuarks(QCD::DOWN).getMass();
-            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - getQuarks(QCD::STRANGE).getMass())) / getQuarks(QCD::STRANGE).getMass();
-            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - getQuarks(QCD::BOTTOM).getMass())) / getQuarks(QCD::BOTTOM).getMass();
+            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
+            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
+            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtop)) / mtop;
+            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - mdown)) / mdown;
+            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
+            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
@@ -482,12 +502,12 @@ double FroggattNielsen::delta() const
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
-            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
-            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass())) / getQuarks(QCD::CHARM).getMass();
-            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtopEW)) / mtopEW;
-            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - getQuarks(QCD::DOWN).getMass())) / getQuarks(QCD::DOWN).getMass();
-            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - getQuarks(QCD::STRANGE).getMass())) / getQuarks(QCD::STRANGE).getMass();
-            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - getQuarks(QCD::BOTTOM).getMass())) / getQuarks(QCD::BOTTOM).getMass();
+            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
+            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
+            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtop)) / mtop;
+            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - mdown)) / mdown;
+            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
+            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
@@ -539,12 +559,12 @@ double FroggattNielsen::delta() const
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
-            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
-            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass())) / getQuarks(QCD::CHARM).getMass();
-            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtopEW)) / mtopEW;
-            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - getQuarks(QCD::DOWN).getMass())) / getQuarks(QCD::DOWN).getMass();
-            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - getQuarks(QCD::STRANGE).getMass())) / getQuarks(QCD::STRANGE).getMass();
-            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - getQuarks(QCD::BOTTOM).getMass())) / getQuarks(QCD::BOTTOM).getMass();
+            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
+            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
+            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtop)) / mtop;
+            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - mdown)) / mdown;
+            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
+            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
@@ -596,12 +616,12 @@ double FroggattNielsen::delta() const
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
 
-            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - getQuarks(QCD::UP).getMass())) / getQuarks(QCD::UP).getMass();
-            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - getQuarks(QCD::CHARM).getMass())) / getQuarks(QCD::CHARM).getMass();
-            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtopEW)) / mtopEW;
-            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - getQuarks(QCD::DOWN).getMass())) / getQuarks(QCD::DOWN).getMass();
-            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - getQuarks(QCD::STRANGE).getMass())) / getQuarks(QCD::STRANGE).getMass();
-            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - getQuarks(QCD::BOTTOM).getMass())) / getQuarks(QCD::BOTTOM).getMass();
+            delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
+            delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
+            delta_mt = c_over_delta_c * abs((sqrt(m_u_2_diag(2)) - mtop)) / mtop;
+            delta_md = c_over_delta_c * abs((sqrt(m_d_2_diag(0)) - mdown)) / mdown;
+            delta_ms = c_over_delta_c * abs((sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
+            delta_mb = c_over_delta_c * abs((sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
@@ -646,12 +666,12 @@ test::~test()
 
 double test::computeThValue()
 {
-   /* std::cout << "md : " << SM.getQuarks(QCD::DOWN).getMass() << std::endl;
-    std::cout << "mu : " << SM.getQuarks(QCD::UP).getMass() << std::endl;
-    std::cout << "ms : " << SM.getQuarks(QCD::STRANGE).getMass() << std::endl;
-    std::cout << "mc : " << SM.getQuarks(QCD::CHARM).getMass() << std::endl;
-    std::cout << "mb : " << SM.getQuarks(QCD::BOTTOM).getMass() << std::endl;
-    std::cout << "mt : " << myFroggattNielsen->getmtopEW() << std::endl << std::endl;
+   /* std::cout << "md : " << myFroggattNielsen->getmdown() << std::endl;
+    std::cout << "mu : " << myFroggattNielsen->getmup() << std::endl;
+    std::cout << "ms : " << myFroggattNielsen->getmstrange() << std::endl;
+    std::cout << "mc : " << myFroggattNielsen->getmcharm() << std::endl;
+    std::cout << "mb : " << myFroggattNielsen->getmbottom() << std::endl;
+    std::cout << "mt : " << myFroggattNielsen->getmtop() << std::endl << std::endl;
     std::cout << "vev : " << SM.v()/sqrt(2.) << std::endl << std::endl;
     std::cout << "ckm : " << myFroggattNielsen->CKM() << std::endl << std::endl;
     std::cout << "QL1 : " << myFroggattNielsen->getQL1() << std::endl;

@@ -19,7 +19,7 @@
 class FroggattNielsen: public StandardModel {
 public:
 
-    static const int NFroggattNielsenvars = 33;
+    static const int NFroggattNielsenvars = 38;
 
     static const std::string FroggattNielsenvars[NFroggattNielsenvars];
     
@@ -62,10 +62,50 @@ public:
     
     /**
      *
+     * @return \f$ m_u $\f
+     */
+    double getmup() const {
+        return mup;
+    }
+    
+    /**
+     *
+     * @return \f$ m_c $\f
+     */
+    double getmcharm() const {
+        return mcharm;
+    }
+    
+    /**
+     *
      * @return \f$ m_t $\f
      */
-    double getmtopEW() const {
-        return mtopEW;
+    double getmtop() const {
+        return mtop;
+    }
+    
+    /**
+     *
+     * @return \f$ m_d $\f
+     */
+    double getmdown() const {
+        return mdown;
+    }
+    
+    /**
+     *
+     * @return \f$ m_s $\f
+     */
+    double getmstrange() const {
+        return mstrange;
+    }
+    
+    /**
+     *
+     * @return \f$ m_b $\f
+     */
+    double getmbottom() const {
+        return mbottom;
     }
     
     /**
@@ -407,7 +447,7 @@ protected:
 
 private:
     
-    double eps, mtopEW;
+    double eps, mup, mcharm, mtop, mdown, mstrange, mbottom;
     double s12CKM, c12CKM, s13CKM, c13CKM, s23CKM, c23CKM, deltaCKM;
     
     double QL1, QL2, QL3;
