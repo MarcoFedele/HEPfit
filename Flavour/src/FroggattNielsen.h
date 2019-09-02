@@ -813,5 +813,23 @@ public:
     const FroggattNielsen *myFroggattNielsen;
 };
 
+
+class FN_delta : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   FN_delta(const StandardModel& SM_i);
+     
+   ~FN_delta();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const FroggattNielsen *myFroggattNielsen;
+};
+
 #endif /* FROGGATTNIELSEN_H */
 

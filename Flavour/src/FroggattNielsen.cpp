@@ -1047,3 +1047,17 @@ double Rd33::computeThValue()
     
     return yd(2,2).abs()/Fd(2,2);
 }
+
+FN_delta::FN_delta(const StandardModel& SM_i)
+: ThObservable(SM_i), myFroggattNielsen(static_cast<const FroggattNielsen*> (&SM_i))
+{
+};
+
+FN_delta::~FN_delta()
+{
+};
+
+double FN_delta::computeThValue()
+{
+    return myFroggattNielsen->delta();
+}
