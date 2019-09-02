@@ -448,7 +448,7 @@ protected:
 private:
     
     double eps, mup, mcharm, mtop, mdown, mstrange, mbottom;
-    double s12CKM, c12CKM, s13CKM, c13CKM, s23CKM, c23CKM, deltaCKM;
+    double s12CKM, c12CKM, s13CKM, c13CKM, s23CKM, c23CKM, deltaCKM, JCKM;
     
     double QL1, QL2, QL3;
     double QRu1, QRu2, QRu3;

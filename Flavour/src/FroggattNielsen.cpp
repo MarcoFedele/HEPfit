@@ -92,6 +92,8 @@ bool FroggattNielsen::Update(const std::map<std::string, double>& DPars) {
 
     for (std::map<std::string, double>::const_iterator it = DPars.begin(); it != DPars.end(); it++)
         setParameter(it->first, it->second);
+    
+    JCKM = c12CKM*c13CKM*c13CKM*s12CKM*s13CKM*s23CKM*deltaCKM;
 
     if (UpdateError) return (false);
 
@@ -412,10 +414,10 @@ double FroggattNielsen::delta() const
 {
     gslpp::matrix<gslpp::complex> delta_yu(3,3,0), m_u(3,3,0), m_u_2(3,3,0), V_u(3,3,0);
     gslpp::matrix<gslpp::complex> delta_yd(3,3,0), m_d(3,3,0), m_d_2(3,3,0), V_d(3,3,0);
-    gslpp::matrix<gslpp::complex> ckm(3,3,0);
+    gslpp::matrix<gslpp::complex> ckm(3,3,0), C(3,3,0);
     vector<double> m_u_2_diag(3,0), m_d_2_diag(3,0);
-    double s_12, c_12, s_13, c_13, s_23, c_23;
-    double delta_mu, delta_mc, delta_mt, delta_md, delta_ms, delta_mb, delta_s12, delta_s13, delta_s23, c_over_delta_c;
+    double s_12, c_12, s_13, c_13, s_23, c_23, T, B, Cdet, JCPV;
+    double delta_mu, delta_mc, delta_mt, delta_md, delta_ms, delta_mb, delta_s12, delta_s13, delta_s23, delta_J, c_over_delta_c;
     double delta = 0.;
     double delta_c = 0.001;
     
@@ -444,6 +446,14 @@ double FroggattNielsen::delta() const
             s_12 = sqrt(1. - c_12*c_12);
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
+            
+            C = m_u_2*m_d_2 - m_d_2*m_u_2;
+            T = (m_u_2_diag(2) - m_u_2_diag(1)) * (m_u_2_diag(2) - m_u_2_diag(0)) * (m_u_2_diag(1) - m_u_2_diag(0));
+            B = (m_d_2_diag(2) - m_d_2_diag(1)) * (m_d_2_diag(2) - m_d_2_diag(0)) * (m_d_2_diag(1) - m_d_2_diag(0));
+            Cdet = C(0,0)*(C(1,1)*C(2,2) - C(1,2)*C(2,1))
+                    - C(0,1)*(C(1,0)*C(2,2) - C(1,2)*C(2,0))
+                    + C(0,2)*(C(1,0)*C(2,1) - C(1,1)*C(2,0));
+            JCPV = ( Cdet / (2. * T * B) ).imag();
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
             delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
@@ -454,6 +464,7 @@ double FroggattNielsen::delta() const
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
+            delta_J = c_over_delta_c * abs(JCPV - JCKM) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -473,6 +484,8 @@ double FroggattNielsen::delta() const
                 delta = delta_s13;
             if (delta_s23 > delta)
                 delta = delta_s23;
+            if (delta_J > delta)
+                delta = delta_J;
         }
     }
     
@@ -501,6 +514,14 @@ double FroggattNielsen::delta() const
             s_12 = sqrt(1. - c_12*c_12);
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
+            
+            C = m_u_2*m_d_2 - m_d_2*m_u_2;
+            T = (m_u_2_diag(2) - m_u_2_diag(1)) * (m_u_2_diag(2) - m_u_2_diag(0)) * (m_u_2_diag(1) - m_u_2_diag(0));
+            B = (m_d_2_diag(2) - m_d_2_diag(1)) * (m_d_2_diag(2) - m_d_2_diag(0)) * (m_d_2_diag(1) - m_d_2_diag(0));
+            Cdet = C(0,0)*(C(1,1)*C(2,2) - C(1,2)*C(2,1))
+                    - C(0,1)*(C(1,0)*C(2,2) - C(1,2)*C(2,0))
+                    + C(0,2)*(C(1,0)*C(2,1) - C(1,1)*C(2,0));
+            JCPV = ( Cdet / (2. * T * B) ).imag();
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
             delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
@@ -511,6 +532,7 @@ double FroggattNielsen::delta() const
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
+            delta_J = c_over_delta_c * abs(JCPV - JCKM) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -530,6 +552,8 @@ double FroggattNielsen::delta() const
                 delta = delta_s13;
             if (delta_s23 > delta)
                 delta = delta_s23;
+            if (delta_J > delta)
+                delta = delta_J;
         }
     }
     
@@ -558,6 +582,14 @@ double FroggattNielsen::delta() const
             s_12 = sqrt(1. - c_12*c_12);
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
+            
+            C = m_u_2*m_d_2 - m_d_2*m_u_2;
+            T = (m_u_2_diag(2) - m_u_2_diag(1)) * (m_u_2_diag(2) - m_u_2_diag(0)) * (m_u_2_diag(1) - m_u_2_diag(0));
+            B = (m_d_2_diag(2) - m_d_2_diag(1)) * (m_d_2_diag(2) - m_d_2_diag(0)) * (m_d_2_diag(1) - m_d_2_diag(0));
+            Cdet = C(0,0)*(C(1,1)*C(2,2) - C(1,2)*C(2,1))
+                    - C(0,1)*(C(1,0)*C(2,2) - C(1,2)*C(2,0))
+                    + C(0,2)*(C(1,0)*C(2,1) - C(1,1)*C(2,0));
+            JCPV = ( Cdet / (2. * T * B) ).imag();
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
             delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
@@ -568,6 +600,7 @@ double FroggattNielsen::delta() const
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
+            delta_J = c_over_delta_c * abs(JCPV - JCKM) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -587,6 +620,8 @@ double FroggattNielsen::delta() const
                 delta = delta_s13;
             if (delta_s23 > delta)
                 delta = delta_s23;
+            if (delta_J > delta)
+                delta = delta_J;
         }
     }
     
@@ -615,6 +650,14 @@ double FroggattNielsen::delta() const
             s_12 = sqrt(1. - c_12*c_12);
             s_23 = ckm(1,2).abs() / c_13;
             c_23 = sqrt(1. - s_23*s_23);
+            
+            C = m_u_2*m_d_2 - m_d_2*m_u_2;
+            T = (m_u_2_diag(2) - m_u_2_diag(1)) * (m_u_2_diag(2) - m_u_2_diag(0)) * (m_u_2_diag(1) - m_u_2_diag(0));
+            B = (m_d_2_diag(2) - m_d_2_diag(1)) * (m_d_2_diag(2) - m_d_2_diag(0)) * (m_d_2_diag(1) - m_d_2_diag(0));
+            Cdet = C(0,0)*(C(1,1)*C(2,2) - C(1,2)*C(2,1))
+                    - C(0,1)*(C(1,0)*C(2,2) - C(1,2)*C(2,0))
+                    + C(0,2)*(C(1,0)*C(2,1) - C(1,1)*C(2,0));
+            JCPV = ( Cdet / (2. * T * B) ).imag();
 
             delta_mu = c_over_delta_c * abs((sqrt(m_u_2_diag(0)) - mup)) / mup;
             delta_mc = c_over_delta_c * abs((sqrt(m_u_2_diag(1)) - mcharm)) / mcharm;
@@ -625,6 +668,7 @@ double FroggattNielsen::delta() const
             delta_s12 = c_over_delta_c * abs(s_12 - s12CKM) / s12CKM;
             delta_s13 = c_over_delta_c * abs(s_13 - s13CKM) / s13CKM;
             delta_s23 = c_over_delta_c * abs(s_23 - s23CKM) / s23CKM;
+            delta_J = c_over_delta_c * abs(JCPV - JCKM) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -644,6 +688,8 @@ double FroggattNielsen::delta() const
                 delta = delta_s13;
             if (delta_s23 > delta)
                 delta = delta_s23;
+            if (delta_J > delta)
+                delta = delta_J;
         }
     }
     
