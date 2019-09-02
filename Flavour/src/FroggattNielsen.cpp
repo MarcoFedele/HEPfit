@@ -416,7 +416,8 @@ double FroggattNielsen::delta() const
     gslpp::matrix<gslpp::complex> delta_yd(3,3,0), m_d(3,3,0), m_d_2(3,3,0), V_d(3,3,0);
     gslpp::matrix<gslpp::complex> ckm(3,3,0), C(3,3,0);
     vector<double> m_u_2_diag(3,0), m_d_2_diag(3,0);
-    double s_12, c_12, s_13, c_13, s_23, c_23, T, B, Cdet, JCPV;
+    double s_12, c_12, s_13, c_13, s_23, c_23, T, B, JCPV;
+    gslpp::complex Cdet;
     double delta_mu, delta_mc, delta_mt, delta_md, delta_ms, delta_mb, delta_s12, delta_s13, delta_s23, delta_J, c_over_delta_c;
     double delta = 0.;
     double delta_c = 0.001;
