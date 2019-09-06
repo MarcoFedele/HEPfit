@@ -462,10 +462,10 @@ double FroggattNielsen::delta() const
             delta_md = abs(c_over_delta_c * (sqrt(m_d_2_diag(0)) - mdown)) / mdown;
             delta_ms = abs(c_over_delta_c * (sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
             delta_mb = abs(c_over_delta_c * (sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
-            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM) / s12CKM;
-            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM) / s13CKM;
-            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM) / s23CKM;
-            delta_J = abs(c_over_delta_c * (JCPV - JCKM) / JCKM;
+            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM)) / s12CKM;
+            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM)) / s13CKM;
+            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM)) / s23CKM;
+            delta_J = abs(c_over_delta_c * (JCPV - JCKM)) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -547,10 +547,10 @@ double FroggattNielsen::delta() const
             delta_md = abs(c_over_delta_c * (sqrt(m_d_2_diag(0)) - mdown)) / mdown;
             delta_ms = abs(c_over_delta_c * (sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
             delta_mb = abs(c_over_delta_c * (sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
-            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM) / s12CKM;
-            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM) / s13CKM;
-            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM) / s23CKM;
-            delta_J = abs(c_over_delta_c * (JCPV - JCKM) / JCKM;
+            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM)) / s12CKM;
+            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM)) / s13CKM;
+            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM)) / s23CKM;
+            delta_J = abs(c_over_delta_c * (JCPV - JCKM)) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -632,10 +632,10 @@ double FroggattNielsen::delta() const
             delta_md = abs(c_over_delta_c * (sqrt(m_d_2_diag(0)) - mdown)) / mdown;
             delta_ms = abs(c_over_delta_c * (sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
             delta_mb = abs(c_over_delta_c * (sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
-            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM) / s12CKM;
-            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM) / s13CKM;
-            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM) / s23CKM;
-            delta_J = abs(c_over_delta_c * (JCPV - JCKM) / JCKM;
+            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM)) / s12CKM;
+            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM)) / s13CKM;
+            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM)) / s23CKM;
+            delta_J = abs(c_over_delta_c * (JCPV - JCKM)) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
@@ -717,10 +717,10 @@ double FroggattNielsen::delta() const
             delta_md = abs(c_over_delta_c * (sqrt(m_d_2_diag(0)) - mdown)) / mdown;
             delta_ms = abs(c_over_delta_c * (sqrt(m_d_2_diag(1)) - mstrange)) / mstrange;
             delta_mb = abs(c_over_delta_c * (sqrt(m_d_2_diag(2)) - mbottom)) / mbottom;
-            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM) / s12CKM;
-            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM) / s13CKM;
-            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM) / s23CKM;
-            delta_J = abs(c_over_delta_c * (JCPV - JCKM) / JCKM;
+            delta_s12 = abs(c_over_delta_c * (s_12 - s12CKM)) / s12CKM;
+            delta_s13 = abs(c_over_delta_c * (s_13 - s13CKM)) / s13CKM;
+            delta_s23 = abs(c_over_delta_c * (s_23 - s23CKM)) / s23CKM;
+            delta_J = abs(c_over_delta_c * (JCPV - JCKM)) / JCKM;
             
             if (delta_mu > delta)
                 delta = delta_mu;
