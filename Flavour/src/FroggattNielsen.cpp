@@ -8,7 +8,7 @@
 #include "FroggattNielsen.h"
 
 const std::string FroggattNielsen::FroggattNielsenvars[NFroggattNielsenvars] = {
-    "eps", "mup", "mcharm", "mtop", "mdown", "mstrange", "mbottom",
+    "eps", "mupFN", "mcharmFN", "mtopFN", "mdownFN", "mstrangeFN", "mbottomFN",
     "s12CKM", "s13CKM", "s23CKM", "deltaCKM",
     "QL1", "QL2", "QL3",
     "QRu1", "QRu2", "QRu3",
@@ -19,12 +19,12 @@ const std::string FroggattNielsen::FroggattNielsenvars[NFroggattNielsenvars] = {
 
 FroggattNielsen::FroggattNielsen() : StandardModel() {   
     ModelParamMap.insert(std::make_pair("eps", std::cref(eps)));
-    ModelParamMap.insert(std::make_pair("mup", std::cref(mup)));
-    ModelParamMap.insert(std::make_pair("mcharm", std::cref(mcharm)));
-    ModelParamMap.insert(std::make_pair("mtop", std::cref(mtop)));
-    ModelParamMap.insert(std::make_pair("mdown", std::cref(mdown)));
-    ModelParamMap.insert(std::make_pair("mstrange", std::cref(mstrange)));
-    ModelParamMap.insert(std::make_pair("mbottom", std::cref(mbottom)));
+    ModelParamMap.insert(std::make_pair("mupFN", std::cref(mup)));
+    ModelParamMap.insert(std::make_pair("mcharmFN", std::cref(mcharm)));
+    ModelParamMap.insert(std::make_pair("mtopFN", std::cref(mtop)));
+    ModelParamMap.insert(std::make_pair("mdownFN", std::cref(mdown)));
+    ModelParamMap.insert(std::make_pair("mstrangeFN", std::cref(mstrange)));
+    ModelParamMap.insert(std::make_pair("mbottomFN", std::cref(mbottom)));
     ModelParamMap.insert(std::make_pair("s12CKM", std::cref(s12CKM)));
     ModelParamMap.insert(std::make_pair("s13CKM", std::cref(s13CKM)));
     ModelParamMap.insert(std::make_pair("s23CKM", std::cref(s23CKM)));
@@ -113,22 +113,22 @@ void FroggattNielsen::setParameter(const std::string name, const double& value){
     if(name.compare("eps") == 0) {
         eps = value;
     }
-    else if(name.compare("mup") == 0) {
+    else if(name.compare("mupFN") == 0) {
         mup = value;
     }
-    else if(name.compare("mcharm") == 0) {
+    else if(name.compare("mcharmFN") == 0) {
         mcharm = value;
     }
-    else if(name.compare("mtop") == 0) {
+    else if(name.compare("mtopFN") == 0) {
         mtop = value;
     }
-    else if(name.compare("mdown") == 0) {
+    else if(name.compare("mdownFN") == 0) {
         mdown = value;
     }
-    else if(name.compare("mstrange") == 0) {
+    else if(name.compare("mstrangeFN") == 0) {
         mstrange = value;
     }
-    else if(name.compare("mbottom") == 0) {
+    else if(name.compare("mbottomFN") == 0) {
         mbottom = value;
     }
     else if(name.compare("s12CKM") == 0) {
