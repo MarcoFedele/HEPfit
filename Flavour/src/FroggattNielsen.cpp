@@ -488,7 +488,7 @@ double FroggattNielsen::delta() const
             if (delta_J > delta)
                 delta = delta_J;
             
-            std::cout << "real u" << std::endl;
+            /*std::cout << "real u" << std::endl;
             std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
@@ -503,7 +503,7 @@ double FroggattNielsen::delta() const
             std::cout << "delta_s13 = " << delta_s13 << std::endl;
             std::cout << "delta_s23 = " << delta_s23 << std::endl;
             std::cout << "delta_J = " << delta_J << std::endl;
-            std::cout << "delta = " << delta << std::endl << std::endl;
+            std::cout << "delta = " << delta << std::endl << std::endl;*/
         }
     }
     
@@ -573,7 +573,7 @@ double FroggattNielsen::delta() const
             if (delta_J > delta)
                 delta = delta_J;
             
-            std::cout << "imag u" << std::endl;
+            /*std::cout << "imag u" << std::endl;
             std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
@@ -588,7 +588,7 @@ double FroggattNielsen::delta() const
             std::cout << "delta_s13 = " << delta_s13 << std::endl;
             std::cout << "delta_s23 = " << delta_s23 << std::endl;
             std::cout << "delta_J = " << delta_J << std::endl;
-            std::cout << "delta = " << delta << std::endl << std::endl;
+            std::cout << "delta = " << delta << std::endl << std::endl;*/
         }
     }
     
@@ -658,7 +658,7 @@ double FroggattNielsen::delta() const
             if (delta_J > delta)
                 delta = delta_J;
             
-            std::cout << "real d" << std::endl;
+            /*std::cout << "real d" << std::endl;
             std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
@@ -673,7 +673,7 @@ double FroggattNielsen::delta() const
             std::cout << "delta_s13 = " << delta_s13 << std::endl;
             std::cout << "delta_s23 = " << delta_s23 << std::endl;
             std::cout << "delta_J = " << delta_J << std::endl;
-            std::cout << "delta = " << delta << std::endl << std::endl;
+            std::cout << "delta = " << delta << std::endl << std::endl;*/
         }
     }
     
@@ -743,7 +743,7 @@ double FroggattNielsen::delta() const
             if (delta_J > delta)
                 delta = delta_J;
             
-            std::cout << "imag d" << std::endl;
+            /*std::cout << "imag d" << std::endl;
             std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
@@ -758,7 +758,7 @@ double FroggattNielsen::delta() const
             std::cout << "delta_s13 = " << delta_s13 << std::endl;
             std::cout << "delta_s23 = " << delta_s23 << std::endl;
             std::cout << "delta_J = " << delta_J << std::endl;
-            std::cout << "delta = " << delta << std::endl << std::endl;
+            std::cout << "delta = " << delta << std::endl << std::endl;*/
         }
     }
     
@@ -781,7 +781,7 @@ test::~test()
 
 double test::computeThValue()
 {
-    std::cout << "md : " << myFroggattNielsen->getmdown() << std::endl;
+    /*std::cout << "md : " << myFroggattNielsen->getmdown() << std::endl;
     std::cout << "mu : " << myFroggattNielsen->getmup() << std::endl;
     std::cout << "ms : " << myFroggattNielsen->getmstrange() << std::endl;
     std::cout << "mc : " << myFroggattNielsen->getmcharm() << std::endl;
@@ -806,7 +806,7 @@ double test::computeThValue()
     std::cout << "y_d : " << myFroggattNielsen->y_d() << std::endl;
     std::cout << "F_d : " << myFroggattNielsen->F_d() << std::endl << std::endl;
     
-    std::cout << "delta : " << myFroggattNielsen->delta() << std::endl << std::endl;
+    std::cout << "delta : " << myFroggattNielsen->delta() << std::endl << std::endl;*/
     
     return myFroggattNielsen->geteps();
 
