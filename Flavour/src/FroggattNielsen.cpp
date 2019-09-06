@@ -489,6 +489,7 @@ double FroggattNielsen::delta() const
                 delta = delta_J;
             
             std::cout << "real u" << std::endl;
+            std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
             std::cout << "JCKM = " << JCKM << std::endl << std::endl;
@@ -573,6 +574,7 @@ double FroggattNielsen::delta() const
                 delta = delta_J;
             
             std::cout << "imag u" << std::endl;
+            std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
             std::cout << "JCKM = " << JCKM << std::endl << std::endl;
@@ -657,6 +659,7 @@ double FroggattNielsen::delta() const
                 delta = delta_J;
             
             std::cout << "real d" << std::endl;
+            std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
             std::cout << "JCKM = " << JCKM << std::endl << std::endl;
@@ -741,6 +744,7 @@ double FroggattNielsen::delta() const
                 delta = delta_J;
             
             std::cout << "imag d" << std::endl;
+            std::cout << "c_over_delta_c = " << c_over_delta_c << std::endl;
             std::cout << "m_u_2_diag = " << m_u_2_diag << std::endl;
             std::cout << "m_d_2_diag = " << m_d_2_diag << std::endl;
             std::cout << "JCKM = " << JCKM << std::endl << std::endl;
