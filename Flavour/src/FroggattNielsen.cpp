@@ -312,7 +312,7 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::create_V(double th1, double th2, 
     gslpp::matrix<gslpp::complex> V(3,3,0);
     
     V.assign(0, 0, c1*c2);
-    V.assign(0, 1, c2*s1);
+    V.assign(0, 1, c1*s2);
     V.assign(0, 2, gslpp::complex(s1, -phi1, true));
     
     V.assign(1, 0, (-gslpp::complex(c3*s2, phi2, true)-gslpp::complex(c2*s1*s3, phi1+phi2, true)));
