@@ -804,7 +804,7 @@ double test::computeThValue()
     std::cout << "F_u : " << myFroggattNielsen->F_u() << std::endl;
     std::cout << "lambda_d : " << myFroggattNielsen->lambda_d() << std::endl;
     std::cout << "y_d : " << myFroggattNielsen->y_d() << std::endl;
-    std::cout << "F_d : " << myFroggattNielsen->F_d() << std::endl << std::endl/*
+    std::cout << "F_d : " << myFroggattNielsen->F_d() << std::endl << std::endl;/*
     
     std::cout << "delta : " << myFroggattNielsen->delta() << std::endl << std::endl;*/
     
