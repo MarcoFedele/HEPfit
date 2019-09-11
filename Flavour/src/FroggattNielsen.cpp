@@ -336,6 +336,9 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::y_u() const
     
     gslpp::matrix<gslpp::complex> yu(3,3,0);
     
+    std::cout << "VLdag " << VL.hconjugate() <<std::endl;
+    std::cout << "Ru " << VRu <<std::endl;
+    
     yu = VL.hconjugate()*lambda_u()*VRu;
     
     return yu;
