@@ -317,11 +317,11 @@ gslpp::matrix<gslpp::complex> FroggattNielsen::create_V(double th1, double th2, 
     
     V.assign(1, 0, (-gslpp::complex(c3*s2, phi2, true)-gslpp::complex(c2*s1*s3, phi1+phi2, true)));
     V.assign(1, 1, (gslpp::complex(c2*c3, phi2, true)-gslpp::complex(s1*s2*s3, phi1+phi2, true)));
-    V.assign(1, 2, gslpp::complex(c1*s3, phi2, true).abs());
+    V.assign(1, 2, gslpp::complex(c1*s3, phi2, true));
     
     V.assign(2, 0, (gslpp::complex(s2*s3, phi3, true)-gslpp::complex(c2*c3*s1, phi1+phi3, true)));
     V.assign(2, 1, (-gslpp::complex(c2*s3, phi3, true)-gslpp::complex(c3*s1*s2, phi1+phi3, true)));
-    V.assign(2, 2, gslpp::complex(c1*c3, phi3, true).abs());
+    V.assign(2, 2, gslpp::complex(c1*c3, phi3, true));
     
     return V;
 }
