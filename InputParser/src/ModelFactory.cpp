@@ -9,6 +9,7 @@
 #include "Axions.h"
 #include "AxionsTHDM.h"
 #include "FroggattNielsen.h"
+#include "LoopMediators.h"
 #include <boost/bind.hpp>
 
 ModelFactory::ModelFactory()
@@ -17,6 +18,7 @@ ModelFactory::ModelFactory()
     modelFactory["Axions"] = boost::factory<Axions*>();
     modelFactory["AxionsTHDM"] = boost::factory<AxionsTHDM*>();
     modelFactory["FroggattNielsen"] = boost::factory<FroggattNielsen*>();
+    modelFactory["LoopMediators"] = boost::factory<LoopMediators*>();
 }
 
 void ModelFactory::addModelToFactory(const std::string name, boost::function<StandardModel*() > funct)

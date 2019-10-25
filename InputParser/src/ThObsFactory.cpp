@@ -15,6 +15,7 @@
 #include "Axions.h"
 #include "AxionsTHDM.h"
 #include "FroggattNielsen.h"
+#include "LoopMediators.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
@@ -65,6 +66,8 @@ ThObsFactory::ThObsFactory()
     obsThFactory["Rd32"] = boost::factory<Rd32*>();
     obsThFactory["Rd33"] = boost::factory<Rd33*>();
     obsThFactory["FN_delta"] = boost::factory<FN_delta*>();
+    
+    obsThFactory["Deltaamu"] = boost::factory<Deltaamu*>();
 
     //
     //-----  StandardModel observables  -----
