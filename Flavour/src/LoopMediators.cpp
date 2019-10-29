@@ -121,8 +121,8 @@ bool LoopMediators::PostUpdate()
     CSp = 0.;
     CPp = 0.;
 
-    /*std::cout << "C1 " << C1 << std::endl;*/
-    std::cout << "C9.abs() " << C9 << std::endl;
+    /*std::cout << "C1 " << C1 << std::endl;
+    std::cout << "C9 " << C9.abs() << std::endl;*/
 
     /*Deltaamu = mmu*mmu / ( 8. * M_PI2 * mphi2) * (
             (GammamuL2 + GammamuR2) * (qphi*F7t(yE) - qpsi*F7(yE))
