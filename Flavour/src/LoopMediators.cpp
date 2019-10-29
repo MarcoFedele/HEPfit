@@ -121,8 +121,8 @@ bool LoopMediators::PostUpdate()
     CSp = 0.;
     CPp = 0.;
 
-    std::cout << "C1 " << C1 << std:endl;
-    std::cout << "C9 " << C9 << std:endl; 
+    std::cout << "C1 " << C1 << std::endl;
+    std::cout << "C9 " << C9 << std::endl;
 
     /*Deltaamu = mmu*mmu / ( 8. * M_PI2 * mphi2) * (
             (GammamuL2 + GammamuR2) * (qphi*F7t(yE) - qpsi*F7(yE))
@@ -138,24 +138,34 @@ bool LoopMediators::PostUpdate()
 
 void LoopMediators::setParameter(const std::string name, const double& value)
 {
-    if(name.compare("GammaL") == 0)
-        GammaL = value;
-    else if(name.compare("GammaR") == 0)
-        GammaR = value;
-    else if(name.compare("GammamuL") == 0)
-        GammamuL = value;
-    else if(name.compare("GammamuR") == 0)
-        GammamuR = value;
-    else if(name.compare("lambdaE") == 0)
-        lambdaE = value;
+    if(name.compare("GammaQ") == 0)
+        GammaQ = value;
+    else if(name.compare("Gammamu") == 0)
+        Gammamu = value;
     else if(name.compare("mphi") == 0)
         mphi = value;
-    else if(name.compare("yD") == 0)
-        yD = value;
-    else if(name.compare("yE") == 0)
-        yE = value;
+    else if(name.compare("mpsiQ") == 0)
+        mpsiQ = value;
+    else if(name.compare("mpsiL") == 0)
+        mpsiL = value;
     else if(name.compare("charge") == 0)
         charge = value;
+    else if(name.compare("chi") == 0)
+        chi = value;
+    else if(name.compare("chiBB") == 0)
+        chiBB = value;
+    else if(name.compare("chi_M") == 0)
+        chi_M = value;
+    else if(name.compare("chiBB_M") == 0)
+        chiBB_M = value;
+    else if(name.compare("eta") == 0)
+        eta = value;
+    else if(name.compare("etaBB") == 0)
+        etaBB = value;
+    else if(name.compare("eta_M") == 0)
+        eta_M = value;
+    else if(name.compare("etaBB_M") == 0)
+        etaBB_M = value;
     else if(name.compare("WCscale") == 0)
         WCscale = value;
     else
