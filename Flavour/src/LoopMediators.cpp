@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2018 HEPfit Collaboration
  *
  *
@@ -7,22 +7,31 @@
 
 #include "LoopMediators.h"
 
-const std::string LoopMediators::LoopMediatorsvars[NLoopMediatorsvars] = {"GammaL", "GammaR", "GammamuL", "GammamuR", "lambdaE", "mphi", "yD", "yE", "charge", "WCscale"};
+const std::string LoopMediators::LoopMediatorsvars[NLoopMediatorsvars] = {
+        "GammaQ", "Gammamu", "mphi", "mpsiQ", "mpsiL", "charge", "chi", "chiBB",
+        "chi_M", "chiBB_M", "eta", "etaBB", "eta_M", "etaBB_M", "WCscale"};
 
-LoopMediators::LoopMediators() : StandardModel(), LoopMediatorsM(*this) 
-{   
+LoopMediators::LoopMediators() : StandardModel(), LoopMediatorsM(*this)
+{
 
     SMM.setObj((StandardModelMatching&) LoopMediatorsM.getObj());
-    ModelParamMap.insert(std::make_pair("GammaL", std::cref(GammaL)));
-    ModelParamMap.insert(std::make_pair("GammaR", std::cref(GammaR)));
-    ModelParamMap.insert(std::make_pair("GammamuL", std::cref(GammamuL)));
-    ModelParamMap.insert(std::make_pair("GammamuR", std::cref(GammamuR)));
-    ModelParamMap.insert(std::make_pair("lambdaE", std::cref(lambdaE)));
+    ModelParamMap.insert(std::make_pair("GammaQ", std::cref(GammaQ)));
+    ModelParamMap.insert(std::make_pair("Gammamu", std::cref(Gammamu)));
     ModelParamMap.insert(std::make_pair("mphi", std::cref(mphi)));
-    ModelParamMap.insert(std::make_pair("yD", std::cref(yD)));
-    ModelParamMap.insert(std::make_pair("yE", std::cref(yE)));
+    ModelParamMap.insert(std::make_pair("mpsiQ", std::cref(mpsiQ)));
+    ModelParamMap.insert(std::make_pair("mpsiL", std::cref(mpsiL)));
     ModelParamMap.insert(std::make_pair("charge", std::cref(charge)));
-    
+
+    ModelParamMap.insert(std::make_pair("chi", std::cref(chi)));
+    ModelParamMap.insert(std::make_pair("chiBB", std::cref(chiBB)));
+    ModelParamMap.insert(std::make_pair("chi_M", std::cref(chi)));
+    ModelParamMap.insert(std::make_pair("chiBB_M", std::cref(chiBB)));
+
+    ModelParamMap.insert(std::make_pair("eta", std::cref(eta)));
+    ModelParamMap.insert(std::make_pair("etaBB", std::cref(etaBB)));
+    ModelParamMap.insert(std::make_pair("eta_M", std::cref(eta)));
+    ModelParamMap.insert(std::make_pair("etaBB_M", std::cref(etaBB)));
+
     ModelParamMap.insert(std::make_pair("WCscale", std::cref(WCscale)));
 }
 
@@ -40,24 +49,24 @@ bool LoopMediators::InitializeModel()
     setModelInitialized(StandardModel::InitializeModel());
     return(true);
 }
-    
-bool LoopMediators::Init(const std::map<std::string, double>& DPars) 
+
+bool LoopMediators::Init(const std::map<std::string, double>& DPars)
 {
     return(StandardModel::Init(DPars));
 }
 
 bool LoopMediators::PreUpdate()
-{    
+{
     if(!StandardModel::PreUpdate()) return (false);
 
     return (true);
 }
 
-bool LoopMediators::Update(const std::map<std::string, double>& DPars) 
+bool LoopMediators::Update(const std::map<std::string, double>& DPars)
 {
-    
+
     if(!PreUpdate()) return (false);
-    
+
     UpdateError = false;
 
     for (std::map<std::string, double>::const_iterator it = DPars.begin(); it != DPars.end(); it++)
@@ -74,47 +83,51 @@ bool LoopMediators::PostUpdate()
 {
     if(!StandardModel::PostUpdate()) return (false);
 
-    double GammaL2 = GammaL*GammaL;
-    double GammaR2 = GammaR*GammaR;
-    double GammaLR = GammaL*GammaR;
-    double GammamuL2 = GammamuL * GammamuL;
-    double GammamuR2 = GammamuR * GammamuR;
+    double GammaQ2 = GammaQ*GammaQ;
+    double Gammamu2 = Gammamu * Gammamu;
     double mphi2 = mphi * mphi;
+    double mpsiQ2 = mpsiQ * mpsiQ;
+    double mpsiL2 = mpsiL * mpsiL;
+    double yQ = mpsiQ2 / mphi2;
+    double yL = mpsiL2 / mphi2;
     double qphi = -charge;
     double qpsi = charge - 1.;
-    
+
     double M_PI2 = M_PI*M_PI;
     double mmu = getLeptons(MU).getMass();
     gslpp::complex Norm = sqrt(2.) / (4. * GF * getCKM().computelamt_s()) / (32. * M_PI * ale);
 
-    C1 = 1. / (128. * M_PI2 * mphi2) * GammaL2 * F9(yD,yD);
+    C1 = 1. / (128. * M_PI2 * mphi2) * GammaQ2 * (chiBB * etaBB - chiBB_M * etaBB_M) * F9(yQ,yQ);
     C2 = 0.;
     C3 = 0.;
     C4 = 0.;
-    C5 = - 1. / (32. * M_PI2 * mphi2) * GammaLR * F9(yD,yD);
-    
-    C1p = 1. / (128. * M_PI2 * mphi2) * GammaR2 * F9(yD,yD);
+    C5 = 0.;
+
+    C1p = 0.;
     C2p = 0.;
     C3p = 0.;
-    
+
     C7 = 0.;
     C8 = 0.;
-    C9 = - Norm * GammaL * (GammamuL2 + GammamuR2) / mphi2 * F9(yD,yE);
-    C10 =  Norm * GammaL * (GammamuL2 - GammamuR2) / mphi2 * F9(yD,yE);
+    C9 = - Norm * GammaQ * Gammamu2 / mphi2 * (chi * eta - chi_M * eta_M) * F9(yQ,yL);
+    C10 =  Norm * GammaQ * Gammamu2 / mphi2 * (chi * eta - chi_M * eta_M) * F9(yQ,yL);
     CS = 0.;
     CP = 0.;
-    
+
     C7p = 0.;
     C8p = 0.;
-    C9p = - Norm * GammaR * (GammamuL2 + GammamuR2) / mphi2 * F9(yD,yE);
-    C10p =  Norm * GammaR * (GammamuL2 - GammamuR2) / mphi2 * F9(yD,yE);
+    C9p = 0.;
+    C10p = 0.;
     CSp = 0.;
     CPp = 0.;
-    
-    Deltaamu = mmu*mmu / ( 8. * M_PI2 * mphi2) * (
+
+    std::cout << "C1 " << C1 << std:endl;
+    std::cout << "C9 " << C9 << std:endl; 
+
+    /*Deltaamu = mmu*mmu / ( 8. * M_PI2 * mphi2) * (
             (GammamuL2 + GammamuR2) * (qphi*F7t(yE) - qpsi*F7(yE))
             + 4./sqrt(2.) * v() * lambdaE / mmu * (2.*GammamuL*GammamuR) * (qphi*G7t(yE) - qpsi*G7(yE))
-            );
+          );*/
 
     /* Necessary for updating StandardModel parameters in StandardModelMatching,
      * and LoopMediators and LoopMediators-derived parameters in LoopMediatorsMatching */
@@ -124,24 +137,24 @@ bool LoopMediators::PostUpdate()
 }
 
 void LoopMediators::setParameter(const std::string name, const double& value)
-{    
+{
     if(name.compare("GammaL") == 0)
-        GammaL = value;  
+        GammaL = value;
     else if(name.compare("GammaR") == 0)
-        GammaR = value;  
+        GammaR = value;
     else if(name.compare("GammamuL") == 0)
-        GammamuL = value;  
+        GammamuL = value;
     else if(name.compare("GammamuR") == 0)
-        GammamuR = value;  
+        GammamuR = value;
     else if(name.compare("lambdaE") == 0)
-        lambdaE = value;  
+        lambdaE = value;
     else if(name.compare("mphi") == 0)
         mphi = value;
     else if(name.compare("yD") == 0)
         yD = value;
     else if(name.compare("yE") == 0)
         yE = value;
-    else if(name.compare("charge") == 0) 
+    else if(name.compare("charge") == 0)
         charge = value;
     else if(name.compare("WCscale") == 0)
         WCscale = value;
@@ -149,7 +162,7 @@ void LoopMediators::setParameter(const std::string name, const double& value)
         StandardModel::setParameter(name,value);
 }
 
-bool LoopMediators::CheckParameters(const std::map<std::string, double>& DPars) 
+bool LoopMediators::CheckParameters(const std::map<std::string, double>& DPars)
 {
     for (int i = 0; i < NLoopMediatorsvars; i++) {
         if (DPars.find(LoopMediatorsvars[i]) == DPars.end()) {
@@ -167,7 +180,7 @@ bool LoopMediators::CheckParameters(const std::map<std::string, double>& DPars)
 bool LoopMediators::setFlag(const std::string name, const bool value)
 {
     bool res = false;
-    
+
     res = StandardModel::setFlag(name,value);
 
     return(res);
@@ -243,11 +256,11 @@ Deltaamu::Deltaamu(const StandardModel& SM_i)
 {
 };
 
-Deltaamu::~Deltaamu() 
+Deltaamu::~Deltaamu()
 {
 };
 
-double Deltaamu::computeThValue() 
+double Deltaamu::computeThValue()
 {
     return myLM->getDeltaamu();
 }
