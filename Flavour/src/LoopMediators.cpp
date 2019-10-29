@@ -95,7 +95,7 @@ bool LoopMediators::PostUpdate()
 
     double M_PI2 = M_PI*M_PI;
     double mmu = getLeptons(MU).getMass();
-    gslpp::complex Norm = sqrt(2.) / (4. * GF * getCKM().computelamt_s()) / (32. * M_PI * ale);
+    double Norm = - sqrt(2.) / (4. * GF * getCKM().computelamt_s().abs()) / (32. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
 
     C1 = 1. / (128. * M_PI2 * mphi2) * GammaQ2 * (chiBB * etaBB - chiBB_M * etaBB_M) * F9(yQ,yQ);
     C2 = 0.;
@@ -288,5 +288,5 @@ C9mC10::~C9mC10()
 
 double C9mC10::computeThValue()
 {
-    return myLM->getC9().abs();
+    return myLM->getC9();
 }
