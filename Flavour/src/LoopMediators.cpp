@@ -277,7 +277,7 @@ double Deltaamu::computeThValue()
 
 
 
-Deltaamu::C9mC10(const StandardModel& SM_i)
+C9mC10::C9mC10(const StandardModel& SM_i)
 : ThObservable(SM_i), myLM(static_cast<const LoopMediators*> (&SM_i))
 {
 };
