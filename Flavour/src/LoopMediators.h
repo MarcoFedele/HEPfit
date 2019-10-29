@@ -143,7 +143,7 @@ public:
      *
      * @return \f$ C_9 $\f
      */
-    gslpp::complex getC9() const {
+    double getC9() const {
         return C9;
     }
 
@@ -151,7 +151,7 @@ public:
      *
      * @return \f$ C_10 $\f
      */
-    gslpp::complex getC10() const {
+    double getC10() const {
         return C10;
     }
 
@@ -254,8 +254,8 @@ private:
 
     gslpp::complex C7;
     gslpp::complex C8;
-    gslpp::complex C9;
-    gslpp::complex C10;
+    double C9;
+    double C10;
     gslpp::complex CS;
     gslpp::complex CP;
 
