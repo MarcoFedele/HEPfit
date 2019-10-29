@@ -123,6 +123,7 @@ bool LoopMediators::PostUpdate()
 
     std::cout << "C1 " << C1 << std::endl;
     std::cout << "C9 " << C9 << std::endl;
+    std::cout << "F9(1,1) " << F9(yQ,yL) << std::endl;
 
     /*Deltaamu = mmu*mmu / ( 8. * M_PI2 * mphi2) * (
             (GammamuL2 + GammamuR2) * (qphi*F7t(yE) - qpsi*F7(yE))
