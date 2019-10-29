@@ -121,8 +121,8 @@ bool LoopMediators::PostUpdate()
     CSp = 0.;
     CPp = 0.;
 
-    /*std::cout << "C1 " << C1 << std::endl;
-    std::cout << "C9 " << C9 << std::endl;*/
+    /*std::cout << "C1 " << C1 << std::endl;*/
+    std::cout << "C9 " << C9 << std::endl;
 
     /*Deltaamu = mmu*mmu / ( 8. * M_PI2 * mphi2) * (
             (GammamuL2 + GammamuR2) * (qphi*F7t(yE) - qpsi*F7(yE))
@@ -273,4 +273,20 @@ Deltaamu::~Deltaamu()
 double Deltaamu::computeThValue()
 {
     return myLM->getDeltaamu();
+}
+
+
+
+Deltaamu::C9mC10(const StandardModel& SM_i)
+: ThObservable(SM_i), myLM(static_cast<const LoopMediators*> (&SM_i))
+{
+};
+
+C9mC10::~C9mC10()
+{
+};
+
+double C9mC10::computeThValue()
+{
+    return myLM->getC9();
 }

@@ -309,4 +309,23 @@ public:
     const LoopMediators * myLM;
 };
 
+
+
+class C9mC10 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   C9mC10(const StandardModel& SM_i);
+
+   ~C9mC10();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const LoopMediators * myLM;
+};
+
 #endif /* LOOPMEDIATORS_H */

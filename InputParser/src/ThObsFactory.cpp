@@ -66,8 +66,9 @@ ThObsFactory::ThObsFactory()
     obsThFactory["Rd32"] = boost::factory<Rd32*>();
     obsThFactory["Rd33"] = boost::factory<Rd33*>();
     obsThFactory["FN_delta"] = boost::factory<FN_delta*>();
-    
+
     obsThFactory["Deltaamu"] = boost::factory<Deltaamu*>();
+    obsThFactory["C9mC10"] = boost::factory<C9mC10*>();
 
     //
     //-----  StandardModel observables  -----
