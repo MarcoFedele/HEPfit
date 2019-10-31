@@ -221,6 +221,30 @@ public:
 
     /**
      *
+     * @return \f$ m_\phi $\f
+     */
+    gslpp::complex getmphi() const {
+        return mphi;
+    }
+
+    /**
+     *
+     * @return \f$ m_{\Psi_Q} $\f
+     */
+    gslpp::complex getmpsiQ() const {
+        return mpsiQ;
+    }
+
+    /**
+     *
+     * @return \f$ m_{\Psi_L} $\f
+     */
+    gslpp::complex getmpsiL() const {
+        return mpsiL;
+    }
+
+    /**
+     *
      * @return \f$ \Delta(a_\mu) $\f
      */
     double getDeltaamu() const {
@@ -319,6 +343,63 @@ public:
    C9mC10(const StandardModel& SM_i);
 
    ~C9mC10();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const LoopMediators * myLM;
+};
+
+
+
+class mphi_mpsiQ : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   mphi_mpsiQ(const StandardModel& SM_i);
+
+   ~mphi_mpsiQ();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const LoopMediators * myLM;
+};
+
+
+
+class mphi_mpsiL : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   mphi_mpsiL(const StandardModel& SM_i);
+
+   ~mphi_mpsiL();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const LoopMediators * myLM;
+};
+
+
+
+class mphsiQ_mpsiL : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   mphsiQ_mpsiL(const StandardModel& SM_i);
+
+   ~mphsiQ_mpsiL();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.

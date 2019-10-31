@@ -290,3 +290,51 @@ double C9mC10::computeThValue()
 {
     return myLM->getC9();
 }
+
+
+
+mphi_mpsiQ::mphi_mpsiQ(const StandardModel& SM_i)
+: ThObservable(SM_i), myLM(static_cast<const LoopMediators*> (&SM_i))
+{
+};
+
+mphi_mpsiQ::~mphi_mpsiQ()
+{
+};
+
+double mphi_mpsiQ::computeThValue()
+{
+    return myLM->getmphi() - myLM->getmpsiQ();
+}
+
+
+
+mphi_mpsiL::mphi_mpsiL(const StandardModel& SM_i)
+: ThObservable(SM_i), myLM(static_cast<const LoopMediators*> (&SM_i))
+{
+};
+
+mphi_mpsiL::~mphi_mpsiL()
+{
+};
+
+double mphi_mpsiL::computeThValue()
+{
+    return myLM->getmphi() - myLM->getmpsiL();
+}
+
+
+
+mpsiQ_mpsiL::mpsiQ_mpsiL(const StandardModel& SM_i)
+: ThObservable(SM_i), myLM(static_cast<const LoopMediators*> (&SM_i))
+{
+};
+
+mpsiQ_mpsiL::~mpsiQ_mpsiL()
+{
+};
+
+double mpsiQ_mpsiL::computeThValue()
+{
+    return myLM->getmpsiQ() - myLM->getmpsiL();
+}
