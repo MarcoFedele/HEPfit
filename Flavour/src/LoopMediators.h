@@ -223,7 +223,7 @@ public:
      *
      * @return \f$ m_\phi $\f
      */
-    gslpp::complex getmphi() const {
+    double getmphi() const {
         return mphi;
     }
 
@@ -231,7 +231,7 @@ public:
      *
      * @return \f$ m_{\Psi_Q} $\f
      */
-    gslpp::complex getmpsiQ() const {
+    double getmpsiQ() const {
         return mpsiQ;
     }
 
@@ -239,7 +239,7 @@ public:
      *
      * @return \f$ m_{\Psi_L} $\f
      */
-    gslpp::complex getmpsiL() const {
+    double getmpsiL() const {
         return mpsiL;
     }
 
