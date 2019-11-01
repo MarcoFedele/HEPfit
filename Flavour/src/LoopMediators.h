@@ -392,14 +392,14 @@ public:
 
 
 
-class mphsiQ_mpsiL : public ThObservable {
+class mpsiQ_mpsiL : public ThObservable {
 public:
     /**
      * @brief Constructor.
      */
-   mphsiQ_mpsiL(const StandardModel& SM_i);
+   mpsiQ_mpsiL(const StandardModel& SM_i);
 
-   ~mphsiQ_mpsiL();
+   ~mpsiQ_mpsiL();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
