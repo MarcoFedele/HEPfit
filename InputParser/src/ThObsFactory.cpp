@@ -69,6 +69,9 @@ ThObsFactory::ThObsFactory()
 
     obsThFactory["Deltaamu"] = boost::factory<Deltaamu*>();
     obsThFactory["C9mC10"] = boost::factory<C9mC10*>();
+    obsThFactory["mphi_mpsiQ"] = boost::factory<mphi_mpsiQ*>();
+    obsThFactory["mphi_mpsiL"] = boost::factory<mphi_mpsiL*>();
+    obsThFactory["mpsiQ_mpsiL"] = boost::factory<mpsiQ_mpsiL*>();
 
     //
     //-----  StandardModel observables  -----
