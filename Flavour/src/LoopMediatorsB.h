@@ -5,34 +5,34 @@
  * For the licensing terms see doc/COPYING.
  */
 
-#ifndef LOOPMEDIATORS_H
-#define LOOPMEDIATORS_H
+#ifndef LOOPMEDIATORSB_H
+#define LOOPMEDIATORSB_H
 
 #include "StandardModel.h"
 #include "gslpp.h"
-#include "LoopMediatorsMatching.h"
+#include "LoopMediatorsBMatching.h"
 #include "ThObservable.h"
 
 /**
- * @class LoopMediators
+ * @class LoopMediatorsB
  * @brief Model for NP contributions to flavour.
  */
-class LoopMediators: public StandardModel {
+class LoopMediatorsB: public StandardModel {
 public:
 
-    static const int NLoopMediatorsvars = 15;
+    static const int NLoopMediatorsBvars = 15;
 
-    static const std::string LoopMediatorsvars[NLoopMediatorsvars];
+    static const std::string LoopMediatorsBvars[NLoopMediatorsBvars];
 
     /**
      * @brief FlavourWilsonCoefficient constructor
      */
-    LoopMediators();
+    LoopMediatorsB();
 
     /**
      * @brief FlavourWilsonCoefficient destructor
      */
-    ~LoopMediators();
+    ~LoopMediatorsB();
 
     virtual bool InitializeModel();
 
@@ -54,9 +54,9 @@ public:
     double G7(double x);
     double G7t(double x);
 
-    virtual LoopMediatorsMatching& getMatching() const
+    virtual LoopMediatorsBMatching& getMatching() const
     {
-        return LoopMediatorsM.getObj();
+        return LoopMediatorsBM.getObj();
     }
 
     /**
@@ -262,7 +262,7 @@ public:
 protected:
 
     virtual void setParameter(const std::string, const double&);
-    mutable Matching<LoopMediatorsMatching,LoopMediators> LoopMediatorsM;
+    mutable Matching<LoopMediatorsBMatching,LoopMediatorsB> LoopMediatorsBM;
 
 private:
 
@@ -316,40 +316,40 @@ private:
 
 
 
-class Deltaamu : public ThObservable {
+class Deltaamu_LMB : public ThObservable {
 public:
     /**
      * @brief Constructor.
      */
-   Deltaamu(const StandardModel& SM_i);
+   Deltaamu_LMB(const StandardModel& SM_i);
 
-   ~Deltaamu();
+   ~Deltaamu_LMB();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
      * @return
      */
     double computeThValue();
-    const LoopMediators * myLM;
+    const LoopMediatorsB * myLM;
 };
 
 
 
-class C9mC10 : public ThObservable {
+class C9mC10_LMB : public ThObservable {
 public:
     /**
      * @brief Constructor.
      */
-   C9mC10(const StandardModel& SM_i);
+   C9mC10_LMB(const StandardModel& SM_i);
 
-   ~C9mC10();
+   ~C9mC10_LMB();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
      * @return
      */
     double computeThValue();
-    const LoopMediators * myLM;
+    const LoopMediatorsB * myLM;
 };
 
 
@@ -368,7 +368,7 @@ public:
      * @return
      */
     double computeThValue();
-    const LoopMediators * myLM;
+    const LoopMediatorsB * myLM;
 };
 
 
@@ -387,7 +387,7 @@ public:
      * @return
      */
     double computeThValue();
-    const LoopMediators * myLM;
+    const LoopMediatorsB * myLM;
 };
 
 
@@ -406,7 +406,7 @@ public:
      * @return
      */
     double computeThValue();
-    const LoopMediators * myLM;
+    const LoopMediatorsB * myLM;
 };
 
-#endif /* LOOPMEDIATORS_H */
+#endif /* LOOPMEDIATORSB_H */

@@ -5,27 +5,27 @@
  * For the licensing terms see doc/COPYING.
  */
 
-#ifndef LOOPMEDIATORSMATCHING_H
-#define LOOPMEDIATORSMATCHING_H
+#ifndef LOOPMEDIATORSBMATCHING_H
+#define LOOPMEDIATORSBMATCHING_H
 
 #include "gslpp.h"
 #include "StandardModelMatching.h"
 
-class LoopMediators;
+class LoopMediatorsB;
 
 /**
- * @class LoopMediators
+ * @class LoopMediatorsB
  * @ingroup FlavourWilsonCoefficient
  * @brief A class for the matching in the NPSMEFTd6.
  * @author HEPfit Collaboration
  * @copyright GNU General Public License
  * @details  
  */
-class LoopMediatorsMatching : public StandardModelMatching {
+class LoopMediatorsBMatching : public StandardModelMatching {
 public:
-    LoopMediatorsMatching(const LoopMediators & LoopMediators_i);
+    LoopMediatorsBMatching(const LoopMediatorsB & LoopMediatorsB_i);
     
-    virtual ~LoopMediatorsMatching();
+    virtual ~LoopMediatorsBMatching();
     
     /**
      *
@@ -33,7 +33,7 @@ public:
      * @return
      */
     
-    void updateLoopMediatorsParameters();
+    void updateLoopMediatorsBParameters();
     
     std::vector<WilsonCoefficient>& CMbsg();
     
@@ -46,7 +46,7 @@ public:
     std::vector<WilsonCoefficient>& CMdbs2();
 
 private:
-    const LoopMediators & myLoopMediators;
+    const LoopMediatorsB & myLoopMediatorsB;
     
     gslpp::complex C7NP;
     gslpp::complex C7pNP;
@@ -81,5 +81,5 @@ private:
     std::vector<WilsonCoefficient> vmcdbs2;
 };
 
-#endif /* LOOPMEDIATORSMATCHING_H */
+#endif /* LOOPMEDIATORSBMATCHING_H */
 

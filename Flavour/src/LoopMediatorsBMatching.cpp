@@ -5,14 +5,14 @@
  * For the licensing terms see doc/COPYING.
  */
 
-#include "LoopMediatorsMatching.h"
-#include "LoopMediators.h"
+#include "LoopMediatorsBMatching.h"
+#include "LoopMediatorsB.h"
 #include <stdexcept>
 
-LoopMediatorsMatching::LoopMediatorsMatching(const LoopMediators & LoopMediators_i) :
+LoopMediatorsBMatching::LoopMediatorsBMatching(const LoopMediatorsB & LoopMediatorsB_i) :
 
-    StandardModelMatching(LoopMediators_i),
-    myLoopMediators(LoopMediators_i),
+    StandardModelMatching(LoopMediatorsB_i),
+    myLoopMediatorsB(LoopMediatorsB_i),
     mcbsg(8, NDR, NNLO),
     mcprimebsg(8, NDR, NNLO),
     mcBMll(13, NDR, NLO),
@@ -20,43 +20,43 @@ LoopMediatorsMatching::LoopMediatorsMatching(const LoopMediators & LoopMediators
     mcdbs2(5, NDR, NLO)
 {}
 
-void LoopMediatorsMatching::updateLoopMediatorsParameters()
+void LoopMediatorsBMatching::updateLoopMediatorsBParameters()
 {   
     
-    C1NP = myLoopMediators.getC1();
-    C2NP = myLoopMediators.getC2();
-    C3NP = myLoopMediators.getC3();
-    C4NP = myLoopMediators.getC4();
-    C5NP = myLoopMediators.getC5();
+    C1NP = myLoopMediatorsB.getC1();
+    C2NP = myLoopMediatorsB.getC2();
+    C3NP = myLoopMediatorsB.getC3();
+    C4NP = myLoopMediatorsB.getC4();
+    C5NP = myLoopMediatorsB.getC5();
     
-    C1pNP = myLoopMediators.getC1p();
-    C2pNP = myLoopMediators.getC2p();
-    C3pNP = myLoopMediators.getC3p();
+    C1pNP = myLoopMediatorsB.getC1p();
+    C2pNP = myLoopMediatorsB.getC2p();
+    C3pNP = myLoopMediatorsB.getC3p();
     
-    C7NP = myLoopMediators.getC7();
-    C8NP = myLoopMediators.getC8();
-    C9NPmu = myLoopMediators.getC9();
-    C10NPmu = myLoopMediators.getC10();
-    CSNPmu = myLoopMediators.getCS();
-    CPNPmu = myLoopMediators.getCP();
+    C7NP = myLoopMediatorsB.getC7();
+    C8NP = myLoopMediatorsB.getC8();
+    C9NPmu = myLoopMediatorsB.getC9();
+    C10NPmu = myLoopMediatorsB.getC10();
+    CSNPmu = myLoopMediatorsB.getCS();
+    CPNPmu = myLoopMediatorsB.getCP();
     
-    C7pNP = myLoopMediators.getC7p();
-    C8pNP = myLoopMediators.getC8p();
-    C9pNPmu = myLoopMediators.getC9p();
-    C10pNPmu = myLoopMediators.getC10p();
-    CSpNPmu = myLoopMediators.getCSp();
-    CPpNPmu = myLoopMediators.getCPp();
+    C7pNP = myLoopMediatorsB.getC7p();
+    C8pNP = myLoopMediatorsB.getC8p();
+    C9pNPmu = myLoopMediatorsB.getC9p();
+    C10pNPmu = myLoopMediatorsB.getC10p();
+    CSpNPmu = myLoopMediatorsB.getCSp();
+    CPpNPmu = myLoopMediatorsB.getCPp();
     
-    WCscale = myLoopMediators.getWCscale();
+    WCscale = myLoopMediatorsB.getWCscale();
 
     StandardModelMatching::updateSMParameters();
 }
 
-LoopMediatorsMatching::~LoopMediatorsMatching()
+LoopMediatorsBMatching::~LoopMediatorsBMatching()
 {}
 
 
-std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMbsg()
+std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMbsg()
 {
     vmcbsg.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMbsg().begin(); it != StandardModelMatching::CMbsg().end(); it++ ) vmcbsg.push_back(*it);
@@ -68,7 +68,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMbsg()
         default:
             std::stringstream out;
             out << mcbsg.getScheme();
-            throw std::runtime_error("LoopMediatorsMatching::CMbsg(): scheme " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMbsg(): scheme " + out.str() + "not implemented"); 
     }
 
     mcbsg.setMu(WCscale);
@@ -84,14 +84,14 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMbsg()
         default:
             std::stringstream out;
             out << mcbsg.getOrder();
-            throw std::runtime_error("LoopMediatorsMatching::CMbsg(): order " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMbsg(): order " + out.str() + "not implemented"); 
     }
 
     vmcbsg.push_back(mcbsg);
     return (vmcbsg);
 }
  
-std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimebsg()
+std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMprimebsg()
 {
     vmcprimebsg.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMprimebsg().begin(); it != StandardModelMatching::CMprimebsg().end(); it++ ) vmcprimebsg.push_back(*it);
@@ -103,7 +103,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimebsg()
         default:
             std::stringstream out;
             out << mcprimebsg.getScheme();
-            throw std::runtime_error("LoopMediatorsMatching::CMprimebsg(): scheme " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMprimebsg(): scheme " + out.str() + "not implemented"); 
     }
 
     mcprimebsg.setMu(WCscale);
@@ -119,14 +119,14 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimebsg()
         default:
             std::stringstream out;
             out << mcprimebsg.getOrder();
-            throw std::runtime_error("LoopMediatorsMatching::CMprimebsg(): order " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMprimebsg(): order " + out.str() + "not implemented"); 
     }
 
     vmcprimebsg.push_back(mcprimebsg);
     return (vmcprimebsg);
 }
 
-std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMBMll(QCD::lepton lepton)
+std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMBMll(QCD::lepton lepton)
 {
     vmcBMll.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMBMll(lepton).begin(); it != StandardModelMatching::CMBMll(lepton).end(); it++ ) vmcBMll.push_back(*it);
@@ -138,7 +138,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMBMll(QCD::lepton lepton
         default:
             std::stringstream out;
             out << mcBMll.getScheme();
-            throw std::runtime_error("LoopMediatorsMatching::CMBMll(): scheme " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMBMll(): scheme " + out.str() + "not implemented"); 
     }
 
     mcBMll.setMu(WCscale);
@@ -153,7 +153,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMBMll(QCD::lepton lepton
                 mcBMll.setCoeff(11, 0., NLO);
         case LO:
             mcBMll.setCoeff(6, C7NP, LO);
-            if(lepton == LoopMediators::MU){
+            if(lepton == LoopMediatorsB::MU){
                 mcBMll.setCoeff(8, C9NPmu, LO);
                 mcBMll.setCoeff(9, C10NPmu, LO);
                 mcBMll.setCoeff(10, CSNPmu, LO);
@@ -163,14 +163,14 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMBMll(QCD::lepton lepton
         default:
             std::stringstream out;
             out << mcBMll.getOrder();
-            throw std::runtime_error("LoopMediatorsMatching::CMBMll(): order " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMBMll(): order " + out.str() + "not implemented"); 
     }
 
     vmcBMll.push_back(mcBMll);
     return (vmcBMll);
 }
 
-std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimeBMll(QCD::lepton lepton)
+std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMprimeBMll(QCD::lepton lepton)
 {
     vmcprimeBMll.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMprimeBMll(lepton).begin(); it != StandardModelMatching::CMprimeBMll(lepton).end(); it++ ) vmcprimeBMll.push_back(*it);
@@ -182,7 +182,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimeBMll(QCD::lepton l
         default:
             std::stringstream out;
             out << mcprimeBMll.getScheme();
-            throw std::runtime_error("LoopMediatorsMatching::CMprimeBMll(): scheme " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMprimeBMll(): scheme " + out.str() + "not implemented"); 
     }
 
     mcprimeBMll.setMu(WCscale);
@@ -197,7 +197,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimeBMll(QCD::lepton l
                 mcprimeBMll.setCoeff(11, 0., NLO);
         case LO:
             mcprimeBMll.setCoeff(6, C7pNP, LO);
-            if(lepton == LoopMediators::MU){
+            if(lepton == LoopMediatorsB::MU){
                 mcprimeBMll.setCoeff(8, C9pNPmu, LO);
                 mcprimeBMll.setCoeff(9, C10pNPmu, LO);
                 mcprimeBMll.setCoeff(10, CSpNPmu, LO);
@@ -207,14 +207,14 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMprimeBMll(QCD::lepton l
         default:
             std::stringstream out;
             out << mcprimeBMll.getOrder();
-            throw std::runtime_error("LoopMediatorsMatching::CMprimeBMll(): order " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMprimeBMll(): order " + out.str() + "not implemented"); 
     }
 
     vmcprimeBMll.push_back(mcprimeBMll);
     return (vmcprimeBMll);
 }
  
-std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMdbs2()
+std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMdbs2()
 {
     vmcdbs2.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMdbs2().begin(); it != StandardModelMatching::CMdbs2().end(); it++ ) vmcdbs2.push_back(*it);
@@ -226,7 +226,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMdbs2()
         default:
             std::stringstream out;
             out << mcdbs2.getScheme();
-            throw std::runtime_error("LoopMediatorsMatching::CMdbs2(): scheme " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMdbs2(): scheme " + out.str() + "not implemented"); 
     }
 
     mcdbs2.setMu(WCscale);
@@ -256,7 +256,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsMatching::CMdbs2()
         default:
             std::stringstream out;
             out << mcdbs2.getOrder();
-            throw std::runtime_error("LoopMediatorsMatching::CMdbs2(): order " + out.str() + "not implemented"); 
+            throw std::runtime_error("LoopMediatorsBMatching::CMdbs2(): order " + out.str() + "not implemented"); 
     }
 
     vmcdbs2.push_back(mcdbs2);

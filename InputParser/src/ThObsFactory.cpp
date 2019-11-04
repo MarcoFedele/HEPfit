@@ -15,7 +15,8 @@
 #include "Axions.h"
 #include "AxionsTHDM.h"
 #include "FroggattNielsen.h"
-#include "LoopMediators.h"
+#include "LoopMediatorsA.h"
+#include "LoopMediatorsB.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
@@ -67,8 +68,14 @@ ThObsFactory::ThObsFactory()
     obsThFactory["Rd33"] = boost::factory<Rd33*>();
     obsThFactory["FN_delta"] = boost::factory<FN_delta*>();
 
-    obsThFactory["Deltaamu"] = boost::factory<Deltaamu*>();
-    obsThFactory["C9mC10"] = boost::factory<C9mC10*>();
+    obsThFactory["Deltaamu_LMA"] = boost::factory<Deltaamu_LMA*>();
+    obsThFactory["C9mC10_LMA"] = boost::factory<C9mC10_LMA*>();
+    obsThFactory["mpsi_mphiQ"] = boost::factory<mpsi_mphiQ*>();
+    obsThFactory["mpsi_mphiL"] = boost::factory<mpsi_mphiL*>();
+    obsThFactory["mphiQ_mphiL"] = boost::factory<mphiQ_mphiL*>();
+
+    obsThFactory["Deltaamu_LMB"] = boost::factory<Deltaamu_LMB*>();
+    obsThFactory["C9mC10_LMB"] = boost::factory<C9mC10_LMB*>();
     obsThFactory["mphi_mpsiQ"] = boost::factory<mphi_mpsiQ*>();
     obsThFactory["mphi_mpsiL"] = boost::factory<mphi_mpsiL*>();
     obsThFactory["mpsiQ_mpsiL"] = boost::factory<mpsiQ_mpsiL*>();

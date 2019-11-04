@@ -30,8 +30,10 @@
       <itemPath>src/HeffDF1bsg.h</itemPath>
       <itemPath>src/HeffDF2.h</itemPath>
       <itemPath>src/HeffDS1.h</itemPath>
-      <itemPath>src/LoopMediators.h</itemPath>
-      <itemPath>src/LoopMediatorsMatching.h</itemPath>
+      <itemPath>src/LoopMediatorsA.h</itemPath>
+      <itemPath>src/LoopMediatorsAMatching.h</itemPath>
+      <itemPath>src/LoopMediatorsB.h</itemPath>
+      <itemPath>src/LoopMediatorsBMatching.h</itemPath>
       <itemPath>src/MPll.h</itemPath>
       <itemPath>src/MPllObservables.h</itemPath>
       <itemPath>src/MPlnu.h</itemPath>
@@ -86,8 +88,10 @@
       <itemPath>src/HeffDF1.cpp</itemPath>
       <itemPath>src/HeffDF1bsg.cpp</itemPath>
       <itemPath>src/HeffDF2.cpp</itemPath>
-      <itemPath>src/LoopMediators.cpp</itemPath>
-      <itemPath>src/LoopMediatorsMatching.cpp</itemPath>
+      <itemPath>src/LoopMediatorsA.cpp</itemPath>
+      <itemPath>src/LoopMediatorsAMatching.cpp</itemPath>
+      <itemPath>src/LoopMediatorsB.cpp</itemPath>
+      <itemPath>src/LoopMediatorsBMatching.cpp</itemPath>
       <itemPath>src/MPll.cpp</itemPath>
       <itemPath>src/MPllObservables.cpp</itemPath>
       <itemPath>src/MPlnu.cpp</itemPath>
@@ -260,13 +264,21 @@
       </item>
       <item path="src/HeffDS1.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/LoopMediators.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/LoopMediatorsA.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/LoopMediators.h" ex="false" tool="3" flavor2="0">
+      <item path="src/LoopMediatorsA.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/LoopMediatorsMatching.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/LoopMediatorsAMatching.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/LoopMediatorsMatching.h" ex="false" tool="3" flavor2="0">
+      <item path="src/LoopMediatorsAMatching.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsB.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsBMatching.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsBMatching.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/MPll.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -484,13 +496,21 @@
       </item>
       <item path="src/HeffDS1.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/LoopMediators.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/LoopMediatorsA.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/LoopMediators.h" ex="false" tool="3" flavor2="0">
+      <item path="src/LoopMediatorsA.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/LoopMediatorsMatching.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/LoopMediatorsAMatching.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/LoopMediatorsMatching.h" ex="false" tool="3" flavor2="0">
+      <item path="src/LoopMediatorsAMatching.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsB.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsB.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsBMatching.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsBMatching.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/MPll.cpp" ex="false" tool="1" flavor2="8">
       </item>
