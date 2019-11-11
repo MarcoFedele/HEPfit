@@ -70,12 +70,14 @@ ThObsFactory::ThObsFactory()
 
     obsThFactory["Deltaamu_LMA"] = boost::factory<Deltaamu_LMA*>();
     obsThFactory["C9mC10_LMA"] = boost::factory<C9mC10_LMA*>();
+    obsThFactory["C1_LMA"] = boost::factory<C1_LMA*>();
     obsThFactory["mpsi_mphiQ"] = boost::factory<mpsi_mphiQ*>();
     obsThFactory["mpsi_mphiL"] = boost::factory<mpsi_mphiL*>();
     obsThFactory["mphiQ_mphiL"] = boost::factory<mphiQ_mphiL*>();
 
     obsThFactory["Deltaamu_LMB"] = boost::factory<Deltaamu_LMB*>();
     obsThFactory["C9mC10_LMB"] = boost::factory<C9mC10_LMB*>();
+    obsThFactory["C1_LMB"] = boost::factory<C1_LMB*>();
     obsThFactory["mphi_mpsiQ"] = boost::factory<mphi_mpsiQ*>();
     obsThFactory["mphi_mpsiL"] = boost::factory<mphi_mpsiL*>();
     obsThFactory["mpsiQ_mpsiL"] = boost::factory<mpsiQ_mpsiL*>();

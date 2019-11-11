@@ -63,7 +63,7 @@ public:
      *
      * @return \f$ C_1 $\f
      */
-    gslpp::complex getC1() const {
+    double getC1() const {
         return C1;
     }
 
@@ -266,7 +266,7 @@ protected:
 
 private:
 
-    gslpp::complex C1;
+    double C1;
     gslpp::complex C2;
     gslpp::complex C3;
     gslpp::complex C4;
@@ -343,6 +343,25 @@ public:
    C9mC10_LMB(const StandardModel& SM_i);
 
    ~C9mC10_LMB();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const LoopMediatorsB * myLM;
+};
+
+
+
+class C1_LMB : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   C1_LMB(const StandardModel& SM_i);
+
+   ~C1_LMB();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.

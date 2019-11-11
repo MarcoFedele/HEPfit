@@ -293,6 +293,21 @@ double C9mC10_LMB::computeThValue()
 
 
 
+C1_LMB::C1_LMB(const StandardModel& SM_i)
+: ThObservable(SM_i), myLM(static_cast<const LoopMediatorsB*> (&SM_i))
+{
+};
+
+C1_LMB::~C1_LMB()
+{
+};
+
+double C1_LMB::computeThValue()
+{
+    return myLM->getC1();
+}
+
+
 mphi_mpsiQ::mphi_mpsiQ(const StandardModel& SM_i)
 : ThObservable(SM_i), myLM(static_cast<const LoopMediatorsB*> (&SM_i))
 {
