@@ -48,8 +48,8 @@ public:
 
     virtual bool setFlag(const std::string name, const bool value);
 
-    double F9(double x, double y);
-    double G9(double x, double y);
+    double F9(double x);
+    double G9(double x);
 
     virtual LoopMediatorsDMMatching& getMatching() const
     {
