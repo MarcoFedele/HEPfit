@@ -11,6 +11,7 @@
 #include "FroggattNielsen.h"
 #include "LoopMediatorsA.h"
 #include "LoopMediatorsB.h"
+#include "LoopMediatorsDM.h"
 #include <boost/bind.hpp>
 
 ModelFactory::ModelFactory()
@@ -21,6 +22,7 @@ ModelFactory::ModelFactory()
     modelFactory["FroggattNielsen"] = boost::factory<FroggattNielsen*>();
     modelFactory["LoopMediatorsA"] = boost::factory<LoopMediatorsA*>();
     modelFactory["LoopMediatorsB"] = boost::factory<LoopMediatorsB*>();
+    modelFactory["LoopMediatorsDM"] = boost::factory<LoopMediatorsDM*>();
 }
 
 void ModelFactory::addModelToFactory(const std::string name, boost::function<StandardModel*() > funct)

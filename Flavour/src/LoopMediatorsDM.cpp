@@ -177,32 +177,32 @@ double LoopMediatorsDM::G9(double x, double y)
 
 
 
-C9_LMD::C9_LMD(const StandardModel& SM_i)
+C9_LMDM::C9_LMDM(const StandardModel& SM_i)
 : ThObservable(SM_i), myLM(static_cast<const LoopMediatorsDM*> (&SM_i))
 {
 };
 
-C9_LMD::~C9_LMD()
+C9_LMDM::~C9_LMDM()
 {
 };
 
-double C9_LMD::computeThValue()
+double C9_LMDM::computeThValue()
 {
     return myLM->getC9();
 }
 
 
 
-C10_LMD::C10_LMD(const StandardModel& SM_i)
+C10_LMDM::C10_LMDM(const StandardModel& SM_i)
 : ThObservable(SM_i), myLM(static_cast<const LoopMediatorsDM*> (&SM_i))
 {
 };
 
-C10_LMD::~C10_LMD()
+C10_LMDM::~C10_LMDM()
 {
 };
 
-double C10_LMD::computeThValue()
+double C10_LMDM::computeThValue()
 {
     return myLM->getC10();
 }

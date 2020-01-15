@@ -94,14 +94,14 @@ private:
 
 
 
-class C9_LMD : public ThObservable {
+class C9_LMDM : public ThObservable {
 public:
     /**
      * @brief Constructor.
      */
-   C9_LMD(const StandardModel& SM_i);
+   C9_LMDM(const StandardModel& SM_i);
 
-   ~C9_LMD();
+   ~C9_LMDM();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
@@ -113,14 +113,14 @@ public:
 
 
 
-class C10_LMD : public ThObservable {
+class C10_LMDM : public ThObservable {
 public:
     /**
      * @brief Constructor.
      */
-   C10_LMD(const StandardModel& SM_i);
+   C10_LMDM(const StandardModel& SM_i);
 
-   ~C10_LMD();
+   ~C10_LMDM();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.

@@ -17,6 +17,7 @@
 #include "FroggattNielsen.h"
 #include "LoopMediatorsA.h"
 #include "LoopMediatorsB.h"
+#include "LoopMediatorsDM.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
@@ -81,6 +82,9 @@ ThObsFactory::ThObsFactory()
     obsThFactory["mphi_mpsiQ"] = boost::factory<mphi_mpsiQ*>();
     obsThFactory["mphi_mpsiL"] = boost::factory<mphi_mpsiL*>();
     obsThFactory["mpsiQ_mpsiL"] = boost::factory<mpsiQ_mpsiL*>();
+    
+    obsThFactory["C9_LMDM"] = boost::factory<C9_LMDM*>();
+    obsThFactory["C10_LMDM"] = boost::factory<C10_LMDM*>();
 
     //
     //-----  StandardModel observables  -----
