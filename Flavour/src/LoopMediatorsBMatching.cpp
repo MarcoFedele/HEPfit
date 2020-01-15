@@ -131,7 +131,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMBMll(QCD::lepton lepto
     vmcBMll.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMBMll(lepton).begin(); it != StandardModelMatching::CMBMll(lepton).end(); it++ ) vmcBMll.push_back(*it);
 
-    switch (mcbsg.getScheme()) {
+    switch (mcBMll.getScheme()) {
         case NDR:
 
             break;
@@ -175,7 +175,7 @@ std::vector<WilsonCoefficient>& LoopMediatorsBMatching::CMprimeBMll(QCD::lepton 
     vmcprimeBMll.clear();
     for (std::vector<WilsonCoefficient>::iterator it = StandardModelMatching::CMprimeBMll(lepton).begin(); it != StandardModelMatching::CMprimeBMll(lepton).end(); it++ ) vmcprimeBMll.push_back(*it);
 
-    switch (mcprimebsg.getScheme()) {
+    switch (mcprimeBMll.getScheme()) {
         case NDR:
 
             break;
