@@ -20,7 +20,7 @@
 class LoopMediatorsDM: public StandardModel {
 public:
 
-    static const int NLoopMediatorsDMvars = 7;
+    static const int NLoopMediatorsDMvars = 6;
 
     static const std::string LoopMediatorsDMvars[NLoopMediatorsDMvars];
 
@@ -83,8 +83,7 @@ private:
     double C10;
 
     double ysybgD;
-    double gmuV;
-    double gmuA;
+    double rVA;
     double QB;
     double mB_NP;
     double mchi_NP;

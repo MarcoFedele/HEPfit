@@ -8,15 +8,14 @@
 #include "LoopMediatorsDM.h"
 
 const std::string LoopMediatorsDM::LoopMediatorsDMvars[NLoopMediatorsDMvars] = {
-        "ysybgD", "gmuV", "gmuA", "QB", "mB_NP", "mchi_NP", "mV_NP"};
+        "ysybgD", "rVA", "QB", "mB_NP", "mchi_NP", "mV_NP"};
 
 LoopMediatorsDM::LoopMediatorsDM() : StandardModel(), LoopMediatorsDMM(*this)
 {
 
     SMM.setObj((StandardModelMatching&) LoopMediatorsDMM.getObj());
     ModelParamMap.insert(std::make_pair("ysybgD", std::cref(ysybgD)));
-    ModelParamMap.insert(std::make_pair("gmuV", std::cref(gmuV)));
-    ModelParamMap.insert(std::make_pair("gmuA", std::cref(gmuA)));
+    ModelParamMap.insert(std::make_pair("rVA", std::cref(rVA)));
     ModelParamMap.insert(std::make_pair("QB", std::cref(QB)));
     ModelParamMap.insert(std::make_pair("mB_NP", std::cref(mB_NP)));
     ModelParamMap.insert(std::make_pair("mchi_NP", std::cref(mchi_NP)));
@@ -70,9 +69,18 @@ bool LoopMediatorsDM::Update(const std::map<std::string, double>& DPars)
 bool LoopMediatorsDM::PostUpdate()
 {
     if(!StandardModel::PostUpdate()) return (false);
+    
+    double mB2 = mB_NP * mB_NP;
+    double mchi2 = mchi_NP * mchi_NP;
+    double y = mB2 / mchi2;
+    double gmuV = 0.007 * mV_NP;
+    double gmuA = rVA * gmuV;
+    
+    double Norm = - sqrt(2.) / (4. * GF * 0.0411494) / (8. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
 
-    C9 =  0.;
-    C10 = 0.;
+
+    C9 =  Norm * ysybgD * gmuV / mB2 * QB * (F9(y) + G9(y)) ;
+    C10 = Norm * ysybgD * gmuA / mB2 * QB * (F9(y) + G9(y)) ;
 
     /*std::cout << "C1 " << C1 << std::endl;
     std::cout << "C9 " << C9.abs() << std::endl;*/
@@ -93,10 +101,8 @@ void LoopMediatorsDM::setParameter(const std::string name, const double& value)
 {
     if(name.compare("ysybgD") == 0)
         ysybgD = value;
-    else if(name.compare("gmuV") == 0)
-        gmuV = value;
-    else if(name.compare("gmuA") == 0)
-        gmuA = value;
+    else if(name.compare("rVA") == 0)
+        rVA = value;
     else if(name.compare("QB") == 0)
         QB = value;
     else if(name.compare("mB_NP") == 0)
@@ -136,38 +142,24 @@ bool LoopMediatorsDM::setFlag(const std::string name, const bool value)
 ///////////////////////////////////////////////////////////////////////////
 // Loop Functions
 
-double LoopMediatorsDM::F9(double x, double y)
+double LoopMediatorsDM::F9(double x)
 {
-    double ym1 = y - 1.;
-    double xm1 = x - 1.;
+    double xm14 = pow(x - 1.,4);
 
-    if (x == 1. && y == 1.)
-        return 1./3.;
-    else if (x == 1.)
-        return (-3.*y*y + 2.*y*y*log(y) + 4.*y - 1.)/2./ym1/ym1/ym1;
-    else if (y == 1.)
-        return (-3.*x*x + 2.*x*x*log(x) + 4.*x - 1.)/2./xm1/xm1/xm1;
-    else if (x == y)
-        return (y*y - 2.*y*log(y) - 1.)/ym1/ym1/ym1;
+    if (x == 1.)
+        return -1./24.;
     else
-        return 1./xm1/ym1 + x*x*log(x)/xm1/xm1/(x-y) + y*y*log(y)/ym1/ym1/(y-x);
+        return (- 2. + 9.*x - 18.*x*x + 11.*x*x*x - 6.*x*x*x*log(x)) / 36. / xm14;
 }
 
-double LoopMediatorsDM::G9(double x, double y)
+double LoopMediatorsDM::G9(double x)
 {
-    double ym1 = y - 1.;
-    double xm1 = x - 1.;
+    double xm14 = pow(x - 1.,4);
 
-    if (x == 1. && y == 1.)
-        return -1./6.;
-    else if (x == 1.)
-        return (-y*y + 2.*y*log(y) + 1.)/2./ym1/ym1/ym1;
-    else if (y == 1.)
-        return (-x*x + 2.*x*log(x) + 1.)/2./xm1/xm1/xm1;
-    else if (x == y)
-        return (2.*ym1 - (y + 1.)*log(y))/ym1/ym1/ym1;
+    if (x == 1.)
+        return 1./8.;
     else
-        return 1./xm1/ym1 + x*log(x)/xm1/xm1/(x-y) + y*log(y)/ym1/ym1/(y-x);
+        return (- 16. + 45.*x - 36.*x*x + 7.*x*x*x + 6.*(3.*x - 2.)*log(x)) / 36. / xm14;
 }
 
 
