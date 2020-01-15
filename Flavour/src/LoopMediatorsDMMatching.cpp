@@ -55,12 +55,12 @@ std::vector<WilsonCoefficient>& LoopMediatorsDMMatching::CMBMll(QCD::lepton lept
                 mcBMll.setCoeff(10, 0., NLO);
                 mcBMll.setCoeff(11, 0., NLO);
         case LO:
-            mcBMll.setCoeff(6, 0, LO);
+            mcBMll.setCoeff(6, 0., LO);
             if(lepton == LoopMediatorsDM::MU){
                 mcBMll.setCoeff(8, C9NPmu, LO);
                 mcBMll.setCoeff(9, C10NPmu, LO);
-                mcBMll.setCoeff(10, 0, LO);
-                mcBMll.setCoeff(11, 0, LO);               
+                mcBMll.setCoeff(10, 0., LO);
+                mcBMll.setCoeff(11, 0., LO);               
             }
             break;
         default:
