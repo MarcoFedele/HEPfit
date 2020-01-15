@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="100">
+<configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -34,6 +34,8 @@
       <itemPath>src/LoopMediatorsAMatching.h</itemPath>
       <itemPath>src/LoopMediatorsB.h</itemPath>
       <itemPath>src/LoopMediatorsBMatching.h</itemPath>
+      <itemPath>src/LoopMediatorsDM.h</itemPath>
+      <itemPath>src/LoopMediatorsDMMatching.h</itemPath>
       <itemPath>src/MPll.h</itemPath>
       <itemPath>src/MPllObservables.h</itemPath>
       <itemPath>src/MPlnu.h</itemPath>
@@ -92,6 +94,8 @@
       <itemPath>src/LoopMediatorsAMatching.cpp</itemPath>
       <itemPath>src/LoopMediatorsB.cpp</itemPath>
       <itemPath>src/LoopMediatorsBMatching.cpp</itemPath>
+      <itemPath>src/LoopMediatorsDM.cpp</itemPath>
+      <itemPath>src/LoopMediatorsDMMatching.cpp</itemPath>
       <itemPath>src/MPll.cpp</itemPath>
       <itemPath>src/MPllObservables.cpp</itemPath>
       <itemPath>src/MPlnu.cpp</itemPath>
@@ -279,6 +283,14 @@
       <item path="src/LoopMediatorsBMatching.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/LoopMediatorsBMatching.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDM.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDMMatching.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDMMatching.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/MPll.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -511,6 +523,14 @@
       <item path="src/LoopMediatorsBMatching.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/LoopMediatorsBMatching.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDM.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDMMatching.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/LoopMediatorsDMMatching.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/MPll.cpp" ex="false" tool="1" flavor2="8">
       </item>
