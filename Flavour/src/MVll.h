@@ -1162,6 +1162,9 @@ private:
     unsigned int h1_updated;/**< Cache variable */
     unsigned int h2_updated;/**< Cache variable */
     
+    unsigned int NPupdated;/**< Cache variable */
+    gslpp::vector<double> NPcache;/**< Cache variable */
+    
     unsigned int H_V0updated;/**< Cache variable */
     gslpp::vector<double> H_V0cache;/**< Cache variable */
     

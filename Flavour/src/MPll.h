@@ -595,6 +595,9 @@ private:
     unsigned int Yupdated;/**< Cache variable */
     gslpp::vector<double> Ycache;/**< Cache variable */
     
+    unsigned int NPupdated;/**< Cache variable */
+    gslpp::vector<double> NPcache;/**< Cache variable */
+    
     unsigned int H_V0updated;/**< Cache variable */
     gslpp::vector<double> H_V0cache;/**< Cache variable */
     gslpp::complex H_V0Ccache[2];/**< Cache variable */

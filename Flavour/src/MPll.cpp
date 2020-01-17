@@ -31,6 +31,7 @@ k2_cache(2, 0.),
 SL_cache(2, 0.),
 N_cache(3, 0.),
 Ycache(2, 0.),
+NPcache(6, 0.),
 H_V0cache(2, 0.),
 H_Scache(2, 0.),
 H_P_cache(4, 0.),
@@ -616,6 +617,20 @@ void MPll::checkCache()
         Ycache(1) = Mc;
     }
 
+    if (LoopModelDM) {
+        if (ysybgD == NPcache(0) && rVA == NPcache(1) && QB == NPcache(2) && mB_NP == NPcache(3) && mchi_NP == NPcache(4) && mV_NP == NPcache(5)) {
+         NPupdated = 1;
+        } else {
+            NPupdated = 0;
+            NPcache(0) = ysybgD;
+            NPcache(1) = rVA;
+            NPcache(2) = QB;
+            NPcache(3) = mB_NP;
+            NPcache(4) = mchi_NP;
+            NPcache(5) = mV_NP;
+        }        
+    }
+
     if (!dispersion) {
         if (MM == H_V0cache(0) && Mb == H_V0cache(1) && h_0 == H_V0Ccache[0] && h_1 == H_V0Ccache[1]) {
             H_V0updated = N_updated * C_9_updated * Yupdated * VL_updated * C_9p_updated * C_7_updated * TL_updated * C_7p_updated;
@@ -658,6 +673,12 @@ void MPll::checkCache()
         H_P_cache(1) = MW;
         H_P_cache(2) = Mlep;
         H_P_cache(3) = Ms;
+    }
+    
+    if (LoopModelDM) {
+        H_V0updated *= NPupdated;
+        H_A0updated *= NPupdated;
+        H_P_updated *= NPupdated;
     }
 
     if (MM == T_cache(0) && Mb == T_cache(1) && Mc == T_cache(2) &&
