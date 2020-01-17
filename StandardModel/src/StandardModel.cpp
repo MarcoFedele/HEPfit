@@ -430,6 +430,9 @@ bool StandardModel::setFlag(const std::string name, const bool value)
     } else if (name.compare("FixedWCbtos") == 0) {
         SMFlavour.setFlagFixedWCbtos(value);
         res = true;
+    } else if (name.compare("LoopModelDM") == 0) {
+        SMFlavour.setFlagLoopModelDM(value);
+        res = true;
     } else
         res = QCD::setFlag(name, value);
 

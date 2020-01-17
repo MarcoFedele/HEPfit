@@ -21,6 +21,11 @@ public:
      */
     Mll(const StandardModel& SM_i, int obsFlag, QCD::meson meson_i, QCD::lepton lep_i);
     
+    /*double F9(double x);
+    double G9(double x);
+    
+    gslpp::complex C10_NP(double q2);*/
+    
     /**
      * 
      * @brief hep-ph/9512380v2
@@ -73,10 +78,25 @@ private:
     gslpp::complex C_P;
     gslpp::complex C_Pp;
     bool FixedWCbtos;
+    //bool LoopModelDM;
     
     gslpp::vector<gslpp::complex> ** allcoeff;
     gslpp::vector<gslpp::complex> ** allcoeffprime;
     gslpp::vector<gslpp::complex> ** allcoeff_noSM;
+    
+    /*double ysybgD;
+    double rVA;
+    double QB;
+    double mB_NP;
+    double mchi_NP;
+    double mV_NP;
+    double mB2_NP;
+    double mchi2_NP;
+    double mV2_NP;
+    double y_NP;
+    double gmuV_NP;
+    double gmuA_NP;
+    double Norm_NP;*/
 
 };
 

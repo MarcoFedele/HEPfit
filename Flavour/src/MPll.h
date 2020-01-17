@@ -197,6 +197,12 @@ public:
      */
     gslpp::complex h_lambda(double q2);
     
+    double F9(double x);
+    double G9(double x);
+    
+    gslpp::complex C9_NP(double q2);
+    gslpp::complex C10_NP(double q2);
+    
     /**
     * @brief The helicity amplitude \f$ H_V^{\lambda} \f$ .
     * @param[in] q2 \f$q^2\f$ of the decay
@@ -281,6 +287,7 @@ private:
     std::unique_ptr<F_2> myF_2;
     bool dispersion;
     bool FixedWCbtos;
+    bool LoopModelDM;
     double mJ2;
     
     double GF;            /**<Fermi constant */
@@ -367,6 +374,20 @@ private:
     gslpp::complex C_10p;/**<Wilson coeffients @f$C_{10}'@f$*/
     gslpp::complex C_Sp;/**<Wilson coeffients @f$C_S'@f$*/
     gslpp::complex C_Pp;/**<Wilson coeffients @f$C_P'@f$*/
+    
+    double ysybgD;
+    double rVA;
+    double QB;
+    double mB_NP;
+    double mchi_NP;
+    double mV_NP;
+    double mB2_NP;
+    double mchi2_NP;
+    double mV2_NP;
+    double y_NP;
+    double gmuV_NP;
+    double gmuA_NP;
+    double Norm_NP;
     
     gsl_interp_accel *acc_Re_deltaC7_QCDF;
     gsl_interp_accel *acc_Im_deltaC7_QCDF;

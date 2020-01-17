@@ -18,7 +18,9 @@ Mll::Mll(const StandardModel& SM_i, int obsFlag, QCD::meson meson_i, QCD::lepton
     else throw std::runtime_error("obsFlag in Bsmumu(myFlavour, obsFlag) called from ThFactory::ThFactory() can only be 1 (BR) or 2 (BRbar) or 3 (Amumu) or 4 (Smumu)");
     SM.initializeMeson(meson);
     FixedWCbtos = SM.getFlavour().getFlagFixedWCbtos();
+    //LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
     if (FixedWCbtos) setParametersForObservable({ "C10_SM" });
+    //if (FixedWCbtos && LoopModelDM) setParametersForObservable({ "C10_SM", "ysybgD", "rVA", "QB", "mB_NP", "mchi_NP", "mV_NP"});
 };
 
 double Mll::computeThValue()

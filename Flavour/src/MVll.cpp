@@ -43,6 +43,7 @@ T_cache(5, 0.)
     vectorM = vector_i;
     dispersion = false;
     FixedWCbtos = false;
+    LoopModelDM = false;
     mJ2 = 3.096 * 3.096;
 
     I0_updated = 0;
@@ -150,6 +151,7 @@ std::vector<std::string> MVll::initializeMVllParameters()
 {
     dispersion = mySM.getFlavour().getFlagUseDispersionRelation();
     FixedWCbtos = mySM.getFlavour().getFlagFixedWCbtos();
+    LoopModelDM = mySM.getFlavour().getFlagLoopModelDM();
     
 #if NFPOLARBASIS_MVLL
     if (vectorM == StandardModel::PHI) mvllParameters = make_vector<std::string>()
@@ -213,6 +215,8 @@ std::vector<std::string> MVll::initializeMVllParameters()
     }
 
     if (FixedWCbtos) mvllParameters.insert(mvllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
+    
+    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "ysybgD", "rVA", "QB", "mB_NP", "mchi_NP", "mV_NP"});
     
     mySM.initializeMeson(meson);
     mySM.initializeMeson(vectorM);
@@ -432,7 +436,24 @@ void MVll::updateParameters()
     C_1Lh_bar = (*(allcoeffh[LO]))(0) / 2.;
     C_2Lh_bar = (*(allcoeffh[LO]))(1) - (*(allcoeff[LO]))(0) / 6.;
     C_8Lh = (*(allcoeffh[LO]))(7);
-
+    
+    if (LoopModelDM) { 
+        ysybgD = mySM.getOptionalParameter("ysybgD");
+        rVA = mySM.getOptionalParameter("rVA");
+        QB = mySM.getOptionalParameter("QB");
+        mB_NP = mySM.getOptionalParameter("mB_NP");
+        mchi_NP = mySM.getOptionalParameter("mchi_NP");
+        mV_NP = mySM.getOptionalParameter("mV_NP");
+        
+        mB2_NP = mB_NP * mB_NP;
+        mchi2_NP = mchi_NP * mchi_NP;
+        mV2_NP = mV_NP * mV_NP;
+        y_NP = mchi2_NP / mB2_NP;
+        gmuV_NP = 0.007 * mV_NP;
+        gmuA_NP = rVA * gmuV_NP;
+        Norm_NP = - sqrt(2.) / (4. * GF * 0.0411494) / (8. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
+    }
+    
     checkCache();
 
     t_p = pow(MM + MV, 2.);
@@ -1625,41 +1646,118 @@ gslpp::complex MVll::h_lambda(int hel, double q2)
     }
 }
 
+double MVll::F9(double x)
+{
+    double xm14 = (x - 1.)*(x - 1.)*(x - 1.)*(x - 1.);
+
+    if (x == 1.)
+        return -1./24.;
+    else
+        return (- 2. + 9.*x - 18.*x*x + 11.*x*x*x - 6.*x*x*x*log(x)) / 36. / xm14;
+}
+
+double MVll::G9(double x)
+{
+    double xm14 = (x - 1.)*(x - 1.)*(x - 1.)*(x - 1.);
+
+    if (x == 1.)
+        return 1./8.;
+    else
+        return (- 16. + 45.*x - 36.*x*x + 7.*x*x*x + 6.*(3.*x - 2.)*log(x)) / 36. / xm14;
+}
+
+gslpp::complex MVll::C9_NP(double q2)
+{
+    return Norm_NP * ysybgD * gmuV_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / (q2 - mV2_NP);
+}
+
+gslpp::complex MVll::C10_NP(double q2)
+{
+    return Norm_NP * ysybgD * gmuA_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / (q2 - mV2_NP);
+}
+
 gslpp::complex MVll::H_V_0(double q2, bool bar)
 {
-    if (!bar) return -gslpp::complex::i() * NN * (((C_9 + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_0(q2)*/ + Y(q2)) - etaV * pow(-1, angmomV) * C_9p) * V_0t(q2) + T_0(q2, !bar) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, !bar, SPLINE) - etaV * pow(-1, angmomV) * C_7p) * T_0t(q2) - sixteenM_PI2 * h_lambda(0, q2)));
-    return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_0(q2)*/ + Y(q2)) - etaV * pow(-1, angmomV) * C_9p.conjugate()) * V_0t(q2) + T_0(q2, bar) + MM2 / q2 * (twoMboMM * (C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE) - etaV * pow(-1, angmomV) * C_7p.conjugate()) * T_0t(q2) - sixteenM_PI2 * h_lambda(0, q2)));
-
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            if (!bar) return -gslpp::complex::i() * NN * (((C_9 + C9_NP(q2) + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_0(q2)*/ + Y(q2)) - etaV * pow(-1, angmomV) * C_9p) * V_0t(q2) + T_0(q2, !bar) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, !bar, SPLINE) - etaV * pow(-1, angmomV) * C_7p) * T_0t(q2) - sixteenM_PI2 * h_lambda(0, q2)));
+            return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + C9_NP(q2) + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_0(q2)*/ + Y(q2)) - etaV * pow(-1, angmomV) * C_9p.conjugate()) * V_0t(q2) + T_0(q2, bar) + MM2 / q2 * (twoMboMM * (C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE) - etaV * pow(-1, angmomV) * C_7p.conjugate()) * T_0t(q2) - sixteenM_PI2 * h_lambda(0, q2)));
+        }
+    }
+    else {
+        if (!bar) return -gslpp::complex::i() * NN * (((C_9 + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_0(q2)*/ + Y(q2)) - etaV * pow(-1, angmomV) * C_9p) * V_0t(q2) + T_0(q2, !bar) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, !bar, SPLINE) - etaV * pow(-1, angmomV) * C_7p) * T_0t(q2) - sixteenM_PI2 * h_lambda(0, q2)));
+        return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_0(q2)*/ + Y(q2)) - etaV * pow(-1, angmomV) * C_9p.conjugate()) * V_0t(q2) + T_0(q2, bar) + MM2 / q2 * (twoMboMM * (C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE) - etaV * pow(-1, angmomV) * C_7p.conjugate()) * T_0t(q2) - sixteenM_PI2 * h_lambda(0, q2)));
+    }
 }
 
 gslpp::complex MVll::H_V_p(double q2, bool bar)
 {
-    if (!bar) return -gslpp::complex::i() * NN * (((C_9 + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_p(q2)*/ + Y(q2)) * V_p(q2) - etaV * pow(-1, angmomV) * C_9p * V_m(q2)) + MM2 / q2 * (twoMboMM * ((C_7 + deltaC7_QCDF(q2, !bar, SPLINE)) * T_p(q2) - etaV * pow(-1, angmomV) * C_7p * T_m(q2)) - sixteenM_PI2 * h_lambda(1, q2)));
-    return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_p(q2)*/ + Y(q2)) * V_p(q2) - etaV * pow(-1, angmomV) * C_9p.conjugate() * V_m(q2)) + MM2 / q2 * (twoMboMM * ((C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE)) * T_p(q2) - etaV * pow(-1, angmomV) * C_7p.conjugate() * T_m(q2)) - sixteenM_PI2 * h_lambda(1, q2)));
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            if (!bar) return -gslpp::complex::i() * NN * (((C_9 + C9_NP(q2) + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_p(q2)*/ + Y(q2)) * V_p(q2) - etaV * pow(-1, angmomV) * C_9p * V_m(q2)) + MM2 / q2 * (twoMboMM * ((C_7 + deltaC7_QCDF(q2, !bar, SPLINE)) * T_p(q2) - etaV * pow(-1, angmomV) * C_7p * T_m(q2)) - sixteenM_PI2 * h_lambda(1, q2)));
+            return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + C9_NP(q2) + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_p(q2)*/ + Y(q2)) * V_p(q2) - etaV * pow(-1, angmomV) * C_9p.conjugate() * V_m(q2)) + MM2 / q2 * (twoMboMM * ((C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE)) * T_p(q2) - etaV * pow(-1, angmomV) * C_7p.conjugate() * T_m(q2)) - sixteenM_PI2 * h_lambda(1, q2)));
+        }
+    }
+    else {
+        if (!bar) return -gslpp::complex::i() * NN * (((C_9 + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_p(q2)*/ + Y(q2)) * V_p(q2) - etaV * pow(-1, angmomV) * C_9p * V_m(q2)) + MM2 / q2 * (twoMboMM * ((C_7 + deltaC7_QCDF(q2, !bar, SPLINE)) * T_p(q2) - etaV * pow(-1, angmomV) * C_7p * T_m(q2)) - sixteenM_PI2 * h_lambda(1, q2)));
+        return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_p(q2)*/ + Y(q2)) * V_p(q2) - etaV * pow(-1, angmomV) * C_9p.conjugate() * V_m(q2)) + MM2 / q2 * (twoMboMM * ((C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE)) * T_p(q2) - etaV * pow(-1, angmomV) * C_7p.conjugate() * T_m(q2)) - sixteenM_PI2 * h_lambda(1, q2)));
+    }
 }
 
 gslpp::complex MVll::H_V_m(double q2, bool bar)
 {
-    if (!bar) return -gslpp::complex::i() * NN * (((C_9 + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_m(q2)*/ + Y(q2)) * V_m(q2) - etaV * pow(-1, angmomV) * C_9p * V_p(q2)) + T_minus(q2, !bar) + MM2 / q2 * (twoMboMM * ((C_7 + deltaC7_QCDF(q2, !bar, SPLINE)) * T_m(q2) - etaV * pow(-1, angmomV) * C_7p * T_p(q2)) - sixteenM_PI2 * h_lambda(2, q2)));
-    return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_m(q2)*/ + Y(q2)) * V_m(q2) - etaV * pow(-1, angmomV) * C_9p.conjugate() * V_p(q2)) + T_minus(q2, bar) + MM2 / q2 * (twoMboMM * ((C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE)) * T_m(q2) - etaV * pow(-1, angmomV) * C_7p.conjugate() * T_p(q2)) - sixteenM_PI2 * h_lambda(2, q2)));
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            if (!bar) return -gslpp::complex::i() * NN * (((C_9 + C9_NP(q2) + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_m(q2)*/ + Y(q2)) * V_m(q2) - etaV * pow(-1, angmomV) * C_9p * V_p(q2)) + T_minus(q2, !bar) + MM2 / q2 * (twoMboMM * ((C_7 + deltaC7_QCDF(q2, !bar, SPLINE)) * T_m(q2) - etaV * pow(-1, angmomV) * C_7p * T_p(q2)) - sixteenM_PI2 * h_lambda(2, q2)));
+            return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + C9_NP(q2) + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_m(q2)*/ + Y(q2)) * V_m(q2) - etaV * pow(-1, angmomV) * C_9p.conjugate() * V_p(q2)) + T_minus(q2, bar) + MM2 / q2 * (twoMboMM * ((C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE)) * T_m(q2) - etaV * pow(-1, angmomV) * C_7p.conjugate() * T_p(q2)) - sixteenM_PI2 * h_lambda(2, q2)));
+        }
+    }
+    else {
+        if (!bar) return -gslpp::complex::i() * NN * (((C_9 + deltaC9_QCDF(q2, !bar, SPLINE) /*+ fDeltaC9_m(q2)*/ + Y(q2)) * V_m(q2) - etaV * pow(-1, angmomV) * C_9p * V_p(q2)) + T_minus(q2, !bar) + MM2 / q2 * (twoMboMM * ((C_7 + deltaC7_QCDF(q2, !bar, SPLINE)) * T_m(q2) - etaV * pow(-1, angmomV) * C_7p * T_p(q2)) - sixteenM_PI2 * h_lambda(2, q2)));
+        return -gslpp::complex::i() * NN_conjugate * (((C_9.conjugate() + deltaC9_QCDF(q2, bar, SPLINE) /*+ fDeltaC9_m(q2)*/ + Y(q2)) * V_m(q2) - etaV * pow(-1, angmomV) * C_9p.conjugate() * V_p(q2)) + T_minus(q2, bar) + MM2 / q2 * (twoMboMM * ((C_7.conjugate() + deltaC7_QCDF(q2, bar, SPLINE)) * T_m(q2) - etaV * pow(-1, angmomV) * C_7p.conjugate() * T_p(q2)) - sixteenM_PI2 * h_lambda(2, q2)));
+    }
 }
 
 gslpp::complex MVll::H_A_0(double q2, bool bar)
 {
-    if (!bar) return gslpp::complex::i() * NN * (-C_10 + etaV * pow(-1, angmomV) * C_10p) * V_0t(q2);
-    return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() + etaV * pow(-1, angmomV) * C_10p.conjugate()) * V_0t(q2);
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            if (!bar) return gslpp::complex::i() * NN * (-C_10 - C10_NP(q2) + etaV * pow(-1, angmomV) * C_10p) * V_0t(q2);
+            return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() - C10_NP(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate()) * V_0t(q2);
+        }
+    }
+    else {
+        if (!bar) return gslpp::complex::i() * NN * (-C_10 + etaV * pow(-1, angmomV) * C_10p) * V_0t(q2);
+        return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() + etaV * pow(-1, angmomV) * C_10p.conjugate()) * V_0t(q2);
+    }
 }
 
 gslpp::complex MVll::H_A_p(double q2, bool bar)
 {
-    if (!bar) return gslpp::complex::i() * NN * (-C_10 * V_p(q2) + etaV * pow(-1, angmomV) * C_10p * V_m(q2));
-    return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() * V_p(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate() * V_m(q2));
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            if (!bar) return gslpp::complex::i() * NN * ((-C_10 - C10_NP(q2)) * V_p(q2) + etaV * pow(-1, angmomV) * C_10p * V_m(q2));
+            return gslpp::complex::i() * NN_conjugate * ((-C_10.conjugate() - C10_NP(q2)) * V_p(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate() * V_m(q2));
+        }
+    }
+    else {
+        if (!bar) return gslpp::complex::i() * NN * (-C_10 * V_p(q2) + etaV * pow(-1, angmomV) * C_10p * V_m(q2));
+        return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() * V_p(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate() * V_m(q2));
+    }
 }
 
 gslpp::complex MVll::H_A_m(double q2, bool bar)
 {
-    if (!bar) return gslpp::complex::i() * NN * (-C_10 * V_m(q2) + etaV * pow(-1, angmomV) * C_10p * V_p(q2));
-    return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() * V_m(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate() * V_p(q2));
+    if(lep == QCD::MU){
+        if (LoopModelDM) {
+            if (!bar) return gslpp::complex::i() * NN * ((-C_10 - C10_NP(q2)) * V_m(q2) + etaV * pow(-1, angmomV) * C_10p * V_p(q2));
+            return gslpp::complex::i() * NN_conjugate * ((-C_10.conjugate() - C10_NP(q2)) * V_m(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate() * V_p(q2));
+        }
+    }
+    else {
+        if (!bar) return gslpp::complex::i() * NN * (-C_10 * V_m(q2) + etaV * pow(-1, angmomV) * C_10p * V_p(q2));
+        return gslpp::complex::i() * NN_conjugate * (-C_10.conjugate() * V_m(q2) + etaV * pow(-1, angmomV) * C_10p.conjugate() * V_p(q2));
+    }
 }
 
 gslpp::complex MVll::H_S(double q2, bool bar)
@@ -1670,8 +1768,16 @@ gslpp::complex MVll::H_S(double q2, bool bar)
 
 gslpp::complex MVll::H_P(double q2, bool bar)
 {
-    if (!bar) return gslpp::complex::i() * NN * (MboMW * (C_P - etaV * pow(-1, angmomV) * C_Pp) + twoMlepMb / q2 * (C_10 * (1. + etaV * pow(-1, angmomV) * MsoMb) - C_10p * (etaV * pow(-1, angmomV) + MsoMb))) * S_L(q2);
-    return gslpp::complex::i() * NN_conjugate * (MboMW * (C_P.conjugate() - etaV * pow(-1, angmomV) * C_Pp.conjugate()) + twoMlepMb / q2 * (C_10.conjugate()*(1. + etaV * pow(-1, angmomV) * MsoMb) - C_10p.conjugate()*(etaV * pow(-1, angmomV) + MsoMb))) * S_L(q2);
+    if(lep == QCD::MU){
+        if (LoopModelDM) {
+            if (!bar) return gslpp::complex::i() * NN * (MboMW * (C_P - etaV * pow(-1, angmomV) * C_Pp) + twoMlepMb / q2 * ((C_10 + C10_NP(q2)) * (1. + etaV * pow(-1, angmomV) * MsoMb) - C_10p * (etaV * pow(-1, angmomV) + MsoMb))) * S_L(q2);
+            return gslpp::complex::i() * NN_conjugate * (MboMW * (C_P.conjugate() - etaV * pow(-1, angmomV) * C_Pp.conjugate()) + twoMlepMb / q2 * ((C_10.conjugate() + C10_NP(q2))*(1. + etaV * pow(-1, angmomV) * MsoMb) - C_10p.conjugate()*(etaV * pow(-1, angmomV) + MsoMb))) * S_L(q2);
+        }
+    }
+    else {
+        if (!bar) return gslpp::complex::i() * NN * (MboMW * (C_P - etaV * pow(-1, angmomV) * C_Pp) + twoMlepMb / q2 * (C_10 * (1. + etaV * pow(-1, angmomV) * MsoMb) - C_10p * (etaV * pow(-1, angmomV) + MsoMb))) * S_L(q2);
+        return gslpp::complex::i() * NN_conjugate * (MboMW * (C_P.conjugate() - etaV * pow(-1, angmomV) * C_Pp.conjugate()) + twoMlepMb / q2 * (C_10.conjugate()*(1. + etaV * pow(-1, angmomV) * MsoMb) - C_10p.conjugate()*(etaV * pow(-1, angmomV) + MsoMb))) * S_L(q2);
+    }
 }
 
 /*******************************************************************************

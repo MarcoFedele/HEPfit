@@ -41,6 +41,7 @@ T_cache(5, 0.)
     pseudoscalar = pseudoscalar_i;
     dispersion = true;
     FixedWCbtos = false;
+    LoopModelDM = false;
     mJ2 = 3.096 * 3.096;
 
     I0_updated = 0;
@@ -77,6 +78,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
 {
     dispersion = mySM.getFlavour().getFlagUseDispersionRelation();
     FixedWCbtos = mySM.getFlavour().getFlagFixedWCbtos();
+    LoopModelDM = mySM.getFlavour().getFlagLoopModelDM();
 
 #if NFPOLARBASIS_MPLL
     if (pseudoscalar == StandardModel::K_P || pseudoscalar == StandardModel::K_0) mpllParameters = make_vector<std::string>()
@@ -119,6 +121,8 @@ std::vector<std::string> MPll::initializeMPllParameters()
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybgD", "rVA", "QB", "mB_NP", "mchi_NP", "mV_NP"});
+    
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
     return mpllParameters;
@@ -253,6 +257,23 @@ void MPll::updateParameters()
     C_1Lh_bar = (*(allcoeffh[LO]))(0) / 2.;
     C_2Lh_bar = (*(allcoeffh[LO]))(1) - (*(allcoeff[LO]))(0) / 6.;
     C_8Lh = (*(allcoeffh[LO]))(7);
+    
+    if (LoopModelDM) { 
+        ysybgD = mySM.getOptionalParameter("ysybgD");
+        rVA = mySM.getOptionalParameter("rVA");
+        QB = mySM.getOptionalParameter("QB");
+        mB_NP = mySM.getOptionalParameter("mB_NP");
+        mchi_NP = mySM.getOptionalParameter("mchi_NP");
+        mV_NP = mySM.getOptionalParameter("mV_NP");
+        
+        mB2_NP = mB_NP * mB_NP;
+        mchi2_NP = mchi_NP * mchi_NP;
+        mV2_NP = mV_NP * mV_NP;
+        y_NP = mchi2_NP / mB2_NP;
+        gmuV_NP = 0.007 * mV_NP;
+        gmuA_NP = rVA * gmuV_NP;
+        Norm_NP = - sqrt(2.) / (4. * GF * 0.0411494) / (8. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
+    }
 
     checkCache();
 
@@ -1101,14 +1122,56 @@ gslpp::complex MPll::h_lambda(double q2)
     }
 }
 
+double MPll::F9(double x)
+{
+    double xm14 = pow(x - 1.,4);
+
+    if (x == 1.)
+        return -1./24.;
+    else
+        return (- 2. + 9.*x - 18.*x*x + 11.*x*x*x - 6.*x*x*x*log(x)) / 36. / xm14;
+}
+
+double MPll::G9(double x)
+{
+    double xm14 = pow(x - 1.,4);
+
+    if (x == 1.)
+        return 1./8.;
+    else
+        return (- 16. + 45.*x - 36.*x*x + 7.*x*x*x + 6.*(3.*x - 2.)*log(x)) / 36. / xm14;
+}
+
+gslpp::complex MPll::C9_NP(double q2)
+{
+    return Norm_NP * ysybgD * gmuV_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / (q2 - mV2_NP);
+}
+
+gslpp::complex MPll::C10_NP(double q2)
+{
+    return Norm_NP * ysybgD * gmuA_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / (q2 - mV2_NP);
+}
+
 gslpp::complex MPll::H_V(double q2)
 {
-    return -((C_9 + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            return -((C_9 + C9_NP(q2) + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
+        }
+    }
+    else
+        return -((C_9 + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
 }
 
 gslpp::complex MPll::H_A(double q2)
 {
-    return (-C_10 + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            return (-C_10 - C10_NP(q2) + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
+        }
+    }
+    else
+        return (-C_10 + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
 }
 
 gslpp::complex MPll::H_S(double q2)
@@ -1118,7 +1181,13 @@ gslpp::complex MPll::H_S(double q2)
 
 gslpp::complex MPll::H_P(double q2)
 {
-    return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
+    if(lep == QCD::MU){
+        if (LoopModelDM) { 
+            return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 + C10_NP(q2) * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
+        }
+    }
+    else
+        return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
 }
 
 /*******************************************************************************

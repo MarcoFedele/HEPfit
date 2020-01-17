@@ -289,6 +289,11 @@ public:
         return (this->FixedWCbtosflag = FixedWCbtosflag);
     }
 
+    bool setFlagLoopModelDM(bool LoopModelDMflag)
+    {
+        return (this->LoopModelDMflag = LoopModelDMflag);
+    }
+
     bool getFlagUseDispersionRelation() const
     {
         return dispersion;
@@ -334,6 +339,11 @@ public:
         return FixedWCbtosflag;
     }
 
+    bool getFlagLoopModelDM() const
+    {
+        return LoopModelDMflag;
+    }
+
 private:
     template<typename T, typename... Args> std::shared_ptr<T>& getPtr(std::shared_ptr<T>& x, Args... args) const;
     template <typename T, typename... Args> T& getM(std::map<std::vector<int>,std::shared_ptr<T> >& map, Args ... args) const;
@@ -358,6 +368,7 @@ private:
     mutable bool gSLm814gTflag;
     mutable bool btocNPpmflag;
     mutable bool FixedWCbtosflag;
+    mutable bool LoopModelDMflag;
 };
 
 /**
