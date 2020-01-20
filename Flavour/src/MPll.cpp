@@ -1165,12 +1165,30 @@ double MPll::G9(double x)
 
 gslpp::complex MPll::C9_NP(double q2)
 {
-    return Norm_NP * ysybgD * gmuV_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / (q2 - mV2_NP);
+    double gD = ysybgD/0.3/0.3;
+    double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
+    double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
+    
+    double GammaV = (gD*gD * sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.) 
+                    + gmuV_NP*gmuV_NP * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
+                    + gmuA_NP*gmuA_NP * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
+    
+    return Norm_NP * ysybgD * gmuV_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / 
+            ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
 gslpp::complex MPll::C10_NP(double q2)
 {
-    return Norm_NP * ysybgD * gmuA_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / (q2 - mV2_NP);
+    double gD = ysybgD/0.3/0.3;
+    double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
+    double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
+    
+    double GammaV = (gD*gD * sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.) 
+                    + gmuV_NP*gmuV_NP * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
+                    + gmuA_NP*gmuA_NP * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
+    
+    return Norm_NP * ysybgD * gmuA_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / 
+            ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
 gslpp::complex MPll::H_V(double q2)
