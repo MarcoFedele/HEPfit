@@ -122,7 +122,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
-    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybgD", "rVA", "QB", "mB_NP", "mchi_NP", "mV_NP"});
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybgDQB", "gmuV_NP", "gmuA_NP", "mB_NP", "mchi_NP", "mV_NP" });
     
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
@@ -260,9 +260,9 @@ void MPll::updateParameters()
     C_8Lh = (*(allcoeffh[LO]))(7);
     
     if (LoopModelDM) { 
-        ysybgD = mySM.getOptionalParameter("ysybgD");
-        rVA = mySM.getOptionalParameter("rVA");
-        QB = mySM.getOptionalParameter("QB");
+        ysybgDQB = mySM.getOptionalParameter("ysybgDQB");
+        gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
+        gmuA_NP = mySM.getOptionalParameter("gmuA_NP");
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
         mV_NP = mySM.getOptionalParameter("mV_NP");
@@ -271,8 +271,6 @@ void MPll::updateParameters()
         mchi2_NP = mchi_NP * mchi_NP;
         mV2_NP = mV_NP * mV_NP;
         y_NP = mchi2_NP / mB2_NP;
-        gmuV_NP = 0.007 * mV_NP;
-        gmuA_NP = rVA * gmuV_NP;
         Norm_NP = - sqrt(2.) / (4. * GF * 0.0411494) / (8. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
     }
 
@@ -618,13 +616,13 @@ void MPll::checkCache()
     }
 
     if (LoopModelDM) {
-        if (ysybgD == NPcache(0) && rVA == NPcache(1) && QB == NPcache(2) && mB_NP == NPcache(3) && mchi_NP == NPcache(4) && mV_NP == NPcache(5)) {
+        if (ysybgDQB == NPcache(0) && gmuV_NP == NPcache(1) && gmuA_NP == NPcache(2) && mB_NP == NPcache(3) && mchi_NP == NPcache(4) && mV_NP == NPcache(5)) {
          NPupdated = 1;
         } else {
             NPupdated = 0;
-            NPcache(0) = ysybgD;
-            NPcache(1) = rVA;
-            NPcache(2) = QB;
+            NPcache(0) = ysybgDQB;
+            NPcache(1) = gmuV_NP;
+            NPcache(2) = gmuA_NP;
             NPcache(3) = mB_NP;
             NPcache(4) = mchi_NP;
             NPcache(5) = mV_NP;
@@ -1165,7 +1163,7 @@ double MPll::G9(double x)
 
 gslpp::complex MPll::C9_NP(double q2)
 {
-    double gD = ysybgD/0.3/0.3;
+    double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
     
@@ -1173,13 +1171,13 @@ gslpp::complex MPll::C9_NP(double q2)
                     + gmuV_NP*gmuV_NP * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
                     + gmuA_NP*gmuA_NP * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
     
-    return Norm_NP * ysybgD * gmuV_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / 
+    return Norm_NP * ysybgDQB * gmuV_NP / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 / 
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
 gslpp::complex MPll::C10_NP(double q2)
 {
-    double gD = ysybgD/0.3/0.3;
+    double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
     
@@ -1187,7 +1185,7 @@ gslpp::complex MPll::C10_NP(double q2)
                     + gmuV_NP*gmuV_NP * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
                     + gmuA_NP*gmuA_NP * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
     
-    return Norm_NP * ysybgD * gmuA_NP / mB2_NP * QB * (F9(y_NP) + G9(y_NP)) * q2 / 
+    return Norm_NP * ysybgDQB * gmuA_NP / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 / 
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 

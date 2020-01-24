@@ -913,9 +913,9 @@ private:
     gslpp::complex C_Sp;/**<Wilson coeffients @f$C_S'@f$*/
     gslpp::complex C_Pp;/**<Wilson coeffients @f$C_P'@f$*/
     
-    double ysybgD;
-    double rVA;
-    double QB;
+    double ysybgDQB;
+    double gmuV_NP;
+    double gmuA_NP;
     double mB_NP;
     double mchi_NP;
     double mV_NP;
@@ -923,8 +923,6 @@ private:
     double mchi2_NP;
     double mV2_NP;
     double y_NP;
-    double gmuV_NP;
-    double gmuA_NP;
     double Norm_NP;
     
     std::vector<double> Re_T_perp;/**<Vector that samples the QCDF @f$Re(T_{perp})@f$ */
