@@ -85,6 +85,8 @@ ThObsFactory::ThObsFactory()
     
     obsThFactory["C9_LMDM"] = boost::factory<C9_LMDM*>();
     obsThFactory["C10_LMDM"] = boost::factory<C10_LMDM*>();
+    
+    obsThFactory["gm2"] = boost::factory<gm2_Zprime*>();
 
     //
     //-----  StandardModel observables  -----

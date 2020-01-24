@@ -31,6 +31,7 @@
 #include "MPlnuObservables.h"
 #include "myMPlnuObservables.h"
 #include "myMVlnuObservables.h"
+#include "MyObs.h"
 
 #endif	/* FLAVOUROBSERVABLES_H */
 

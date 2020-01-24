@@ -9,17 +9,18 @@
 #define MYOBS_H
 
 class StandardModel;
+#include <gsl/gsl_integration.h>
 #include "ThObservable.h"
 #include "QCD.h"
 #include "OrderScheme.h"
 
-class MyObs : public ThObservable {
+class gm2_Zprime : public ThObservable {
 public:   
     /**
      * constructor
      * @param Flavour
      */
-    MyObs(const StandardModel& SM_i);
+    gm2_Zprime(const StandardModel& SM_i);
     
     /**
      * 
@@ -28,8 +29,22 @@ public:
     
     
 protected:
+    double IntFunct(double z);
     
 private:
+    bool LoopModelDM;
+    
+    gsl_function FInt;/**< GSL integral variable */
+    double Int;/**< GSL integral variable */
+    double errInt;/**< GSL integral variable */
+    gsl_integration_cquad_workspace * w_Int;/**< GSL integral variable */
+    
+    double mV;
+    double gmuV;
+    double gmuA;
+    
+    double mmu;
+    double x;
 
 };
 
