@@ -217,7 +217,7 @@ std::vector<std::string> MVll::initializeMVllParameters()
 
     if (FixedWCbtos) mvllParameters.insert(mvllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
     
-    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "ysybgDQB", "gmuV_NP", "gmuA_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "ysybgDQB", "gmuV_NP", "rAV_NP", "mB_NP", "mchi_NP", "mV_NP" });
     
     mySM.initializeMeson(meson);
     mySM.initializeMeson(vectorM);
@@ -441,7 +441,7 @@ void MVll::updateParameters()
     if (LoopModelDM) { 
         ysybgDQB = mySM.getOptionalParameter("ysybgDQB");
         gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
-        gmuA_NP = mySM.getOptionalParameter("gmuA_NP");
+        gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
         mV_NP = mySM.getOptionalParameter("mV_NP");
