@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2014 HEPfit Collaboration
  *
  *
@@ -18,20 +18,20 @@
 
 MPll::MPll(const StandardModel& SM_i, QCD::meson meson_i, QCD::meson pseudoscalar_i, QCD::lepton lep_i)
 : mySM(SM_i), myF_1(new F_1()), myF_2(new F_2()),
-#if LATTICE        
+#if LATTICE
 fplus_lat_cache(3, 0.),
 fT_lat_cache(3, 0.),
 f0_lat_cache(3, 0.),
-#else        
+#else
 fplus_cache(2, 0.),
 fT_cache(2, 0.),
 f0_cache(2, 0.),
-#endif        
+#endif
 k2_cache(2, 0.),
 SL_cache(2, 0.),
 N_cache(3, 0.),
 Ycache(2, 0.),
-NPcache(6, 0.),
+NPcache(8, 0.),
 H_V0cache(2, 0.),
 H_Scache(2, 0.),
 H_P_cache(4, 0.),
@@ -89,17 +89,17 @@ std::vector<std::string> MPll::initializeMPllParameters()
         << "b_0_f0" << "b_1_f0" << "b_2_f0" << "m_fit_f0_lat"
 #else
         << "r_1_fplus" << "r_2_fplus" << "m_fit2_fplus" << "r_1_fT" << "r_2_fT" << "m_fit2_fT" << "r_2_f0" << "m_fit2_f0"
-#endif            
+#endif
         << "absh_0_MP" << "argh_0_MP" << "absh_1_MP" << "argh_1_MP";
 #else
     if (pseudoscalar == StandardModel::K_P || pseudoscalar == StandardModel::K_0) mpllParameters = make_vector<std::string>()
-#if LATTICE            
+#if LATTICE
         << "b_0_fplus" << "b_1_fplus" << "b_2_fplus" << "m_fit_fplus_lat"
         << "b_0_fT" << "b_1_fT" << "b_2_fT" << "m_fit_fT_lat"
         << "b_0_f0" << "b_1_f0" << "b_2_f0" << "m_fit_f0_lat"
-#else            
+#else
         << "r_1_fplus" << "r_2_fplus" << "m_fit2_fplus" << "r_1_fT" << "r_2_fT" << "m_fit2_fT" << "r_2_f0" << "m_fit2_f0"
-#endif            
+#endif
         << "reh_0_MP" << "imh_0_MP" << "reh_1_MP" << "imh_1_MP";
 #endif
     else {
@@ -115,15 +115,15 @@ std::vector<std::string> MPll::initializeMPllParameters()
             << "b_0_fplus" << "b_1_fplus" << "b_2_fplus" << "m_fit_fplus_lat"
             << "b_0_fT" << "b_1_fT" << "b_2_fT" << "m_fit_fT_lat"
             << "b_0_f0" << "b_1_f0" << "b_2_f0" << "m_fit_f0_lat"
-#else                
+#else
             << "r_1_fplus" << "r_2_fplus" << "m_fit2_fplus" << "r_1_fT" << "r_2_fT" << "m_fit2_fT" << "r_2_f0" << "m_fit2_f0"
-#endif                
+#endif
             << "r1_BK" << "r2_BK" << "deltaC9_BK" << "phDC9_BK";
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
-    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybgDQB", "gmuV_NP", "rAV_NP", "mB_NP", "mchi_NP", "mV_NP" });
-    
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybgDQB", "gmuV_NP", "rAV_NP", "gmuV_e_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
     return mpllParameters;
@@ -155,7 +155,7 @@ void MPll::updateParameters()
     switch (pseudoscalar) {
         case StandardModel::K_P:
         case StandardModel::K_0:
-#if LATTICE            
+#if LATTICE
             b_0_fplus = mySM.getOptionalParameter("b_0_fplus");
             b_1_fplus = mySM.getOptionalParameter("b_1_fplus");
             b_2_fplus = mySM.getOptionalParameter("b_2_fplus");
@@ -177,7 +177,7 @@ void MPll::updateParameters()
             m_fit2_fT = mySM.getOptionalParameter("m_fit2_fT");
             r_2_f0 = mySM.getOptionalParameter("r_2_f0");
             m_fit2_f0 = mySM.getOptionalParameter("m_fit2_f0");
-#endif            
+#endif
 
             if (pseudoscalar == StandardModel::K_P) spectator_charge = mySM.getQuarks(QCD::UP).getCharge();
             else spectator_charge = mySM.getQuarks(QCD::DOWN).getCharge();
@@ -239,7 +239,7 @@ void MPll::updateParameters()
     C_10p = (*(allcoeffprime[LO]))(9) + (*(allcoeffprime[NLO]))(9);
     C_Sp = MW / Mb * ((*(allcoeffprime[LO]))(10) + (*(allcoeffprime[NLO]))(10));
     C_Pp = MW / Mb * ((*(allcoeffprime[LO]))(11) + (*(allcoeffprime[NLO]))(11));
-    
+
     if (FixedWCbtos) { /** NOTE: ComputeCoeff with different argumetns cannot be mixed. They have to be called sequentially. **/
         allcoeff_noSM = mySM.getFlavour().ComputeCoeffBMll(mu_b, lep, true); //check the mass scale, scheme fixed to NDR
         C_7 = mySM.getOptionalParameter("C7_SM") + ((*(allcoeff_noSM[LO]))(6) + (*(allcoeff_noSM[NLO]))(6));
@@ -258,15 +258,17 @@ void MPll::updateParameters()
     C_1Lh_bar = (*(allcoeffh[LO]))(0) / 2.;
     C_2Lh_bar = (*(allcoeffh[LO]))(1) - (*(allcoeff[LO]))(0) / 6.;
     C_8Lh = (*(allcoeffh[LO]))(7);
-    
-    if (LoopModelDM) { 
+
+    if (LoopModelDM) {
         ysybgDQB = mySM.getOptionalParameter("ysybgDQB");
         gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
         gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
+        gmuV_e_NP = mySM.getOptionalParameter("gmuV_e_NP");
+        gmuA_e_NP = mySM.getOptionalParameter("rAV_e_NP") * gmuV_e_NP;
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
         mV_NP = mySM.getOptionalParameter("mV_NP");
-        
+
         mB2_NP = mB_NP * mB_NP;
         mchi2_NP = mchi_NP * mchi_NP;
         mV2_NP = mV_NP * mV_NP;
@@ -363,7 +365,7 @@ void MPll::updateParameters()
 
     if (deltaTparpupdated * deltaTparmupdated == 0) for (it = I1Cached.begin(); it != I1Cached.end(); ++it) it->second = 0;
 
-#if SPLINE    
+#if SPLINE
     if (mySM.getFlavour().getUpdateFlag(meson, pseudoscalar, lep)) spline_QCDF_func();
 #else
     fit_DeltaC9_mumu();
@@ -386,7 +388,7 @@ void MPll::checkCache()
         k2_cache(1) = MP;
     }
 
-#if LATTICE    
+#if LATTICE
     if (b_0_fplus == fplus_lat_cache(0) && b_1_fplus == fplus_lat_cache(1) && b_2_fplus == fplus_lat_cache(2)) {
         fplus_lat_updated = 1;
     } else {
@@ -413,7 +415,7 @@ void MPll::checkCache()
         f0_lat_cache(1) = b_1_f0;
         f0_lat_cache(2) = b_2_f0;
     }
-#else    
+#else
     if (r_1_fplus == fplus_cache(0) && r_2_fplus == fplus_cache(1)) {
         fplus_updated = 1;
     } else {
@@ -436,7 +438,7 @@ void MPll::checkCache()
         f0_updated = 0;
         f0_cache = r_2_f0;
     }
-#endif    
+#endif
     if (Mlep == beta_cache) {
         beta_updated = 1;
     } else {
@@ -447,24 +449,24 @@ void MPll::checkCache()
     lambda_updated = k2_updated;
     F_updated = lambda_updated * beta_updated;
 
-#if LATTICE 
+#if LATTICE
     VL_updated = k2_updated * fplus_lat_updated;
 #else
     VL_updated = k2_updated * fplus_updated;
-#endif 
+#endif
 
-#if LATTICE 
+#if LATTICE
     TL_updated = k2_updated * fT_lat_updated;
 #else
     TL_updated = k2_updated * fT_updated;
-#endif 
+#endif
 
     if (Mb == SL_cache(0) && Ms == SL_cache(1)) {
-#if LATTICE 
+#if LATTICE
         SL_updated = k2_updated * f0_lat_updated;
 #else
         SL_updated = k2_updated * f0_updated;
-#endif            
+#endif
     } else {
         SL_updated = 0;
         SL_cache(0) = Mb;
@@ -616,17 +618,19 @@ void MPll::checkCache()
     }
 
     if (LoopModelDM) {
-        if (ysybgDQB == NPcache(0) && gmuV_NP == NPcache(1) && gmuA_NP == NPcache(2) && mB_NP == NPcache(3) && mchi_NP == NPcache(4) && mV_NP == NPcache(5)) {
+        if (ysybgDQB == NPcache(0) && gmuV_NP == NPcache(1) && gmuA_NP == NPcache(2) gmuV_e_NP == NPcache(3) && gmuA_e_NP == NPcache(4) && mB_NP == NPcache(5) && mchi_NP == NPcache(6) && mV_NP == NPcache(7)) {
          NPupdated = 1;
         } else {
             NPupdated = 0;
             NPcache(0) = ysybgDQB;
             NPcache(1) = gmuV_NP;
             NPcache(2) = gmuA_NP;
-            NPcache(3) = mB_NP;
-            NPcache(4) = mchi_NP;
-            NPcache(5) = mV_NP;
-        }        
+            NPcache(3) = gmuV_e_NP;
+            NPcache(4) = gmuA_e_NP;
+            NPcache(5) = mB_NP;
+            NPcache(6) = mchi_NP;
+            NPcache(7) = mV_NP;
+        }
     }
 
     if (!dispersion) {
@@ -672,7 +676,7 @@ void MPll::checkCache()
         H_P_cache(2) = Mlep;
         H_P_cache(3) = Ms;
     }
-    
+
     if (LoopModelDM) {
         H_V0updated *= NPupdated;
         H_A0updated *= NPupdated;
@@ -744,7 +748,7 @@ double MPll::f_plus(double q2)
     return LATTICE_fit1(q2, b_0_fplus, b_1_fplus, b_2_fplus, m_fit2_fplus_lat);
 #else
     return LCSR_fit1(q2, r_1_fplus, r_2_fplus, m_fit2_fplus);
-#endif        
+#endif
 }
 
 double MPll::f_T(double q2)
@@ -753,7 +757,7 @@ double MPll::f_T(double q2)
     return LATTICE_fit1(q2, b_0_fT, b_1_fT, b_2_fT, m_fit2_fT_lat);
 #else
     return LCSR_fit1(q2, r_1_fT, r_2_fT, m_fit2_fT);
-#endif        
+#endif
 }
 
 double MPll::f_0(double q2)
@@ -762,7 +766,7 @@ double MPll::f_0(double q2)
     return LATTICE_fit2(q2, b_0_f0, b_1_f0, b_2_f0, m_fit2_f0_lat);
 #else
     return LCSR_fit2(q2, r_2_f0, m_fit2_f0);
-#endif        
+#endif
 }
 
 gslpp::complex MPll::V_L(double q2)
@@ -1161,39 +1165,44 @@ double MPll::G9(double x)
         return (- 16. + 45.*x - 36.*x*x + 7.*x*x*x + 6.*(3.*x - 2.)*log(x)) / 36. / xm14;
 }
 
-gslpp::complex MPll::C9_NP(double q2)
+gslpp::complex MVll::C9_NP(double q2, double gmu_V, double gmu_A)
 {
     double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
-    
-    double GammaV = (gD*gD * sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.) 
-                    + gmuV_NP*gmuV_NP * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
-                    + gmuA_NP*gmuA_NP * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
-    
-    return Norm_NP * ysybgDQB * gmuV_NP / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 / 
+
+    double GammaV = (gD*gD * sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.)
+                    + gmu_V*gmu_V * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
+                    + gmu_A*gmu_A * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
+
+    return Norm_NP * ysybgDQB * gmu_V / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
-gslpp::complex MPll::C10_NP(double q2)
+gslpp::complex MVll::C10_NP(double q2, double gmu_V, double gmu_A)
 {
     double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
-    
-    double GammaV = (gD*gD * sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.) 
-                    + gmuV_NP*gmuV_NP * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
-                    + gmuA_NP*gmuA_NP * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
-    
-    return Norm_NP * ysybgDQB * gmuA_NP / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 / 
+
+    double GammaV = (gD*gD * sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.)
+                    + gmu_V*gmu_V * sqrt(1.-4.*mmu2omV2) * (2.*mmu2omV2 + 1.)
+                    + gmu_A*gmu_A * sqrt(1.-4.*mmu2omV2) * (1.-4.*mmu2omV2))/12./M_PI;
+
+    return Norm_NP * ysybgDQB * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
 gslpp::complex MPll::H_V(double q2)
 {
     if(lep == QCD::MU){
-        if (LoopModelDM) { 
-            return -((C_9 + C9_NP(q2) + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
+        if (LoopModelDM) {
+            return -((C_9 + C9_NP(q2, gmuV_NP, gmuA_NP) + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
+        }
+    }
+    else if(lep == QCD::ELECTRON){
+        if (LoopModelDM) {
+            return -((C_9 + C9_NP(q2, gmuV_e_NP, gmuA_e_NP) + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
         }
     }
     else
@@ -1203,8 +1212,13 @@ gslpp::complex MPll::H_V(double q2)
 gslpp::complex MPll::H_A(double q2)
 {
     if(lep == QCD::MU){
-        if (LoopModelDM) { 
-            return (-C_10 - C10_NP(q2) + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
+        if (LoopModelDM) {
+            return (-C_10 - C10_NP(q2, gmuV_NP, gmuA_NP) + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
+        }
+    }
+    else if(lep == QCD::ELECTRON){
+        if (LoopModelDM) {
+            return (-C_10 - C10_NP(q2, gmuV_e_NP, gmuA_e_NP) + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
         }
     }
     else
@@ -1219,8 +1233,13 @@ gslpp::complex MPll::H_S(double q2)
 gslpp::complex MPll::H_P(double q2)
 {
     if(lep == QCD::MU){
-        if (LoopModelDM) { 
-            return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 + C10_NP(q2) * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
+        if (LoopModelDM) {
+            return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 + C10_NP(q2, gmuV_NP, gmuA_NP) * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
+        }
+    }
+    else if(lep == QCD::ELECTRON){
+        if (LoopModelDM) {
+            return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 + C10_NP(q2, gmuV_e_NP, gmuA_e_NP) * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
         }
     }
     else
