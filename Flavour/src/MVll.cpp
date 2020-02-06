@@ -853,7 +853,7 @@ void MVll::checkCache()
     }
 
     if (LoopModelDM) {
-        if (ysybgDQB == NPcache(0) && gmuV_NP == NPcache(1) && gmuA_NP == NPcache(2) gmuV_e_NP == NPcache(3) && gmuA_e_NP == NPcache(4) && mB_NP == NPcache(5) && mchi_NP == NPcache(6) && mV_NP == NPcache(7)) {
+        if (ysybgDQB == NPcache(0) && gmuV_NP == NPcache(1) && gmuA_NP == NPcache(2) && gmuV_e_NP == NPcache(3) && gmuA_e_NP == NPcache(4) && mB_NP == NPcache(5) && mchi_NP == NPcache(6) && mV_NP == NPcache(7)) {
          NPupdated = 1;
         } else {
             NPupdated = 0;
