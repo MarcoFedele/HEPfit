@@ -1165,7 +1165,7 @@ double MPll::G9(double x)
         return (- 16. + 45.*x - 36.*x*x + 7.*x*x*x + 6.*(3.*x - 2.)*log(x)) / 36. / xm14;
 }
 
-gslpp::complex MVll::C9_NP(double q2, double gmu_V, double gmu_A)
+gslpp::complex MPll::C9_NP(double q2, double gmu_V, double gmu_A)
 {
     double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
@@ -1179,7 +1179,7 @@ gslpp::complex MVll::C9_NP(double q2, double gmu_V, double gmu_A)
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
-gslpp::complex MVll::C10_NP(double q2, double gmu_V, double gmu_A)
+gslpp::complex MPll::C10_NP(double q2, double gmu_V, double gmu_A)
 {
     double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
