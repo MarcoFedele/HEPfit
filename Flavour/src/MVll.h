@@ -453,7 +453,7 @@ public:
 
     double F9(double x);
     double G9(double x);
-    
+
     gslpp::complex C9_NP(double q2, double gmu_V, double gmu_A);
     gslpp::complex C10_NP(double q2, double gmu_V, double gmu_A);
 
@@ -913,11 +913,12 @@ private:
     gslpp::complex C_Sp;/**<Wilson coeffients @f$C_S'@f$*/
     gslpp::complex C_Pp;/**<Wilson coeffients @f$C_P'@f$*/
 
-    double ysybgDQB;
+    double ysybQB;
+    double gD;
     double gmuV_NP;
     double gmuA_NP;
-    double gmuV_e_NP;
-    double gmuA_e_NP;
+    double geV_NP;
+    double geA_NP;
     double mB_NP;
     double mchi_NP;
     double mV_NP;

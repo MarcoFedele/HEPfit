@@ -375,11 +375,12 @@ private:
     gslpp::complex C_Sp;/**<Wilson coeffients @f$C_S'@f$*/
     gslpp::complex C_Pp;/**<Wilson coeffients @f$C_P'@f$*/
 
-    double ysybgDQB;
+    double ysybQB;
+    double gD;
     double gmuV_NP;
     double gmuA_NP;
-    double gmuV_e_NP;
-    double gmuA_e_NP;
+    double geV_NP;
+    double geA_NP;
     double mB_NP;
     double mchi_NP;
     double mV_NP;

@@ -31,7 +31,7 @@ k2_cache(2, 0.),
 SL_cache(2, 0.),
 N_cache(3, 0.),
 Ycache(2, 0.),
-NPcache(8, 0.),
+NPcache(9, 0.),
 H_V0cache(2, 0.),
 H_Scache(2, 0.),
 H_P_cache(4, 0.),
@@ -122,7 +122,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
-    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybgDQB", "gmuV_NP", "rAV_NP", "gmuV_e_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybQB", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
 
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
@@ -260,11 +260,12 @@ void MPll::updateParameters()
     C_8Lh = (*(allcoeffh[LO]))(7);
 
     if (LoopModelDM) {
-        ysybgDQB = mySM.getOptionalParameter("ysybgDQB");
+        ysybQB = mySM.getOptionalParameter("ysybQB");
+        gD = mySM.getOptionalParameter("gD");
         gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
         gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
-        gmuV_e_NP = mySM.getOptionalParameter("gmuV_e_NP");
-        gmuA_e_NP = mySM.getOptionalParameter("rAV_e_NP") * gmuV_e_NP;
+        geV_NP = mySM.getOptionalParameter("geV_NP");
+        geA_NP = mySM.getOptionalParameter("rAV_e_NP") * geV_NP;
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
         mV_NP = mySM.getOptionalParameter("mV_NP");
@@ -618,18 +619,19 @@ void MPll::checkCache()
     }
 
     if (LoopModelDM) {
-        if (ysybgDQB == NPcache(0) && gmuV_NP == NPcache(1) && gmuA_NP == NPcache(2) && gmuV_e_NP == NPcache(3) && gmuA_e_NP == NPcache(4) && mB_NP == NPcache(5) && mchi_NP == NPcache(6) && mV_NP == NPcache(7)) {
+        if (ysybQB == NPcache(0) && gD == NPcache(1) && gmuV_NP == NPcache(2) && gmuA_NP == NPcache(3) && geV_NP == NPcache(4) && geA_NP == NPcache(5) && mB_NP == NPcache(6) && mchi_NP == NPcache(7) && mV_NP == NPcache(8)) {
          NPupdated = 1;
         } else {
             NPupdated = 0;
-            NPcache(0) = ysybgDQB;
-            NPcache(1) = gmuV_NP;
-            NPcache(2) = gmuA_NP;
-            NPcache(3) = gmuV_e_NP;
-            NPcache(4) = gmuA_e_NP;
-            NPcache(5) = mB_NP;
-            NPcache(6) = mchi_NP;
-            NPcache(7) = mV_NP;
+            NPcache(0) = ysybQB;
+            NPcache(1) = gD;
+            NPcache(2) = gmuV_NP;
+            NPcache(3) = gmuA_NP;
+            NPcache(4) = geV_NP;
+            NPcache(5) = geA_NP;
+            NPcache(6) = mB_NP;
+            NPcache(7) = mchi_NP;
+            NPcache(8) = mV_NP;
         }
     }
 
@@ -1167,7 +1169,6 @@ double MPll::G9(double x)
 
 gslpp::complex MPll::C9_NP(double q2, double gmu_V, double gmu_A)
 {
-    double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
 
@@ -1187,13 +1188,12 @@ gslpp::complex MPll::C9_NP(double q2, double gmu_V, double gmu_A)
                     + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
 
-    return Norm_NP * ysybgDQB * gmu_V / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
+    return Norm_NP * ysybQB * gD * gmu_V / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
 gslpp::complex MPll::C10_NP(double q2, double gmu_V, double gmu_A)
 {
-    double gD = ysybgDQB/0.3/0.3;
     double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
 
@@ -1213,7 +1213,7 @@ gslpp::complex MPll::C10_NP(double q2, double gmu_V, double gmu_A)
                     + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
 
-    return Norm_NP * ysybgDQB * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
+    return Norm_NP * ysybQB * gD * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
@@ -1226,7 +1226,7 @@ gslpp::complex MPll::H_V(double q2)
     }
     else if(lep == QCD::ELECTRON){
         if (LoopModelDM) {
-            return -((C_9 + C9_NP(q2, gmuV_e_NP, gmuA_e_NP) + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
+            return -((C_9 + C9_NP(q2, geV_NP, geA_NP) + deltaC9_QCDF(q2, SPLINE) + Y(q2) /*+ fDeltaC9(q2)*/ - etaP * pow(-1, angmomP) * C_9p) * V_L(q2) + MM2 / q2 * (twoMboMM * (C_7 + deltaC7_QCDF(q2, SPLINE) - etaP * pow(-1, angmomP) * C_7p) * T_L(q2) - sixteenM_PI2 * h_lambda(q2)));
         }
     }
     else
@@ -1242,7 +1242,7 @@ gslpp::complex MPll::H_A(double q2)
     }
     else if(lep == QCD::ELECTRON){
         if (LoopModelDM) {
-            return (-C_10 - C10_NP(q2, gmuV_e_NP, gmuA_e_NP) + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
+            return (-C_10 - C10_NP(q2, geV_NP, geA_NP) + etaP * pow(-1, angmomP) * C_10p) *V_L(q2);
         }
     }
     else
@@ -1263,7 +1263,7 @@ gslpp::complex MPll::H_P(double q2)
     }
     else if(lep == QCD::ELECTRON){
         if (LoopModelDM) {
-            return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 + C10_NP(q2, gmuV_e_NP, gmuA_e_NP) * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
+            return ( MboMW * (C_P - etaP * pow(-1, angmomP) * C_Pp) + twoMlepMb / q2 * (C_10 + C10_NP(q2, geV_NP, geA_NP) * (1. + etaP * pow(-1, angmomP) * MsoMb) - C_10p * (etaP * pow(-1, angmomP) + MsoMb))) * S_L(q2);
         }
     }
     else
