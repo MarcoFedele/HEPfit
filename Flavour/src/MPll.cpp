@@ -122,7 +122,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
-    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybQB", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybQB_gD", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
 
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
@@ -260,8 +260,8 @@ void MPll::updateParameters()
     C_8Lh = (*(allcoeffh[LO]))(7);
 
     if (LoopModelDM) {
-        ysybQB = mySM.getOptionalParameter("ysybQB");
         gD = mySM.getOptionalParameter("gD");
+        ysybQB = mySM.getOptionalParameter("ysybQB_gD")/gD;
         gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
         gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
         geV_NP = mySM.getOptionalParameter("geV_NP");
