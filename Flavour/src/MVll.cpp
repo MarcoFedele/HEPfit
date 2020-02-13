@@ -452,13 +452,12 @@ void MVll::updateParameters()
         }
         if (gmu_logscale){
             gmuV_NP = pow(10.,mySM.getOptionalParameter("gmuV_NP"));
-            geV_NP = pow(10.,mySM.getOptionalParameter("geV_NP"));
         } else {
             gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
-            geV_NP = mySM.getOptionalParameter("geV_NP");
         }
         std::cout << "gmu " << gmuV_NP << std::endl;
         gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
+        geV_NP = mySM.getOptionalParameter("geV_NP");
         geA_NP = mySM.getOptionalParameter("rAV_e_NP") * geV_NP;
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
