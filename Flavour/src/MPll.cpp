@@ -82,6 +82,8 @@ std::vector<std::string> MPll::initializeMPllParameters()
     dispersion = mySM.getFlavour().getFlagUseDispersionRelation();
     FixedWCbtos = mySM.getFlavour().getFlagFixedWCbtos();
     LoopModelDM = mySM.getFlavour().getFlagLoopModelDM();
+    ysybgD_logscale = mySM.getFlavour().getFlagysybgD_logscale();
+    gmu_logscale = mySM.getFlavour().getFlaggmu_logscale();
 
 #if NFPOLARBASIS_MPLL
     if (pseudoscalar == StandardModel::K_P || pseudoscalar == StandardModel::K_0) mpllParameters = make_vector<std::string>()
@@ -280,8 +282,6 @@ void MPll::updateParameters()
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
         mV_NP = mySM.getOptionalParameter("mV_NP");
-        std::cout << "gmu " << gmuV_NP << std::endl;
-        std::cout << "ge " << geV_NP << std::endl;
         
         mB2_NP = mB_NP * mB_NP;
         mchi2_NP = mchi_NP * mchi_NP;
