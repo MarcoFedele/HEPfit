@@ -280,7 +280,9 @@ void MPll::updateParameters()
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
         mV_NP = mySM.getOptionalParameter("mV_NP");
-
+        std::cout << "gmu " << gmuV_NP << std::endl;
+        std::cout << "ge " << geV_NP << std::endl;
+        
         mB2_NP = mB_NP * mB_NP;
         mchi2_NP = mchi_NP * mchi_NP;
         mV2_NP = mV_NP * mV_NP;
