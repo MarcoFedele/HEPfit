@@ -31,7 +31,7 @@ k2_cache(2, 0.),
 SL_cache(2, 0.),
 N_cache(3, 0.),
 Ycache(2, 0.),
-NPcache(9, 0.),
+NPcache(10, 0.),
 H_V0cache(2, 0.),
 H_Scache(2, 0.),
 H_P_cache(4, 0.),
@@ -43,6 +43,8 @@ T_cache(5, 0.)
     dispersion = true;
     FixedWCbtos = false;
     LoopModelDM = false;
+    ysybgD_logscale = false;
+    gmu_logscale = false;
     mJ2 = 3.096 * 3.096;
 
     I0_updated = 0;
@@ -122,7 +124,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
-    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "ysybQB_gD", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
 
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
@@ -261,7 +263,17 @@ void MPll::updateParameters()
 
     if (LoopModelDM) {
         gD = mySM.getOptionalParameter("gD");
-        ysybQB = mySM.getOptionalParameter("ysybQB_gD")/gD;
+        QB = mySM.getOptionalParameter("QB");
+        if (ysybgD_logscale){
+            ysybgD = pow(10.,mySM.getOptionalParameter("ysybgD"));
+        } else {
+            ysybgD = mySM.getOptionalParameter("ysybgD");
+        }
+        if (gmu_logscale){
+            gmuV_NP = pow(10.,mySM.getOptionalParameter("gmuV_NP"));
+        } else {
+            gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
+        }
         gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
         gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
         geV_NP = mySM.getOptionalParameter("geV_NP");
@@ -619,11 +631,11 @@ void MPll::checkCache()
     }
 
     if (LoopModelDM) {
-        if (ysybQB == NPcache(0) && gD == NPcache(1) && gmuV_NP == NPcache(2) && gmuA_NP == NPcache(3) && geV_NP == NPcache(4) && geA_NP == NPcache(5) && mB_NP == NPcache(6) && mchi_NP == NPcache(7) && mV_NP == NPcache(8)) {
+        if (ysybgD == NPcache(0) && gD == NPcache(1) && gmuV_NP == NPcache(2) && gmuA_NP == NPcache(3) && geV_NP == NPcache(4) && geA_NP == NPcache(5) && mB_NP == NPcache(6) && mchi_NP == NPcache(7) && mV_NP == NPcache(8) && QB == NPcache(9)) {
          NPupdated = 1;
         } else {
             NPupdated = 0;
-            NPcache(0) = ysybQB;
+            NPcache(0) = ysybgD;
             NPcache(1) = gD;
             NPcache(2) = gmuV_NP;
             NPcache(3) = gmuA_NP;
@@ -632,6 +644,7 @@ void MPll::checkCache()
             NPcache(6) = mB_NP;
             NPcache(7) = mchi_NP;
             NPcache(8) = mV_NP;
+            NPcache(9) = QB;
         }
     }
 
@@ -1188,7 +1201,7 @@ gslpp::complex MPll::C9_NP(double q2, double gmu_V, double gmu_A)
                     + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
 
-    return Norm_NP * ysybQB * gD * gmu_V / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
+    return Norm_NP * QB * ysybgD * gmu_V / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
@@ -1213,7 +1226,7 @@ gslpp::complex MPll::C10_NP(double q2, double gmu_V, double gmu_A)
                     + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
 
-    return Norm_NP * ysybQB * gD * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
+    return Norm_NP * QB * ysybgD * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 

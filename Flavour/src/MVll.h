@@ -733,6 +733,8 @@ private:
     bool dispersion;
     bool FixedWCbtos;
     bool LoopModelDM;
+    bool ysybgD_logscale;
+    bool gmu_logscale;
     double mJ2;
     gslpp::complex exp_Phase[3];
 
@@ -913,7 +915,8 @@ private:
     gslpp::complex C_Sp;/**<Wilson coeffients @f$C_S'@f$*/
     gslpp::complex C_Pp;/**<Wilson coeffients @f$C_P'@f$*/
 
-    double ysybQB;
+    double QB;
+    double ysybgD;
     double gD;
     double gmuV_NP;
     double gmuA_NP;

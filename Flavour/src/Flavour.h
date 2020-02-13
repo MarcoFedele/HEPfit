@@ -294,6 +294,16 @@ public:
         return (this->LoopModelDMflag = LoopModelDMflag);
     }
 
+    bool setFlagysybgD_logscale(bool ysybgD_logscaleflag)
+    {
+        return (this->ysybgD_logscaleflag = ysybgD_logscaleflag);
+    }
+
+    bool setFlaggmu_logscale(bool gmu_logscaleflag)
+    {
+        return (this->gmu_logscaleflag = gmu_logscaleflag);
+    }
+
     bool getFlagUseDispersionRelation() const
     {
         return dispersion;
@@ -344,6 +354,17 @@ public:
         return LoopModelDMflag;
     }
 
+    bool getFlagysybgD_logscale() const
+    {
+        return ysybgD_logscaleflag;
+    }
+
+
+    bool getFlaggmu_logscale() const
+    {
+        return gmu_logscaleflag;
+    }
+
 private:
     template<typename T, typename... Args> std::shared_ptr<T>& getPtr(std::shared_ptr<T>& x, Args... args) const;
     template <typename T, typename... Args> T& getM(std::map<std::vector<int>,std::shared_ptr<T> >& map, Args ... args) const;
@@ -369,6 +390,8 @@ private:
     mutable bool btocNPpmflag;
     mutable bool FixedWCbtosflag;
     mutable bool LoopModelDMflag;
+    mutable bool ysybgD_logscaleflag;
+    mutable bool gmu_logscaleflag;
 };
 
 /**
