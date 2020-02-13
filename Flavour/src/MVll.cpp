@@ -455,7 +455,6 @@ void MVll::updateParameters()
         } else {
             gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
         }
-        std::cout << "gmu " << gmuV_NP << std::endl;
         gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
         geV_NP = mySM.getOptionalParameter("geV_NP");
         geA_NP = mySM.getOptionalParameter("rAV_e_NP") * geV_NP;
