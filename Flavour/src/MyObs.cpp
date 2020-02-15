@@ -17,7 +17,7 @@ gm2_Zprime::gm2_Zprime(const StandardModel& SM_i)
     gmu_logscale = false;
 
     LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
-    LoopModelDM = SM.getFlavour().getFlaggmu_logscale();
+    gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
 
     if (LoopModelDM) {
         setParametersForObservable({ "mV_NP", "gmuV_NP", "rAV_NP" });
