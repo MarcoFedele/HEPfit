@@ -42,9 +42,9 @@ double gm2_Zprime::computeThValue()
     if (LoopModelDM) {
         mV = SM.getOptionalParameter("mV_NP");
         if (gmu_logscale){
-            gmuV_NP = pow(10.,mySM.getOptionalParameter("gmuV_NP"));
+            gmuV = pow(10.,SM.getOptionalParameter("gmuV_NP"));
         } else {
-            gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
+            gmuV = SM.getOptionalParameter("gmuV_NP");
         }
         gmuA = SM.getOptionalParameter("rAV_NP") * gmuV;
 
