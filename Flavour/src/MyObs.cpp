@@ -15,14 +15,6 @@ gm2_Zprime::gm2_Zprime(const StandardModel& SM_i)
 {
     LoopModelDM = false;
     gmu_logscale = false;
-
-    LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
-    gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
-
-    if (LoopModelDM) {
-        setParametersForObservable({ "mV_NP", "gmuV_NP", "rAV_NP" });
-        w_Int = gsl_integration_cquad_workspace_alloc(100);
-    }
 };
 
 
@@ -39,6 +31,14 @@ double gm2_Zprime::IntFunct(double z)
 double gm2_Zprime::computeThValue()
 {
 
+    LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
+    gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
+
+    if (LoopModelDM) {
+        setParametersForObservable({ "mV_NP", "gmuV_NP", "rAV_NP" });
+        w_Int = gsl_integration_cquad_workspace_alloc(100);
+    }
+    
     if (LoopModelDM) {
         mV = SM.getOptionalParameter("mV_NP");
         if (gmu_logscale){
@@ -47,7 +47,7 @@ double gm2_Zprime::computeThValue()
             gmuV = SM.getOptionalParameter("gmuV_NP");
         }
         gmuA = SM.getOptionalParameter("rAV_NP") * gmuV;
-
+    
         mmu = SM.getLeptons(QCD::MU).getMass();
         x = mmu/mV;
 
