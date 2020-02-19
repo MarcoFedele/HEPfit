@@ -47,6 +47,10 @@ protected:
      */
     void computeAmpSq(orders order, orders_qed order_qed, double mu);
     void computeObs(orders order, orders_qed order_qed);
+
+    double F9(double x);
+    double G9(double x);
+    gslpp::complex C10_NP(double q2, double gmu_V, double gmu_A);
     
 private:
     
@@ -78,15 +82,21 @@ private:
     gslpp::complex C_P;
     gslpp::complex C_Pp;
     bool FixedWCbtos;
-    //bool LoopModelDM;
+    bool LoopModelDM;
+    bool ysybgD_logscale;
+    bool gmu_logscale;
+    bool rAV_parametric;
     
     gslpp::vector<gslpp::complex> ** allcoeff;
     gslpp::vector<gslpp::complex> ** allcoeffprime;
     gslpp::vector<gslpp::complex> ** allcoeff_noSM;
     
-    /*double ysybgD;
-    double rVA;
     double QB;
+    double ysybgD;
+    double gD;
+    double gmuV_NP;
+    double rAV;
+    double gmuA_NP;
     double mB_NP;
     double mchi_NP;
     double mV_NP;
@@ -94,9 +104,7 @@ private:
     double mchi2_NP;
     double mV2_NP;
     double y_NP;
-    double gmuV_NP;
-    double gmuA_NP;
-    double Norm_NP;*/
+    double Norm_NP;
 
 };
 

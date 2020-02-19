@@ -18,9 +18,12 @@ Mll::Mll(const StandardModel& SM_i, int obsFlag, QCD::meson meson_i, QCD::lepton
     else throw std::runtime_error("obsFlag in Bsmumu(myFlavour, obsFlag) called from ThFactory::ThFactory() can only be 1 (BR) or 2 (BRbar) or 3 (Amumu) or 4 (Smumu)");
     SM.initializeMeson(meson);
     FixedWCbtos = SM.getFlavour().getFlagFixedWCbtos();
-    //LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
+    LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
+    ysybgD_logscale = SM.getFlavour().getFlagysybgD_logscale();
+    gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
+    rAV_parametric = SM.getFlavour().getFlagrAV_parametric();
     if (FixedWCbtos) setParametersForObservable({ "C10_SM" });
-    //if (FixedWCbtos && LoopModelDM) setParametersForObservable({ "C10_SM", "ysybgD", "rVA", "QB", "mB_NP", "mchi_NP", "mV_NP"});
+    if (FixedWCbtos && LoopModelDM) setParametersForObservable({ "C10_SM", "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "mB_NP", "mchi_NP", "mV_NP"});
 };
 
 double Mll::computeThValue()
@@ -63,6 +66,37 @@ void Mll::computeObs(orders order, orders_qed order_qed)
     }
     chiral = pow(mBs, 2.) / 2. / mlep * mb / (mb + ms);
     beta = sqrt(1. - pow(2. * mlep / mBs, 2.));
+    
+    if (LoopModelDM) {
+        gD = SM.getOptionalParameter("gD");
+        QB = SM.getOptionalParameter("QB");
+        mV_NP = SM.getOptionalParameter("mV_NP");
+        if (ysybgD_logscale){
+            ysybgD = pow(10.,SM.getOptionalParameter("ysybgD"));
+        } else {
+            ysybgD = SM.getOptionalParameter("ysybgD");
+        }
+        if (gmu_logscale){
+            gmuV_NP = pow(10.,SM.getOptionalParameter("gmuV_NP"));
+        } else {
+            gmuV_NP = SM.getOptionalParameter("gmuV_NP");
+        }
+        if (!rAV_parametric) {
+            rAV = SM.getOptionalParameter("rAV_NP");
+        } else {
+            rAV = -0.455 + 0.0244/mV_NP - 0.000652/mV_NP/mV_NP ;
+        }
+        gmuA_NP = rAV * gmuV_NP;
+        mB_NP = SM.getOptionalParameter("mB_NP");
+        mchi_NP = SM.getOptionalParameter("mchi_NP");
+
+        mB2_NP = mB_NP * mB_NP;
+        mchi2_NP = mchi_NP * mchi_NP;
+        mV2_NP = mV_NP * mV_NP;
+        y_NP = mchi2_NP / mB2_NP;
+        Norm_NP = - sqrt(2.) / (4. * SM.getGF() * 0.0411494) / (8. * M_PI * SM.getAle()); // N.B. took the abs of CKM, hence changed overall sign
+    }
+    
     computeAmpSq(order, order_qed, mu);
     Amumu = (absP * absP * cos(2. * argP - phiNP) -  absS * absS * cos(2. * argS - phiNP)) / (absP * absP + absS * absS);
     Smumu = (absP * absP * sin(2. * argP - phiNP) -  absS * absS * sin(2. * argS - phiNP)) / (absP * absP + absS * absS);
@@ -78,6 +112,51 @@ double Mll::computeSmumu(orders order)
 {
     computeObs(FULLNLO, FULLNLO_QED);
     return(Smumu);
+}
+
+double Mll::F9(double x)
+{
+    double xm14 = (x - 1.)*(x - 1.)*(x - 1.)*(x - 1.);
+
+    if (x == 1.)
+        return -1./24.;
+    else
+        return (- 2. + 9.*x - 18.*x*x + 11.*x*x*x - 6.*x*x*x*log(x)) / 36. / xm14;
+}
+
+double Mll::G9(double x)
+{
+    double xm14 = (x - 1.)*(x - 1.)*(x - 1.)*(x - 1.);
+
+    if (x == 1.)
+        return 1./8.;
+    else
+        return (- 16. + 45.*x - 36.*x*x + 7.*x*x*x + 6.*(3.*x - 2.)*log(x)) / 36. / xm14;
+}
+
+gslpp::complex Mll::C10_NP(double q2, double gmu_V, double gmu_A)
+{
+    double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
+    double mmu2omV2 = mlep*mlep/mV_NP/mV_NP;
+
+    double gDterm, gmuterm;
+
+    if (4.*mchi2omV2 > 1.)
+        gDterm = 0;
+    else
+        gDterm = sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.);
+
+    if (4.*mmu2omV2 > 1.)
+        gmuterm = 0;
+    else
+        gmuterm = sqrt(1.-4.*mmu2omV2);
+
+    double GammaV = (gD*gD * gDterm
+                    + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
+                    + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
+
+    return Norm_NP * QB * ysybgD * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
+            ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
 void Mll::computeAmpSq(orders order, orders_qed order_qed, double mu)
@@ -112,7 +191,12 @@ void Mll::computeAmpSq(orders order, orders_qed order_qed, double mu)
         C_10 = SM.getOptionalParameter("C10_SM") + ((*(allcoeff_noSM[LO]))(9) + (*(allcoeff_noSM[NLO]))(9));
     }
     else C_10 = ((*(allcoeff[LO]))(9) + (*(allcoeff[NLO]))(9));
-
+    
+    if (LoopModelDM && lep == QCD::MU) {
+        C_10 += C10_NP(mBs*mBs, gmuV_NP, gmuA_NP);
+        C_P += - 2. * mlep * (mb + ms) / (mV_NP * mV_NP) * C10_NP(mBs*mBs, gmuV_NP, gmuA_NP);
+    }
+    
     if ((order == FULLNLO) && (order_qed == FULLNLO_QED)) {
 
         switch (order_qed) {
