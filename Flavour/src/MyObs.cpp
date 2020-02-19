@@ -37,11 +37,7 @@ double gm2_Zprime::computeThValue()
     rAV_parametric = SM.getFlavour().getFlagrAV_parametric();
 
     if (LoopModelDM) {
-        if (!rAV_parametric) {
-            setParametersForObservable({ "mV_NP", "gmuV_NP", "rAV_NP" });
-        } else {
-            setParametersForObservable({ "mV_NP", "gmuV_NP" });
-        }
+        setParametersForObservable({ "mV_NP", "gmuV_NP", "rAV_NP" });
         w_Int = gsl_integration_cquad_workspace_alloc(100);
     }
     

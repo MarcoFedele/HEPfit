@@ -128,8 +128,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
     }
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
-    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "QB", "ysybgD", "gD", "gmuV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
-    if (!rAV_parametric) mpllParameters.insert(mpllParameters.end(), { "rAV_NP" });
+    if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
 
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
