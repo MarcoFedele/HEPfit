@@ -1736,6 +1736,8 @@ gslpp::complex MVll::C9_NP(double q2, double gmu_V, double gmu_A)
     double GammaV = (gD*gD * gDterm
                     + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
+    
+    //std::cout << "factor " << QB * (F9(y_NP) + G9(y_NP)) / 32./M_PI/M_PI / mB2_NP << std::endl;
 
     return Norm_NP * QB * ysybgD * gmu_V / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
