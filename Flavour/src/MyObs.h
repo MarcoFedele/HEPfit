@@ -34,6 +34,7 @@ protected:
 private:
     bool LoopModelDM;
     bool gmu_logscale;
+    bool rAV_parametric;
 
     gsl_function FInt;/**< GSL integral variable */
     double Int;/**< GSL integral variable */
@@ -42,6 +43,7 @@ private:
 
     double mV;
     double gmuV;
+    double rAV;
     double gmuA;
 
     double mmu;

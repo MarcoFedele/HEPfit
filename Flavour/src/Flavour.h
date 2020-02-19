@@ -304,6 +304,11 @@ public:
         return (this->gmu_logscaleflag = gmu_logscaleflag);
     }
 
+    bool setFlagrAV_parametric(bool rAV_parametricflag)
+    {
+        return (this->rAV_parametricflag = rAV_parametricflag);
+    }
+
     bool getFlagUseDispersionRelation() const
     {
         return dispersion;
@@ -359,10 +364,14 @@ public:
         return ysybgD_logscaleflag;
     }
 
-
     bool getFlaggmu_logscale() const
     {
         return gmu_logscaleflag;
+    }
+
+    bool getFlagrAV_parametric() const
+    {
+        return rAV_parametricflag;
     }
 
 private:
@@ -392,6 +401,7 @@ private:
     mutable bool LoopModelDMflag;
     mutable bool ysybgD_logscaleflag;
     mutable bool gmu_logscaleflag;
+    mutable bool rAV_parametricflag;
 };
 
 /**

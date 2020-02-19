@@ -439,6 +439,9 @@ bool StandardModel::setFlag(const std::string name, const bool value)
     } else if (name.compare("gmu_logscale") == 0) {
         SMFlavour.setFlaggmu_logscale(value);
         res = true;
+    } else if (name.compare("rAV_parametric") == 0) {
+        SMFlavour.setFlagrAV_parametric(value);
+        res = true;
     } else
         res = QCD::setFlag(name, value);
 

@@ -735,6 +735,7 @@ private:
     bool LoopModelDM;
     bool ysybgD_logscale;
     bool gmu_logscale;
+    bool rAV_parametric;
     double mJ2;
     gslpp::complex exp_Phase[3];
 
@@ -919,6 +920,7 @@ private:
     double ysybgD;
     double gD;
     double gmuV_NP;
+    double rAV;
     double gmuA_NP;
     double geV_NP;
     double geA_NP;

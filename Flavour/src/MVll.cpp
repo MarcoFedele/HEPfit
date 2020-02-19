@@ -47,6 +47,7 @@ T_cache(5, 0.)
     LoopModelDM = false;
     ysybgD_logscale = false;
     gmu_logscale = false;
+    rAV_parametric = false;
     mJ2 = 3.096 * 3.096;
 
     I0_updated = 0;
@@ -157,6 +158,7 @@ std::vector<std::string> MVll::initializeMVllParameters()
     LoopModelDM = mySM.getFlavour().getFlagLoopModelDM();
     ysybgD_logscale = mySM.getFlavour().getFlagysybgD_logscale();
     gmu_logscale = mySM.getFlavour().getFlaggmu_logscale();
+    rAV_parametric = mySM.getFlavour().getFlagrAV_parametric();
 
 #if NFPOLARBASIS_MVLL
     if (vectorM == StandardModel::PHI) mvllParameters = make_vector<std::string>()
@@ -221,7 +223,8 @@ std::vector<std::string> MVll::initializeMVllParameters()
 
     if (FixedWCbtos) mvllParameters.insert(mvllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
 
-    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "QB", "ysybgD", "gD", "gmuV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (!rAV_parametric) mvllParameters.insert(mvllParameters.end(), { "rAV_NP" });
     
     mySM.initializeMeson(meson);
     mySM.initializeMeson(vectorM);
@@ -445,6 +448,7 @@ void MVll::updateParameters()
     if (LoopModelDM) {
         gD = mySM.getOptionalParameter("gD");
         QB = mySM.getOptionalParameter("QB");
+        mV_NP = mySM.getOptionalParameter("mV_NP");
         if (ysybgD_logscale){
             ysybgD = pow(10.,mySM.getOptionalParameter("ysybgD"));
         } else {
@@ -455,12 +459,16 @@ void MVll::updateParameters()
         } else {
             gmuV_NP = mySM.getOptionalParameter("gmuV_NP");
         }
-        gmuA_NP = mySM.getOptionalParameter("rAV_NP") * gmuV_NP;
+        if (!rAV_parametric) {
+            rAV = mySM.getOptionalParameter("rAV_NP");
+        } else {
+            rAV = -0.455 + 0.0244/mV_NP - 0.000652/mV_NP/mV_NP ;
+        }
+        gmuA_NP = rAV * gmuV_NP;
         geV_NP = mySM.getOptionalParameter("geV_NP");
         geA_NP = mySM.getOptionalParameter("rAV_e_NP") * geV_NP;
         mB_NP = mySM.getOptionalParameter("mB_NP");
         mchi_NP = mySM.getOptionalParameter("mchi_NP");
-        mV_NP = mySM.getOptionalParameter("mV_NP");
 
         mB2_NP = mB_NP * mB_NP;
         mchi2_NP = mchi_NP * mchi_NP;
