@@ -19,9 +19,6 @@ Mll::Mll(const StandardModel& SM_i, int obsFlag, QCD::meson meson_i, QCD::lepton
     SM.initializeMeson(meson);
     FixedWCbtos = SM.getFlavour().getFlagFixedWCbtos();
     LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
-    ysybgD_logscale = SM.getFlavour().getFlagysybgD_logscale();
-    gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
-    rAV_parametric = SM.getFlavour().getFlagrAV_parametric();
     if (FixedWCbtos) setParametersForObservable({ "C10_SM" });
     if (FixedWCbtos && LoopModelDM) setParametersForObservable({ "C10_SM", "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "mB_NP", "mchi_NP", "mV_NP"});
 };
@@ -68,6 +65,10 @@ void Mll::computeObs(orders order, orders_qed order_qed)
     beta = sqrt(1. - pow(2. * mlep / mBs, 2.));
     
     if (LoopModelDM) {
+        ysybgD_logscale = SM.getFlavour().getFlagysybgD_logscale();
+        gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
+        rAV_parametric = SM.getFlavour().getFlagrAV_parametric();
+
         gD = SM.getOptionalParameter("gD");
         QB = SM.getOptionalParameter("QB");
         mV_NP = SM.getOptionalParameter("mV_NP");
