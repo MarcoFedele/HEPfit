@@ -229,11 +229,11 @@ double AxionsTHDM::gae() const
     else if (model == 2.)
         Cae = cosb*cosb/3.;
     else if (model == 3.)
-        Cae = cosb*cosb + eps_L;
+        Cae = cosb*cosb - eps_L;
     else if (model == 4.)
         Cae = sinb*sinb + eps_L;
     else if (model == 5.)
-        Cae = cosb*cosb + eps_L;
+        Cae = cosb*cosb - eps_L;
     else if (model == 6.)
         Cae = sinb*sinb + eps_L;
     else if (model == 7.)
