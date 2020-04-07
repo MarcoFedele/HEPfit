@@ -17,3 +17,8 @@ double  RmBs::computeThValue()
 {
     return RBs(FULLNLO).abs() - 1.;
 }
+
+double  RmBs::computeThValue()
+{
+    return RBsm1(FULLNLO);
+}

@@ -44,6 +44,7 @@ protected:
     gslpp::complex AmpBd(orders order);
     gslpp::complex AmpBs(orders order);
     gslpp::complex RBs(orders order);
+    gslpp::complex RBsm1(orders order);
     gslpp::complex PBd();
     gslpp::complex PBs();
 

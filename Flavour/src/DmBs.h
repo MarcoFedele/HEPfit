@@ -76,4 +76,23 @@ public:
     double computeThValue();
 };
 
+
+class RmBsm1 : public ThObservable, AmpDB2 {
+public:
+
+    /**
+     * constructor
+     * @param Flavour
+     */
+
+    RmBsm1(const StandardModel& SM_i) : ThObservable(SM_i), AmpDB2(SM_i) {};
+
+    /**
+     *
+     * @return theoretical value of @f$R (\Delta M_{B_s})@f$
+     */
+
+    double computeThValue();
+};
+
 #endif	/* DMBS_H */

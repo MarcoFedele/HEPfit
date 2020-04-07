@@ -82,6 +82,7 @@ ThObsFactory::ThObsFactory()
     obsThFactory["mphi_mpsiQ"] = boost::factory<mphi_mpsiQ*>();
     obsThFactory["mphi_mpsiL"] = boost::factory<mphi_mpsiL*>();
     obsThFactory["mpsiQ_mpsiL"] = boost::factory<mpsiQ_mpsiL*>();
+    obsThFactory["RmBsm1"] = boost::factory<RmBsm1*>();
     
     obsThFactory["C9_LMDM"] = boost::factory<C9_LMDM*>();
     obsThFactory["C10_LMDM"] = boost::factory<C10_LMDM*>();
