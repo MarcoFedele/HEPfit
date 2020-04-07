@@ -110,7 +110,7 @@ gslpp::complex AmpDB2::RBsm1(orders order)
 
     switch(order) {
         case FULLNLO:
-            return (C_1_SM * me(0)) / (*(allcoeff[LO]) + *(allcoeff[NLO])) * me 
+            return (C_1_SM * me(0)) / ((*(allcoeff[LO]) + *(allcoeff[NLO])) * me )
                     ;
         case LO:
             return((*(allcoeff[LO])) * me / HCUT);
