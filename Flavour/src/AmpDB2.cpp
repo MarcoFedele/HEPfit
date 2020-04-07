@@ -68,7 +68,7 @@ gslpp::complex AmpDB2::RBs(orders order)
     }
 }
 
-gslpp::complex AmpDB2::RBs(orders order)
+gslpp::complex AmpDB2::RBsm1(orders order)
 {
     mySM.getFlavour().getHDF2().getCoeffBs().getOrder();
     if (mySM.getFlavour().getHDF2().getCoeffBs().getOrder() < order % 3)
@@ -100,13 +100,13 @@ gslpp::complex AmpDB2::RBs(orders order)
     me(3) *= 1./4.*KBd*MBd*Fb*Fb;
     me(4) *= 1./12.*KBd*MBd*Fb*Fb;
 
-    /*std::cout << "C1_SM :" << C_1_SM << std::endl << std::endl;
+    std::cout << "C1_SM :" << C_1_SM << std::endl << std::endl;
     
     std::cout << "C1 :" << ((*(allcoeff[LO]))(0) + (*(allcoeff[NLO]))(0)) << std::endl;
     std::cout << "C2 :" << ((*(allcoeff[LO]))(1) + (*(allcoeff[NLO]))(1)) << std::endl;
     std::cout << "C3 :" << ((*(allcoeff[LO]))(2) + (*(allcoeff[NLO]))(2)) << std::endl;
     std::cout << "C4 :" << ((*(allcoeff[LO]))(3) + (*(allcoeff[NLO]))(3)) << std::endl;
-    std::cout << "C5 :" << ((*(allcoeff[LO]))(4) + (*(allcoeff[NLO]))(4)) << std::endl << std::endl;*/
+    std::cout << "C5 :" << ((*(allcoeff[LO]))(4) + (*(allcoeff[NLO]))(4)) << std::endl << std::endl;
 
     switch(order) {
         case FULLNLO:
