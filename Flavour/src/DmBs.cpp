@@ -20,5 +20,5 @@ double  RmBs::computeThValue()
 
 double  RmBsm1::computeThValue()
 {
-    return RBsm1(FULLNLO);
+    return RBsm1(FULLNLO).real();
 }
