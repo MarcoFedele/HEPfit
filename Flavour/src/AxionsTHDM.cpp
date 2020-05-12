@@ -192,7 +192,9 @@ double AxionsTHDM::gag() const
 {
     double Cag;
 
-    if (model == 0.)
+    if (model == - 1.)
+        return 0.;
+    else if (model == 0.)
         Cag = - 1.92;
     else if (model == 1.)
         Cag = 8./3. - 1.92;
@@ -213,7 +215,7 @@ double AxionsTHDM::gag() const
     else if (model == 9.)
         Cag = 4./3. + 1.92;
     else
-        throw std::runtime_error("error in AzionsTHDM::gag, model can only be an integer between 0. and 9. !");
+        throw std::runtime_error("error in AzionsTHDM::gag, model can only be an integer between -1. and 9. !");
 
     return getAle()/2./M_PI * ma/(5.7e9) * Cag;
 }
@@ -222,7 +224,9 @@ double AxionsTHDM::gae() const
 {
     double Cae;
 
-    if (model == 0.)
+    if (model == - 1.)
+        return 0.;
+    else if (model == 0.)
         Cae = 0.;
     else if (model == 1.)
         Cae = sinb*sinb/3.;
@@ -243,7 +247,7 @@ double AxionsTHDM::gae() const
     else if (model == 9.)
         Cae = 0.;
     else
-        throw std::runtime_error("error in AzionsTHDM::gae, model can only be an integer between 0. and 9. !");
+        throw std::runtime_error("error in AzionsTHDM::gae, model can only be an integer between -1. and 9. !");
 
     return 0.84e-13 * ma * Cae;
 }
@@ -253,7 +257,10 @@ double AxionsTHDM::gap() const
     double Cad, Cas, Cab;
     double Cau, Cac, Cat;
 
-    if (model == 0.) {
+    if (model == -1.) {
+        return 0.;
+    }
+    else if (model == 0.) {
         Cad = 0.;
         Cas = 0.;
         Cab = 0.;
@@ -334,7 +341,7 @@ double AxionsTHDM::gap() const
         Cat = -sinb*sinb;
     }
     else
-        throw std::runtime_error("error in AzionsTHDM::gap, model can only be an integer between 0. and 9. !");
+        throw std::runtime_error("error in AzionsTHDM::gap, model can only be an integer between -1. and 9. !");
 
     double Cap = (-0.47+C_pn_err_0)
             + (0.88+C_pn_err_1)*Cau + (-0.39+C_pn_err_2)*Cad - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
@@ -349,7 +356,10 @@ double AxionsTHDM::gan() const
     double Cad, Cas, Cab;
     double Cau, Cac, Cat;
 
-    if (model == 0.) {
+    if (model == -1.) {
+        return 0.;
+    }
+    else if (model == 0.) {
         Cad = 0.;
         Cas = 0.;
         Cab = 0.;
@@ -430,7 +440,7 @@ double AxionsTHDM::gan() const
         Cat = -sinb*sinb;
     }
     else
-        throw std::runtime_error("error in AzionsTHDM::gan, model can only be an integer between 0. and 9. !");
+        throw std::runtime_error("error in AzionsTHDM::gan, model can only be an integer between -1. and 9. !");
 
     double Can = (-0.02+C_pn_err_0)
             + (0.88+C_pn_err_1)*Cad + (-0.39+C_pn_err_2)*Cau - 0.038*Cas - 0.012*Cac - 0.009*Cab - 0.0035*Cat;
@@ -488,7 +498,10 @@ logtbTHDM::~logtbTHDM()
 
 double logtbTHDM::computeThValue()
 {
-    return log10(myAxions->gettanb());
+    if (myAxions->getmodel() == -1.) {
+        return 0.;
+    }
+    else return log10(myAxions->gettanb());
 
 }
 
@@ -504,7 +517,10 @@ logmaTHDM::~logmaTHDM()
 
 double logmaTHDM::computeThValue()
 {
-    return log10(myAxions->getma());
+    if (myAxions->getmodel() == -1.) {
+        return 0.;
+    }
+    else return log10(myAxions->getma());
 
 }
 
@@ -520,7 +536,10 @@ loggagTHDM::~loggagTHDM()
 
 double loggagTHDM::computeThValue()
 {
-    return log10(myAxions->gag());
+    if (myAxions->getmodel() == -1.) {
+        return 0.;
+    }
+    else return log10(myAxions->gag());
 
 }
 
@@ -536,7 +555,10 @@ loggaeTHDM::~loggaeTHDM()
 
 double loggaeTHDM::computeThValue()
 {
-    return log10(myAxions->gae());
+    if (myAxions->getmodel() == -1.) {
+        return 0.;
+    }
+    else return log10(myAxions->gae());
 
 }
 
