@@ -685,10 +685,10 @@ double TRGBTHDM::computeThValue()
     double a=myAxions->geta_TRGB();
     double b=myAxions->getb_TRGB();
 
-    double gae=myAxions->gae();
+    double gae=myAxions->gae()/1.e-13;
 
     return - 4.03 - 0.25*(sqrt(gae*gae + 0.93) - 0.96 - 0.17*pow(gae,1.5))
-            + 0.039 + a + gae*b;
+            + a + gae*b;
 
 }
 
@@ -707,7 +707,7 @@ double HBRTHDM::computeThValue()
     double Y=myAxions->getY_HBR();
 
     gslpp::complex gag=myAxions->gag();
-    double gae=myAxions->gae();
+    double gae=myAxions->gae()/1.e-13;
 
     double alpha = gae*gae/4./M_PI;
     double g10 = gag.abs()*1.e10;
