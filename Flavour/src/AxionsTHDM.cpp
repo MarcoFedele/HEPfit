@@ -5,6 +5,23 @@
  * For the licensing terms see doc/COPYING.
  */
 
+/*
+ * Models:
+ * 
+ * -1: SM
+ * 0: KSVZ
+ * 1: DFSZ1
+ * 2: DFSZ2
+ * 3: M1
+ * 4: M2
+ * 5: M3
+ * 6: M4
+ * 7: 3HDMi
+ * 8: 3HDMii1
+ * 9: 3HDMii2
+ *
+ */
+
 #include "AxionsTHDM.h"
 
 const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L",
