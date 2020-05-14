@@ -705,7 +705,7 @@ double TRGBTHDM::computeThValue()
     double gae=myAxions->gae()/1.e-13;
 
     return - 4.03 - 0.25*(sqrt(gae*gae + 0.93) - 0.96 - 0.17*pow(gae,1.5))
-            + a + gae*b;
+            + 0.039 + a + gae*b;
 
 }
 
