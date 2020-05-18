@@ -754,6 +754,6 @@ double GaNTHDM::computeThValue()
     double gan=myAxions->gan();
     double gap=myAxions->gap();
 
-    return gap*gap + gan*gan;
+    return gan*gan + 0.29*gap*gap + 0.27*gan*gap;
 
 }
