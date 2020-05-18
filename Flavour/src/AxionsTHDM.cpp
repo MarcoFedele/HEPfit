@@ -24,7 +24,7 @@
 
 #include "AxionsTHDM.h"
 
-const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L",
+const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L", "EoN"
                                 "C_pn_err_0", "C_pn_err_1", "C_pn_err_2",
                                 "a_G117B15A", "b_G117B15A", "c_G117B15A", "d_G117B15A",
                                 "a_R548", "b_R548", "c_R548", "d_R548",
@@ -38,6 +38,7 @@ AxionsTHDM::AxionsTHDM() : StandardModel() {
     ModelParamMap.insert(std::make_pair("logma", std::cref(ma)));
     ModelParamMap.insert(std::make_pair("model", std::cref(model)));
     ModelParamMap.insert(std::make_pair("eps_L", std::cref(eps_L)));
+    ModelParamMap.insert(std::make_pair("EoN", std::cref(EoN)));
     ModelParamMap.insert(std::make_pair("C_pn_err_0", std::cref(C_pn_err_0)));
     ModelParamMap.insert(std::make_pair("C_pn_err_1", std::cref(C_pn_err_1)));
     ModelParamMap.insert(std::make_pair("C_pn_err_2", std::cref(C_pn_err_2)));
@@ -134,6 +135,8 @@ void AxionsTHDM::setParameter(const std::string name, const double& value){
         model = value;
     else if(name.compare("eps_L") == 0)
         eps_L = value;
+    else if(name.compare("EoN") == 0)
+        EoN = value;
     else if(name.compare("C_pn_err_0") == 0)
         C_pn_err_0 = value;
     else if(name.compare("C_pn_err_1") == 0)
@@ -212,7 +215,7 @@ double AxionsTHDM::gag() const
     if (model == - 1.)
         return 0.;
     else if (model == 0.)
-        Cag = - 1.92;
+        Cag = (EoN - 1.92).abs();
     else if (model == 1.)
         Cag = 8./3. - 1.92;
     else if (model == 2.)
