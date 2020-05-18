@@ -215,7 +215,7 @@ double AxionsTHDM::gag() const
     if (model == - 1.)
         return 0.;
     else if (model == 0.)
-        Cag = (EoN - 1.92).abs();
+        Cag = std::abs(EoN - 1.92);
     else if (model == 1.)
         Cag = 8./3. - 1.92;
     else if (model == 2.)
