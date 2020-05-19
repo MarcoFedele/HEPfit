@@ -757,6 +757,8 @@ double GaNTHDM::computeThValue()
     double gan=myAxions->gan();
     double gap=myAxions->gap();
 
-    return gan*gan + 0.29*gap*gap + 0.27*gan*gap;
+    return gan*gan + 0.61*gap*gap + 0.53*gan*gap;
+    
+    return gan*gan + 0.29*gap*gap + 0.27*gan*gap; // old, published bound
 
 }
