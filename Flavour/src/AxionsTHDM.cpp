@@ -24,10 +24,11 @@
 
 const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L", "EoN", "Chi3",
                                 "C_pn_err_0", "C_pn_err_1", "C_pn_err_2",
-                                "a_G117B15A", "b_G117B15A", "c_G117B15A", "d_G117B15A",
-                                "a_R548", "b_R548", "c_R548", "d_R548",
-                                "a_PG1351489", "b_PG1351489", "c_PG1351489", "d_PG1351489",
-                                "a_L192", "b_L192", "c_L192", "d_L192",
+                                "a_G117B15A", "b_G117B15A",
+                                "a_R548", "b_R548",
+                                "a_PG1351489", "b_PG1351489",
+                                "a_L113", "b_L113", 
+                                "a_L192", "b_L192",
                                 "a_TRGB", "b_TRGB",
                                 "Y_HBR"};
 
@@ -45,23 +46,18 @@ AxionsTHDM::AxionsTHDM() : StandardModel() {
 
     ModelParamMap.insert(std::make_pair("a_G117B15A", std::cref(a_G117B15A)));
     ModelParamMap.insert(std::make_pair("b_G117B15A", std::cref(b_G117B15A)));
-    ModelParamMap.insert(std::make_pair("c_G117B15A", std::cref(c_G117B15A)));
-    ModelParamMap.insert(std::make_pair("d_G117B15A", std::cref(d_G117B15A)));
 
     ModelParamMap.insert(std::make_pair("a_R548", std::cref(a_R548)));
     ModelParamMap.insert(std::make_pair("b_R548", std::cref(b_R548)));
-    ModelParamMap.insert(std::make_pair("c_R548", std::cref(c_R548)));
-    ModelParamMap.insert(std::make_pair("d_R548", std::cref(d_R548)));
 
     ModelParamMap.insert(std::make_pair("a_PG1351489", std::cref(a_PG1351489)));
     ModelParamMap.insert(std::make_pair("b_PG1351489", std::cref(b_PG1351489)));
-    ModelParamMap.insert(std::make_pair("c_PG1351489", std::cref(c_PG1351489)));
-    ModelParamMap.insert(std::make_pair("d_PG1351489", std::cref(d_PG1351489)));
+
+    ModelParamMap.insert(std::make_pair("a_L113", std::cref(a_L113)));
+    ModelParamMap.insert(std::make_pair("b_L113", std::cref(b_L113)));
 
     ModelParamMap.insert(std::make_pair("a_L192", std::cref(a_L192)));
     ModelParamMap.insert(std::make_pair("b_L192", std::cref(b_L192)));
-    ModelParamMap.insert(std::make_pair("c_L192", std::cref(c_L192)));
-    ModelParamMap.insert(std::make_pair("d_L192", std::cref(d_L192)));
 
     ModelParamMap.insert(std::make_pair("a_TRGB", std::cref(a_TRGB)));
     ModelParamMap.insert(std::make_pair("b_TRGB", std::cref(b_TRGB)));
@@ -148,34 +144,22 @@ void AxionsTHDM::setParameter(const std::string name, const double& value){
         a_G117B15A = value;
     else if(name.compare("b_G117B15A") == 0)
         b_G117B15A = value;
-    else if(name.compare("c_G117B15A") == 0)
-        c_G117B15A = value;
-    else if(name.compare("d_G117B15A") == 0)
-        d_G117B15A = value;
     else if(name.compare("a_R548") == 0)
         a_R548 = value;
     else if(name.compare("b_R548") == 0)
         b_R548 = value;
-    else if(name.compare("c_R548") == 0)
-        c_R548 = value;
-    else if(name.compare("d_R548") == 0)
-        d_R548 = value;
     else if(name.compare("a_PG1351489") == 0)
         a_PG1351489 = value;
     else if(name.compare("b_PG1351489") == 0)
         b_PG1351489 = value;
-    else if(name.compare("c_PG1351489") == 0)
-        c_PG1351489 = value;
-    else if(name.compare("d_PG1351489") == 0)
-        d_PG1351489 = value;
+    else if(name.compare("a_L113") == 0)
+        a_L113 = value;
+    else if(name.compare("b_L113") == 0)
+        b_L113 = value;
     else if(name.compare("a_L192") == 0)
         a_L192 = value;
     else if(name.compare("b_L192") == 0)
         b_L192 = value;
-    else if(name.compare("c_L192") == 0)
-        c_L192 = value;
-    else if(name.compare("d_L192") == 0)
-        d_L192 = value;
     else if(name.compare("a_TRGB") == 0)
         a_TRGB = value;
     else if(name.compare("b_TRGB") == 0)
@@ -577,12 +561,10 @@ double G117B15ATHDM::computeThValue()
 {
     double a=myAxions->geta_G117B15A();
     double b=myAxions->getb_G117B15A();
-    double c=myAxions->getc_G117B15A();
-    double d=myAxions->getd_G117B15A();
 
-    double mac2=myAxions->gae()/0.28e-13;
+    double a26=myAxions->gae()*myAxions->gae()/(4.*M_PI)/1.e-26;
 
-    return a + mac2*b + mac2*mac2*c + mac2*mac2*mac2*d;
+    return a + a26*b;
 
 }
 
@@ -600,12 +582,10 @@ double R548THDM::computeThValue()
 {
     double a=myAxions->geta_R548();
     double b=myAxions->getb_R548();
-    double c=myAxions->getc_R548();
-    double d=myAxions->getd_R548();
 
-    double mac2=myAxions->gae()/0.28e-13;
+    double a26=myAxions->gae()*myAxions->gae()/(4.*M_PI)/1.e-26;
 
-    return a + mac2*b + mac2*mac2*c + mac2*mac2*mac2*d;
+    return a + a26*b;
 
 }
 
@@ -623,12 +603,31 @@ double PG1351489THDM::computeThValue()
 {
     double a=myAxions->geta_PG1351489();
     double b=myAxions->getb_PG1351489();
-    double c=myAxions->getc_PG1351489();
-    double d=myAxions->getd_PG1351489();
 
-    double mac2=myAxions->gae()/0.28e-13;
+    double a26=myAxions->gae()*myAxions->gae()/(4.*M_PI)/1.e-26;
 
-    return a + mac2*b + mac2*mac2*c + mac2*mac2*mac2*d;
+    return a + a26*b;
+
+}
+
+
+L113THDM::L113THDM(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+L113THDM::~L113THDM()
+{
+};
+
+double L113THDM::computeThValue()
+{
+    double a=myAxions->geta_L113();
+    double b=myAxions->getb_L113();
+
+    double a26=myAxions->gae()*myAxions->gae()/(4.*M_PI)/1.e-26;
+
+    return a + a26*b;
 
 }
 
@@ -646,12 +645,10 @@ double L192THDM::computeThValue()
 {
     double a=myAxions->geta_L192();
     double b=myAxions->getb_L192();
-    double c=myAxions->getc_L192();
-    double d=myAxions->getd_L192();
 
-    double mac2=myAxions->gae()/0.28e-13;
+    double a26=myAxions->gae()*myAxions->gae()/(4.*M_PI)/1.e-26;
 
-    return a + mac2*b + mac2*mac2*c + mac2*mac2*mac2*d;
+    return a + a26*b;
 
 }
 
