@@ -244,7 +244,11 @@ double AxionsTHDM::gae() const
     if (model == - 1.)
         return 0.;
     else if (model == 0.)
-        Cae = 0.;
+    {
+        double ale = 1./137.;
+        double me = 5.109989e-4;
+        Cae = 3.*ale*ale/4/M_PI/M_PI * std::abs( EoN * log(2.e11/me) - 1.92 * log(1./me) );
+    }
     else if (model == 1.)
         Cae = sinb*sinb/3.;
     else if (model == 2.)
