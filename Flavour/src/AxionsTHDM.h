@@ -543,4 +543,21 @@ public:
     const AxionsTHDM *myAxions;
 };
 
+class ganTHDM : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   ganTHDM(const StandardModel& SM_i);
+
+   ~ganTHDM();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const AxionsTHDM *myAxions;
+};
+
 #endif /* AXIONS_H */

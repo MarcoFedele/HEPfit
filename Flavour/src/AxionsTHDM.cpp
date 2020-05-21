@@ -724,3 +724,22 @@ double GaNTHDM::computeThValue()
     return gan*gan + 0.29*gap*gap + 0.27*gan*gap; // old, published bound
 
 }
+
+
+ganTHDM::ganTHDM(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+ganTHDM::~ganTHDM()
+{
+};
+
+double ganTHDM::computeThValue()
+{
+    if (myAxions->getmodel() == -1.) {
+        return 0.;
+    }
+    else return myAxions->gan();
+
+}
