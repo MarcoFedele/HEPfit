@@ -740,6 +740,6 @@ double ganTHDM::computeThValue()
     if (myAxions->getmodel() == -1.) {
         return 0.;
     }
-    else return myAxions->gan();
+    else return std::abs(myAxions->gan());
 
 }
