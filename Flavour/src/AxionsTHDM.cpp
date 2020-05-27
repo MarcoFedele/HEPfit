@@ -221,7 +221,7 @@ double AxionsTHDM::gag() const
     return getAle()/2./M_PI * ma/(5.7e9) * Cag;
 }
 
-double AxionsTHDM::gae() const
+double AxionsTHDM::Cae() const
 {
     double Cae;
 
@@ -250,7 +250,12 @@ double AxionsTHDM::gae() const
     else
         throw std::runtime_error("error in AzionsTHDM::gae, model can only be an integer between -1. and 7. !");
 
-    return 0.84e-13 * ma * Cae;
+    return Cae;
+}
+
+double AxionsTHDM::gae() const
+{
+    return 0.84e-13 * ma * Cae();
 }
 
 double AxionsTHDM::gap() const
@@ -741,5 +746,24 @@ double ganTHDM::computeThValue()
         return 0.;
     }
     else return std::abs(myAxions->gan());
+
+}
+
+
+CaeTHDM::CaeTHDM(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+CaeTHDM::~CaeTHDM()
+{
+};
+
+double CaeTHDM::computeThValue()
+{
+    if (myAxions->getmodel() == -1.) {
+        return 0.;
+    }
+    else return std::abs(myAxions->Cae());
 
 }

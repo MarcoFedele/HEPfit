@@ -236,6 +236,12 @@ public:
 
     /**
      *
+     * @return \f$ C_{ae} $\f
+     */
+    double Cae() const;
+
+    /**
+     *
      * @return \f$ g_{ae} $\f
      */
     double gae() const;
@@ -551,6 +557,23 @@ public:
    ganTHDM(const StandardModel& SM_i);
 
    ~ganTHDM();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const AxionsTHDM *myAxions;
+};
+
+class CaeTHDM : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   CaeTHDM(const StandardModel& SM_i);
+
+   ~CaeTHDM();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
