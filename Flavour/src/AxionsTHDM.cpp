@@ -17,6 +17,8 @@
  * 5: M3
  * 6: M4
  * 7: 3HDM
+ * 11: DFSZ1 general
+ * 12: DFSZ2 general
  *
  */
 
@@ -38,6 +40,7 @@ AxionsTHDM::AxionsTHDM() : StandardModel() {
     ModelParamMap.insert(std::make_pair("model", std::cref(model)));
     ModelParamMap.insert(std::make_pair("eps_L", std::cref(eps_L)));
     ModelParamMap.insert(std::make_pair("EoN", std::cref(EoN)));
+    ModelParamMap.insert(std::make_pair("logcgamma", std::cref(cgamma)));
     ModelParamMap.insert(std::make_pair("Chi3", std::cref(Chi3)));
     ModelParamMap.insert(std::make_pair("C_pn_err_0", std::cref(C_pn_err_0)));
     ModelParamMap.insert(std::make_pair("C_pn_err_1", std::cref(C_pn_err_1)));
@@ -132,6 +135,8 @@ void AxionsTHDM::setParameter(const std::string name, const double& value){
         eps_L = value;
     else if(name.compare("EoN") == 0)
         EoN = value;
+    else if(name.compare("logcgamma") == 0)
+        cgamma = pow(10., value);
     else if(name.compare("Chi3") == 0)
         Chi3 = value;
     else if(name.compare("C_pn_err_0") == 0)
@@ -215,6 +220,8 @@ double AxionsTHDM::gag() const
         Cag = 14./3. - 1.92;
     else if (model == 7.)
         Cag = 8./3. - 1.92;
+    else if ((model == 11.) || (model == 12.))
+        Cag = cgamma;
     else
         throw std::runtime_error("error in AzionsTHDM::gag, model can only be an integer between -1. and 7. !");
 
@@ -233,9 +240,9 @@ double AxionsTHDM::Cae() const
         double me = 5.109989e-4;
         Cae = 3.*ale*ale/4/M_PI/M_PI * std::abs( EoN * log(2.e11/me) - 1.92 * log(1./me) );
     }
-    else if (model == 1.)
+    else if ((model == 1.) || (model == 11.))
         Cae = sinb*sinb/3.;
-    else if (model == 2.)
+    else if ((model == 2.) || (model == 12.))
         Cae = cosb*cosb/3.;
     else if (model == 3.)
         Cae = cosb*cosb - eps_L;
@@ -274,7 +281,7 @@ double AxionsTHDM::gap() const
         Cac = 0.;
         Cat = 0.;
     }
-    else if (model == 1.){
+    else if ((model == 1.) || (model == 11.)){
         Cad = sinb*sinb/3.;
         Cas = sinb*sinb/3.;
         Cab = sinb*sinb/3.;
@@ -282,7 +289,7 @@ double AxionsTHDM::gap() const
         Cac = cosb*cosb/3.;
         Cat = cosb*cosb/3.;
     }
-    else if (model == 2.){
+    else if ((model == 2.) || (model == 12.)){
         Cad = sinb*sinb/3.;
         Cas = sinb*sinb/3.;
         Cab = sinb*sinb/3.;
@@ -357,7 +364,7 @@ double AxionsTHDM::gan() const
         Cac = 0.;
         Cat = 0.;
     }
-    else if (model == 1.){
+    else if ((model == 1.) || (model == 11.)){
         Cad = sinb*sinb/3.;
         Cas = sinb*sinb/3.;
         Cab = sinb*sinb/3.;
@@ -365,7 +372,7 @@ double AxionsTHDM::gan() const
         Cac = cosb*cosb/3.;
         Cat = cosb*cosb/3.;
     }
-    else if (model == 2.){
+    else if ((model == 2.) || (model == 12.)){
         Cad = sinb*sinb/3.;
         Cas = sinb*sinb/3.;
         Cab = sinb*sinb/3.;

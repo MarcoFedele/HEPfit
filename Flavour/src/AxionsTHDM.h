@@ -19,7 +19,7 @@
 class AxionsTHDM: public StandardModel {
 public:
 
-    static const int NAxionsvars = 22;
+    static const int NAxionsvars = 23;
 
     static const std::string Axionsvars[NAxionsvars];
 
@@ -90,6 +90,14 @@ public:
      */
     double getEoN() const {
         return EoN;
+    }
+
+    /**
+     *
+     * @return \f$ E/N $\f
+     */
+    double getcgamma() const {
+        return cgamma;
     }
 
     /**
@@ -269,7 +277,7 @@ private:
 
     double ma, tanb, sinb, cosb;
 
-    double model, eps_L, EoN, Chi3;
+    double model, eps_L, EoN, cgamma,Chi3;
             
     double C_pn_err_0, C_pn_err_1, C_pn_err_2;
 
