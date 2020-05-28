@@ -24,7 +24,7 @@
 
 #include "AxionsTHDM.h"
 
-const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L", "EoN", "Chi3",
+const std::string AxionsTHDM::Axionsvars[NAxionsvars] = {"logtanb", "logma", "model", "eps_L", "EoN", "logcgamma", "Chi3",
                                 "C_pn_err_0", "C_pn_err_1", "C_pn_err_2",
                                 "a_G117B15A", "b_G117B15A",
                                 "a_R548", "b_R548",
