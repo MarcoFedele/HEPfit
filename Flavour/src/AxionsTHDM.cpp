@@ -774,3 +774,22 @@ double CaeTHDM::computeThValue()
     else return std::abs(myAxions->Cae());
 
 }
+
+
+logcgTHDM::logcgTHDM(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+logcgTHDM::~logcgTHDM()
+{
+};
+
+double logcgTHDM::computeThValue()
+{
+    if ((myAxions->getmodel() == 11.) || (myAxions->getmodel() == 12.)) {
+        return log10(myAxions->getcgamma());
+    }
+    else return 0.;
+
+}

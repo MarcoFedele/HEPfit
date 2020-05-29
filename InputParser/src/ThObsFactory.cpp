@@ -50,6 +50,7 @@ ThObsFactory::ThObsFactory()
     obsThFactory["HBRTHDM"] = boost::factory<HBRTHDM*>();
     obsThFactory["GaNTHDM"] = boost::factory<GaNTHDM*>();
     obsThFactory["ganTHDM"] = boost::factory<ganTHDM*>();
+    obsThFactory["logcgTHDM"] = boost::factory<logcgTHDM*>();
 
     obsThFactory["test"] = boost::factory<test*>();
     obsThFactory["Ru11"] = boost::factory<Ru11*>();

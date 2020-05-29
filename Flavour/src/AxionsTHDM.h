@@ -591,4 +591,21 @@ public:
     const AxionsTHDM *myAxions;
 };
 
+class logcgTHDM : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   logcgTHDM(const StandardModel& SM_i);
+
+   ~logcgTHDM();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const AxionsTHDM *myAxions;
+};
+
 #endif /* AXIONS_H */
