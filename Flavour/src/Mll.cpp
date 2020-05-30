@@ -95,7 +95,7 @@ void Mll::computeObs(orders order, orders_qed order_qed)
         mchi2_NP = mchi_NP * mchi_NP;
         mV2_NP = mV_NP * mV_NP;
         y_NP = mchi2_NP / mB2_NP;
-        Norm_NP = - sqrt(2.) / (4. * SM.getGF() * 0.0411494) / (8. * M_PI * SM.getAle()); // N.B. took the abs of CKM, hence changed overall sign
+        Norm_NP = - sqrt(2.) / (4. * SM.getGF() * 0.0411494) / (4. * M_PI * SM.getAle()); // N.B. took the abs of CKM, hence changed overall sign
     }
     
     computeAmpSq(order, order_qed, mu);
