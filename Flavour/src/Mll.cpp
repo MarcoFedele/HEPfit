@@ -20,7 +20,7 @@ Mll::Mll(const StandardModel& SM_i, int obsFlag, QCD::meson meson_i, QCD::lepton
     FixedWCbtos = SM.getFlavour().getFlagFixedWCbtos();
     LoopModelDM = SM.getFlavour().getFlagLoopModelDM();
     if (FixedWCbtos) setParametersForObservable({ "C10_SM" });
-    if (FixedWCbtos && LoopModelDM) setParametersForObservable({ "C10_SM", "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "mB_NP", "mchi_NP", "mV_NP"});
+    if (FixedWCbtos && LoopModelDM) setParametersForObservable({ "C10_SM", "QB", "ysybgD", "gammaD", "gmuV_NP", "rAV_NP", "mB_NP", "mchi_NP", "mV_NP"});
 };
 
 double Mll::computeThValue()
@@ -69,7 +69,7 @@ void Mll::computeObs(orders order, orders_qed order_qed)
         gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
         rAV_parametric = SM.getFlavour().getFlagrAV_parametric();
 
-        gD = SM.getOptionalParameter("gD");
+        gammaD = SM.getOptionalParameter("gammaD");
         QB = SM.getOptionalParameter("QB");
         mV_NP = SM.getOptionalParameter("mV_NP");
         if (ysybgD_logscale){
@@ -137,23 +137,17 @@ double Mll::G9(double x)
 
 gslpp::complex Mll::C10_NP(double q2, double gmu_V, double gmu_A)
 {
-    double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = mlep*mlep/mV_NP/mV_NP;
 
-    double gDterm, gmuterm;
-
-    if (4.*mchi2omV2 > 1.)
-        gDterm = 0;
-    else
-        gDterm = sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.);
+    double gmuterm;
 
     if (4.*mmu2omV2 > 1.)
         gmuterm = 0;
     else
         gmuterm = sqrt(1.-4.*mmu2omV2);
 
-    double GammaV = (gD*gD * gDterm
-                    + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
+    double GammaV = gammaD
+                    + (gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
 
     return Norm_NP * QB * ysybgD * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /

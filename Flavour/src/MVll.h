@@ -918,7 +918,7 @@ private:
 
     double QB;
     double ysybgD;
-    double gD;
+    double gammaD;
     double gmuV_NP;
     double rAV;
     double gmuA_NP;

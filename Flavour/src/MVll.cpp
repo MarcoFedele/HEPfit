@@ -223,7 +223,7 @@ std::vector<std::string> MVll::initializeMVllParameters()
 
     if (FixedWCbtos) mvllParameters.insert(mvllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
 
-    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "QB", "ysybgD", "gD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
+    if (LoopModelDM) mvllParameters.insert(mvllParameters.end(), { "QB", "ysybgD", "gammaD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
     
     mySM.initializeMeson(meson);
     mySM.initializeMeson(vectorM);
@@ -445,7 +445,7 @@ void MVll::updateParameters()
     C_8Lh = (*(allcoeffh[LO]))(7);
 
     if (LoopModelDM) {
-        gD = mySM.getOptionalParameter("gD");
+        gammaD = mySM.getOptionalParameter("gammaD");
         QB = mySM.getOptionalParameter("QB");
         mV_NP = mySM.getOptionalParameter("mV_NP");
         if (ysybgD_logscale){
@@ -874,12 +874,12 @@ void MVll::checkCache()
     }
 
     if (LoopModelDM) {
-        if (ysybgD == NPcache(0) && gD == NPcache(1) && gmuV_NP == NPcache(2) && gmuA_NP == NPcache(3) && geV_NP == NPcache(4) && geA_NP == NPcache(5) && mB_NP == NPcache(6) && mchi_NP == NPcache(7) && mV_NP == NPcache(8) && QB == NPcache(9)) {
+        if (ysybgD == NPcache(0) && gammaD == NPcache(1) && gmuV_NP == NPcache(2) && gmuA_NP == NPcache(3) && geV_NP == NPcache(4) && geA_NP == NPcache(5) && mB_NP == NPcache(6) && mchi_NP == NPcache(7) && mV_NP == NPcache(8) && QB == NPcache(9)) {
          NPupdated = 1;
         } else {
             NPupdated = 0;
             NPcache(0) = ysybgD;
-            NPcache(1) = gD;
+            NPcache(1) = gammaD;
             NPcache(2) = gmuV_NP;
             NPcache(3) = gmuA_NP;
             NPcache(4) = geV_NP;
@@ -1718,23 +1718,17 @@ double MVll::G9(double x)
 
 gslpp::complex MVll::C9_NP(double q2, double gmu_V, double gmu_A)
 {
-    double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
 
-    double gDterm, gmuterm;
-
-    if (4.*mchi2omV2 > 1.)
-        gDterm = 0;
-    else
-        gDterm = sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.);
+    double gmuterm;
 
     if (4.*mmu2omV2 > 1.)
         gmuterm = 0;
     else
         gmuterm = sqrt(1.-4.*mmu2omV2);
 
-    double GammaV = (gD*gD * gDterm
-                    + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
+    double GammaV = gammaD
+                    + (gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
     
     //std::cout << "factor " << QB * (F9(y_NP) + G9(y_NP)) / 32./M_PI/M_PI / mB2_NP << std::endl;
@@ -1745,23 +1739,17 @@ gslpp::complex MVll::C9_NP(double q2, double gmu_V, double gmu_A)
 
 gslpp::complex MVll::C10_NP(double q2, double gmu_V, double gmu_A)
 {
-    double mchi2omV2 = mchi_NP*mchi_NP/mV_NP/mV_NP;
     double mmu2omV2 = Mlep*Mlep/mV_NP/mV_NP;
 
-    double gDterm, gmuterm;
-
-    if (4.*mchi2omV2 > 1.)
-        gDterm = 0;
-    else
-        gDterm = sqrt(1.-4.*mchi2omV2) * (2.*mchi2omV2 + 1.);
+    double gmuterm;
 
     if (4.*mmu2omV2 > 1.)
         gmuterm = 0;
     else
         gmuterm = sqrt(1.-4.*mmu2omV2);
 
-    double GammaV = (gD*gD * gDterm
-                    + gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
+    double GammaV = gammaD
+                    + (gmu_V*gmu_V * gmuterm * (2.*mmu2omV2 + 1.)
                     + gmu_A*gmu_A * gmuterm * (1.-4.*mmu2omV2))/12./M_PI;
 
     return Norm_NP * QB * ysybgD * gmu_A / mB2_NP * (F9(y_NP) + G9(y_NP)) * q2 /
