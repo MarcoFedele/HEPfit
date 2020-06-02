@@ -69,7 +69,7 @@ void Mll::computeObs(orders order, orders_qed order_qed)
         gmu_logscale = SM.getFlavour().getFlaggmu_logscale();
         rAV_parametric = SM.getFlavour().getFlagrAV_parametric();
 
-        gammaD = SM.getOptionalParameter("gammaD");
+        gammaD = pow(10.,SM.getOptionalParameter("gammaD"));
         QB = SM.getOptionalParameter("QB");
         mV_NP = SM.getOptionalParameter("mV_NP");
         if (ysybgD_logscale){

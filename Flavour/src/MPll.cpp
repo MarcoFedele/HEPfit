@@ -266,7 +266,7 @@ void MPll::updateParameters()
     C_8Lh = (*(allcoeffh[LO]))(7);
 
     if (LoopModelDM) {
-        gammaD = mySM.getOptionalParameter("gammaD");
+        gammaD = pow(10.,mySM.getOptionalParameter("gammaD"));
         QB = mySM.getOptionalParameter("QB");
         mV_NP = mySM.getOptionalParameter("mV_NP");
         if (ysybgD_logscale){
