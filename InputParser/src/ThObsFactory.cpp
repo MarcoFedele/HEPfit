@@ -29,6 +29,7 @@ ThObsFactory::ThObsFactory()
     obsThFactory["G117B15A"] = boost::factory<G117B15A*>();
     obsThFactory["R548"] = boost::factory<R548*>();
     obsThFactory["PG1351489"] = boost::factory<PG1351489*>();
+    obsThFactory["L113"] = boost::factory<L113*>();
     obsThFactory["L192"] = boost::factory<L192*>();
     obsThFactory["TRGB"] = boost::factory<TRGB*>();
     obsThFactory["HBR"] = boost::factory<HBR*>();

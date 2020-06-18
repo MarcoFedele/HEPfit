@@ -58,11 +58,13 @@
       </logicalFolder>
     </logicalFolder>
     <itemPath>Axions.conf</itemPath>
+    <itemPath>Axions_THDM.conf</itemPath>
     <itemPath>Flavour.conf</itemPath>
     <itemPath>FroggattNielsen.conf</itemPath>
     <itemPath>Model.conf</itemPath>
     <itemPath>MonteCarlo.conf</itemPath>
     <itemPath>Observables_Axions.conf</itemPath>
+    <itemPath>Observables_Axions_THDM.conf</itemPath>
     <itemPath>Observables_FN.conf</itemPath>
     <itemPath>StandardModel.conf</itemPath>
   </logicalFolder>
@@ -244,6 +246,8 @@
       </compileType>
       <item path="Axions.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Axions_THDM.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
@@ -253,6 +257,8 @@
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_Axions_THDM.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -496,6 +502,8 @@
       </compileType>
       <item path="Axions.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Axions_THDM.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
@@ -505,6 +513,8 @@
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_Axions_THDM.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -741,6 +751,8 @@
       </compileType>
       <item path="Axions.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Axions_THDM.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
@@ -750,6 +762,8 @@
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_Axions_THDM.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>
@@ -988,6 +1002,8 @@
       </compileType>
       <item path="Axions.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Axions_THDM.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Flavour.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="FroggattNielsen.conf" ex="false" tool="3" flavor2="0">
@@ -997,6 +1013,8 @@
       <item path="MonteCarlo.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_Axions.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Observables_Axions_THDM.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Observables_FN.conf" ex="false" tool="3" flavor2="0">
       </item>

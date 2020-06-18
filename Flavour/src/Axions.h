@@ -19,7 +19,7 @@
 class Axions: public StandardModel {
 public:
 
-    static const int NAxionsvars = 21;
+    static const int NAxionsvars = 15;
 
     static const std::string Axionsvars[NAxionsvars];
     
@@ -86,22 +86,6 @@ public:
     
     /**
      *
-     * @return c_G117B15A
-     */
-    double getc_G117B15A() const {
-        return c_G117B15A;
-    }
-    
-    /**
-     *
-     * @return d_G117B15A
-     */
-    double getd_G117B15A() const {
-        return d_G117B15A;
-    }
-    
-    /**
-     *
      * @return a_R548
      */
     double geta_R548() const {
@@ -114,22 +98,6 @@ public:
      */
     double getb_R548() const {
         return b_R548;
-    }
-    
-    /**
-     *
-     * @return c_R548
-     */
-    double getc_R548() const {
-        return c_R548;
-    }
-    
-    /**
-     *
-     * @return d_R548
-     */
-    double getd_R548() const {
-        return d_R548;
     }
     
     /**
@@ -150,18 +118,18 @@ public:
     
     /**
      *
-     * @return c_PG1351489
+     * @return a_L113
      */
-    double getc_PG1351489() const {
-        return c_PG1351489;
+    double geta_L113() const {
+        return a_L113;
     }
     
     /**
      *
-     * @return d_PG1351489
+     * @return b_L113
      */
-    double getd_PG1351489() const {
-        return d_PG1351489;
+    double getb_L113() const {
+        return b_L113;
     }
     
     /**
@@ -178,22 +146,6 @@ public:
      */
     double getb_L192() const {
         return b_L192;
-    }
-    
-    /**
-     *
-     * @return c_L192
-     */
-    double getc_L192() const {
-        return c_L192;
-    }
-    
-    /**
-     *
-     * @return d_L192
-     */
-    double getd_L192() const {
-        return d_L192;
     }
     
     /**
@@ -229,10 +181,11 @@ private:
     
     double gae, gag;
     
-    double a_G117B15A, b_G117B15A, c_G117B15A, d_G117B15A;
-    double a_R548, b_R548, c_R548, d_R548;
-    double a_PG1351489, b_PG1351489, c_PG1351489, d_PG1351489;
-    double a_L192, b_L192, c_L192, d_L192;
+    double a_G117B15A, b_G117B15A;
+    double a_R548, b_R548;
+    double a_PG1351489, b_PG1351489;
+    double a_L113, b_L113;
+    double a_L192, b_L192;
     
     double a_TRGB, b_TRGB;
     
@@ -308,6 +261,23 @@ public:
    PG1351489(const StandardModel& SM_i);
      
    ~PG1351489();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const Axions *myAxions;
+};
+
+class L113 : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   L113(const StandardModel& SM_i);
+     
+   ~L113();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
