@@ -291,10 +291,10 @@ double TRGB::computeThValue()
 {
     double a=myAxions->geta_TRGB();
     double b=myAxions->getb_TRGB();
-    
-    double gae=myAxions->getgae();
-    
-    return - 4.03 - 0.25*(sqrt(gae*gae + 0.93) - 0.96 - 0.17*pow(gae,1.5)) 
+
+    double gae=myAxions->getgae()/1.e-13;
+
+    return - 4.03 - 0.25*(sqrt(gae*gae + 0.93) - 0.96 - 0.17*pow(gae,1.5))
             + 0.039 + a + gae*b;
 
 }
