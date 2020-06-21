@@ -159,7 +159,7 @@ bool Axions::setFlag(const std::string name, const bool value)
 
 
 loggag::loggag(const StandardModel& SM_i)
-: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+: ThObservable(SM_i), myAxions(static_cast<const Axions*> (&SM_i))
 {
 };
 
@@ -175,7 +175,7 @@ double loggag::computeThValue()
 
 
 loggae::loggae(const StandardModel& SM_i)
-: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+: ThObservable(SM_i), myAxions(static_cast<const Axions*> (&SM_i))
 {
 };
 
