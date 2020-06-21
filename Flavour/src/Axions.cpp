@@ -98,7 +98,7 @@ void Axions::setParameter(const std::string name, const double& value){
     if(name.compare("gae") == 0) 
         gae = value;  
     else if(name.compare("gag") == 0) 
-        gag = value;
+        gag = pow(10., value);
     else if(name.compare("a_G117B15A") == 0)
         a_G117B15A = value;
     else if(name.compare("b_G117B15A") == 0)
