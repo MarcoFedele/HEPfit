@@ -376,6 +376,9 @@ double Xenon::computeThValue()
 {
     double gg10=myAxions->getgag()/1.e-10;
     double ge12=myAxions->getgae()/1.e-12;
+    
+    std::cout << "gg10 " << gg10 <<std::endl;
+    std::cout << "ge12 " << ge12 <<std::endl; 
 
     return pow( ge12*ge12 * (ge12*ge12 + 2.*gg10*gg10) ,0.25);  // 2003.01100, Eq. (247)
 
