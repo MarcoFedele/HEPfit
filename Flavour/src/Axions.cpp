@@ -157,6 +157,39 @@ bool Axions::setFlag(const std::string name, const bool value)
 // Observables
 
 
+
+loggag::loggag(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+loggag::~loggag()
+{
+};
+
+double loggag::computeThValue()
+{
+    return log10(myAxions->getgag());
+
+}
+
+
+loggae::loggae(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const AxionsTHDM*> (&SM_i))
+{
+};
+
+loggae::~loggae()
+{
+};
+
+double loggae::computeThValue()
+{
+    return log10(myAxions->getgae());
+
+}
+
+
 mac2::mac2(const StandardModel& SM_i)
 : ThObservable(SM_i), myAxions(static_cast<const Axions*> (&SM_i))
 {
@@ -326,5 +359,24 @@ double HBR::computeThValue()
     return 6.26*Y - 0.12 - 0.14*g10*g10 - 1.61*dMc - 0.067*alpha;  // 1512.08108, Eq. (7.5)
 
     return 6.26*Y - 0.41*g10*g10 - 0.12;  // 1406.6053, Eq. (1)
+
+}
+
+
+Xenon::Xenon(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const Axions*> (&SM_i))
+{
+};
+
+Xenon::~Xenon()
+{
+};
+
+double Xenon::computeThValue()
+{
+    double gg10=myAxions->getgag()/1.e-10;
+    double ge12=myAxions->getgae()/1.e-12;
+
+    return pow( ge12*ge12 * (ge12*ge12 + 2.*gg10*gg10) ,0.25);  // 2003.01100, Eq. (247)
 
 }

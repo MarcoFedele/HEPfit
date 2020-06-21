@@ -202,6 +202,40 @@ private:
 
 
 
+class loggag : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   loggag(const StandardModel& SM_i);
+     
+   ~loggag();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const Axions *myAxions;
+};
+
+class loggae : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   loggae(const StandardModel& SM_i);
+     
+   ~loggae();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const Axions *myAxions;
+};
+
 class mac2 : public ThObservable {
 public:
     /**
@@ -329,6 +363,23 @@ public:
    HBR(const StandardModel& SM_i);
      
    ~HBR();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const Axions *myAxions;
+};
+
+class Xenon : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   Xenon(const StandardModel& SM_i);
+     
+   ~Xenon();
 
    /**
      * @brief Two positivity conditions of the Higgs potential.
