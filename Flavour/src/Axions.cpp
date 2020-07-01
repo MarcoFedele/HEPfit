@@ -354,8 +354,13 @@ double HBR::computeThValue()
 
     double dMc = 0.024*(sqrt(gae*gae + 1.23*1.23) - 1.23 - 0.921*pow(alpha,0.75));
     
-    dMc = 0.024*(sqrt(9.*9. + 1.23*1.23) - 1.23 - 0.921*pow(9.*9./4./M_PI,0.75));  // FISSATO GAE=9 QUI!!!!!
+    // dMc = 0.024*(sqrt(9.*9. + 1.23*1.23) - 1.23 - 0.921*pow(9.*9./4./M_PI,0.75));  // FISSATO GAE=9 QUI!!!!!
 
+    double a = 6.26*Y - 0.12;
+    double b = 0.41;
+    
+    return a / (1 + g10*g10*b/a) ;
+    
     return 7.33*Y + 0.02 - 0.095*sqrt(21.86 + 21.08*g10) - 1.61*dMc - 0.067*alpha;  // 1512.08108, Eq. (7.6)
 
     return 6.26*Y - 0.12 - 0.14*g10*g10 - 1.61*dMc - 0.067*alpha;  // 1512.08108, Eq. (7.5)
