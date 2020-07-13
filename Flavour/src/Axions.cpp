@@ -403,6 +403,9 @@ double CaeoCag::computeThValue()
     double gag=myAxions->getgag();
     double gae=myAxions->getgae();
     
-    return 7.2973525698e-3/(2 * M_PI * 5.109989e-4) * ( gae / gag);
+    double res = 7.2973525698e-3/(2 * M_PI * 5.109989e-4) * ( gae / gag);
+    
+    if (res > 1.) return 0.;
+    else return res;
 
 }
