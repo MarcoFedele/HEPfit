@@ -98,7 +98,7 @@ void Axions::setParameter(const std::string name, const double& value){
     if(name.compare("gae") == 0) 
         gae = value;  
     else if(name.compare("gag") == 0) 
-        gag = pow(10., value);
+        gag = value; //pow(10., value);
     else if(name.compare("a_G117B15A") == 0)
         a_G117B15A = value;
     else if(name.compare("b_G117B15A") == 0)
@@ -327,7 +327,7 @@ double TRGB::computeThValue()
 
     double gae=myAxions->getgae()/1.e-13;
 
-    return - 4.03 - 0.25*(sqrt(gae*gae + 0.93) - 0.96 - 0.17*pow(gae,1.5))
+    return - 4.08 - 0.25*(sqrt(gae*gae + 0.93) - 0.96 - 0.17*pow(gae,1.5))
             + 0.039 + a + gae*b;
 
 }
@@ -352,14 +352,14 @@ double HBR::computeThValue()
     double alpha = gae*gae/4./M_PI;
     double g10 = gag.abs()*1.e10;
 
+    double a = 6.26*Y - 0.12;
+    double b = 0.41;
+
     double dMc = 0.024*(sqrt(gae*gae + 1.23*1.23) - 1.23 - 0.921*pow(alpha,0.75));
     
     // dMc = 0.024*(sqrt(9.*9. + 1.23*1.23) - 1.23 - 0.921*pow(9.*9./4./M_PI,0.75));  // FISSATO GAE=9 QUI!!!!!
-
-    double a = 6.26*Y - 0.12;
-    double b = 0.41;
     
-    return a / (1 + g10*g10*b/a) ;
+    // return a / (1 + g10*g10*b/a) ;  // Versione per gag grande
     
     return 7.33*Y + 0.02 - 0.095*sqrt(21.86 + 21.08*g10) - 1.61*dMc - 0.067*alpha;  // 1512.08108, Eq. (7.6)
 
