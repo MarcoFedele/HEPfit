@@ -387,3 +387,22 @@ double Xenon::computeThValue()
     return pow( ge12*ge12 * (ge12*ge12 + 2.*gg10*gg10) ,0.25);  // 2003.01100, Eq. (247)
 
 }
+
+
+CaeoCag::CaeoCag(const StandardModel& SM_i)
+: ThObservable(SM_i), myAxions(static_cast<const Axions*> (&SM_i))
+{
+};
+
+CaeoCag::~CaeoCag()
+{
+};
+
+double CaeoCag::computeThValue()
+{
+    double gag=myAxions->getgag();
+    double gae=myAxions->getgae();
+    
+    return 7.2973525698e-3/(2 * M_PI * 5.109989e-4) * ( gae / gag);
+
+}

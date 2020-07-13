@@ -389,5 +389,22 @@ public:
     const Axions *myAxions;
 };
 
+class CaeoCag : public ThObservable {
+public:
+    /**
+     * @brief Constructor.
+     */
+   CaeoCag(const StandardModel& SM_i);
+     
+   ~CaeoCag();
+
+   /**
+     * @brief Two positivity conditions of the Higgs potential.
+     * @return
+     */
+    double computeThValue();
+    const Axions *myAxions;
+};
+
 #endif /* AXIONS_H */
 

@@ -36,6 +36,7 @@ ThObsFactory::ThObsFactory()
     obsThFactory["TRGB"] = boost::factory<TRGB*>();
     obsThFactory["HBR"] = boost::factory<HBR*>();
     obsThFactory["Xenon"] = boost::factory<Xenon*>();
+    obsThFactory["CaeoCag"] = boost::factory<CaeoCag*>();
 
     obsThFactory["gagTHDM"] = boost::factory<gagTHDM*>();
     obsThFactory["CaeTHDM"] = boost::factory<CaeTHDM*>();
