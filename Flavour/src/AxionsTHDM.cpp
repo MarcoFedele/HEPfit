@@ -263,7 +263,7 @@ double AxionsTHDM::Cae() const
     else if (model == 8.)
         Cae = cosb*cosb;
     else if (model == 9.)
-        Cae = -sinb*sinb;
+        Cae = sinb*sinb;
     else
         throw std::runtime_error("error in AzionsTHDM::gae, model can only be an integer between -1. and 9. !");
 
