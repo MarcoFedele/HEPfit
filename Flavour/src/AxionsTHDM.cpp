@@ -249,21 +249,21 @@ double AxionsTHDM::Cae() const
     else if ((model == 1.) || (model == 11.))
         Cae = sinb*sinb/3.;
     else if ((model == 2.) || (model == 12.))
-        Cae = cosb*cosb/3.;
+        Cae = -cosb*cosb/3.;
     else if (model == 3.)
-        Cae = cosb*cosb - eps_L;
+        Cae = -sinb*sinb + eps_L;
     else if (model == 4.)
-        Cae = sinb*sinb + eps_L;
+        Cae = -sinb*sinb + eps_L;
     else if (model == 5.)
-        Cae = cosb*cosb - eps_L;
-    else if (model == 6.)
         Cae = sinb*sinb + eps_L;
+    else if (model == 6.)
+        Cae = -sinb*sinb + eps_L;
     else if (model == 7.)
         Cae = Chi3/3.;
     else if (model == 8.)
         Cae = cosb*cosb;
     else if (model == 9.)
-        Cae = sinb*sinb;
+        Cae = -sinb*sinb;
     else
         throw std::runtime_error("error in AzionsTHDM::gae, model can only be an integer between -1. and 9. !");
 
@@ -308,36 +308,36 @@ double AxionsTHDM::gap() const
         Cat = cosb*cosb/3.;
     }
     else if (model == 3.){
-        Cad = sinb*sinb;
-        Cas = sinb*sinb;
-        Cab = -cosb*cosb;
-        Cau = cosb*cosb;
-        Cac = cosb*cosb;
-        Cat = -sinb*sinb;
+        Cad = cosb*cosb;
+        Cas = cosb*cosb;
+        Cab = -sinb*sinb;
+        Cau = sinb*sinb;
+        Cac = sinb*sinb;
+        Cat = -cosb*cosb;
     }
     else if (model == 4.){
-        Cad = sinb*sinb;
-        Cas = sinb*sinb;
-        Cab = -cosb*cosb;
-        Cau = cosb*cosb;
-        Cac = cosb*cosb;
-        Cat = -sinb*sinb;
+        Cad = cosb*cosb;
+        Cas = -sinb*sinb;
+        Cab = -sinb*sinb;
+        Cau = sinb*sinb;
+        Cac = sinb*sinb;
+        Cat = sinb*sinb;
     }
     else if (model == 5.){
         Cad = sinb*sinb;
         Cas = sinb*sinb;
-        Cab = -cosb*cosb;
+        Cab = sinb*sinb;
         Cau = cosb*cosb;
-        Cac = cosb*cosb;
+        Cac = -sinb*sinb;
         Cat = -sinb*sinb;
     }
     else if (model == 6.){
-        Cad = sinb*sinb;
-        Cas = sinb*sinb;
-        Cab = -cosb*cosb;
-        Cau = cosb*cosb;
-        Cac = cosb*cosb;
-        Cat = -sinb*sinb;
+        Cad = cosb*cosb;
+        Cas = -sinb*sinb;
+        Cab = -sinb*sinb;
+        Cau = sinb*sinb;
+        Cac = sinb*sinb;
+        Cat = sinb*sinb;
     }
     else if (model == 7.){
         Cad = 1./3. + Chi3/3.;
@@ -349,18 +349,18 @@ double AxionsTHDM::gap() const
     }
     else if (model == 8.){
         Cad = cosb*cosb;
-        Cas = - 1. + cosb*cosb;
-        Cab = - 1. + cosb*cosb;
-        Cau = 1.1 - cosb*cosb;
-        Cac = 0.91 - cosb*cosb;
-        Cat = 0.99 - cosb*cosb;
+        Cas = -sinb*sinb;
+        Cab = -sinb*sinb;
+        Cau = 0.1 + sinb*sinb;
+        Cac = -0.09 + sinb*sinb;
+        Cat = -0.01 + sinb*sinb;
     }
     else if (model == 9.){
         Cad = 0.1 + cosb*cosb;
         Cas = 0.55 + cosb*cosb;
-        Cab = - 0.66 + cosb*cosb;
-        Cau = 1. - cosb*cosb;
-        Cac = - 0.0036 - cosb*cosb;
+        Cab = -0.66 + cosb*cosb;
+        Cau = sinb*sinb;
+        Cac = -0.0036 - cosb*cosb;
         Cat = 0.0036 - cosb*cosb;
     }
     else
@@ -407,36 +407,36 @@ double AxionsTHDM::gan() const
         Cat = cosb*cosb/3.;
     }
     else if (model == 3.){
-        Cad = sinb*sinb;
-        Cas = sinb*sinb;
-        Cab = -cosb*cosb;
-        Cau = cosb*cosb;
-        Cac = cosb*cosb;
-        Cat = -sinb*sinb;
+        Cad = cosb*cosb;
+        Cas = cosb*cosb;
+        Cab = -sinb*sinb;
+        Cau = sinb*sinb;
+        Cac = sinb*sinb;
+        Cat = -cosb*cosb;
     }
     else if (model == 4.){
-        Cad = sinb*sinb;
-        Cas = sinb*sinb;
-        Cab = -cosb*cosb;
-        Cau = cosb*cosb;
-        Cac = cosb*cosb;
-        Cat = -sinb*sinb;
+        Cad = cosb*cosb;
+        Cas = -sinb*sinb;
+        Cab = -sinb*sinb;
+        Cau = sinb*sinb;
+        Cac = sinb*sinb;
+        Cat = sinb*sinb;
     }
     else if (model == 5.){
         Cad = sinb*sinb;
         Cas = sinb*sinb;
-        Cab = -cosb*cosb;
+        Cab = sinb*sinb;
         Cau = cosb*cosb;
-        Cac = cosb*cosb;
+        Cac = -sinb*sinb;
         Cat = -sinb*sinb;
     }
     else if (model == 6.){
-        Cad = sinb*sinb;
-        Cas = sinb*sinb;
-        Cab = -cosb*cosb;
-        Cau = cosb*cosb;
-        Cac = cosb*cosb;
-        Cat = -sinb*sinb;
+        Cad = cosb*cosb;
+        Cas = -sinb*sinb;
+        Cab = -sinb*sinb;
+        Cau = sinb*sinb;
+        Cac = sinb*sinb;
+        Cat = sinb*sinb;
     }
     else if (model == 7.){
         Cad = 1./3. + Chi3/3.;
@@ -448,18 +448,18 @@ double AxionsTHDM::gan() const
     }
     else if (model == 8.){
         Cad = cosb*cosb;
-        Cas = - 1. + cosb*cosb;
-        Cab = - 1. + cosb*cosb;
-        Cau = 1.1 - cosb*cosb;
-        Cac = 0.91 - cosb*cosb;
-        Cat = 0.99 - cosb*cosb;
+        Cas = -sinb*sinb;
+        Cab = -sinb*sinb;
+        Cau = 0.1 + sinb*sinb;
+        Cac = -0.09 + sinb*sinb;
+        Cat = -0.01 + sinb*sinb;
     }
     else if (model == 9.){
         Cad = 0.1 + cosb*cosb;
         Cas = 0.55 + cosb*cosb;
-        Cab = - 0.66 + cosb*cosb;
-        Cau = 1. - cosb*cosb;
-        Cac = - 0.0036 - cosb*cosb;
+        Cab = -0.66 + cosb*cosb;
+        Cau = sinb*sinb;
+        Cac = -0.0036 - cosb*cosb;
         Cat = 0.0036 - cosb*cosb;
     }
     else
