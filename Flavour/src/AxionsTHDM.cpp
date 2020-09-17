@@ -272,7 +272,7 @@ double AxionsTHDM::Cae() const
 
 double AxionsTHDM::gae() const
 {
-    return 0.84e-13 * ma * Cae();
+    return 0.84e-13 * ma * std::abs(Cae());
 }
 
 double AxionsTHDM::gap() const
