@@ -203,6 +203,9 @@ public:
     gslpp::complex C9_NP(double q2, double gmu_V, double gmu_A);
     gslpp::complex C10_NP(double q2, double gmu_V, double gmu_A);
 
+    gslpp::complex C9_NP(double q2, double C1bs, double C3bs, double C1mu, double C3mu);
+    gslpp::complex C10_NP(double q2, double C1bs, double C3bs, double C1tmu, double C3tmu);
+
     /**
     * @brief The helicity amplitude \f$ H_V^{\lambda} \f$ .
     * @param[in] q2 \f$q^2\f$ of the decay
@@ -288,6 +291,7 @@ private:
     bool dispersion;
     bool FixedWCbtos;
     bool LoopModelDM;
+    bool LoopModelDM2;
     bool ysybgD_logscale;
     bool gmu_logscale;
     bool rAV_parametric;
@@ -603,6 +607,9 @@ private:
 
     unsigned int NPupdated;/**< Cache variable */
     gslpp::vector<double> NPcache;/**< Cache variable */
+
+    unsigned int NP2updated;/**< Cache variable */
+    gslpp::vector<double> NP2cache;/**< Cache variable */
 
     unsigned int H_V0updated;/**< Cache variable */
     gslpp::vector<double> H_V0cache;/**< Cache variable */

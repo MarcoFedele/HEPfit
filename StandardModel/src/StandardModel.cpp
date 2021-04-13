@@ -433,6 +433,9 @@ bool StandardModel::setFlag(const std::string name, const bool value)
     } else if (name.compare("LoopModelDM") == 0) {
         SMFlavour.setFlagLoopModelDM(value);
         res = true;
+    } else if (name.compare("LoopModelDM2") == 0) {
+        SMFlavour.setFlagLoopModelDM2(value);
+        res = true;
     } else if (name.compare("ysybgD_logscale") == 0) {
         SMFlavour.setFlagysybgD_logscale(value);
         res = true;

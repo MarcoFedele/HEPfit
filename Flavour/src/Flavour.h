@@ -294,6 +294,11 @@ public:
         return (this->LoopModelDMflag = LoopModelDMflag);
     }
 
+    bool setFlagLoopModelDM2(bool LoopModelDM2flag)
+    {
+        return (this->LoopModelDM2flag = LoopModelDM2flag);
+    }
+
     bool setFlagysybgD_logscale(bool ysybgD_logscaleflag)
     {
         return (this->ysybgD_logscaleflag = ysybgD_logscaleflag);
@@ -359,6 +364,11 @@ public:
         return LoopModelDMflag;
     }
 
+    bool getFlagLoopModelDM2() const
+    {
+        return LoopModelDM2flag;
+    }
+
     bool getFlagysybgD_logscale() const
     {
         return ysybgD_logscaleflag;
@@ -399,6 +409,7 @@ private:
     mutable bool btocNPpmflag;
     mutable bool FixedWCbtosflag;
     mutable bool LoopModelDMflag;
+    mutable bool LoopModelDM2flag;
     mutable bool ysybgD_logscaleflag;
     mutable bool gmu_logscaleflag;
     mutable bool rAV_parametricflag;
