@@ -32,7 +32,7 @@ SL_cache(2, 0.),
 N_cache(3, 0.),
 Ycache(2, 0.),
 NPcache(10, 0.),
-NP2cache(8, 0.),
+NP2cache(9, 0.),
 H_V0cache(2, 0.),
 H_Scache(2, 0.),
 H_P_cache(4, 0.),
@@ -132,7 +132,7 @@ std::vector<std::string> MPll::initializeMPllParameters()
 
     if (FixedWCbtos) mpllParameters.insert(mpllParameters.end(), { "C7_SM", "C9_SM", "C10_SM" });
     if (LoopModelDM) mpllParameters.insert(mpllParameters.end(), { "QB", "ysybgD", "gammaD", "gmuV_NP", "rAV_NP", "geV_NP", "rAV_e_NP", "mB_NP", "mchi_NP", "mV_NP" });
-    if (LoopModelDM2) mpllParameters.insert(mpllParameters.end(), { "gammaD", "mV_NP", "C1bs", "C3bs", "C1mu", "C3mu", "C1tmu", "C3tmu" });
+    if (LoopModelDM2) mpllParameters.insert(mpllParameters.end(), { "QB", "gammaD", "mV_NP", "C1bs", "C3bs", "C1mu", "C3mu", "C1tmu", "C3tmu" });
 
     mySM.initializeMeson(meson);
     mySM.initializeMeson(pseudoscalar);
@@ -303,6 +303,7 @@ void MPll::updateParameters()
 
     if (LoopModelDM2) {
         gammaD = pow(10.,mySM.getOptionalParameter("gammaD"));
+        QB = mySM.getOptionalParameter("QB");
         mV_NP = mySM.getOptionalParameter("mV_NP");
         if (ysybgD_logscale){
             C1bs_NP = pow(10.,mySM.getOptionalParameter("C1bs"));
@@ -687,7 +688,7 @@ void MPll::checkCache()
     }
 
     if (LoopModelDM2) {
-        if (mV_NP == NP2cache(0) && gammaD == NP2cache(1) && C1bs_NP == NP2cache(2) && C3bs_NP == NP2cache(3) && C1mu_NP == NP2cache(4) && C3mu_NP == NP2cache(5) && C1tmu_NP == NP2cache(6) && C3tmu_NP == NP2cache(7)) {
+        if (mV_NP == NP2cache(0) && gammaD == NP2cache(1) && C1bs_NP == NP2cache(2) && C3bs_NP == NP2cache(3) && C1mu_NP == NP2cache(4) && C3mu_NP == NP2cache(5) && C1tmu_NP == NP2cache(6) && C3tmu_NP == NP2cache(7) && QB == NP2cache(8)) {
          NP2updated = 1;
         } else {
             NP2updated = 0;
@@ -699,6 +700,7 @@ void MPll::checkCache()
             NP2cache(5) = C3mu_NP;
             NP2cache(6) = C1tmu_NP;
             NP2cache(7) = C3tmu_NP;
+            NP2cache(8) = QB;
         }
     }
 
@@ -1280,13 +1282,13 @@ gslpp::complex MPll::C10_NP(double q2, double gmu_V, double gmu_A)
 
 gslpp::complex MPll::C9_NP(double q2, double C1bs, double C3bs, double C1mu, double C3mu)
 {
-    return - Norm_NP * (C1bs - C3bs * q2) * (C1mu - C3mu * q2) /
+    return - Norm_NP * QB * (C1bs - C3bs * q2) * (C1mu - C3mu * q2) /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD );
 }
 
 gslpp::complex MPll::C10_NP(double q2, double C1bs, double C3bs, double C1tmu, double C3tmu)
 {
-    return - Norm_NP * (C1bs - C3bs * q2) * (C1tmu - C3tmu * q2) /
+    return - Norm_NP * QB * (C1bs - C3bs * q2) * (C1tmu - C3tmu * q2) /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD );
 }
 
