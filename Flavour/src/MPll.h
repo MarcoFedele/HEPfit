@@ -398,6 +398,12 @@ private:
     double mV2_NP;
     double y_NP;
     double Norm_NP;
+    double C1bs_NP;
+    double C3bs_NP;
+    double C1mu_NP;
+    double C3mu_NP;
+    double C1tmu_NP;
+    double C3tmu_NP;
 
     gsl_interp_accel *acc_Re_deltaC7_QCDF;
     gsl_interp_accel *acc_Im_deltaC7_QCDF;

@@ -1278,13 +1278,13 @@ gslpp::complex MPll::C10_NP(double q2, double gmu_V, double gmu_A)
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*GammaV );
 }
 
-gslpp::complex MVll::C9_NP(double q2, double C1bs, double C3bs, double C1mu, double C3mu)
+gslpp::complex MPll::C9_NP(double q2, double C1bs, double C3bs, double C1mu, double C3mu)
 {
     return - Norm_NP * (C1bs - C3bs * q2) * (C1mu - C3mu * q2) /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD );
 }
 
-gslpp::complex MVll::C10_NP(double q2, double C1bs, double C3bs, double C1tmu, double C3tmu)
+gslpp::complex MPll::C10_NP(double q2, double C1bs, double C3bs, double C1tmu, double C3tmu)
 {
     return - Norm_NP * (C1bs - C3bs * q2) * (C1tmu - C3tmu * q2) /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD );
