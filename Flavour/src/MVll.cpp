@@ -505,7 +505,7 @@ void MVll::updateParameters()
         }
 
         mV2_NP = mV_NP * mV_NP;
-        Norm_NP = - sqrt(2.) / (4. * GF * 0.0411494) / (4. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
+        Norm_NP = - sqrt(2.) * M_PI / (GF * 0.0411494 * ale); // N.B. took the abs of CKM, hence changed overall sign
     }
 
     checkCache();
@@ -1817,6 +1817,10 @@ gslpp::complex MVll::C10_NP(double q2, double gmu_V, double gmu_A)
 
 gslpp::complex MVll::C9_NP(double q2, double C1bs, double C3bs, double C1mu, double C3mu)
 {
+    // std::cout << "Norm :" << - Norm_NP * QB << std::endl;
+    // std::cout << "Num :" << (C1bs - C3bs) * (C1mu - C3mu ) << std::endl;
+    // std::cout << "Den :" << 1. / ( 6. - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD ) << std::endl;
+    // std::cout << "test :" << - Norm_NP * QB * (C1bs - C3bs) * (C1mu - C3mu ) / ( 1. - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD ) << std::endl;
     return - Norm_NP * QB * (C1bs - C3bs * q2) * (C1mu - C3mu * q2) /
             ( q2 - mV2_NP + gslpp::complex::i()*mV2_NP*gammaD );
 }

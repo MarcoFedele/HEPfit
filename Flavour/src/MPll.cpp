@@ -325,7 +325,7 @@ void MPll::updateParameters()
         }
 
         mV2_NP = mV_NP * mV_NP;
-        Norm_NP = - sqrt(2.) / (4. * GF * 0.0411494) / (4. * M_PI * ale); // N.B. took the abs of CKM, hence changed overall sign
+        Norm_NP = - sqrt(2.) * M_PI / (GF * 0.0411494 * ale); // N.B. took the abs of CKM, hence changed overall sign
     }
 
     checkCache();
