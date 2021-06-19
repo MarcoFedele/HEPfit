@@ -103,13 +103,16 @@
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/analysis</output>
           <linkerAddLib>
+            <pElem>../BAT_parallel/lib64</pElem>
             <pElem>../BAT_parallel/lib</pElem>
             <pElem>../FeynHiggs/lib64</pElem>
             <pElem>../FeynHiggs/lib</pElem>
+            <pElem>../LoopTools/lib64</pElem>
             <pElem>../LoopTools/lib</pElem>
           </linkerAddLib>
           <linkerDynSerch>
             <pElem>.</pElem>
+            <pElem>../BAT_parallel/lib64</pElem>
             <pElem>../BAT_parallel/lib</pElem>
           </linkerDynSerch>
           <commandlineTool>mpic++</commandlineTool>
